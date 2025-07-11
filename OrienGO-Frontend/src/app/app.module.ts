@@ -7,12 +7,13 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { VerifyCodeComponent } from './pages/verify-code/verify-code.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './pages/login/login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResetPasswordComponent,
     SignUpComponent,
     VerifyCodeComponent,
+    LoginComponent
   ], // ajoute ici les composants non-standalone
   imports: [
     RouterOutlet,
@@ -31,6 +33,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    }),
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

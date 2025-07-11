@@ -2,21 +2,37 @@
   <div class="bg-white rounded-3xl shadow-lg flex flex-col md:flex-row w-full max-w-[1000px] overflow-hidden">
 
     <!-- Partie gauche -->
-    <div class="bg-[#fff1dd] w-full md:w-1/2 flex flex-col justify-center items-center p-8 sm:p-10">
-      <!-- OrienGo en haut à gauche (visible seulement sur grands écrans) -->
-      <div class="w-full hidden md:block">
-        <h1 class="text-lg font-semibold text-gray-600 ml-4 mb-6">OrienGo</h1>
+    <div class="bg-[#fff1dd] w-full md:w-1/2 flex flex-col p-6 sm:p-10">
+      <!-- OrienGo en haut à gauche -->
+      <div class="w-full hidden md:flex items-center gap-2 ml-4 mt-4 mb-16">
+        <img
+          src="assets/images/logo/logoOrienGo.png"
+          alt="LogoImage"
+          class="w-[50px] h-auto"
+        />
+        <h1 class="text-lg font-semibold text-gray-600">OrienGo</h1>
       </div>
 
-      <!-- Titre centré -->
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-center text-gray-800 leading-snug">
-        Welcome <br /> to OrienGo!
-      </h1>
+      <!-- Contenu centré verticalement et responsive -->
+      <div class="flex-1 flex flex-col justify-center items-center min-h-[300px] px-4">
+        <!-- Titre centré -->
+        <h1
+          class="font-bold mb-4 text-center text-gray-800 leading-snug
+                text-[clamp(1.25rem,4vw,2.2rem)]"
+        >
+          Welcome <br /> to OrienGo!
+        </h1>
 
-      <!-- Image responsive légèrement à droite -->
-      <img src="assets/LoginImage.png" alt="LoginImage"
-        class="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mt-4 ml-4 md:ml-8" />
+        <!-- Image responsive et centrée -->
+        <img
+          src="assets/images/login/loginImage.png"
+          alt="LoginImage"
+          class="w-full max-w-[clamp(200px,70vw,600px)] h-auto mx-auto mt-4"
+        />
+      </div>
     </div>
+
+
 
     <!-- Partie droite (formulaire) -->
     <div class="w-full md:w-1/2 p-8 sm:p-10 flex flex-col justify-center bg-[#fff8ef]">
@@ -48,7 +64,7 @@
 
         <button
           class="bg-[#f0713f] text-white w-full py-2 rounded-md font-semibold hover:bg-[#db6237] transition duration-200">
-          {{'LOGIN.SIGNIN'}}
+          {{ 'LOGIN.SIGNIN' | translate }}
         </button>
       </form>
 

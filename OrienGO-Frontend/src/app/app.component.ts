@@ -9,12 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-localStorage: any;
-switchLang($event: Event) {
-throw new Error('Method not implemented.');
-}
-  title = 'oriengo-frontend';
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService){
     const savedLang = localStorage.getItem('lang');
     const browserLang = navigator.language.split('-')[0]; // Use 'en', 'fr', etc.
 
@@ -27,5 +22,17 @@ throw new Error('Method not implemented.');
 
     this.translateService.setDefaultLang('en');
     this.translateService.use(lang);
+  }
+  switchLang(event: Event) {
+    const select = event.target as HTMLSelectElement;
+    const lang = select.value;
+    console.log('Switching language to:', lang);
+    localStorage.setItem('lang', lang);
+    this.translateService.setDefaultLang(lang);
+    this.translateService.use(lang);
+  }
+  protected readonly localStorage = localStorage;
+  ngOnInit() {
+    // this.authInitService.init();
   }
 }
