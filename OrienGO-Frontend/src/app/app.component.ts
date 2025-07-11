@@ -1,13 +1,31 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+localStorage: any;
+switchLang($event: Event) {
+throw new Error('Method not implemented.');
+}
   title = 'oriengo-frontend';
+  constructor(private translateService: TranslateService) {
+    const savedLang = localStorage.getItem('lang');
+    const browserLang = navigator.language.split('-')[0]; // Use 'en', 'fr', etc.
+
+    const lang = savedLang || (browserLang === 'fr' ? 'fr' : 'en');
+
+    // Save chosen language if not already saved
+    if (!savedLang) {
+      localStorage.setItem('lang', lang);
+    }
+
+    this.translateService.setDefaultLang('en');
+    this.translateService.use(lang);
+  }
 }

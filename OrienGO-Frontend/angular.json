@@ -5,6 +5,13 @@
   "projects": {
     "oriengo-frontend": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "eng",
+        "locales": {
+          "fr": "src/assets/i18n/fr.json",
+          "en": "src/assets/i18n/en.json"
+        }
+      },
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
@@ -21,11 +28,10 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+              "src/favicon.ico",
+              "src/assets"
+            ]
+            ,
             "styles": [
               "src/styles.css"
             ],
@@ -79,11 +85,10 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+              "src/favicon.ico",
+              "src/assets"
+            ]
+            ,
             "styles": [
               "src/styles.css"
             ],
@@ -92,5 +97,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

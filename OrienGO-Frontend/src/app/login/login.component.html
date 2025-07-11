@@ -1,0 +1,61 @@
+<div class="min-h-screen flex items-center justify-center bg-[#fff8ef] px-4">
+  <div class="bg-white rounded-3xl shadow-lg flex flex-col md:flex-row w-full max-w-[1000px] overflow-hidden">
+
+    <!-- Partie gauche -->
+    <div class="bg-[#fff1dd] w-full md:w-1/2 flex flex-col justify-center items-center p-8 sm:p-10">
+      <!-- OrienGo en haut à gauche (visible seulement sur grands écrans) -->
+      <div class="w-full hidden md:block">
+        <h1 class="text-lg font-semibold text-gray-600 ml-4 mb-6">OrienGo</h1>
+      </div>
+
+      <!-- Titre centré -->
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-center text-gray-800 leading-snug">
+        Welcome <br /> to OrienGo!
+      </h1>
+
+      <!-- Image responsive légèrement à droite -->
+      <img src="assets/LoginImage.png" alt="LoginImage"
+        class="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mt-4 ml-4 md:ml-8" />
+    </div>
+
+    <!-- Partie droite (formulaire) -->
+    <div class="w-full md:w-1/2 p-8 sm:p-10 flex flex-col justify-center bg-[#fff8ef]">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Login</h2>
+
+      <!-- Boutons sociaux -->
+      <button
+        class="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-full py-2 px-4 mb-3 shadow-sm hover:bg-gray-50 w-full">
+        <img src="https://img.icons8.com/color/16/000000/google-logo.png" />
+        Continue with Google
+      </button>
+      <button
+        class="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-full py-2 px-4 mb-6 shadow-sm hover:bg-gray-50 w-full">
+        <img src="https://img.icons8.com/color/16/000000/linkedin.png" />
+        Continue with Linkedin
+      </button>
+
+      <!-- Formulaire -->
+      <form class="w-full max-w-sm mx-auto">
+        <label class="block text-sm text-gray-600 mb-1 text-left">Email:</label>
+        <input type="email" placeholder="Email"
+          class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md" />
+
+        <label class="block text-sm text-gray-600 mb-1 text-left">Password:</label>
+        <input type="password" placeholder="Password"
+          class="w-full mb-2 px-4 py-2 border border-gray-300 rounded-md" />
+
+        <a href="#" class="text-sm text-gray-500 hover:underline block text-left mb-4">Forgotten password?</a>
+
+        <button
+          class="bg-[#f0713f] text-white w-full py-2 rounded-md font-semibold hover:bg-[#db6237] transition duration-200">
+          {{'LOGIN.SIGNIN'}}
+        </button>
+      </form>
+
+      <p class="text-sm mt-4 text-center">
+        Don’t have an account?
+        <a href="#" class="text-[#f0713f] font-semibold hover:underline">Sign up</a>
+      </p>
+    </div>
+  </div>
+</div>

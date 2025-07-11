@@ -1,0 +1,21 @@
+{
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "SUBMIT": "Sign In",
+    "FORGOT": "Forgot Password?",
+    "SIGNIN":"Sign In"
+  },
+  "SIGNUP": {
+    "TITLE": "Create your account",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "GENDER": "Gender",
+    "SCHOOL_LEVEL": "School level",
+    "SUBMIT": "Register",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?"
+  }
+}
