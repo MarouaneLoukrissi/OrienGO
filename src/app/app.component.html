@@ -1,0 +1,8 @@
+<router-outlet>
+<div class="absolute top-4 right-4">
+  <select class="form-select w-auto" (change)="switchLang($event)">
+    <option value="en" [selected]="localStorage.getItem('lang') === 'en'">English</option>
+    <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">Français</option>
+  </select>
+</div>
+</router-outlet>

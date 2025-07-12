@@ -1,0 +1,52 @@
+{
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "WELCOME_LINE1": "Bienvenue",
+    "WELCOME_LINE2": "sur OrienGo !",
+    "WITH_GOOGLE": "Continuer avec Google",
+    "WITH_LINKEDIN": "Continuer avec Linkedin",
+    "EMAIL_LABEL": "Email :",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PASSWORD_LABEL": "Mot de passe :",
+    "PASSWORD_PLACEHOLDER": "Mot de passe",
+    "FORGOT_PASSWORD": "Mot de passe oublié ?",
+    "SIGNIN": "Connexion",
+    "NO_ACCOUNT": "Vous n'avez pas de compte ?",
+    "SIGNUP_LINK": "S'inscrire"
+  },
+  "SIGNUP": {
+    "TITLE": "Créer un compte",
+    "WITH_GOOGLE": "Continuer avec Google",
+    "WITH_LINKEDIN": "Continuer avec Linkedin",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom",
+    "EMAIL": "Email",
+    "PASSWORD": "Mot de passe",
+    "GENDER": "Genre",
+    "SCHOOL_LEVEL": "Niveau scolaire",
+    "SUBMIT": "S'inscrire",
+    "ALREADY_HAVE_ACCOUNT": "Vous avez déjà un compte ?",
+    "LOGIN_LINK": "Se connecter"
+  },
+  "RESET": {
+    "NEW_PASSWORD": "Nouveau mot de passe",
+    "NEW_PASSWORD_PLACEHOLDER": "Au moins 8 caractères",
+    "CONFIRM_PASSWORD": "Réécrire le mot de passe",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Répétez le mot de passe",
+    "SUBMIT": "Changer"
+  },
+  "FORGOT": {
+    "TITLE": "Mot de passe oublié",
+    "EMAIL_LABEL": "Adresse email",
+    "EMAIL_PLACEHOLDER": "exemple@domaine.com",
+    "SUBMIT": "Envoyer le code"
+  },
+  "VERIFY": {
+    "TITLE": "Vérifier le code",
+    "SUBTITLE": "Code reçu par e-mail",
+    "BUTTON": "Vérifier"
+  }
+
+
+
+}

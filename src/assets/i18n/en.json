@@ -1,0 +1,55 @@
+{
+  "LOGIN": {
+    "TITLE": "Login",
+    "WELCOME_LINE1": "Welcome",
+    "WELCOME_LINE2": "to OrienGo!",
+    "WITH_GOOGLE": "Continue with Google",
+    "WITH_LINKEDIN": "Continue with Linkedin",
+    "EMAIL_LABEL": "Email:",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PASSWORD_LABEL": "Password:",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "FORGOT_PASSWORD": "Forgotten password?",
+    "SIGNIN": "Login",
+    "NO_ACCOUNT": "Don’t have an account?",
+    "SIGNUP_LINK": "Sign up"
+  },
+  "SIGNUP": {
+    "TITLE": "Create your account",
+    "WITH_GOOGLE": "Continue with Google",
+    "WITH_LINKEDIN": "Continue with Linkedin",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "GENDER": "Gender",
+    "SCHOOL_LEVEL": "School level",
+    "SUBMIT": "Register",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_LINK": "Log in"
+  },
+  "RESET": {
+    "NEW_PASSWORD": "New Password",
+    "NEW_PASSWORD_PLACEHOLDER": "At least 8 characters",
+    "CONFIRM_PASSWORD": "Rewrite The Password",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Repeat the password",
+    "SUBMIT": "Change"
+  },
+  "FORGOT": {
+    "TITLE": "Forgot Password",
+    "EMAIL_LABEL": "Email Address",
+    "EMAIL_PLACEHOLDER": "example@domain.com",
+    "SUBMIT": "Send the code"
+  },
+  "VERIFY": {
+    "TITLE": "Verify Code",
+    "SUBTITLE": "Code received by mail",
+    "BUTTON": "Verify"
+  }
+
+
+  
+
+
+
+}
