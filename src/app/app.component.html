@@ -1,8 +1,15 @@
-<router-outlet>
-<div class="absolute top-4 right-4">
-  <select class="form-select w-auto" (change)="switchLang($event)">
-    <option value="en" [selected]="localStorage.getItem('lang') === 'en'">English</option>
-    <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">Français</option>
-  </select>
+<!-- Enveloppe globale avec même fond -->
+<div class="min-h-screen bg-[#fff8ef]">
+
+  <!-- Barre supérieure avec le sélecteur de langue -->
+  <div class="flex justify-end px-6 pt-4">
+    <select (change)="switchLang($event)" class="border px-2 py-1 rounded text-sm">
+      <option value="en" [selected]="localStorage.getItem('lang') === 'en'">English</option>
+      <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">Français</option>
+    </select>
+  </div>
+
+  <!-- Contenu de la page -->
+  <router-outlet></router-outlet>
+
 </div>
-</router-outlet>

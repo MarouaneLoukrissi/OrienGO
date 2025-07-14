@@ -45,11 +45,123 @@
     "TITLE": "Verify Code",
     "SUBTITLE": "Code received by mail",
     "BUTTON": "Verify"
+  },
+  "HOME": {
+  "HEADER": {
+    "SIGN_UP": "Sign up",
+    "LOGIN": "Login"
+  },
+  "HERO": {
+    "TITLE_LINE1": "Find your path",
+    "TITLE_LINE2": "with OrienGo",
+    "DESCRIPTION": "An intelligent platform to discover the careers that fit you thanks to the RIASEC test and artificial intelligence",
+    "START_TEST": "Start the RIASEC Test",
+    "LEARN_MORE": "Learn more"
+  },
+  "WHY": {
+    "TITLE": "Why choose OrienGo?",
+    "DESCRIPTION": "Our scientific and personalized approach helps you discover careers that truly match your personality",
+    "TEST": {
+      "TITLE": "RIASEC Test",
+      "DESCRIPTION": "Evaluation based on 6 dimensions of professional personality"
+    },
+    "RECOMMENDATIONS": {
+      "TITLE": "Recommendations",
+      "DESCRIPTION": "Fields of study and jobs tailored to your profile"
+    },
+    "SUPPORT": {
+      "TITLE": "Guidance",
+      "DESCRIPTION": "Personalized support on your orientation journey"
+    },
+    "RELIABILITY": {
+      "TITLE": "Reliability",
+      "DESCRIPTION": "Trusted method used by guidance counselors"
+    }
+  },
+  "CTA": {
+    "TITLE": "Ready to discover your professional future?",
+    "DESCRIPTION": "Take the RIASEC test now and receive your personalized recommendations",
+    "BUTTON": "Start the test -20 minutes"
   }
+},
+"HEADER": {
+    "HOME": "Home",
+    "LEARN_MORE": "Learn More",
+    "SIGNUP": "Sign Up",
+    "LOGIN": "Log In"
+  },
+  "RIASEC": {
+    "TITLE": "Discover the RIASEC Test",
+    "DESCRIPTION": "A scientific and recognized method to identify your professional interests and guide you towards careers that truly match you.",
+    "WHAT": {
+      "TITLE": "What is the RIASEC Test?",
+      "DESCRIPTION": "The RIASEC test is a psychological evaluation tool developed by the American psychologist John Holland. It identifies 6 types of professional personality to help you choose a career that matches your interests and aptitudes.",
+      "LI1": "Scientifically validated method",
+      "LI2": "Used by career guidance counselors",
+      "LI3": "Recognized worldwide",
+      "LI4": "Based on decades of research",
+      "CARD_TITLE": "6 Dimensions",
+      "CARD_DESC": "Evaluate your personality based on 6 key dimensions of career guidance."
+    },
+    "DIMENSIONS": {
+      "TITLE": "The 6 RIASEC dimensions",
+      "REALISTIC": {
+        "TITLE": "Realistic",
+        "DESCRIPTION": "Prefers practical activities, manual work, and structured environments."
+      },
+      "INVESTIGATIVE": {
+        "TITLE": "Investigative",
+        "DESCRIPTION": "Likes to analyze, understand, and solve complex problems."
+      },
+      "ARTISTIC": {
+        "TITLE": "Artistic",
+        "DESCRIPTION": "Seeks creativity, personal expression, and innovation."
+      },
+      "SOCIAL": {
+        "TITLE": "Social",
+        "DESCRIPTION": "Prioritizes helping others, collaboration, and communication."
+      },
+      "ENTERPRISING": {
+        "TITLE": "Enterprising",
+        "DESCRIPTION": "Enjoys leading, persuading, and achieving ambitious goals."
+      },
+      "CONVENTIONAL": {
+        "TITLE": "Conventional",
+        "DESCRIPTION": "Prefers organization, precision, and structured environments."
+      }
+    },
+    "HOW": {
+      "TITLE": "How does it work?",
+      "QUIZ": {
+        "TITLE": "Questionnaire",
+        "DESCRIPTION": "Answer 60 questions about your preferences and interests."
+      },
+      "ANALYSIS": {
+        "TITLE": "Analysis",
+        "DESCRIPTION": "Your answers are analyzed according to the 6 RIASEC dimensions."
+      },
+      "PROFILE": {
+        "TITLE": "Profile",
+        "DESCRIPTION": "Receive your personalized profile with your dominant dimensions."
+      },
+      "RECOMMEND": {
+        "TITLE": "Recommendations",
+        "DESCRIPTION": "Discover the careers and training programs that match you."
+      }
+    },
+    "CTA": {
+      "TITLE": "Ready to discover your profile?",
+      "DESCRIPTION": "Start your RIASEC test now and receive your personalized recommendations in 10 minutes.",
+      "BUTTON": "Start the test for free"
+    }
+  }
+}
+
+
 
 
   
 
 
 
-}
+

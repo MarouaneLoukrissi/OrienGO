@@ -45,7 +45,119 @@
     "TITLE": "Vérifier le code",
     "SUBTITLE": "Code reçu par e-mail",
     "BUTTON": "Vérifier"
+  },
+  "HOME": {
+  "HEADER": {
+    "SIGN_UP": "Inscription",
+    "LOGIN": "Connexion"
+  },
+  "HERO": {
+    "TITLE_LINE1": "Trouvez votre voie",
+    "TITLE_LINE2": "avec OrienGo",
+    "DESCRIPTION": "Une plateforme intelligente pour découvrir les métiers faits pour vous grâce au test RIASEC et à l'intelligence artificielle",
+    "START_TEST": "Commencer le test RIASEC",
+    "LEARN_MORE": "En savoir plus"
+  },
+  "WHY": {
+    "TITLE": "Pourquoi choisir OrienGo ?",
+    "DESCRIPTION": "Notre approche scientifique et personnalisée vous aide à découvrir les métiers qui correspondent vraiment à votre personnalité",
+    "TEST": {
+      "TITLE": "Test RIASEC",
+      "DESCRIPTION": "Évaluation basée sur 6 dimensions de personnalité professionnelle"
+    },
+    "RECOMMENDATIONS": {
+      "TITLE": "Recommandations",
+      "DESCRIPTION": "Métiers et filières d'études selon votre profil"
+    },
+    "SUPPORT": {
+      "TITLE": "Accompagnement",
+      "DESCRIPTION": "Suivi personnalisé dans votre parcours d’orientation"
+    },
+    "RELIABILITY": {
+      "TITLE": "Fiabilité",
+      "DESCRIPTION": "Méthode reconnue utilisée par les conseillers d’orientation"
+    }
+  },
+  "CTA": {
+    "TITLE": "Prêt à découvrir votre avenir professionnel ?",
+    "DESCRIPTION": "Passez le test RIASEC maintenant et recevez vos recommandations personnalisées",
+    "BUTTON": "Commencer le test -20 minutes"
   }
+},
+"HEADER": {
+    "HOME": "Accueil",
+    "LEARN_MORE": "En savoir plus",
+    "SIGNUP": "Inscription",
+    "LOGIN": "Connexion"
+  },
+  "RIASEC": {
+    "TITLE": "Découvrez le test RIASEC",
+    "DESCRIPTION": "Une méthode scientifique reconnue pour identifier vos intérêts professionnels et vous guider vers les métiers qui vous correspondent.",
+    "WHAT": {
+      "TITLE": "Qu'est-ce que le test RIASEC ?",
+      "DESCRIPTION": "Le test RIASEC est un outil d’évaluation psychologique développé par le psychologue américain John Holland. Il identifie 6 types de personnalités professionnelles pour vous aider à choisir une carrière correspondant à vos intérêts et aptitudes.",
+      "LI1": "Méthode scientifiquement validée",
+      "LI2": "Utilisée par les conseillers d’orientation",
+      "LI3": "Reconnue à l’international",
+      "LI4": "Basée sur des décennies de recherche",
+      "CARD_TITLE": "6 dimensions",
+      "CARD_DESC": "Évaluez votre personnalité selon 6 grandes dimensions d’orientation professionnelle."
+    },
+    "DIMENSIONS": {
+      "TITLE": "Les 6 dimensions RIASEC",
+      "REALISTIC": {
+        "TITLE": "Réaliste",
+        "DESCRIPTION": "Préfère les activités pratiques, le travail manuel et les environnements structurés."
+      },
+      "INVESTIGATIVE": {
+        "TITLE": "Investigateur",
+        "DESCRIPTION": "Aime analyser, comprendre et résoudre des problèmes complexes."
+      },
+      "ARTISTIC": {
+        "TITLE": "Artistique",
+        "DESCRIPTION": "Recherche la créativité, l'expression personnelle et l'innovation."
+      },
+      "SOCIAL": {
+        "TITLE": "Social",
+        "DESCRIPTION": "Privilégie l'aide aux autres, la collaboration et la communication."
+      },
+      "ENTERPRISING": {
+        "TITLE": "Entrepreneurial",
+        "DESCRIPTION": "Aime diriger, persuader et atteindre des objectifs ambitieux."
+      },
+      "CONVENTIONAL": {
+        "TITLE": "Conventionnel",
+        "DESCRIPTION": "Préfère l'organisation, la précision et les environnements structurés."
+      }
+    },
+    "HOW": {
+      "TITLE": "Comment ça fonctionne ?",
+      "QUIZ": {
+        "TITLE": "Questionnaire",
+        "DESCRIPTION": "Répondez à 60 questions sur vos préférences et intérêts."
+      },
+      "ANALYSIS": {
+        "TITLE": "Analyse",
+        "DESCRIPTION": "Vos réponses sont analysées selon les 6 dimensions RIASEC."
+      },
+      "PROFILE": {
+        "TITLE": "Profil",
+        "DESCRIPTION": "Recevez votre profil personnalisé selon vos dimensions dominantes."
+      },
+      "RECOMMEND": {
+        "TITLE": "Recommandations",
+        "DESCRIPTION": "Découvrez les métiers et formations adaptés à votre profil."
+      }
+    },
+    "CTA": {
+      "TITLE": "Prêt à découvrir votre profil ?",
+      "DESCRIPTION": "Commencez maintenant le test RIASEC et recevez vos recommandations personnalisées en 10 minutes.",
+      "BUTTON": "Commencer le test gratuitement"
+    }
+  }
+
+
+
 
 
 
