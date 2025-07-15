@@ -17,5 +17,195 @@
     "SCHOOL_LEVEL": "School level",
     "SUBMIT": "Register",
     "ALREADY_HAVE_ACCOUNT": "Already have an account?"
-  }
+  },
+  "SIDEBAR": {
+  "DASHBOARD": "Dashboard",
+  "NOTIFICATIONS": "Notifications",
+  "RIASEC_TEST": "RIASEC Test",
+  "MY_NETWORK": "My Network",
+  "SAVED": "Saved",
+  "HISTORY": "History",
+  "PROFILE": "Profile",
+  "FAVORITES": "Favorites",
+  "SETTINGS": "Settings",
+  "LOGOUT": "Log out"
+},
+"SIDEBAR_COACH": {
+  "DASHBOARD": "Dashboard",
+  "NOTIFICATIONS": "Notifications",
+  "MY_NETWORK": "My Network",
+  "HISTORY": "History",
+  "PROFILE": "Profile",
+  "SETTINGS": "Settings",
+  "LOGOUT": "Log out"
+},
+"SETTINGS_COACH": {
+    "TITLE": "Settings",
+  "SUBTITLE": "Manage your availability & Jobs & Visibility",
+  "NOTIFICATIONS": "Notifications",
+  "RECEIVE_NOTIFICATIONS": "Receive Notifications By mail",
+  "NEW_JOB_ALERTS": "Notifications for new jobs",
+  "CONFIDENTIAL": "Confidential",
+  "ALLOW_CONTACT": "Allow students to contact me",
+  "PROFILE_VISIBILITY": "Visibility profile to students",
+  "MANAGE_AVAILABILITY": "Manage my availability"
+},
+  "DASHBOARD_COACH": {
+    "WELCOME": "Welcome back, {{name}}!",
+    "SUBTITLE": "Here are the average of your Coachees career test results",
+
+    "RADAR_TITLE": "Radar Chart – Complete Profile",
+    "BAR_TITLE": "Bar Chart – Detailed Scores",
+
+    "DETAIL_SCORES": "Detailed Scores",
+    "DOMINANT_PROFILE": "Your Coachees Dominant Profile",
+
+    "PERCENT": "{{value}}%",
+    
+    "PROFILES": {
+      "R": {
+        "NAME": "Realistic (R)",
+        "DESC": "Practical, hands-on, action-oriented"
+      },
+      "I": {
+        "NAME": "Investigative (I)",
+        "DESC": "Analytical, curious, scientific"
+      },
+      "A": {
+        "NAME": "Artistic (A)",
+        "DESC": "Creative, expressive, original"
+      },
+      "S": {
+        "NAME": "Social (S)",
+        "DESC": "Altruistic, cooperative, kind"
+      },
+      "E": {
+        "NAME": "Enterprising (E)",
+        "DESC": "Persuasive, ambitious, energetic"
+      },
+      "C": {
+        "NAME": "Conventional (C)",
+        "DESC": "Organized, precise, methodical"
+      }
+    }
+  },
+"TEST_HISTORY": {
+  "TITLE": "Test History",
+  "SUBTITLE": "Track the evolution of your RIASEC profile over time",
+  "TESTS_PASSED": "Tests passed",
+  "CURRENT_PROFILE": "Current profile",
+  "CURRENT_SCORE": "Current score",
+  "PROGRESS": "Tests passed",
+  "FILTERS": {
+    "ALL": "All tests",
+    "LAST_3_MONTHS": "Last 3 months",
+    "FULL_TESTS": "Full tests",
+    "EXPRESS_TESTS": "Express tests"
+  },
+  "RIASEC_EXPRESS": "RIASEC Express",
+  "DURATION": "Duration",
+  "PERCENTILE_SCORE": "Dominant score",
+  "VIEW_DETAILS": "View details",
+  "DOWNLOAD_PDF": "Download PDF",
+  "EVOLUTION_TITLE": "Evolution of your profile",
+  "EVOLUTION_CHART_UNAVAILABLE": "Evolution chart unavailable with more data"
+},
+"MY_NETWORK": {
+  "TAB_MY_NETWORK": "My network",
+  "TAB_MY_PENDINGS": "My pendings",
+  "TITLE": "My Students",
+  "SORTED_BY": "Sorted by:",
+  "RECENTLY_ADDED": "Recently Added",
+  "SEARCH": "Search by Name",
+  "RELATIONS": "relations",
+  "CONNECTED_ON": "Connected on",
+  "MESSAGE": "Message",
+  "REMOVE": "Remove",
+  "ADD_STUDENT": "Add a Student",
+  "INPUT_PLACEHOLDER": "Enter the code or the student’s email",
+  "SEND_REQUEST": "Send the request"
+},
+"MY_PENDINGS": {
+  "TAB_MY_NETWORK": "My network",
+  "TAB_MY_PENDINGS": "My pendings",
+  "TITLE": "My Students (Pending)",
+  "SORTED_BY": "Sorted by:",
+  "RECENTLY_ADDED": "Recently Added",
+  "SEARCH": "Search by Name",
+  "RELATIONS": "pendings",
+  "REMOVE": "Remove",
+  "ADD_STUDENT": "Add a Student",
+  "INPUT_PLACEHOLDER": "Enter the code or the student’s email",
+  "SEND_REQUEST": "Send the request"
+},
+"MODIFY_PROFILE": {
+  "TITLE": "Modify your profile",
+  "FIRST_NAME": "First name",
+  "LAST_NAME": "Last name",
+  "LOCATION": "Location",
+  "PHONE": "Phone number",
+  "SAVE": "Save",
+  "CANCEL": "Cancel",
+  "ROLE": "Coach"
+},
+
+"TEACHER_PROFILE": {
+  "COVER_BUTTON": "Add Cover Photo",
+  "PDF": "PDF",
+  "SHARE": "Share",
+  "RIASEC_SCORE": "Dominant RIASEC Profile",
+  "TESTS_FULL": "RIASEC Tests – Full Access",
+  "TESTS_EXPRESS": "Express Tests – Access",
+  "FAVORITE_JOBS": "Favorite Jobs",
+  "CREATED_TRAININGS": "Trainings Created",
+  "PERSONAL_INFO": "Personal Information",
+  "MODIFY": "Modify",
+  
+  "LABELS": {
+    "FULL_NAME": "Full name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "LOCATION": "Location",
+    "SCHOOL": "School",
+    "CLASS": "Class"
+  },
+
+  "STUDENT_DOMINANT_PROFILE": "Dominant profile of his/her students",
+  "PROFILE_TYPE": "Realistic",
+  "PROFILE_DESCRIPTION": "Practical and solution-oriented",
+  "MATCH_SCORE": "% match"
+},
+"TEACHER_PUBLIC_PROFILE": {
+  "CONNECT": "Connect",
+  "MESSAGE": "Message",
+  "SHARE": "Share",
+  "TESTS_FULL": "RIASEC Tests – Full Access",
+  "TESTS_EXPRESS": "Express Tests – Access",
+  "MEMBER_SINCE": "Member since",
+  "LAST_ACTIVITY": "Last Activity",
+  
+  "ABOUT": "About",
+  
+  "LABELS": {
+    "FULL_NAME": "Full name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "LOCATION": "Location",
+    "SCHOOL": "School",
+    "CLASS": "Class"
+  },
+
+  "STUDENT_DOMINANT_PROFILE": "Dominant profile of his/her students",
+  "PROFILE_TYPE": "Realistic",
+  "PROFILE_DESCRIPTION": "Practical and solution-oriented",
+  "MATCH_SCORE": "% match",
+  
+  "REVIEWS_COUNT": "{{count}} relations"
+}
+
+
+
+
+
+
 }
