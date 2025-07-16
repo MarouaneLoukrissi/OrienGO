@@ -36,6 +36,7 @@
     "MY_NETWORK": "Mon Réseau",
     "HISTORY": "Historique",
     "PROFILE": "Profil",
+    "MODIFY PROFILE": "Modifier Mon Profil",
     "SETTINGS": "Paramètres",
     "LOGOUT": "Déconnexion"
   },
@@ -139,8 +140,9 @@
   "INPUT_PLACEHOLDER": "Entrez le code ou l'e-mail de l'étudiant",
   "SEND_REQUEST": "Envoyer la demande"
 },
+
 "MODIFY_PROFILE": {
-  "TITLE": "Modifier votre profil",
+  "TITLE": "Modifier Mon profil",
   "FIRST_NAME": "Prénom",
   "LAST_NAME": "Nom",
   "LOCATION": "Localisation",
@@ -149,66 +151,62 @@
   "CANCEL": "Annuler",
   "ROLE": "Coach"
 },
-
-
-
-"TEACHER_PROFILE": {
-  "COVER_BUTTON": "Add Cover Photo",
-  "PDF": "PDF",
-  "SHARE": "Share",
-  "RIASEC_SCORE": "Dominant RIASEC Profile",
-  "TESTS_FULL": "RIASEC Tests – Full Access",
-  "TESTS_EXPRESS": "Express Tests – Access",
-  "FAVORITE_JOBS": "Favorite Jobs",
-  "CREATED_TRAININGS": "Trainings Created",
-  "PERSONAL_INFO": "Personal Information",
-  "MODIFY": "Modify",
-  "LABELS": {
-    "FULL_NAME": "Full name",
-    "PHONE": "Phone",
-    "EMAIL": "Email",
-    "LOCATION": "Location",
-    "SCHOOL": "School",
-    "CLASS": "Class"
-  },
-  "STUDENT_DOMINANT_PROFILE": "Dominant profile of his/her students",
-  "PROFILE_TYPE": "Realistic",
-  "PROFILE_DESCRIPTION": "Practical and solution-oriented",
-  "MATCH_SCORE": "% match"
-},
-"TEACHER_PUBLIC_PROFILE": {
-  "CONNECT": "Se connecter",
-  "MESSAGE": "Message",
-  "SHARE": "Partager",
-  "TESTS_FULL": "Tests RIASEC – Accès complet",
-  "TESTS_EXPRESS": "Tests Express – Accès",
-  "MEMBER_SINCE": "Membre depuis",
-  "LAST_ACTIVITY": "Dernière activité",
-  
-  "ABOUT": "À propos",
-  
-  "LABELS": {
+  "PROFILE_COACH": {
     "FULL_NAME": "Nom complet",
-    "EMAIL": "Email",
     "PHONE": "Téléphone",
     "LOCATION": "Localisation",
-    "SCHOOL": "Établissement",
-    "CLASS": "Classe"
+    "MODIFY": "Modifier",
+    "DOWNLOAD_PDF": "PDF",
+    "SHARE": "Partager",
+    "PERSONAL_INFORMATION": "Informations personnelles",
+    "DOMINANT_STUDENT_PROFILE": "Profil dominant de ses élèves",
+    "PROFILE_LABEL": "Réaliste",
+    "PROFILE_DESC": "Pratique et orienté vers l'action",
+    "MATCH": "taux de correspondance",
+    "DOMINANT_RIASEC": "Profil RIASEC dominant",
+    "TESTS_FULL": "Accès total aux tests",
+    "TESTS_EXPRESS": "Accès aux tests express",
+    "FAVORITE_JOBS": "Offres d'emploi favorites",
+    "TRAINING_COURSES": "Accès aux formations",
+    "SCHOOL": "Lycée Victor Hugo • Terminale scientifique",
+    "JOINED_SINCE": "Membre depuis janvier 2024"
   },
 
-  "STUDENT_DOMINANT_PROFILE": "Profil dominant de ses étudiants",
-  "PROFILE_TYPE": "Réaliste",
-  "PROFILE_DESCRIPTION": "Pratique et orienté solution",
-  "MATCH_SCORE": "% de correspondance",
-  
-  "REVIEWS_COUNT": "{{count}} relations"
-
+  "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "PROFILE_VIEWED": {
+      "TITLE": "Votre profil a été consulté par un étudiant",
+      "SUBTITLE": "Un étudiant a consulté votre profil"
+    },
+    "NEW_JOB": {
+      "TITLE": "Nouvelle opportunité d'emploi",
+      "SUBTITLE": "Une nouvelle offre d’emploi vous correspond"
+    }
+  },
+  "HISTORY": {
+  "TITLE": "Historique des tests",
+  "SUBTITLE": "Suivez l'évolution de votre profil RIASEC dans le temps",
+  "TOTAL_TESTS": "Tests passés",
+  "CURRENT_PROFILE": "Profil actuel",
+  "CURRENT_SCORE": "Score actuel",
+  "SCORE_CHANGE": "Tests réussis",
+  "FILTER_ALL": "Tous les tests",
+  "FILTER_LAST_2_MONTHS": "Les 2 derniers mois",
+  "FILTER_FULL_TESTS": "Tests complets",
+  "FILTER_EXPRESS_TESTS": "Tests express",
+  "LABEL_FULL": "RIASEC Complet",
+  "LABEL_EXPRESS": "RIASEC Express",
+  "VIEW_DETAILS": "Voir détails",
+  "DOWNLOAD_PDF": "Télécharger PDF",
+  "EVOLUTION_TITLE": "Évolution de votre profil",
+  "EVOLUTION_EMPTY": "Le graphique d'évolution sera disponible avec plus de données",
+  "SCORES": {
+    "R": "R",
+    "I": "I",
+    "A": "A",
+    "S": "S",
+    "E": "E",
+    "C": "C"
+  }
 }
-
-
-
-
-
-
-
 }

@@ -1,0 +1,110 @@
+<div class="flex-1 p-6 bg-[#FFFAF0] min-h-screen">
+  <!-- Titre principal -->
+  <div class="text-center mb-8">
+    <div class="flex justify-center mb-2">
+      <img src="assets/icons/calendar.svg" class="w-6 h-6" />
+    </div>
+    <h1 class="text-3xl font-bold text-[#121212]">Test History</h1>
+    <p class="text-sm text-[#7E7E7E]">Track the evolution of your RIASEC profile over time</p>
+  </div>
+
+  <!-- Statistiques principales -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white rounded-lg shadow p-4 text-center">
+      <p class="text-xl font-bold text-[#121212]">4</p>
+      <p class="text-[#7E7E7E] text-sm">Tests passed</p>
+    </div>
+    <div class="bg-orange-100 rounded-lg shadow p-4 text-center">
+      <p class="text-xl font-bold text-orange-600">Investigator</p>
+      <p class="text-[#7E7E7E] text-sm">Current profile</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4 text-center">
+      <p class="text-xl font-bold text-[#121212]">85%</p>
+      <p class="text-[#7E7E7E] text-sm">Current score</p>
+    </div>
+    <div class="bg-green-100 rounded-lg shadow p-4 text-center">
+      <p class="text-xl font-bold text-green-600">+5%</p>
+      <p class="text-[#7E7E7E] text-sm">Tests passed</p>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="bg-white shadow rounded-xl p-4 mb-6">
+    <div class="flex items-center gap-3 overflow-x-auto">
+      <button class="px-4 py-2 bg-orange-500 text-white rounded-md text-sm">All tests</button>
+      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Last 2 months</button>
+      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Full tests</button>
+      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Express tests</button>
+    </div>
+  </div>
+
+  <!-- Cartes de tests -->
+  <div class="flex flex-col gap-4">
+    <!-- Carte RIASEC Full -->
+    <div class="bg-white rounded-xl shadow p-5">
+      <div class="flex justify-between items-center mb-3">
+        <div class="flex items-center gap-2">
+          <img src="assets/icons/ria-sec-icon.svg" class="w-6 h-6" />
+          <div>
+            <p class="font-bold text-[#121212] text-sm">RIASEC Full</p>
+            <p class="text-xs text-[#7E7E7E]">07/2024 - Duration 8 min</p>
+          </div>
+        </div>
+        <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">Investigator</span>
+      </div>
+      <div class="grid grid-cols-6 text-xs text-[#7E7E7E] font-medium mb-2">
+        <div>R</div><div>I</div><div>A</div><div>S</div><div>E</div><div>C</div>
+      </div>
+      <div class="grid grid-cols-6 gap-1 items-center text-center mb-2">
+        <div class="text-[#121212]">22%</div>
+        <div class="text-[#121212]">43%</div>
+        <div class="text-[#121212]">15%</div>
+        <div class="text-[#121212]">10%</div>
+        <div class="text-[#121212]">7%</div>
+        <div class="text-[#121212]">3%</div>
+      </div>
+      <div class="text-end text-sm font-semibold text-[#121212]">85%</div>
+      <div class="flex justify-between mt-3 text-sm">
+        <a href="#" class="text-orange-500 font-medium">View details</a>
+        <a href="#" class="text-orange-500 font-medium">Download PDF</a>
+      </div>
+    </div>
+
+    <!-- Carte RIASEC Express -->
+    <div class="bg-white rounded-xl shadow p-5">
+      <div class="flex justify-between items-center mb-3">
+        <div class="flex items-center gap-2">
+          <img src="assets/icons/ria-sec-icon.svg" class="w-6 h-6" />
+          <div>
+            <p class="font-bold text-[#121212] text-sm">RIASEC Express</p>
+            <p class="text-xs text-[#7E7E7E]">06/2024 - Duration 5 min</p>
+          </div>
+        </div>
+        <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">Investigator</span>
+      </div>
+      <div class="grid grid-cols-6 text-xs text-[#7E7E7E] font-medium mb-2">
+        <div>R</div><div>I</div><div>A</div><div>S</div><div>E</div><div>C</div>
+      </div>
+      <div class="grid grid-cols-6 gap-1 items-center text-center mb-2">
+        <div class="text-[#121212]">25%</div>
+        <div class="text-[#121212]">40%</div>
+        <div class="text-[#121212]">12%</div>
+        <div class="text-[#121212]">9%</div>
+        <div class="text-[#121212]">9%</div>
+        <div class="text-[#121212]">5%</div>
+      </div>
+      <div class="text-end text-sm font-semibold text-[#121212]">80%</div>
+      <div class="flex justify-between mt-3 text-sm">
+        <a href="#" class="text-orange-500 font-medium">View details</a>
+        <a href="#" class="text-orange-500 font-medium">Download PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Courbe d'évolution -->
+  <div class="bg-white mt-6 p-6 rounded-xl shadow text-center">
+    <h2 class="text-lg font-bold text-[#121212] mb-4">Evolution of your profile</h2>
+    <img src="assets/icons/chart-placeholder.svg" class="mx-auto w-24 h-24 opacity-50" alt="No data" />
+    <p class="text-sm text-[#7E7E7E]">Evolution chart available with more data</p>
+  </div>
+</div>

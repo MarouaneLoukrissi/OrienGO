@@ -35,6 +35,7 @@
   "NOTIFICATIONS": "Notifications",
   "MY_NETWORK": "My Network",
   "HISTORY": "History",
+  "MODIFY_PROFILE": "Modify My Profile",
   "PROFILE": "Profile",
   "SETTINGS": "Settings",
   "LOGOUT": "Log out"
@@ -139,7 +140,7 @@
   "SEND_REQUEST": "Send the request"
 },
 "MODIFY_PROFILE": {
-  "TITLE": "Modify your profile",
+  "TITLE": "Modify My Profile",
   "FIRST_NAME": "First name",
   "LAST_NAME": "Last name",
   "LOCATION": "Location",
@@ -148,64 +149,63 @@
   "CANCEL": "Cancel",
   "ROLE": "Coach"
 },
-
-"TEACHER_PROFILE": {
-  "COVER_BUTTON": "Add Cover Photo",
-  "PDF": "PDF",
-  "SHARE": "Share",
-  "RIASEC_SCORE": "Dominant RIASEC Profile",
-  "TESTS_FULL": "RIASEC Tests – Full Access",
-  "TESTS_EXPRESS": "Express Tests – Access",
-  "FAVORITE_JOBS": "Favorite Jobs",
-  "CREATED_TRAININGS": "Trainings Created",
-  "PERSONAL_INFO": "Personal Information",
-  "MODIFY": "Modify",
-  
-  "LABELS": {
+  "PROFILE_COACH": {
     "FULL_NAME": "Full name",
-    "EMAIL": "Email",
     "PHONE": "Phone",
     "LOCATION": "Location",
-    "SCHOOL": "School",
-    "CLASS": "Class"
+    "MODIFY": "Modify",
+    "DOWNLOAD_PDF": "PDF",
+    "SHARE": "Share",
+    "PERSONAL_INFORMATION": "Personal Informations",
+    "DOMINANT_STUDENT_PROFILE": "Dominant profile of his/her students",
+    "PROFILE_LABEL": "Realistic",
+    "PROFILE_DESC": "Practical and action-oriented",
+    "MATCH": "match",
+    "DOMINANT_RIASEC": "Dominant RIASEC Profile",
+    "TESTS_FULL": "Tests full Access",
+    "TESTS_EXPRESS": "Tests Express Access",
+    "FAVORITE_JOBS": "Favorite Jobs Access",
+    "TRAINING_COURSES": "Training Courses Access",
+    "SCHOOL": "Victor Hugo high school • Final year of science",
+    "JOINED_SINCE": "Member since January 2024"
   },
 
-  "STUDENT_DOMINANT_PROFILE": "Dominant profile of his/her students",
-  "PROFILE_TYPE": "Realistic",
-  "PROFILE_DESCRIPTION": "Practical and solution-oriented",
-  "MATCH_SCORE": "% match"
-},
-"TEACHER_PUBLIC_PROFILE": {
-  "CONNECT": "Connect",
-  "MESSAGE": "Message",
-  "SHARE": "Share",
-  "TESTS_FULL": "RIASEC Tests – Full Access",
-  "TESTS_EXPRESS": "Express Tests – Access",
-  "MEMBER_SINCE": "Member since",
-  "LAST_ACTIVITY": "Last Activity",
-  
-  "ABOUT": "About",
-  
-  "LABELS": {
-    "FULL_NAME": "Full name",
-    "EMAIL": "Email",
-    "PHONE": "Phone",
-    "LOCATION": "Location",
-    "SCHOOL": "School",
-    "CLASS": "Class"
+    "NOTIFICATIONS" : {
+    "TITLE": "Notifications",
+    "PROFILE_VIEWED": {
+      "TITLE": "Your profile was viewed by a Student",
+      "SUBTITLE": "A Student viewed your profile"
+    },
+    "NEW_JOB": {
+      "TITLE": "New Job opportunity",
+      "SUBTITLE": "A new job opportunity matches you"
+    }
   },
+  "HISTORY": {
+  "TITLE": "Test History",
+  "SUBTITLE": "Track the evolution of your RIASEC profile over time",
+  "TOTAL_TESTS": "Tests passed",
+  "CURRENT_PROFILE": "Current profile",
+  "CURRENT_SCORE": "Current score",
+  "SCORE_CHANGE": "Tests passed",
+  "FILTER_ALL": "All tests",
+  "FILTER_LAST_2_MONTHS": "Last 2 months",
+  "FILTER_FULL_TESTS": "Full tests",
+  "FILTER_EXPRESS_TESTS": "Express tests",
+  "LABEL_FULL": "RIASEC Full",
+  "LABEL_EXPRESS": "RIASEC Express",
+  "VIEW_DETAILS": "View details",
+  "DOWNLOAD_PDF": "Download PDF",
+  "EVOLUTION_TITLE": "Evolution of your profile",
+  "EVOLUTION_EMPTY": "Evolution chart available with more data",
+  "SCORES": {
+    "R": "R",
+    "I": "I",
+    "A": "A",
+    "S": "S",
+    "E": "E",
+    "C": "C"
+  }
 
-  "STUDENT_DOMINANT_PROFILE": "Dominant profile of his/her students",
-  "PROFILE_TYPE": "Realistic",
-  "PROFILE_DESCRIPTION": "Practical and solution-oriented",
-  "MATCH_SCORE": "% match",
-  
-  "REVIEWS_COUNT": "{{count}} relations"
 }
-
-
-
-
-
-
 }

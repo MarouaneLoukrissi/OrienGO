@@ -1,0 +1,82 @@
+<!-- Wrapper général avec centrage horizontal & vertical -->
+<div class="flex min-h-screen bg-[#FFFAF0] items-center justify-center">
+  
+  <!-- Contenu Settings centré -->
+  <div class="bg-[#FFF9ED] p-6 rounded-lg">
+    
+    <!-- Carte principale blanche -->
+   <div class="bg-white shadow-2xl rounded-2xl p-20 w-full max-w-4xl min-h-[500px] text-center">
+
+      <!-- Titre -->
+      <div class="text-center mb-6">
+        <lucide-icon name="settings" class="mx-auto w-8 h-8 text-orange-500" />
+        <h1 class="text-2xl font-bold text-gray-800">{{ 'SETTINGS_COACH.TITLE' | translate }}</h1>
+        <p class="text-gray-500 text-sm">{{ 'SETTINGS_COACH.SUBTITLE' | translate }}</p>
+      </div>
+
+      <!-- Card blanche intérieure -->
+      <div class="bg-white shadow-md rounded-xl p-6 space-y-6">
+
+
+        <!-- Notifications -->
+        <div>
+          <h2 class="font-bold flex items-center gap-2 text-[#EB5E00]">
+            <lucide-icon name="bell" class="w-5 h-5 text-[#EB5E00]" />
+            {{ 'SETTINGS_COACH.NOTIFICATIONS' | translate }}
+          </h2>
+          <div class="mt-2 space-y-2">
+            <!-- Notification switches -->
+            <div class="flex justify-between items-center">
+              <span class="text-gray-800 text-sm">{{ 'SETTINGS_COACH.RECEIVE_NOTIFICATIONS' | translate }}</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-orange-500 transition-colors"></div>
+                <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform peer-checked:translate-x-full"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-800 text-sm">{{ 'SETTINGS_COACH.NEW_JOB_ALERTS' | translate }}</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-orange-500 transition-colors"></div>
+                <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform peer-checked:translate-x-full"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confidential -->
+        <div>
+          <h2 class="font-bold flex items-center gap-2 text-[#EB5E00]">
+            <lucide-icon name="lock" class="w-5 h-5 text-[#EB5E00]" />
+            {{ 'SETTINGS_COACH.CONFIDENTIAL' | translate }}
+          </h2>
+          <div class="mt-2 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-800 text-sm">{{ 'SETTINGS_COACH.ALLOW_CONTACT' | translate }}</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-orange-500 transition-colors"></div>
+                <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform peer-checked:translate-x-full"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-800 text-sm">{{ 'SETTINGS_COACH.PROFILE_VISIBILITY' | translate }}</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-orange-500 transition-colors"></div>
+                <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform peer-checked:translate-x-full"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-800 text-sm">{{ 'SETTINGS_COACH.MANAGE_AVAILABILITY' | translate }}</span>
+              <lucide-icon name="calendar" class="w-5 h-5 text-gray-600" />
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- fin de carte intérieure -->
+
+    </div> <!-- fin carte blanche principale -->
+  </div>
+</div>
