@@ -91,27 +91,6 @@
     }
   },
 
-"TEST_HISTORY": {
-  "TITLE": "Historique des tests",
-  "SUBTITLE": "Suivez l'évolution de votre profil RIASEC au fil du temps",
-  "TESTS_PASSED": "Tests passés",
-  "CURRENT_PROFILE": "Profil actuel",
-  "CURRENT_SCORE": "Score actuel",
-  "PROGRESS": "Tests réussis",
-  "FILTERS": {
-    "ALL": "Tous les tests",
-    "LAST_3_MONTHS": "3 derniers mois",
-    "FULL_TESTS": "Tests complets",
-    "EXPRESS_TESTS": "Tests express"
-  },
-  "RIASEC_EXPRESS": "RIASEC Express",
-  "DURATION": "Durée",
-  "PERCENTILE_SCORE": "Score dominant",
-  "VIEW_DETAILS": "Voir détails",
-  "DOWNLOAD_PDF": "Télécharger le PDF",
-  "EVOLUTION_TITLE": "Évolution de votre profil",
-  "EVOLUTION_CHART_UNAVAILABLE": "Graphique d’évolution non disponible avec les données actuelles"
-},
 "MY_NETWORK": {
   "TAB_MY_NETWORK": "Mon Réseau",
   "TAB_MY_PENDINGS": "Mes Invitations",
@@ -169,7 +148,8 @@
     "FAVORITE_JOBS": "Offres d'emploi favorites",
     "TRAINING_COURSES": "Accès aux formations",
     "SCHOOL": "Lycée Victor Hugo • Terminale scientifique",
-    "JOINED_SINCE": "Membre depuis janvier 2024"
+    "JOINED_SINCE": "Membre depuis janvier 2024",
+    "PHOTO": "Modifier Pdp"
   },
 
   "NOTIFICATIONS": {
@@ -183,30 +163,25 @@
       "SUBTITLE": "Une nouvelle offre d’emploi vous correspond"
     }
   },
-  "HISTORY": {
-  "TITLE": "Historique des tests",
-  "SUBTITLE": "Suivez l'évolution de votre profil RIASEC dans le temps",
-  "TOTAL_TESTS": "Tests passés",
-  "CURRENT_PROFILE": "Profil actuel",
-  "CURRENT_SCORE": "Score actuel",
-  "SCORE_CHANGE": "Tests réussis",
-  "FILTER_ALL": "Tous les tests",
-  "FILTER_LAST_2_MONTHS": "Les 2 derniers mois",
-  "FILTER_FULL_TESTS": "Tests complets",
-  "FILTER_EXPRESS_TESTS": "Tests express",
-  "LABEL_FULL": "RIASEC Complet",
-  "LABEL_EXPRESS": "RIASEC Express",
-  "VIEW_DETAILS": "Voir détails",
-  "DOWNLOAD_PDF": "Télécharger PDF",
-  "EVOLUTION_TITLE": "Évolution de votre profil",
-  "EVOLUTION_EMPTY": "Le graphique d'évolution sera disponible avec plus de données",
-  "SCORES": {
-    "R": "R",
-    "I": "I",
-    "A": "A",
-    "S": "S",
-    "E": "E",
-    "C": "C"
+  "TEST_HISTORY": {
+    "TITLE": "Historique des tests",
+    "SUBTITLE": "Suivez l'évolution de votre profil RIASEC au fil du temps",
+    "TESTS_PASSED": "Tests réussis",
+    "CURRENT_PROFILE": "Profil actuel",
+    "CURRENT_SCORE": "Score actuel",
+    "SCORE_EVOLUTION": "Évolution du score",
+    "FILTERS": {
+      "ALL": "Tous les tests",
+      "LAST_3_MONTHS": "3 derniers mois",
+      "FULL": "Tests complets",
+      "EXPRESS": "Tests express"
+    },
+    "DURATION": "Durée",
+    "PROFILE_LABEL": "Investigateur",
+    "VIEW_DETAILS": "Voir les détails",
+    "DOWNLOAD_PDF": "Télécharger le PDF",
+    "CHART_TITLE": "Évolution de votre profil",
+    "CHART_EMPTY": "Le graphique sera disponible avec plus de données"
   }
-}
+
 }

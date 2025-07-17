@@ -10,14 +10,16 @@ import {
   Bell,
   Home,
   LogOut,
-  User,
   Globe,
   Clock,
   Lock,
   Settings,
   LucideAngularModule,
-  Calendar
-} from 'lucide-angular';
+  Calendar,
+   ClipboardList,
+    Timer, 
+    FileDown, User,Phone, Eye,TrendingUp,CheckCircle, Target, Zap, Book, Briefcase, NotebookPen
+  } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from './settings/settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -46,14 +48,17 @@ import { HistoryComponent } from './history/history.component';
     CoachRoutingModule,
     TranslateModule,
     LucideAngularModule.pick({
-  User,
   Home,
   LogOut,
   Bell,
   Globe,
   Clock,
-  Lock,
-  Settings, Calendar})
-  ]
+  Lock,Calendar,
+   ClipboardList,
+    Timer, 
+    FileDown, 
+    Eye,TrendingUp,CheckCircle, Target, Zap, Book, Briefcase, NotebookPen,Settings,User, Phone
+  
+})],
 })
 export class CoachModule { }

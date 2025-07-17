@@ -167,7 +167,8 @@
     "FAVORITE_JOBS": "Favorite Jobs Access",
     "TRAINING_COURSES": "Training Courses Access",
     "SCHOOL": "Victor Hugo high school • Final year of science",
-    "JOINED_SINCE": "Member since January 2024"
+    "JOINED_SINCE": "Member since January 2024",
+    "PHOTO": "Add Cover Photo"
   },
 
     "NOTIFICATIONS" : {
@@ -181,31 +182,27 @@
       "SUBTITLE": "A new job opportunity matches you"
     }
   },
-  "HISTORY": {
-  "TITLE": "Test History",
-  "SUBTITLE": "Track the evolution of your RIASEC profile over time",
-  "TOTAL_TESTS": "Tests passed",
-  "CURRENT_PROFILE": "Current profile",
-  "CURRENT_SCORE": "Current score",
-  "SCORE_CHANGE": "Tests passed",
-  "FILTER_ALL": "All tests",
-  "FILTER_LAST_2_MONTHS": "Last 2 months",
-  "FILTER_FULL_TESTS": "Full tests",
-  "FILTER_EXPRESS_TESTS": "Express tests",
-  "LABEL_FULL": "RIASEC Full",
-  "LABEL_EXPRESS": "RIASEC Express",
-  "VIEW_DETAILS": "View details",
-  "DOWNLOAD_PDF": "Download PDF",
-  "EVOLUTION_TITLE": "Evolution of your profile",
-  "EVOLUTION_EMPTY": "Evolution chart available with more data",
-  "SCORES": {
-    "R": "R",
-    "I": "I",
-    "A": "A",
-    "S": "S",
-    "E": "E",
-    "C": "C"
+ {
+  "TEST_HISTORY": {
+    "TITLE": "Test History",
+    "SUBTITLE": "Track the evolution of your RIASEC profile over time",
+    "TESTS_PASSED": "Tests passed",
+    "CURRENT_PROFILE": "Current profile",
+    "CURRENT_SCORE": "Current score",
+    "SCORE_EVOLUTION": "Tests passed",
+    "FILTERS": {
+      "ALL": "All tests",
+      "LAST_3_MONTHS": "Last 3 months",
+      "FULL": "Full tests",
+      "EXPRESS": "Express tests"
+    },
+    "DURATION": "Duration",
+    "PROFILE_LABEL": "Investigator",
+    "VIEW_DETAILS": "View details",
+    "DOWNLOAD_PDF": "Download PDF",
+    "CHART_TITLE": "Evolution of your profile",
+    "CHART_EMPTY": "Evolution chart available with more data"
   }
-
 }
+
 }

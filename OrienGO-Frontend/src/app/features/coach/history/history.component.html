@@ -1,110 +1,125 @@
 <div class="flex-1 p-6 bg-[#FFFAF0] min-h-screen">
-  <!-- Titre principal -->
+
+  <!-- Titre -->
   <div class="text-center mb-8">
     <div class="flex justify-center mb-2">
-      <img src="assets/icons/calendar.svg" class="w-6 h-6" />
+      <lucide-icon name="calendar" class="w-6 h-6 text-orange-500"></lucide-icon>
     </div>
-    <h1 class="text-3xl font-bold text-[#121212]">Test History</h1>
-    <p class="text-sm text-[#7E7E7E]">Track the evolution of your RIASEC profile over time</p>
+    <h1 class="text-3xl font-bold text-[#121212]">
+      {{ 'TEST_HISTORY.TITLE' | translate }}
+    </h1>
+    <p class="text-sm text-[#7E7E7E]">
+      {{ 'TEST_HISTORY.SUBTITLE' | translate }}
+    </p>
   </div>
 
-  <!-- Statistiques principales -->
+  <!-- Statistiques -->
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
     <div class="bg-white rounded-lg shadow p-4 text-center">
       <p class="text-xl font-bold text-[#121212]">4</p>
-      <p class="text-[#7E7E7E] text-sm">Tests passed</p>
+      <p class="text-[#7E7E7E] text-sm">
+        {{ 'TEST_HISTORY.TESTS_PASSED' | translate }}
+      </p>
     </div>
     <div class="bg-orange-100 rounded-lg shadow p-4 text-center">
-      <p class="text-xl font-bold text-orange-600">Investigator</p>
-      <p class="text-[#7E7E7E] text-sm">Current profile</p>
+      <p class="text-xl font-bold text-orange-600">
+        {{ 'TEST_HISTORY.PROFILE_LABEL' | translate }}
+      </p>
+      <p class="text-[#7E7E7E] text-sm">
+        {{ 'TEST_HISTORY.CURRENT_PROFILE' | translate }}
+      </p>
     </div>
     <div class="bg-white rounded-lg shadow p-4 text-center">
       <p class="text-xl font-bold text-[#121212]">85%</p>
-      <p class="text-[#7E7E7E] text-sm">Current score</p>
+      <p class="text-[#7E7E7E] text-sm">
+        {{ 'TEST_HISTORY.CURRENT_SCORE' | translate }}
+      </p>
     </div>
     <div class="bg-green-100 rounded-lg shadow p-4 text-center">
       <p class="text-xl font-bold text-green-600">+5%</p>
-      <p class="text-[#7E7E7E] text-sm">Tests passed</p>
+      <p class="text-[#7E7E7E] text-sm">
+        {{ 'TEST_HISTORY.SCORE_EVOLUTION' | translate }}
+      </p>
     </div>
   </div>
 
-  <!-- Filtres -->
+  <!-- Filtres dynamiques -->
   <div class="bg-white shadow rounded-xl p-4 mb-6">
     <div class="flex items-center gap-3 overflow-x-auto">
-      <button class="px-4 py-2 bg-orange-500 text-white rounded-md text-sm">All tests</button>
-      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Last 2 months</button>
-      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Full tests</button>
-      <button class="px-4 py-2 bg-[#F5F5F5] text-[#121212] rounded-md text-sm">Express tests</button>
+      <button *ngFor="let filter of filters"
+              (click)="setActiveFilter(filter)"
+              [ngClass]="{
+                'bg-orange-500 text-white': activeFilter === filter,
+                'bg-[#F5F5F5] text-[#121212]': activeFilter !== filter
+              }"
+              class="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200">
+        {{ filter | translate }}
+      </button>
     </div>
   </div>
 
-  <!-- Cartes de tests -->
+  <!-- Cartes des tests filtrés -->
   <div class="flex flex-col gap-4">
-    <!-- Carte RIASEC Full -->
-    <div class="bg-white rounded-xl shadow p-5">
-      <div class="flex justify-between items-center mb-3">
-        <div class="flex items-center gap-2">
-          <img src="assets/icons/ria-sec-icon.svg" class="w-6 h-6" />
+    <div *ngFor="let test of getFilteredTests()" class="bg-white rounded-xl shadow p-5 space-y-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <lucide-icon name="bar-chart-2" class="w-6 h-6 text-orange-500"></lucide-icon>
           <div>
-            <p class="font-bold text-[#121212] text-sm">RIASEC Full</p>
-            <p class="text-xs text-[#7E7E7E]">07/2024 - Duration 8 min</p>
+            <p class="text-sm font-bold text-[#121212]">{{ test.title }}</p>
+            <p class="text-xs text-[#7E7E7E]">
+              {{ test.date }} · {{ 'TEST_HISTORY.DURATION' | translate }}: 15 min
+            </p>
           </div>
         </div>
-        <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">Investigator</span>
+        <div class="flex items-center gap-2">
+          <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">
+            {{ test.profile }}
+          </span>
+          <p class="text-sm text-[#121212] font-bold">{{ test.score }}%</p>
+        </div>
       </div>
-      <div class="grid grid-cols-6 text-xs text-[#7E7E7E] font-medium mb-2">
-        <div>R</div><div>I</div><div>A</div><div>S</div><div>E</div><div>C</div>
-      </div>
-      <div class="grid grid-cols-6 gap-1 items-center text-center mb-2">
-        <div class="text-[#121212]">22%</div>
-        <div class="text-[#121212]">43%</div>
-        <div class="text-[#121212]">15%</div>
-        <div class="text-[#121212]">10%</div>
-        <div class="text-[#121212]">7%</div>
-        <div class="text-[#121212]">3%</div>
-      </div>
-      <div class="text-end text-sm font-semibold text-[#121212]">85%</div>
-      <div class="flex justify-between mt-3 text-sm">
-        <a href="#" class="text-orange-500 font-medium">View details</a>
-        <a href="#" class="text-orange-500 font-medium">Download PDF</a>
-      </div>
-    </div>
 
-    <!-- Carte RIASEC Express -->
-    <div class="bg-white rounded-xl shadow p-5">
-      <div class="flex justify-between items-center mb-3">
-        <div class="flex items-center gap-2">
-          <img src="assets/icons/ria-sec-icon.svg" class="w-6 h-6" />
-          <div>
-            <p class="font-bold text-[#121212] text-sm">RIASEC Express</p>
-            <p class="text-xs text-[#7E7E7E]">06/2024 - Duration 5 min</p>
-          </div>
-        </div>
-        <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full">Investigator</span>
-      </div>
-      <div class="grid grid-cols-6 text-xs text-[#7E7E7E] font-medium mb-2">
+      <!-- RIASEC Légendes -->
+      <div class="grid grid-cols-6 text-xs text-[#7E7E7E] font-medium mb-1">
         <div>R</div><div>I</div><div>A</div><div>S</div><div>E</div><div>C</div>
       </div>
-      <div class="grid grid-cols-6 gap-1 items-center text-center mb-2">
-        <div class="text-[#121212]">25%</div>
-        <div class="text-[#121212]">40%</div>
-        <div class="text-[#121212]">12%</div>
-        <div class="text-[#121212]">9%</div>
-        <div class="text-[#121212]">9%</div>
-        <div class="text-[#121212]">5%</div>
+
+      <!-- Barres RIASEC -->
+      <div class="grid grid-cols-6 gap-2 items-center mb-2">
+        <div *ngFor="let value of test.percentages" class="flex flex-col items-center gap-1">
+          <div class="w-full h-1.5 bg-gray-200 rounded">
+            <div class="h-1.5 bg-orange-500 rounded" [style.width.%]="value"></div>
+          </div>
+          <span class="text-xs text-[#121212] font-medium">{{ value }}%</span>
+        </div>
       </div>
-      <div class="text-end text-sm font-semibold text-[#121212]">80%</div>
-      <div class="flex justify-between mt-3 text-sm">
-        <a href="#" class="text-orange-500 font-medium">View details</a>
-        <a href="#" class="text-orange-500 font-medium">Download PDF</a>
+
+      <!-- Liens -->
+      <div class="flex justify-between text-sm font-medium">
+        <a href="#" class="flex items-center gap-1 text-orange-500">
+          <lucide-icon name="eye" class="w-4 h-4" />
+          {{ 'TEST_HISTORY.VIEW_DETAILS' | translate }}
+        </a>
+        <a href="#" class="flex items-center gap-1 text-orange-500">
+          <lucide-icon name="file-down" class="w-4 h-4" />
+          {{ 'TEST_HISTORY.DOWNLOAD_PDF' | translate }}
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Courbe d'évolution -->
-  <div class="bg-white mt-6 p-6 rounded-xl shadow text-center">
-    <h2 class="text-lg font-bold text-[#121212] mb-4">Evolution of your profile</h2>
-    <img src="assets/icons/chart-placeholder.svg" class="mx-auto w-24 h-24 opacity-50" alt="No data" />
-    <p class="text-sm text-[#7E7E7E]">Evolution chart available with more data</p>
+  <!-- Graphique d'évolution -->
+  <div class="bg-white mt-6 p-6 rounded-xl shadow">
+    <h2 class="text-base font-semibold text-[#121212] flex items-center gap-2 mb-4">
+      <lucide-icon name="trending-up" class="w-5 h-5 text-orange-500"></lucide-icon>
+      {{ 'TEST_HISTORY.CHART_TITLE' | translate }}
+    </h2>
+    <div class="bg-[#F9FAFB] rounded-md p-10 flex flex-col items-center justify-center">
+      <lucide-icon name="trending-up" class="w-10 h-10 text-gray-300 mb-2"></lucide-icon>
+      <p class="text-sm text-gray-400">
+        {{ 'TEST_HISTORY.CHART_EMPTY' | translate }}
+      </p>
+    </div>
   </div>
+
 </div>
