@@ -134,6 +134,7 @@
     "FULL_NAME": "Nom complet",
     "PHONE": "Téléphone",
     "LOCATION": "Localisation",
+    "RELATIONS": "500 relations",
     "MODIFY": "Modifier",
     "DOWNLOAD_PDF": "PDF",
     "SHARE": "Partager",
@@ -149,7 +150,9 @@
     "TRAINING_COURSES": "Accès aux formations",
     "SCHOOL": "Lycée Victor Hugo • Terminale scientifique",
     "JOINED_SINCE": "Membre depuis janvier 2024",
-    "PHOTO": "Modifier Pdp"
+    "PHOTO": "Modifier Pdp",
+    "CONNECT": "Connecte",
+    "MESSAGE": "Message"
   },
 
   "NOTIFICATIONS": {

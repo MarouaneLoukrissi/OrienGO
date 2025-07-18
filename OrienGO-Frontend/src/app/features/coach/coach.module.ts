@@ -16,7 +16,7 @@ import {
   Settings,
   LucideAngularModule,
   Calendar,
-   ClipboardList,
+   ClipboardList,UserPlus, Send, Share2, MapPin, CalendarDays, GraduationCap,
     Timer, 
     FileDown, User,Phone, Eye,TrendingUp,CheckCircle, Target, Zap, Book, Briefcase, NotebookPen
   } from 'lucide-angular';
@@ -28,6 +28,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HistoryComponent } from './history/history.component';
+import { PublicProfileComponent } from './public-profile/public-profile.component';
 @NgModule({
   declarations: [
     CoachLayoutComponent,
@@ -38,7 +39,8 @@ import { HistoryComponent } from './history/history.component';
     ProfileComponent,
     NotificationsComponent,
     ProfileEditComponent,
-    HistoryComponent
+    HistoryComponent,
+    PublicProfileComponent
     
     
   ],
@@ -56,9 +58,10 @@ import { HistoryComponent } from './history/history.component';
   Lock,Calendar,
    ClipboardList,
     Timer, 
-    FileDown, 
+    FileDown, UserPlus, Send, Share2, MapPin, CalendarDays, GraduationCap,
     Eye,TrendingUp,CheckCircle, Target, Zap, Book, Briefcase, NotebookPen,Settings,User, Phone
   
 })],
+
 })
 export class CoachModule { }

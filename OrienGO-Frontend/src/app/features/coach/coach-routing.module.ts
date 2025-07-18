@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HistoryComponent } from './history/history.component';
+import { PublicProfileComponent } from './public-profile/public-profile.component';
+
 const routes: Routes = [
    {
     path: 'coach',
@@ -20,8 +22,13 @@ const routes: Routes = [
           { path: 'profile', component: ProfileComponent},
           { path: 'notifications', component: NotificationsComponent },
           {path: 'profile/edit',component: ProfileEditComponent},
-          {path: 'history',component: HistoryComponent}
+          {path: 'history',component: HistoryComponent},
           
+{
+  path: 'coach-profile/:id',
+  component: PublicProfileComponent
+}
+
          ]
   }
 ];

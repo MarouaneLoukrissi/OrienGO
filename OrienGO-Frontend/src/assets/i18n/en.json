@@ -90,27 +90,6 @@
       }
     }
   },
-"TEST_HISTORY": {
-  "TITLE": "Test History",
-  "SUBTITLE": "Track the evolution of your RIASEC profile over time",
-  "TESTS_PASSED": "Tests passed",
-  "CURRENT_PROFILE": "Current profile",
-  "CURRENT_SCORE": "Current score",
-  "PROGRESS": "Tests passed",
-  "FILTERS": {
-    "ALL": "All tests",
-    "LAST_3_MONTHS": "Last 3 months",
-    "FULL_TESTS": "Full tests",
-    "EXPRESS_TESTS": "Express tests"
-  },
-  "RIASEC_EXPRESS": "RIASEC Express",
-  "DURATION": "Duration",
-  "PERCENTILE_SCORE": "Dominant score",
-  "VIEW_DETAILS": "View details",
-  "DOWNLOAD_PDF": "Download PDF",
-  "EVOLUTION_TITLE": "Evolution of your profile",
-  "EVOLUTION_CHART_UNAVAILABLE": "Evolution chart unavailable with more data"
-},
 "MY_NETWORK": {
   "TAB_MY_NETWORK": "My network",
   "TAB_MY_PENDINGS": "My pendings",
@@ -154,6 +133,7 @@
     "PHONE": "Phone",
     "LOCATION": "Location",
     "MODIFY": "Modify",
+    "RELATIONS": "500 relations",
     "DOWNLOAD_PDF": "PDF",
     "SHARE": "Share",
     "PERSONAL_INFORMATION": "Personal Informations",
@@ -168,10 +148,11 @@
     "TRAINING_COURSES": "Training Courses Access",
     "SCHOOL": "Victor Hugo high school • Final year of science",
     "JOINED_SINCE": "Member since January 2024",
-    "PHOTO": "Add Cover Photo"
+    "PHOTO": "Add Cover Photo",
+   "CONNECT": "Connect",
+    "MESSAGE": "Message"
   },
-
-    "NOTIFICATIONS" : {
+   "NOTIFICATIONS" : {
     "TITLE": "Notifications",
     "PROFILE_VIEWED": {
       "TITLE": "Your profile was viewed by a Student",
@@ -182,7 +163,7 @@
       "SUBTITLE": "A new job opportunity matches you"
     }
   },
- {
+ 
   "TEST_HISTORY": {
     "TITLE": "Test History",
     "SUBTITLE": "Track the evolution of your RIASEC profile over time",
@@ -203,6 +184,6 @@
     "CHART_TITLE": "Evolution of your profile",
     "CHART_EMPTY": "Evolution chart available with more data"
   }
-}
+
 
 }
