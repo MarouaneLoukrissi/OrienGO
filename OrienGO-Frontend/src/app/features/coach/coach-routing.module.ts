@@ -9,10 +9,10 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HistoryComponent } from './history/history.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
-
+import { ResultsComponent } from './results/results.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 const routes: Routes = [
-   {
-    path: 'coach',
+   { path: 'coach',
     component: CoachLayoutComponent,
     children: [
       // ici viendront les routes du coach : dashboard, settings...
@@ -21,13 +21,14 @@ const routes: Routes = [
           { path: 'network', component: NetworkCoachComponent },
           { path: 'profile', component: ProfileComponent},
           { path: 'notifications', component: NotificationsComponent },
-          {path: 'profile/edit',component: ProfileEditComponent},
-          {path: 'history',component: HistoryComponent},
+          { path: 'profile/edit',component: ProfileEditComponent},
+          { path: 'history',component: HistoryComponent},
+
           
-{
-  path: 'coach-profile/:id',
-  component: PublicProfileComponent
-}
+          {path: 'coach-profile/:id',component: PublicProfileComponent},
+          {path: 'results/eleve/:id',component: ResultsComponent},
+          
+          {path: 'recommendations/:id',component: RecommendationsComponent}
 
          ]
   }

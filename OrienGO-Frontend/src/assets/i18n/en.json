@@ -183,7 +183,71 @@
     "DOWNLOAD_PDF": "Download PDF",
     "CHART_TITLE": "Evolution of your profile",
     "CHART_EMPTY": "Evolution chart available with more data"
+  },
+  
+  "RESULTS": {
+    "TITLE": "Your RIASEC Results",
+    "SUBTITLE": "Congratulations! Here is your dominant RIASEC profile based on your test",
+    "DOWNLOAD": "Download PDF",
+    "SHARE": "Share",
+    "YOUR_DOMINANT_PROFILE": "Your Dominant Profile",
+    "REALISTIC": "Realistic",
+    "REALISTIC_DESC": "Practical, realistic, action-oriented",
+    "MATCH": "Match",
+    "CHART_RADAR": "Radar Chart – Complete Profile",
+    "CHART_BAR": "Bar Chart – Detailed Scores",
+    "DETAILED_SCORES": "Detailed Scores",
+    "KEY_POINTS": "Key Points of {{name}}’s Profile",
+    "CTA": {
+    "TITLE": "Ready for the Next Step?",
+    "DESC": "Now that you know your profile, discover the careers and training programs that match it.",
+    "BTN": "See my Recommendations"
+  }
+  },
+"RECOMMENDATIONS": {
+    "TITLE": "PERSONALIZED RECOMMENDATIONS",
+    "SUBTITLE": "DISCOVER THE CAREERS AND TRAINING PROGRAMS THAT PERFECTLY MATCH YOUR PROFILE RIASEC",
+    "RECOMMENDEDCAREERS": "RECOMMENDED CAREERS FOR YOUR PROFILE",
+    "JOBMARKETHIGH": "HIGH DEMAND",
+    "JOBMARKETSTABLE": "STABLE",
+    "EDUCATIONLABEL": "EDUCATION",
+    "SALARYLABEL": "SALARY",
+    "JOBMARKETLABEL": "JOB MARKET",
+    "TAGS": ["LISTEN", "TOGETHER", "HELP"],
+    "LEARNMORE": "LEARN MORE",
+    "EXPLORETITLE": "EXPLORE THE DETAILED JOB PROFILES",
+    "EXPLORESUBTITLE": "DISCOVER A COMPLETE DATABASE OF JOBS WITH SALARIES, TRAINING, AND CAREER OPPORTUNITIES.",
+    "CTA": "SEE THE JOB PROFILES",
+    "ARTSCHOOLTITLE": "Art/Design School",
+  "UNIVERSITYCARDTITLE": "University - Humanities",
+  "UNIVERSITYMATCH": "89% Match",
+  "UNIVERSITYDURATION": "3-5 years",
+  "UNIVERSITYDESCRIPTION": "Theoretical training and research",
+  "UNIVERSITYSPECIALIZATIONS": "Specializations",
+  "UNIVERSITYSPECIALTAGS": ["Psychology", "Sociology", "History"],
+
+  "ENGINEERINGCARDTITLE": "Engineering School",
+  "ENGINEERINGMATCH": "77% Match",
+  "ENGINEERINGDURATION": "5 years",
+  "ENGINEERINGDESCRIPTION": "Complete training in science and technology",
+  "ENGINEERINGSPECIALIZATIONS": "Specializations",
+  "ENGINEERINGSPECIALTAGS": ["Civil Engineering", "Electronics", "Computer Science"],
+
+  "ARTCARDSCHOOLTITLE": "Art/Design School",
+  "ARTMATCH": "66% Match",
+  "ARTDURATION": "3-5 years",
+  "ARTDESCRIPTION": "Artistic and creative training",
+  "ARTSPECIALIZATIONS": "Specializations",
+  "ARTSPECIALTAGS": ["Graphic Design", "Architecture", "Applied Arts"],
+
+  "BUSINESSCARDTITLE": "Business School",
+  "BUSINESSMATCH": "33% Match",
+  "BUSINESSDURATION": "3-5 years",
+  "BUSINESSDESCRIPTION": "Training in management and business",
+  "BUSINESSSPECIALIZATIONS": "Specializations",
+  "BUSINESSSPECIALTAGS": ["Marketing", "Finance", "Management"]
   }
 
 
+  
 }

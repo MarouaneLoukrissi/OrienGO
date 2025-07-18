@@ -1,0 +1,26 @@
+
+<!-- Résultats RIASEC - Titre, texte, boutons -->
+<div class="text-center mt-6 mb-8">
+  <div class="flex justify-center mb-4">
+    <lucide-icon name="brain-circuit" class="w-10 h-10 text-orange-500"></lucide-icon>
+  </div>
+
+  <h1 class="text-2xl font-bold text-gray-900 mb-2">
+    {{ 'RESULTS.TITLE' | translate }}
+  </h1>
+  <p class="text-sm text-gray-600 mb-4">
+    {{ 'RESULTS.SUBTITLE' | translate }}
+  </p>
+
+  <div class="flex justify-center gap-4">
+    <button class="border border-orange-500 text-orange-500 px-4 py-2 rounded hover:bg-orange-50 transition flex items-center gap-2">
+      <lucide-icon name="download" class="w-4 h-4"></lucide-icon>
+      {{ 'RESULTS.DOWNLOAD' | translate }}
+    </button>
+    <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition flex items-center gap-2">
+      <lucide-icon name="share-2" class="w-4 h-4"></lucide-icon>
+      {{ 'RESULTS.SHARE' | translate }}
+    </button>
+  </div>
+</div>
+

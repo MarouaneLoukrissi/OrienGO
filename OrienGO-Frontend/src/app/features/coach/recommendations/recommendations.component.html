@@ -1,0 +1,110 @@
+<div class="p-6 bg-[#FFFAF0] min-h-screen">
+  <!-- Title and Subtitle -->
+  <div class="text-center mb-8">
+    <lucide-icon name="Lightbulb" class="mx-auto w-8 h-8 text-orange-500" />
+    <h1 class="text-2xl font-bold mt-2">{{ 'RECOMMENDATIONS.TITLE' | translate }}</h1>
+    <p class="text-gray-600 text-sm mt-1">{{ 'RECOMMENDATIONS.SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Recommended Careers -->
+  <div class="mb-10">
+    <h2 class="text-lg font-semibold text-orange-500 mb-4">
+      <lucide-icon name="Star" class="inline mr-2" /> {{ 'RECOMMENDATIONS.RECOMMENDEDCAREERS' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="font-semibold text-lg">PSYCHOLOGIST</h3>
+          <span class="text-sm bg-orange-100 text-orange-600 px-2 py-1 rounded-full">66% MATCH</span>
+        </div>
+        <div class="text-sm text-gray-600 mb-2">PSYCHOLOGICAL SUPPORT FOR PATIENTS</div>
+        <div class="text-sm mb-1"><strong>{{ 'RECOMMENDATIONS.EDUCATIONLABEL' | translate }}:</strong> MASTER’S IN PSYCHOLOGY</div>
+        <div class="text-sm mb-1"><strong>{{ 'RECOMMENDATIONS.SALARYLABEL' | translate }}:</strong> 30 000 - 50 000$/YEAR</div>
+        <div class="text-sm mb-3"><strong>{{ 'RECOMMENDATIONS.JOBMARKETLABEL' | translate }}:</strong> {{ 'RECOMMENDATIONS.JOBMARKETHIGH' | translate }}</div>
+        <div class="flex gap-1 mb-3">
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">LISTEN</span>
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">TOGETHER</span>
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">HELP</span>
+        </div>
+        <button class="bg-orange-500 text-white w-full py-2 rounded hover:bg-orange-600 text-sm">
+          {{ 'RECOMMENDATIONS.LEARNMORE' | translate }} <lucide-icon name="ArrowRight" class="inline ml-1 w-4 h-4" />
+        </button>
+      </div>
+
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="font-semibold text-lg">TEACHER</h3>
+          <span class="text-sm bg-orange-100 text-orange-600 px-2 py-1 rounded-full">68% MATCH</span>
+        </div>
+        <div class="text-sm text-gray-600 mb-2">KNOWLEDGE TRANSMISSION AND STUDENT GUIDANCE</div>
+        <div class="text-sm mb-1"><strong>{{ 'RECOMMENDATIONS.EDUCATIONLABEL' | translate }}:</strong> MASTER MEEF (TEACHING)</div>
+        <div class="text-sm mb-1"><strong>{{ 'RECOMMENDATIONS.SALARYLABEL' | translate }}:</strong> 25 000 - 45 000$/YEAR</div>
+        <div class="text-sm mb-3"><strong>{{ 'RECOMMENDATIONS.JOBMARKETLABEL' | translate }}:</strong> {{ 'RECOMMENDATIONS.JOBMARKETSTABLE' | translate }}</div>
+        <div class="flex gap-1 mb-3">
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">PHILIPPINES</span>
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">COMMUNICATION</span>
+          <span class="bg-gray-200 text-xs px-2 py-1 rounded">PEDAGOGY</span>
+        </div>
+        <button class="bg-orange-500 text-white w-full py-2 rounded hover:bg-orange-600 text-sm">
+          {{ 'RECOMMENDATIONS.LEARNMORE' | translate }} <lucide-icon name="ArrowRight" class="inline ml-1 w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Art/Design School Section -->
+  <div class="mb-10">
+    <h2 class="text-lg font-semibold text-orange-500 mb-4">
+      <lucide-icon name="Eye" class="inline mr-2" /> {{ 'RECOMMENDATIONS.ARTSCHOOLTITLE' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-semibold text-sm">UNIVERSITY - HUMANITIES</h3>
+          <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">89% MATCH</span>
+        </div>
+        <div class="text-xs text-gray-600 mb-1">3-5 YEARS</div>
+        <div class="text-xs text-gray-600 mb-1">THEORETICAL TRAINING AND RESEARCH</div>
+        <div class="text-xs text-gray-600">SPECIALIZATIONS: PSYCHOLOGY, SOCIOLOGY, HISTORY</div>
+      </div>
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-semibold text-sm">ENGINEERING SCHOOL</h3>
+          <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">77% MATCH</span>
+        </div>
+        <div class="text-xs text-gray-600 mb-1">5 YEARS</div>
+        <div class="text-xs text-gray-600 mb-1">COMPLETE TRAINING IN SCIENCE AND TECHNOLOGY</div>
+        <div class="text-xs text-gray-600">SPECIALIZATIONS: CIVIL ENGINEERING, ELECTRONICS, COMPUTER SCIENCE</div>
+      </div>
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-semibold text-sm">ART/DESIGN SCHOOL</h3>
+          <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">66% MATCH</span>
+        </div>
+        <div class="text-xs text-gray-600 mb-1">3-5 YEARS</div>
+        <div class="text-xs text-gray-600 mb-1">ARTISTIC AND CREATIVE TRAINING</div>
+        <div class="text-xs text-gray-600">SPECIALIZATIONS: GRAPHIC DESIGN, ARCHITECTURE, APPLIED ARTS</div>
+      </div>
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-semibold text-sm">BUSINESS SCHOOL</h3>
+          <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">33% MATCH</span>
+        </div>
+        <div class="text-xs text-gray-600 mb-1">3-5 YEARS</div>
+        <div class="text-xs text-gray-600 mb-1">TRAINING IN MANAGEMENT AND BUSINESS</div>
+        <div class="text-xs text-gray-600">SPECIALIZATIONS: MARKETING, FINANCE, MANAGEMENT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explore Section -->
+  <div class="mt-10 bg-gradient-to-r from-orange-400 to-orange-500 text-white p-6 text-center rounded">
+    <h3 class="text-lg font-semibold">{{ 'RECOMMENDATIONS.EXPLORETITLE' | translate }}</h3>
+    <p class="text-sm mb-4">{{ 'RECOMMENDATIONS.EXPLORESUBTITLE' | translate }}</p>
+    <button class="bg-white text-orange-600 px-4 py-2 rounded font-semibold hover:bg-orange-100">
+      {{ 'RECOMMENDATIONS.CTA' | translate }} <lucide-icon name="ArrowRight" class="inline ml-1 w-4 h-4" />
+    </button>
+  </div>
+</div>

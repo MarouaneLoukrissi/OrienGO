@@ -185,6 +185,73 @@
     "DOWNLOAD_PDF": "Télécharger le PDF",
     "CHART_TITLE": "Évolution de votre profil",
     "CHART_EMPTY": "Le graphique sera disponible avec plus de données"
+  },
+
+  "RESULTS": {
+    "TITLE": "Vos Résultats RIASEC",
+    "SUBTITLE": "Félicitations ! Voici le profil RIASEC dominant basé sur votre test",
+    "DOWNLOAD": "Télécharger PDF",
+    "SHARE": "Partager",
+    "YOUR_DOMINANT_PROFILE": "Votre Profil Dominant",
+    "REALISTIC": "Réaliste",
+    "REALISTIC_DESC": "Pratique, réaliste, orienté vers l’action",
+    "MATCH": "Correspondance",
+    "CHART_RADAR": "Graphique Radar – Profil complet",
+    "CHART_BAR": "Graphique en barres – Scores détaillés",
+    "DETAILED_SCORES": "Scores détaillés",
+    "KEY_POINTS": "Points clés du profil de {{name}}",
+     "CTA": {
+    "TITLE": "Prêt pour la prochaine étape ?",
+    "DESC": "Maintenant que vous connaissez votre profil, découvrez les carrières et formations qui correspondent à vos intérêts.",
+    "BTN": "Voir mes recommandations"
   }
+  },
+
+  "RECOMMENDATIONS": {
+    "TITLE": "RECOMMANDATIONS PERSONNALISÉES",
+    "SUBTITLE": "DÉCOUVREZ LES CARRIÈRES ET FORMATIONS QUI CORRESPONDENT PARFAITEMENT À VOTRE PROFIL RIASEC",
+    "RECOMMENDEDCAREERS": "MÉTIERS RECOMMANDÉS POUR VOTRE PROFIL",
+    "JOBMARKETHIGH": "FORTE DEMANDE",
+    "JOBMARKETSTABLE": "STABLE",
+    "EDUCATIONLABEL": "FORMATION",
+    "SALARYLABEL": "SALAIRE",
+    "JOBMARKETLABEL": "MARCHÉ DU TRAVAIL",
+    "TAGS": ["ÉCOUTER", "ENSEMBLE", "AIDER"],
+    "LEARNMORE": "EN SAVOIR PLUS",
+    "EXPLORETITLE": "EXPLORER LES PROFILS MÉTIERS EN DÉTAIL",
+    "EXPLORESUBTITLE": "DÉCOUVREZ UNE BASE DE DONNÉES COMPLÈTE AVEC LES SALAIRES, FORMATIONS ET OPPORTUNITÉS DE CARRIÈRE.",
+    "CTA": "VOIR LES PROFILS MÉTIERS",
+    "ARTSCHOOLTITLE": "École d'Art / Design",
+  "UNIVERSITYCARDTITLE": "Université - Sciences humaines",
+  "UNIVERSITYMATCH": "89% de correspondance",
+  "UNIVERSITYDURATION": "3-5 ans",
+  "UNIVERSITYDESCRIPTION": "Formation théorique et recherche",
+  "UNIVERSITYSPECIALIZATIONS": "Spécialisations",
+  "UNIVERSITYSPECIALTAGS": ["Psychologie", "Sociologie", "Histoire"],
+
+  "ENGINEERINGCARDTITLE": "École d'ingénieurs",
+  "ENGINEERINGMATCH": "77% de correspondance",
+  "ENGINEERINGDURATION": "5 ans",
+  "ENGINEERINGDESCRIPTION": "Formation complète en science et technologie",
+  "ENGINEERINGSPECIALIZATIONS": "Spécialisations",
+  "ENGINEERINGSPECIALTAGS": ["Génie civil", "Électronique", "Informatique"],
+
+  "ARTCARDSCHOOLTITLE": "École d'art / design",
+  "ARTMATCH": "66% de correspondance",
+  "ARTDURATION": "3-5 ans",
+  "ARTDESCRIPTION": "Formation artistique et créative",
+  "ARTSPECIALIZATIONS": "Spécialisations",
+  "ARTSPECIALTAGS": ["Design graphique", "Architecture", "Arts appliqués"],
+
+  "BUSINESSCARDTITLE": "École de commerce",
+  "BUSINESSMATCH": "33% de correspondance",
+  "BUSINESSDURATION": "3-5 ans",
+  "BUSINESSDESCRIPTION": "Formation en management et gestion",
+  "BUSINESSSPECIALIZATIONS": "Spécialisations",
+  "BUSINESSSPECIALTAGS": ["Marketing", "Finance", "Management"]
+  }
+
+
+
 
 }
