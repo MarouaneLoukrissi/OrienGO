@@ -1,0 +1,370 @@
+<div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[88rem] mx-auto">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+        <!-- Settings Icon -->
+        <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-14 h-14 sm:w-16 sm:h-16 md:w-[68px] md:h-[68px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        </div>
+        
+        <!-- Title and Subtitle -->
+        <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">Settings</h1>
+        <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
+        {{ getSubtitleByRole() }}
+        </p>
+        
+        <!-- Role Selector for Demo -->
+        <div class="mt-6">
+        <select 
+            [(ngModel)]="currentUserRole" 
+            (change)="onRoleChange()"
+            class="max-w-[120px] xxs:max-w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <option value="student">Student</option>
+            <option value="coach">Coach</option>
+            <option value="admin">Admin</option>
+            <option value="superadmin">Super Admin</option>
+        </select>
+        <p class="text-sm text-gray-500 mt-2">Demo: Switch between user roles</p>
+        </div>
+    </div>
+
+    <!-- Settings Card -->
+    <div class="max-w-full mx-auto">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <div class="p-4 smaller:p-6 sm:p-8 md:p-12">
+            
+            <!-- Notifications Section -->
+            <div class="mb-12">
+            <div class="flex flex-wrap items-center mb-8">
+                <div class="shrink-0 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                    <svg class="w-5 h-5 sm:w-[26px] sm:h-[26px] md:w-8 md:h-8 text-orange-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.48149 9.07777C6.39886 5.86945 8.89127 3 12.1007 3V3C15.24 3 17.656 5.74275 17.5341 8.87969C17.5127 9.42969 17.5 9.97677 17.5 10.5C17.5 13.7812 21 18 21 18H3C3 18 6.5 14.7188 6.5 10.5C6.5 10.0122 6.49331 9.5369 6.48149 9.07777Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 21C10.4886 21.6132 11.2035 22 12 22C12.7965 22 13.5114 21.6132 14 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </div>
+                <h2 class="text-[16px] smaller:text-[20px] sm:text-[22px] md:text-[26px] font-semibold text-gray-900">Notifications</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Email Notifications Toggle -->
+                <div class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Receive Notifications By mail
+                </span>
+                <button 
+                    (click)="toggleEmailNotifications()"
+                    [class]="settings.notifications.receiveEmailNotifications ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.receiveEmailNotifications ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- New Jobs Notifications Toggle (Student/Coach) -->
+                <div *ngIf="showJobNotifications()" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Notifications for new jobs
+                </span>
+                <button 
+                    (click)="toggleNewJobNotifications()"
+                    [class]="settings.notifications.newJobNotifications ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.newJobNotifications ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Test Reminders Toggle (Student) -->
+                <div *ngIf="currentUserRole === 'student'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Tests Reminder to finish
+                </span>
+                <button 
+                    (click)="toggleTestReminders()"
+                    [class]="settings.notifications.testReminders ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.testReminders ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- System Alerts Toggle (Admin/SuperAdmin) -->
+                <div *ngIf="isAdminRole()" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    System alerts and maintenance
+                </span>
+                <button 
+                    (click)="toggleSystemAlerts()"
+                    [class]="settings.notifications.systemAlerts ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.systemAlerts ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Coaching Updates Toggle (Coach) -->
+                <div *ngIf="currentUserRole === 'coach'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Coaching session updates
+                </span>
+                <button 
+                    (click)="toggleCoachingUpdates()"
+                    [class]="settings.notifications.coachingUpdates ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.coachingUpdates ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Student Progress Toggle (Coach) -->
+                <div *ngIf="currentUserRole === 'coach'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Student progress notifications
+                </span>
+                <button 
+                    (click)="toggleStudentProgress()"
+                    [class]="settings.notifications.studentProgress ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.notifications.studentProgress ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Privacy/Confidential Section -->
+            <div class="mb-12">
+            <div class="flex flex-wrap items-center mb-8">
+                <div class="shrink-0 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 sm:w-[28px] sm:h-[28px] md:w-9 md:h-9 text-orange-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </div>
+                <h2 class="text-[16px] smaller:text-[20px] sm:text-[22px] md:text-[26px] font-semibold text-gray-900">
+                {{ getPrivacySectionTitle() }}
+                </h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Profile Visibility Toggle (Student) -->
+                <div *ngIf="currentUserRole === 'student'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Visibility profile to teachers
+                </span>
+                <button 
+                    (click)="toggleProfileVisibility()"
+                    [class]="settings.profile.visibilityToTeachers ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.profile.visibilityToTeachers ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Visibility to Students Toggle (Coach) -->
+                <div *ngIf="currentUserRole === 'coach'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Visibility profile to students
+                </span>
+                <button 
+                    (click)="toggleVisibilityToStudents()"
+                    [class]="settings.profile.visibilityToStudents ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.profile.visibilityToStudents ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Visibility to Coaches Toggle (Student) -->
+                <div *ngIf="currentUserRole === 'student'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Visibility profile to coaches
+                </span>
+                <button 
+                    (click)="toggleVisibilityToCoaches()"
+                    [class]="settings.profile.visibilityToCoaches ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.profile.visibilityToCoaches ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Public Profile Toggle (Admin/SuperAdmin) -->
+                <div *ngIf="isAdminRole()" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Public profile visibility
+                </span>
+                <button 
+                    (click)="togglePublicProfile()"
+                    [class]="settings.profile.publicProfile ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.profile.publicProfile ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Modify Password Button -->
+                <div class="py-4">
+                <button 
+                    (click)="modifyPassword()"
+                    class="text-sm xxs:text-base sm:text-lg md:text-xl text-gray-800 font-medium hover:text-orange-600 transition-colors duration-200 focus:outline-none focus:underline text-left">
+                    Modify Password
+                </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Admin Controls Section (Admin/SuperAdmin only) -->
+            <div *ngIf="isAdminRole()" class="mb-12 border-t border-gray-200 pt-8">
+            <div class="flex flex-wrap items-center mb-8">
+                <div class="shrink-0 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 sm:w-[26px] sm:h-[26px] md:w-8 md:h-8 text-blue-600" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>security-verified</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M24,6.2c5.3,1.5,11.1,3.3,14,4.3V26.2c0,3.4-3.7,9.4-14,15.4-10.3-6.1-14-12-14-15.4V10.5c2.9-1.1,8.7-2.8,14-4.3M24,2S6,7.1,6,8V26.2c0,9.2,13.3,17.3,17,19.5a1.8,1.8,0,0,0,2,0c3.8-2.1,17-10.3,17-19.5V8c0-.9-18-6-18-6Z"></path> <path d="M19.6,29.4l-5-4.9a2.1,2.1,0,0,1-.2-2.7,1.9,1.9,0,0,1,3-.2L21,25.2l9.6-9.6a2,2,0,0,1,2.8,2.8l-11,11A1.9,1.9,0,0,1,19.6,29.4Z"></path> </g> </g> </g></svg>
+                </div>
+                <h2 class="text-[16px] smaller:text-[20px] sm:text-[22px] md:text-[26px] font-semibold text-gray-900">Admin Controls</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- User Management Toggle -->
+                <div class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    User management permissions
+                </span>
+                <button 
+                    (click)="toggleUserManagement()"
+                    [class]="settings.admin?.manageUsers ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.admin?.manageUsers ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- System Maintenance Toggle (SuperAdmin only) -->
+                <div *ngIf="currentUserRole === 'superadmin'" class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    System maintenance access
+                </span>
+                <button 
+                    (click)="toggleSystemMaintenance()"
+                    [class]="settings.admin?.systemMaintenance ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.admin?.systemMaintenance ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+
+                <!-- Data Export Toggle -->
+                <div class="flex flex-wrap items-center justify-between py-4 gap-3">
+                <span class="text-sm xxs-xs:text-base sm:text-lg md:text-xl text-gray-800 font-medium">
+                    Data export permissions
+                </span>
+                <button 
+                    (click)="toggleDataExport()"
+                    [class]="settings.admin?.dataExport ? 
+                    'bg-orange-500 focus:ring-orange-500' : 
+                    'bg-gray-300 focus:ring-gray-400'"
+                    class="relative inline-flex h-6 w-[48px] sm:h-7 sm:w-[52px] md:h-8 md:w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    role="switch">
+                    <span 
+                    [class]="settings.admin?.dataExport ? 
+                        'translate-x-6' : 'translate-x-0'"
+                    class="pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    </span>
+                </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Danger Zone Section -->
+            <div class="border-t border-gray-200 pt-8">
+                <div class="flex flex-wrap items-center gap-6 mb-8 justify-between items-center">
+                    <div class="flex flex-wrap items-center">
+                        <div class="shrink-0 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-5 h-5 sm:w-[26px] sm:h-[26px] md:w-8 md:h-8 text-red-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5.31171 10.7615C8.23007 5.58716 9.68925 3 12 3C14.3107 3 15.7699 5.58716 18.6883 10.7615L19.0519 11.4063C21.4771 15.7061 22.6897 17.856 21.5937 19.428C20.4978 21 17.7864 21 12.3637 21H11.6363C6.21356 21 3.50217 21 2.40626 19.428C1.31034 17.856 2.52291 15.7061 4.94805 11.4063L5.31171 10.7615Z" stroke="currentColor" stroke-width="2"></path> <path d="M12 8V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> <circle cx="12" cy="16" r="1" stroke="currentColor" stroke-width="0.5" fill="currentColor"></circle> </g></svg>
+                        </div>
+                        <h2 class="text-[16px] smaller:text-[20px] sm:text-[22px] md:text-[26px] font-semibold text-red-600">Danger Zone</h2>
+                    </div>
+
+                    <div class="text-center">
+                        <button 
+                        (click)="deleteAccount()"
+                        class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2.5 md:px-8 md:py-3 bg-red-600 text-white font-semibold text-sm xs:text-base smaller:text-lg rounded-full hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 shadow-lg">
+                        {{ getDangerButtonText() }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>

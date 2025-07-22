@@ -1,8 +1,14 @@
-<router-outlet>
-<div class="absolute top-4 right-4">
-  <select class="form-select w-auto" (change)="switchLang($event)">
-    <option value="en" [selected]="localStorage.getItem('lang') === 'en'">English</option>
-    <option value="fr" [selected]="localStorage.getItem('lang') === 'fr'">Français</option>
-  </select>
+<div>
+  <div class="flex min-h-screen">
+    <app-sidebar class="flex-shrink-0"></app-sidebar>
+    <div class="flex-1 min-w-0">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="absolute top-4 right-4">
+      <select class="p-2 border border-gray-300 rounded-md bg-white w-auto">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+  </div>
 </div>
-</router-outlet>

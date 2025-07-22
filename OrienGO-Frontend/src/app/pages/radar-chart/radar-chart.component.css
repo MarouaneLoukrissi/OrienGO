@@ -1,0 +1,6 @@
+.data-point {
+  transition: r 0.2s ease;
+}
+.data-point:hover {
+  r: 8;
+}
