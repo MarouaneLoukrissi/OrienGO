@@ -1,0 +1,53 @@
+<div class="h-screen w-64 bg-[#ffe2b3] rounded-tr-2xl shadow-lg text-black flex flex-col p-6">
+  <div>
+    <div class="flex items-center mb-8">
+      <img src="assets/images/logo/logoOrienGo.png" alt="OrienGo Logo" class="w-8 h-8 mr-2" />
+      <span class="font-bold text-lg">OrienGO</span>
+    </div>
+
+    <nav class="space-y-2">
+      <a 
+        routerLink="/admin-dashboard" 
+        routerLinkActive="bg-orange-300 text-white" 
+        class="flex items-center gap-2 py-2 px-3 rounded hover:bg-orange-100 transition">
+        <span>📊</span>
+        {{ 'SIDEBAR.DASHBOARD' | translate }}
+      </a>
+      <a 
+        routerLink="/manage-users" 
+        routerLinkActive="bg-orange-300 text-white" 
+        class="flex items-center gap-2 py-2 px-3 rounded hover:bg-orange-100 transition">
+        <span>👥</span>
+        {{ 'SIDEBAR.USERS' | translate }}
+      </a>
+      <ng-container *ngIf="isSuperAdmin">
+        <a routerLink="/admins"
+          routerLinkActive="bg-[#e0cda9] text-black"
+          class="flex items-center space-x-2 text-black hover:bg-[#e0cda9] px-4 py-2 rounded transition duration-200">
+          <span class="text-lg">🛡️</span>
+          <span>{{ 'SIDEBAR.ADMINS' | translate }}</span>
+        </a>
+      </ng-container>
+      <a 
+        routerLink="/admin-questionnaires" 
+        routerLinkActive="bg-orange-300 text-white" 
+        class="flex items-center gap-2 py-2 px-3 rounded hover:bg-orange-100 transition">
+        <span>📋</span>
+        {{ 'SIDEBAR.QUESTIONNAIRES' | translate }}
+      </a>
+      <a 
+        routerLink="/admin-careers"
+        routerLinkActive="bg-orange-300 text-white" 
+        class="flex items-center gap-2 py-2 px-3 rounded hover:bg-orange-100 transition">
+        <span>💼</span>
+      {{ 'SIDEBAR.CAREER_PROFILES' | translate }}
+      </a>
+    </nav>
+  </div>
+  <div class="mt-6">
+    <button class="flex items-center gap-2 text-sm text-black hover:text-red-200 transition">
+      <span>↩</span>
+      {{ 'SIDEBAR.LOGOUT' | translate }}
+    </button>
+  </div>
+</div>

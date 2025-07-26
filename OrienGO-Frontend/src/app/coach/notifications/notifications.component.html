@@ -1,0 +1,27 @@
+<div class="min-h-screen bg-[#FFF8EB] flex justify-center pt-20 px-4">
+  <div class="w-full max-w-4xl">
+    <h1 class="text-2xl font-bold text-[#121212] mb-6">{{ 'NOTIFICATIONS.TITLE' | translate }}</h1>
+
+    <!-- Notification 1 -->
+    <div class="bg-white rounded-xl shadow-md px-5 py-4 flex items-center gap-4 mb-4 cursor-pointer hover:shadow-lg transition">
+      <lucide-icon name="eye" class="w-5 h-5 text-[#121212]"></lucide-icon>
+      <div>
+        <p class="text-[#121212] font-bold text-lg">{{ 'NOTIFICATIONS.PROFILE_VIEWED.TITLE' | translate }}</p>
+        <p class="text-[#7E7E7E] text-sm mt-1">{{ 'NOTIFICATIONS.PROFILE_VIEWED.SUBTITLE' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Notification 2 -->
+    <div class="bg-white rounded-xl shadow-md px-5 py-4 flex items-center gap-4 cursor-pointer hover:shadow-lg transition">
+      <lucide-icon name="briefcase" class="w-5 h-5 text-[#121212]"></lucide-icon>
+      <div>
+        <p class="text-[#121212] font-semibold text-lg">
+          {{ 'NOTIFICATIONS.NEW_JOB.TITLE' | translate }}
+        </p>
+        <p class="text-[#7E7E7E] text-base mt-1">
+          {{ 'NOTIFICATIONS.NEW_JOB.SUBTITLE' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

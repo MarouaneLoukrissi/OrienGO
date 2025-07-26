@@ -1,0 +1,83 @@
+<div class="container mx-auto px-4 py-6 bg-[#FFF9ED] min-h-screen">
+
+  <!-- Onglets -->
+  <div class="flex flex-wrap gap-6 mb-6 border-b border-gray-300">
+    <button
+      (click)="currentTab = 'MY_NETWORK'"
+      [ngClass]="{ 'text-orange-600 font-bold border-b-2 border-orange-600': currentTab === 'MY_NETWORK' }"
+      class="pb-2"
+    >
+      {{ 'MY_NETWORK.TAB_MY_NETWORK' | translate }}
+    </button>
+
+    <button
+      (click)="currentTab = 'MY_PENDINGS'"
+      [ngClass]="{ 'text-orange-600 font-bold border-b-2 border-orange-600': currentTab === 'MY_PENDINGS' }"
+      class="pb-2"
+    >
+      {{ 'MY_PENDINGS.TAB_MY_PENDINGS' | translate }}
+    </button>
+  </div>
+
+  <!-- Barre d'ajout -->
+  <div class="flex flex-col sm:flex-row gap-3 mb-6">
+    <input
+      type="text"
+      class="flex-1 border border-gray-300 rounded px-4 py-2 text-sm"
+      [placeholder]="(currentTab === 'MY_NETWORK' ? 'MY_NETWORK.INPUT_PLACEHOLDER' : 'MY_PENDINGS.INPUT_PLACEHOLDER') | translate"
+    />
+    <button class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition">
+      {{ (currentTab === 'MY_NETWORK' ? 'MY_NETWORK.SEND_REQUEST' : 'MY_PENDINGS.SEND_REQUEST') | translate }}
+    </button>
+  </div>
+
+  <!-- MY_NETWORK -->
+  <div *ngIf="currentTab === 'MY_NETWORK'" class="bg-white p-4 rounded-xl shadow-md">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+      {{ 'MY_NETWORK.TITLE' | translate }}
+    </h2>
+
+    <div *ngFor="let student of acceptedStudents" class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-3 border-b">
+      <div class="flex items-center gap-3">
+        <img [src]="student.avatar" class="w-12 h-12 rounded-full object-cover" />
+        <div>
+          <p class="font-semibold text-gray-800">{{ student.name }}</p>
+          <p class="text-sm text-gray-500">
+            {{ 'MY_NETWORK.CONNECTED_ON' | translate }} {{ student.connectedOn }}
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button class="border border-orange-500 text-orange-500 px-3 py-1 rounded hover:bg-orange-50 text-sm">
+          {{ 'MY_NETWORK.MESSAGE' | translate }}
+        </button>
+        <button class="text-gray-500 hover:text-red-500 text-sm">
+          {{ 'MY_NETWORK.REMOVE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY_PENDINGS -->
+  <div *ngIf="currentTab === 'MY_PENDINGS'" class="bg-white p-4 rounded-xl shadow-md">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+      {{ 'MY_PENDINGS.TITLE' | translate }}
+    </h2>
+
+    <div *ngFor="let student of pendingStudents" class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 py-3 border-b">
+      <div class="flex items-center gap-3">
+        <img [src]="student.avatar" class="w-12 h-12 rounded-full object-cover" />
+        <div>
+          <p class="font-semibold text-gray-800">{{ student.name }}</p>
+          <p class="text-sm text-gray-500">{{ student.email }}</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button class="text-green-600 hover:underline text-sm">Accepter</button>
+        <button class="text-gray-500 hover:text-red-500 text-sm">
+          {{ 'MY_PENDINGS.REMOVE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

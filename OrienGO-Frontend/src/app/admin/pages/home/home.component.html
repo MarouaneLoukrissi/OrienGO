@@ -1,0 +1,88 @@
+<div class="min-h-screen bg-[#fff4dc]">
+  
+  <header class="bg-[#fff7ea] shadow-md py-3 px-6 flex justify-between items-center rounded-xl mx-4 mt-4">
+    
+    <div class="flex items-center gap-2">
+      <img src="assets/images/logo/logoOrienGo.png" alt="Logo" class="w-8 h-auto" />
+      <span class="text-2xl font-bold text-gray-800">OrienGo</span>
+    </div>
+    <div class="flex items-center gap-4">
+      
+      <nav class="flex items-center gap-6 text-sm font-semibold text-gray-800">
+        <a routerLink="/signup" class="hover:underline">
+          {{ 'HOME.HEADER.SIGN_UP' | translate }}
+        </a>
+        <a routerLink="/login" class="hover:underline">
+          {{ 'HOME.HEADER.LOGIN' | translate }}
+        </a>
+      </nav>
+    </div>
+  </header>
+  <section class="flex flex-col md:flex-row items-center justify-center p-8 md:p-32">
+    <div class="md:w-1/2 mb-8 md:mb-0">
+      <h2 class="text-4xl font-bold text-[#5c2d0d] leading-tight">
+        {{ 'HOME.HERO.TITLE_LINE1' | translate }}<br />
+        {{ 'HOME.HERO.TITLE_LINE2' | translate }}
+      </h2>
+      <p class="mt-4 text-gray-700">
+        {{ 'HOME.HERO.DESCRIPTION' | translate }}
+      </p>
+      <div class="mt-6 space-x-4">
+        <button class="bg-[#f0713f] text-white px-4 py-2 rounded hover:bg-[#db6237]">
+          {{ 'HOME.HERO.START_TEST' | translate }}
+        </button>
+        <button class="border border-[#f0713f] text-[#f0713f] px-4 py-2 rounded hover:bg-orange-50">
+          {{ 'HOME.HERO.LEARN_MORE' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="md:w-1/2">
+      <img src="assets/images/logo2/HomeImage.png" alt="Hero Image" class="w-full max-w-md mx-auto" />
+    </div>
+  </section>
+
+  <section class="bg-white rounded-xl shadow-md mx-4 md:mx-20 p-6 md:p-10 mt-20">
+    <h3 class="text-xl font-bold text-center mb-2">
+      {{ 'HOME.WHY.TITLE' | translate }}
+    </h3>
+    <p class="text-center text-sm text-gray-500 mb-8">
+      {{ 'HOME.WHY.DESCRIPTION' | translate }}
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div #fadeBlock class="text-center bg-[#ffeee5] p-4 rounded-lg opacity-0 translate-y-8 transition-all duration-[2000ms]">
+        <div class="text-4xl mb-2 text-[#f0713f]">🧠</div>
+        <h4 class="font-bold text-[#333]">{{ 'HOME.WHY.TEST.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-600">{{ 'HOME.WHY.TEST.DESCRIPTION' | translate }}</p>
+      </div>
+      <div #fadeBlock class="text-center bg-[#fff9e0] p-4 rounded-lg opacity-0 translate-y-8 transition-all duration-[2000ms]">
+        <div class="text-4xl mb-2 text-[#d6a300]">🎯</div>
+        <h4 class="font-bold text-[#333]">{{ 'HOME.WHY.RECOMMENDATIONS.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-600">{{ 'HOME.WHY.RECOMMENDATIONS.DESCRIPTION' | translate }}</p>
+      </div>
+      <div #fadeBlock class="text-center bg-[#ffeee5] p-4 rounded-lg opacity-0 translate-y-8 transition-all duration-[2000ms]">
+        <div class="text-4xl mb-2 text-[#f0713f]">🧭</div>
+        <h4 class="font-bold text-[#333]">{{ 'HOME.WHY.SUPPORT.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-600">{{ 'HOME.WHY.SUPPORT.DESCRIPTION' | translate }}</p>
+      </div>
+      <div #fadeBlock class="text-center bg-[#fff9e0] p-4 rounded-lg opacity-0 translate-y-8 transition-all duration-[2000ms]">
+        <div class="text-4xl mb-2 text-[#d6a300]">✅</div>
+        <h4 class="font-bold text-[#333]">{{ 'HOME.WHY.RELIABILITY.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-600">{{ 'HOME.WHY.RELIABILITY.DESCRIPTION' | translate }}</p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section class="bg-[#f0713f] text-white text-center py-10 px-4 mt-12">
+    <h3 class="text-2xl font-bold">
+      {{ 'HOME.CTA.TITLE' | translate }}
+    </h3>
+    <p class="text-sm my-3">
+      {{ 'HOME.CTA.DESCRIPTION' | translate }}
+    </p>
+    <button class="bg-white text-[#f0713f] px-6 py-2 mt-2 rounded font-semibold hover:bg-orange-100">
+      {{ 'HOME.CTA.BUTTON' | translate }}
+    </button>
+  </section>
+</div>
+

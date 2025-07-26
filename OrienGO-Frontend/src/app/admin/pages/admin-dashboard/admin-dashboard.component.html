@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-[#fff4dc] flex">
+  <app-sidebar></app-sidebar>
+  <main class="flex-1 p-10">
+    <h2 class="text-2xl font-bold mb-1">
+      {{ 'ADMIN_DASHBOARD.HEADER.WELCOME' | translate }}
+    </h2>
+    <p class="text-gray-700 mb-6">{{ 'ADMIN_DASHBOARD.HEADER.STATS' | translate }}</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+      <div class="bg-orange-100 p-4 rounded shadow text-center">
+        <div class="text-3xl mb-1">👥</div>
+        <div class="font-bold text-xl">400</div>
+        <div class="text-sm">{{ 'ADMIN_DASHBOARD.STATS.USERS' | translate }}</div>
+      </div>
+      <div class="bg-gray-200 p-4 rounded shadow text-center">
+        <div class="text-3xl mb-1">📄</div>
+        <div class="font-bold text-xl">600</div>
+        <div class="text-sm">{{ 'ADMIN_DASHBOARD.STATS.FULL_TESTS' | translate }}</div>
+      </div>
+      <div class="bg-pink-100 p-4 rounded shadow text-center">
+        <div class="text-3xl mb-1">🧾</div>
+        <div class="font-bold text-xl">60</div>
+        <div class="text-sm">{{ 'ADMIN_DASHBOARD.STATS.QUESTIONNAIRES' | translate }}</div>
+      </div>
+      <div class="bg-blue-100 p-4 rounded shadow text-center">
+        <div class="text-3xl mb-1">🎁</div>
+        <div class="font-bold text-xl">20</div>
+        <div class="text-sm">{{ 'ADMIN_DASHBOARD.STATS.PROFILES' | translate }}</div>
+      </div>
+      <div class="bg-green-100 p-4 rounded shadow text-center col-span-2 md:col-span-1">
+        <div class="text-3xl mb-1">⚡</div>
+        <div class="font-bold text-xl">600</div>
+        <div class="text-sm">{{ 'ADMIN_DASHBOARD.STATS.EXPRESS' | translate }}</div>
+      </div>
+    </div>
+    <h3 class="text-lg font-semibold mb-4">{{ 'ADMIN_DASHBOARD.CHART.TITLE' | translate }}</h3>
+    <div class="space-y-2">
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.INVESTIGATOR' | translate }}</span>
+        <div class="flex-1 h-2 bg-orange-400 rounded mr-2" style="width: 60%"></div>
+      </div>
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.ENTREPRENEUR' | translate }}</span>
+        <div class="flex-1 h-2 bg-red-500 rounded mr-2" style="width: 30%"></div>
+      </div>
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.SOCIAL' | translate }}</span>
+        <div class="flex-1 h-2 bg-blue-600 rounded mr-2" style="width: 80%"></div>
+      </div>
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.ARTISTIC' | translate }}</span>
+        <div class="flex-1 h-2 bg-green-500 rounded mr-2" style="width: 50%"></div>
+      </div>
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.REALISTIC' | translate }}</span>
+        <div class="flex-1 h-2 bg-pink-500 rounded mr-2" style="width: 45%"></div>
+      </div>
+      <div class="flex items-center">
+        <span class="w-32">{{ 'ADMIN_DASHBOARD.CHART.CONVENTIONAL' | translate }}</span>
+        <div class="flex-1 h-2 bg-cyan-400 rounded mr-2" style="width: 70%"></div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,3 +1,5 @@
+server:
+  port: 8877
 spring:
   application:
     name: OrienGo
@@ -5,7 +7,7 @@ spring:
     restart:
       enabled: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/oriengo_db
+    url: jdbc:postgresql://postgres:5432/oriengo_db
     username: postgres
     password: "0000"
     driver-class-name: org.postgresql.Driver

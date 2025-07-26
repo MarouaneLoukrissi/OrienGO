@@ -1,0 +1,113 @@
+<div class="bg-[#fff4dc] min-h-screen">
+  <header class="bg-white shadow px-6 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <img src="assets/images/logo/logoOrienGo.png" alt="OrienGo Logo" class="w-8 h-8" />
+      <h1 class="text-xl font-bold">OrienGo</h1>
+    </div>
+    <nav class="space-x-6 text-sm">
+      <a routerLink="/" class="text-gray-700 hover:underline">{{ 'HEADER.HOME' | translate }}</a>
+      <a routerLink="/learn-more" class="text-orange-500 underline">{{ 'HEADER.LEARN_MORE' | translate }}</a>
+      <a routerLink="/signup" class="text-gray-700 hover:underline">{{ 'HEADER.SIGNUP' | translate }}</a>
+      <a routerLink="/login" class="text-gray-700 hover:underline">{{ 'HEADER.LOGIN' | translate }}</a>
+    </nav>
+  </header>
+  <section class="text-center py-10 px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ 'RIASEC.TITLE' | translate }}</h2>
+    <p class="text-gray-600 max-w-xl mx-auto">
+      {{ 'RIASEC.DESCRIPTION' | translate }}
+    </p>
+  </section>
+  <section class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6 flex flex-col md:flex-row items-center gap-6">
+    <div class="flex-1">
+      <h3 class="font-semibold text-lg mb-2">{{ 'RIASEC.WHAT.TITLE' | translate }}</h3>
+      <p class="text-sm text-gray-600 mb-2">{{ 'RIASEC.WHAT.DESCRIPTION' | translate }}</p>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li class="flex items-start gap-2">
+          <span class="text-green-500">✔</span>
+          <span>{{ 'RIASEC.WHAT.LI1' | translate }}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-green-500">✔</span>
+          <span>{{ 'RIASEC.WHAT.LI2' | translate }}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-green-500">✔</span>
+          <span>{{ 'RIASEC.WHAT.LI3' | translate }}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-green-500">✔</span>
+          <span>{{ 'RIASEC.WHAT.LI4' | translate }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="flex-1 bg-gradient-to-r from-orange-300 to-yellow-400 text-white rounded-lg p-4 text-center">
+      <div class="text-4xl mb-2">🧠</div>
+      <p class="font-semibold text-lg">{{ 'RIASEC.WHAT.CARD_TITLE' | translate }}</p>
+      <p class="text-sm">{{ 'RIASEC.WHAT.CARD_DESC' | translate }}</p>
+    </div>
+  </section>
+
+  
+  <section class="py-10 px-6">
+    <h3 class="text-center text-xl font-bold text-gray-800 mb-6">{{ 'RIASEC.DIMENSIONS.TITLE' | translate }}</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-400">
+        <h4 class="text-blue-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.REALISTIC.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.REALISTIC.DESCRIPTION' | translate }}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-400">
+        <h4 class="text-green-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.INVESTIGATIVE.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.INVESTIGATIVE.DESCRIPTION' | translate }}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-purple-400">
+        <h4 class="text-purple-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.ARTISTIC.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.ARTISTIC.DESCRIPTION' | translate }}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-pink-400">
+        <h4 class="text-pink-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.SOCIAL.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.SOCIAL.DESCRIPTION' | translate }}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-400">
+        <h4 class="text-yellow-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.ENTERPRISING.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.ENTERPRISING.DESCRIPTION' | translate }}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 border-l-4 border-gray-400">
+        <h4 class="text-gray-700 font-semibold mb-2">{{ 'RIASEC.DIMENSIONS.CONVENTIONAL.TITLE' | translate }}</h4>
+        <p class="text-sm text-gray-700">{{ 'RIASEC.DIMENSIONS.CONVENTIONAL.DESCRIPTION' | translate }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="max-w-5xl mx-auto bg-white rounded-lg shadow p-6 mt-6">
+    <h3 class="text-center text-xl font-bold text-gray-800 mb-6">{{ 'RIASEC.HOW.TITLE' | translate }}</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center text-sm">
+      <div>
+        <div class="text-orange-500 text-3xl mb-2">🎯</div>
+        <p class="font-bold mb-1">{{ 'RIASEC.HOW.QUIZ.TITLE' | translate }}</p>
+        <p>{{ 'RIASEC.HOW.QUIZ.DESCRIPTION' | translate }}</p>
+      </div>
+      <div>
+        <div class="text-orange-500 text-3xl mb-2">🧠</div>
+        <p class="font-bold mb-1">{{ 'RIASEC.HOW.ANALYSIS.TITLE' | translate }}</p>
+        <p>{{ 'RIASEC.HOW.ANALYSIS.DESCRIPTION' | translate }}</p>
+      </div>
+      <div>
+        <div class="text-orange-500 text-3xl mb-2">🧑‍💼</div>
+        <p class="font-bold mb-1">{{ 'RIASEC.HOW.PROFILE.TITLE' | translate }}</p>
+        <p>{{ 'RIASEC.HOW.PROFILE.DESCRIPTION' | translate }}</p>
+      </div>
+      <div>
+        <div class="text-orange-500 text-3xl mb-2">📋</div>
+        <p class="font-bold mb-1">{{ 'RIASEC.HOW.RECOMMEND.TITLE' | translate }}</p>
+        <p>{{ 'RIASEC.HOW.RECOMMEND.DESCRIPTION' | translate }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="bg-gradient-to-r from-orange-600 to-orange-400 text-white text-center py-10 px-6 mt-10 rounded-md max-w-4xl mx-auto">
+    <h3 class="text-2xl font-semibold mb-2">{{ 'RIASEC.CTA.TITLE' | translate }}</h3>
+    <p class="text-sm mb-4">{{ 'RIASEC.CTA.DESCRIPTION' | translate }}</p>
+    <button class="bg-white text-orange-600 font-semibold px-6 py-2 rounded hover:bg-orange-50">
+      {{ 'RIASEC.CTA.BUTTON' | translate }}
+    </button>
+  </section>
+  <br>
+</div>

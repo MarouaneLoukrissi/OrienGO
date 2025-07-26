@@ -1,0 +1,99 @@
+<div class="flex bg-[#fff4dc] min-h-screen">
+  <app-sidebar></app-sidebar>
+  <div class="flex-1 p-8">
+    <!-- Header -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+      {{ 'ADMIN_DASHBOARD.HEADER.WELCOME' | translate }}, Super Admin!
+    </h2>
+    <p class="text-lg text-gray-600 mb-8">{{ 'ADMIN_DASHBOARD.HEADER.STATS' | translate }}</p>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-orange-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">👥</div>
+        <div class="text-2xl font-bold">400</div>
+        <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.USERS' | translate }}</div>
+      </div>
+      <div class="bg-blue-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">📘</div>
+        <div class="text-2xl font-bold">600</div>
+        <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.FULL_TESTS' | translate }}</div>
+      </div>
+      <div class="bg-purple-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">🧾</div>
+        <div class="text-2xl font-bold">60</div>
+        <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.QUESTIONNAIRES' | translate }}</div>
+      </div>
+      <div class="bg-cyan-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">💼</div>
+        <div class="text-2xl font-bold">20</div>
+        <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.PROFILES' | translate }}</div>
+      </div>
+      <div class="bg-lime-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">📝</div>
+        <div class="text-2xl font-bold">600</div>
+        <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.EXPRESS' | translate }}</div>
+      </div>
+      <div class="bg-pink-100 p-6 rounded-lg text-center">
+        <div class="text-4xl mb-2">👑</div>
+        <div class="text-2xl font-bold">20</div>
+        <div class="text-sm text-gray-700">Admins</div>
+      </div>
+    </div>
+
+    <!-- RIASEC Chart -->
+    <h3 class="text-xl font-semibold text-gray-800 mb-4">
+      {{ 'ADMIN_DASHBOARD.CHART.TITLE' | translate }}
+    </h3>
+    <div class="space-y-3">
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Investigateur</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-orange-600 rounded-full w-[60%]"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Entrepreneur</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-red-500 rounded-full w-[30%]"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Social</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-blue-600 rounded-full w-[90%]"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Artistic</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-green-500 rounded-full w-[65%]"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Realistic</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-fuchsia-500 rounded-full w-[50%]"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span>Conventionnal</span>
+        </div>
+        <div class="w-full h-2 bg-gray-300 rounded-full">
+          <div class="h-full bg-cyan-500 rounded-full w-[75%]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

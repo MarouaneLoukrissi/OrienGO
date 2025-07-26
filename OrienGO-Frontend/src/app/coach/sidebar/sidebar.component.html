@@ -1,0 +1,79 @@
+<div
+  [ngClass]="{
+    'w-64': !isCollapsed,
+    'w-20': isCollapsed
+  }"
+  class="relative flex flex-col h-full bg-[#FFF1DD] px-4 py-6 transition-all duration-300 shadow-[4px_0_15px_-5px_rgba(0,0,0,0.1)]"
+>
+
+  <!-- Logo + Nom + Toggle button -->
+  <div class="flex items-center justify-between px-2 mb-10">
+    <div class="flex items-center gap-2">
+      <img src="assets/images/logo/logoOrienGo.png" alt="Logo" class="h-8" />
+      <span *ngIf="!isCollapsed" class="text-xl font-bold text-gray-700">OrienGO</span>
+    </div>
+    <!-- Toggle Button -->
+    <button (click)="toggleSidebar()" class="transition-transform hover:scale-105">
+      <lucide-icon *ngIf="!isCollapsed" name="chevron-left" class="w-5 h-5 text-gray-700" />
+      <lucide-icon *ngIf="isCollapsed" name="chevron-right" class="w-5 h-5 text-gray-700" />
+    </button>
+  </div>
+
+  <!-- Menu -->
+  <nav class="flex flex-col gap-4">
+    <a routerLink="/coach/dashboard"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-black hover:bg-orange-100 transition-all">
+      <lucide-icon name="home" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text"> {{ 'SIDEBAR_COACH.DASHBOARD' | translate }}</span>
+    </a>
+
+    <a routerLink="/coach/notifications"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-gray-800 hover:bg-orange-100 transition-all">
+      <lucide-icon name="bell" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text">{{ 'SIDEBAR_COACH.NOTIFICATIONS' | translate }}</span>
+    </a>
+
+    <a routerLink="/coach/network"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-gray-800 hover:bg-orange-100 transition-all">
+      <lucide-icon name="globe" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text">{{ 'SIDEBAR_COACH.MY_NETWORK' | translate }}</span>
+    </a>
+
+    <a routerLink="/coach/history"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-gray-800 hover:bg-orange-100 transition-all">
+      <lucide-icon name="clock" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text">{{ 'SIDEBAR_COACH.HISTORY' | translate }}</span>
+    </a>
+     <a routerLink="/coach/profile"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-gray-800 hover:bg-orange-100 transition-all">
+      <lucide-icon name="clock" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text">{{ 'SIDEBAR_COACH.PROFILE' | translate }}</span>
+    </a>
+
+
+    <a routerLink="/coach/settings"
+       routerLinkActive="bg-[#EBCB9F] shadow-md"
+       class="flex items-center gap-3 px-4 py-2 rounded-xl text-gray-800 hover:bg-orange-100 transition-all">
+      <lucide-icon name="settings" class="w-5 h-5" />
+      <span *ngIf="!isCollapsed" class="font-bold text">{{ 'SIDEBAR_COACH.SETTINGS' | translate }}</span>
+    </a>
+  </nav>
+
+  <!-- Spacer -->
+  <div class="flex-grow"></div>
+
+  <!-- Logout -->
+  
+<div class="mt-3">
+  <a routerLink="/logout"
+     class="flex items-center gap-3 px-4 py-2 text-black hover:bg-orange-100 rounded-md transition-all">
+    <lucide-icon name="log-out" class="w-5 h-5" />
+    <span *ngIf="!isCollapsed" class="font-bold">{{'SIDEBAR_COACH.LOGOUT' | translate }}</span>
+  </a>
+</div>
+</div>
