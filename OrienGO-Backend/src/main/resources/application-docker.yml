@@ -1,0 +1,11 @@
+server:
+  port: 8877
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/oriengo_db
+    username: postgres
+    password: "0000"
+    driver-class-name: org.postgresql.Driver
+media:
+  upload-dir: ${MEDIA_UPLOAD_DIR:/app/uploads}

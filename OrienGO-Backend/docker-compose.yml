@@ -26,14 +26,22 @@ services:
       dockerfile: Dockerfile #build: .
 
     container_name: oriengo_app
+    environment:
+      MEDIA_UPLOAD_DIR: /app/uploads
     ports:
       - "8877:8877"
+    restart: on-failure
     depends_on:
       - postgres #the service not the image
+    volumes:
+      - ./uploads:/app/uploads  # host:container
     networks:
       - oriengo-net
+
   maildev:
+
     image: maildev/maildev
+
     container_name: maildev
     ports:
       - "1080:1080"   # Web UI
