@@ -1,11 +1,8 @@
 # a top-level
-version: '3.8'
-
-# a top-level
 services:
   postgres:
 
-    image: postgres
+    image: postgres:16
 
     container_name: oriengo_postgres
     environment:
@@ -19,21 +16,29 @@ services:
     networks:
       - oriengo-net
 
-  oriengo-app:
+#  oriengo-app:
+#
+#    build:
+#      context: .
+#      dockerfile: Dockerfile #build: .
+#
+#    container_name: oriengo_app
+#    environment:
+#      MEDIA_UPLOAD_DIR: /app/uploads
+#    ports:
+#      - "8877:8877"
+#    restart: on-failure
+#    depends_on:
+#      - postgres #the service not the image
+#    volumes:
+#      - ./uploads:/app/uploads  # host:container
+#    networks:
+#      - oriengo-net
 
-    build:
-      context: .
-      dockerfile: Dockerfile #build: .
-
-    container_name: oriengo_app
-    ports:
-      - "8877:8877"
-    depends_on:
-      - postgres #the service not the image
-    networks:
-      - oriengo-net
   maildev:
+
     image: maildev/maildev
+
     container_name: maildev
     ports:
       - "1080:1080"   # Web UI
