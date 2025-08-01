@@ -58,7 +58,7 @@ public class Notification implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipient_id", nullable = false)
-    private User recipient; // can be Student or Coach
+    private User recipient; // can be Student or CoachRepository
 
     @Column(nullable = false)
     private boolean deleted = false;

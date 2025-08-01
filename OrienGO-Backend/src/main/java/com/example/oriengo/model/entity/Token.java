@@ -36,8 +36,6 @@ public class Token implements Serializable {
     @Column(name = "token_value", nullable = false, unique = true, length = 512) //default length is 255
     private String tokenValue;
 
-    private String tokenHash;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private TokenType tokenType;
@@ -47,10 +45,13 @@ public class Token implements Serializable {
     private LocalDateTime createdAt;
 
     @Column(name = "expires_at", nullable = false)
-    private LocalDateTime expiresAt;
+    private LocalDateTime expiredAt;
 
     @Column(name = "revoked_at")
     private LocalDateTime revokedAt; //When a user logs out or resets their password, old tokens get revoked.
+
+    @Column(nullable = false)
+    private boolean expired = false;
 
     @Column(nullable = false)
     private boolean revoked = false;
@@ -60,6 +61,6 @@ public class Token implements Serializable {
     private User user;
 
     public boolean isActive() {
-        return !revoked && expiresAt.isAfter(LocalDateTime.now());
+        return !revoked && expiredAt.isAfter(LocalDateTime.now());
     }
 }

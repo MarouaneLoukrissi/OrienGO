@@ -6,23 +6,32 @@ spring:
   devtools:
     restart:
       enabled: true
-#  flyway:
-#    enabled: true
-#    postgresql:
-#      transactional-lock: false
-#    baseline-on-migrate: true
-#    validate-on-migrate: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    validate-on-migrate: false  # Temporarily disable validation to avoid conflicts
+    clean-disabled: false  # Allow clean operations in development
+    out-of-order: true  # Allow out-of-order migrations
+    postgresql:
+      transactional-lock: false
+    # Optional: specify locations explicitly
+    locations: classpath:db/migration
   jpa:
     hibernate:
-      ddl-auto: update # FlyWay: none
+      ddl-auto: none  # Let Flyway handle schema management
     show-sql: true
-    open-in-view: false  # Add this line
+    open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  #    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true  # Pretty print SQL in logs
+        use_sql_comments: true  # Add comments to generated SQL
   thymeleaf:
     check-template-location: false
+
 logging:
   level:
     org.springframework.jdbc: DEBUG
+    org.flywaydb: DEBUG  # Add Flyway debug logging
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

@@ -151,5 +151,4 @@ public class User implements Serializable {
     public boolean hasRole(String roleName) {
         return roles.stream().anyMatch(r -> r.getName().equalsIgnoreCase(roleName));
     }
-
 }
