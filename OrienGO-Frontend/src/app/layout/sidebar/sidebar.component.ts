@@ -3,6 +3,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Subject, takeUntil, combineLatest } from 'rxjs';
 import { UserService, User, MenuItem } from '../../Service/user.service';
 import { MenuService } from '../../Service/menu.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 type DeviceType = 'mobile' | 'tablet' | 'laptop' | 'desktop';
 
@@ -14,11 +16,11 @@ type DeviceType = 'mobile' | 'tablet' | 'laptop' | 'desktop';
     trigger('slideInOut', [
       state('expanded', style({ width: '280px' })),
       state('collapsed', style({ width: '80px' })),
-      state('mobile-open', style({ 
+      state('mobile-open', style({
         width: '280px',
         transform: 'translateX(0)'
       })),
-      state('mobile-closed', style({ 
+      state('mobile-closed', style({
         width: '280px',
         transform: 'translateX(-100%)'
       })),
@@ -47,12 +49,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
   menuItems: MenuItem[] = [];
   activeItem = 'dashboard';
-  
+
   private destroy$ = new Subject<void>();
   private readonly STORAGE_KEY = 'sidebar-preferences';
 
   private readonly breakpoints = {
-    mobile: 640,   
+    mobile: 640,
     tablet: 1024,
     laptop: 1440,
     desktop: 1441
@@ -60,14 +62,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private router: Router
   ) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     const previousDeviceType = this.currentDeviceType;
     this.checkScreenSize();
-    
+
     if (previousDeviceType !== this.currentDeviceType) {
       this.handleDeviceTypeChange(previousDeviceType);
     }
@@ -84,6 +87,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
     ).subscribe(([user]) => {
       this.currentUser = user;
       this.loadMenuItems();
+      // Sync active item after menu items are loaded
+      this.syncActiveItemFromUrl();
+    });
+
+    // Subscribe to router events to detect URL changes
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
+    ).subscribe((event: NavigationEnd) => {
+      this.syncActiveItemFromUrl();
     });
 
     if (this.userRole) {
@@ -96,9 +109,81 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  private syncActiveItemFromUrl() {
+    if (!this.currentUser || this.menuItems.length === 0) return;
+
+    const currentUrl = this.router.url;
+    console.log('Current URL:', currentUrl); // Debug log
+
+    // Handle special cases first
+    if (currentUrl.includes('/test/express')) {
+      this.setActiveItem('riasec-test');
+      return;
+    }
+
+    if (currentUrl.includes('/profile/')) {
+      if (this.currentUser.role === 'coach') {
+        this.setActiveItem('coach-profile');
+      } else {
+        this.setActiveItem('profile');
+      }
+      return;
+    }
+
+    // Extract the last segment of the URL for matching
+    const urlSegments = currentUrl.split('/').filter(segment => segment);
+    console.log('URL segments:', urlSegments); // Debug log
+
+    if (urlSegments.length >= 2) {
+      const lastSegment = urlSegments[urlSegments.length - 1];
+      console.log('Last segment:', lastSegment); // Debug log
+
+      // Try to find a menu item that matches the URL pattern
+      const matchingItem = this.menuItems.find(item => {
+        if (!item.route) return false;
+
+        // Remove leading slash from route for comparison
+        const routeWithoutSlash = item.route.startsWith('/') ? item.route.substring(1) : item.route;
+
+        // Check if the route matches the last segment or the full path
+        return routeWithoutSlash === lastSegment ||
+              currentUrl.includes(item.route) ||
+              (item.route === '/dashboard' && (
+                this.currentUser &&
+                (lastSegment === this.currentUser.role ||
+                currentUrl === `/${this.currentUser.role}` ||
+                currentUrl === `/${this.currentUser.role}/`)
+              ));
+      });
+
+      console.log('Matching item:', matchingItem); // Debug log
+
+      if (matchingItem) {
+        this.setActiveItem(matchingItem.id);
+        return;
+      }
+    }
+
+    // Default to dashboard if no match found or if we're on the role root
+    const rolePattern = new RegExp(`^/${this.currentUser.role}/?$`);
+    if (rolePattern.test(currentUrl)) {
+      this.setActiveItem('dashboard');
+    }
+  }
+
+  private setActiveItem(itemId: string) {
+    this.activeItem = itemId;
+
+    // Update the isActive state for all menu items
+    this.menuItems = this.menuItems.map(item => ({
+      ...item,
+      isActive: item.id === itemId
+    }));
+  }
+
   private checkScreenSize() {
     const width = window.innerWidth;
-    
+
     if (width < this.breakpoints.mobile) {
       this.currentDeviceType = 'mobile';
     } else if (width < this.breakpoints.tablet) {
@@ -112,23 +197,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private initializeSidebarState() {
     const savedPreferences = this.getSavedPreferences();
-    
+
     switch (this.currentDeviceType) {
       case 'mobile':
         this.isExpanded = false;
         this.showMobileOverlay = false;
         break;
-        
+
       case 'tablet':
         this.isExpanded = savedPreferences?.tablet?.isExpanded ?? false;
         break;
-        
+
       case 'laptop':
         this.isExpanded = savedPreferences?.laptop?.isExpanded ?? false;
         break;
-        
+
       case 'desktop':
-        this.isExpanded = savedPreferences?.desktop?.isExpanded ?? true; //false://ok////
+        this.isExpanded = savedPreferences?.desktop?.isExpanded ?? true;
         break;
     }
 
@@ -161,7 +246,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     try {
       const currentPreferences = this.getSavedPreferences() || {};
-      
+
       currentPreferences[this.currentDeviceType] = {
         isExpanded: this.isExpanded,
         lastUpdated: new Date().toISOString()
@@ -197,12 +282,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   selectItem(itemId: string) {
-    this.activeItem = itemId;
-    
-    this.menuItems = this.menuItems.map(item => ({
-      ...item,
-      isActive: item.id === itemId
-    }));
+    this.setActiveItem(itemId);
 
     if (this.currentDeviceType === 'mobile') {
       this.closeMobileSidebar();
@@ -212,8 +292,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.handleLogout();
       return;
     }
-    //OK//
-    console.log(`Navigating to: ${itemId}`);
+
+    const selectedItem = this.menuItems.find(item => item.id === itemId);
+    if (selectedItem) {
+      this.router.navigate(['/' + this.currentUser?.role + '/' + selectedItem.route]);
+    }
   }
 
   private handleLogout() {
@@ -222,8 +305,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.warn('Failed to clear sidebar preferences:', error);
     }
-    //OK//
-    console.log('Logging out...');
+    this.router.navigate(['/home']);
   }
 
   private toggleBodyScroll() {
@@ -297,7 +379,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return this.showMobileOverlay ? 'visible' : 'hidden';
   }
 
-  //OK//
   getRoleDisplayName(role: string): string {
     const roleNames = {
       'admin': 'Administrator',
@@ -308,7 +389,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return roleNames[role as keyof typeof roleNames] || role;
   }
 
-  //OK//
   getRoleColor(role: string): string {
     const roleColors = {
       'admin': 'bg-blue-500',
@@ -318,108 +398,4 @@ export class SidebarComponent implements OnInit, OnDestroy {
     };
     return roleColors[role as keyof typeof roleColors] || 'bg-gray-500';
   }
-
-  /*getIconSvg(iconType: string): string {
-    const icons: { [key: string]: string } = {
-      dashboard: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"/>
-        <rect x="14" y="3" width="7" height="7"/>
-        <rect x="14" y="14" width="7" height="7"/>
-        <rect x="3" y="14" width="7" height="7"/>
-      </svg>`,
-      notifications: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-      </svg>`,
-      system: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-        <line x1="8" y1="21" x2="16" y2="21"/>
-        <line x1="12" y1="17" x2="12" y2="21"/>
-      </svg>`,
-      'global-analytics': `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        <polyline points="8,12 12,8 16,12"/>
-      </svg>`,
-      'admin-users': `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        <circle cx="18" cy="8" r="2"/>
-      </svg>`,
-      users: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>`,
-      analytics: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
-      </svg>`,
-      reports: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14,2 14,8 20,8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-        <polyline points="10,9 9,9 8,9"/>
-      </svg>`,
-      students: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-      </svg>`,
-      coaching: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        <path d="M8 9h8"/>
-        <path d="M8 13h6"/>
-      </svg>`,
-      progress: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10"/>
-        <line x1="12" y1="20" x2="12" y2="4"/>
-        <line x1="6" y1="20" x2="6" y2="14"/>
-      </svg>`,
-      riasec: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-      </svg>`,
-      network: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>`,
-      career: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>`,
-      saved: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-      </svg>`,
-      favorites: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-      </svg>`,
-      history: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="12,6 12,12 16,14"/>
-      </svg>`,
-      profile: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>`,
-      settings: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>`,
-      help: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-        <line x1="12" y1="17" x2="12.01" y2="17"/>
-      </svg>`,
-      logout: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        <polyline points="16,17 21,12 16,7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>`
-    };
-    return icons[iconType] || '';
-  }*/
 }

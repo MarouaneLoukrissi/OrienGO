@@ -9,123 +9,128 @@ export class MenuService {
     // Core navigation items
     {
       id: 'dashboard',
-      label: 'Dashboard',
+      label: 'SIDEBAR.MENU_ITEMS.DASHBOARD',
       icon: 'dashboard',
       route: '/dashboard',
       roles: ['admin', 'superAdmin', 'student', 'coach']
     },
     {
-      id: 'notifications',
-      label: 'Notifications',
+      id: 'notification',
+      label: 'SIDEBAR.MENU_ITEMS.NOTIFICATIONS',
       icon: 'notifications',
       route: '/notifications',
-      roles: ['admin', 'superAdmin', 'student', 'coach'],
+      roles: ['student', 'coach'],
       badge: 3
-    },
-
-    // Super Admin exclusive items
-    {
-      id: 'system-management',
-      label: 'System Management',
-      icon: 'system',
-      route: '/system',
-      roles: ['superAdmin']
-    },
-    {
-      id: 'global-analytics',
-      label: 'Global Analytics',
-      icon: 'global-analytics',
-      route: '/global-analytics',
-      roles: ['superAdmin']
-    },
-    {
-      id: 'admin-management',
-      label: 'Admin Management',
-      icon: 'admin-users',
-      route: '/admin-management',
-      roles: ['superAdmin']
     },
 
     // Admin items
     {
       id: 'user-management',
-      label: 'User Management',
+      label: 'SIDEBAR.MENU_ITEMS.USERS',
       icon: 'users',
       route: '/users',
       roles: ['admin', 'superAdmin']
     },
     {
-      id: 'analytics',
-      label: 'Analytics',
-      icon: 'analytics',
-      route: '/analytics',
-      roles: ['admin', 'superAdmin', 'coach']
+      id: 'questions-management',
+      label: 'SIDEBAR.MENU_ITEMS.QUESTIONS',
+      icon: 'questions',
+      route: '/questions',
+      roles: ['admin', 'superAdmin']
     },
-    {
-      id: 'reports',
-      label: 'Reports',
-      icon: 'reports',
-      route: '/reports',
-      roles: ['admin', 'superAdmin', 'coach']
-    },
+    // {
+    //   id: 'analytics',
+    //   label: 'Analytics',
+    //   icon: 'analytics',
+    //   route: '/analytics',
+    //   roles: ['admin', 'superAdmin', 'coach']
+    // },
+    // {
+    //   id: 'reports',
+    //   label: 'Reports',
+    //   icon: 'reports',
+    //   route: '/reports',
+    //   roles: ['admin', 'superAdmin', 'coach']
+    // },
 
     // Coach specific items
-    {
-      id: 'my-students',
-      label: 'My Students',
-      icon: 'students',
-      route: '/students',
-      roles: ['coach']
-    },
-    {
-      id: 'coaching-sessions',
-      label: 'Coaching Sessions',
-      icon: 'coaching',
-      route: '/coaching-sessions',
-      roles: ['coach']
-    },
-    {
-      id: 'student-progress',
-      label: 'Student Progress',
-      icon: 'progress',
-      route: '/student-progress',
-      roles: ['coach']
-    },
+    // {
+    //   id: 'my-students',
+    //   label: 'My Students',
+    //   icon: 'students',
+    //   route: '/students',
+    //   roles: ['coach']
+    // },
+    // {
+    //   id: 'coaching-sessions',
+    //   label: 'Coaching Sessions',
+    //   icon: 'coaching',
+    //   route: '/coaching-sessions',
+    //   roles: ['coach']
+    // },
+    // {
+    //   id: 'student-progress',
+    //   label: 'Student Progress',
+    //   icon: 'progress',
+    //   route: '/student-progress',
+    //   roles: ['coach']
+    // },
 
     // Assessment tools
     {
       id: 'riasec-test',
-      label: 'RIASEC Test',
+      label: 'SIDEBAR.MENU_ITEMS.RIASEC',
       icon: 'riasec',
-      route: '/riasec',
-      roles: ['student', 'coach']
+      route: '/test',
+      roles: ['student']
     },
+    // {
+    //   id: 'riasec-test-results',
+    //   label: 'SIDEBAR.MENU_ITEMS.RIASEC',
+    //   icon: 'riasec',
+    //   route: '/test/results',
+    //   roles: ['student']
+    // },
+    // {
+    //   id: 'riasec-test-recommendations',
+    //   label: 'SIDEBAR.MENU_ITEMS.RIASEC',
+    //   icon: 'riasec',
+    //   route: '/test/recommendations',
+    //   roles: ['student']
+    // },
+    // {
+    //   id: 'riasec-test-jobs',
+    //   label: 'SIDEBAR.MENU_ITEMS.RIASEC',
+    //   icon: 'riasec',
+    //   route: '/test/personalizedjobs',
+    //   roles: ['student']
+    // },
 
     // Student specific items
     {
-      id: 'my-network',
-      label: 'My Network',
+      id: 'network',
+      label: 'SIDEBAR.MENU_ITEMS.NETWORK',
       icon: 'network',
       route: '/network',
-      roles: ['student']
+      roles: ['student', 'coach']
     },
     {
-      id: 'career-path',
-      label: 'Career Path',
-      icon: 'career',
-      route: '/career-path',
+      id: 'jobs',
+      label: 'SIDEBAR.MENU_ITEMS.CAREER',
+      icon: 'jobs',
+      route: '/jobs',
       roles: ['student']
     },
     {
       id: 'saved',
-      label: 'Saved',
+      label: 'SIDEBAR.MENU_ITEMS.SAVED',
       icon: 'saved',
       route: '/saved',
       roles: ['student']
     },
     {
       id: 'favorites',
-      label: 'Favorites',
+      label: 'SIDEBAR.MENU_ITEMS.FAVORITES',
       icon: 'favorites',
       route: '/favorites',
       roles: ['student'],
@@ -135,36 +140,51 @@ export class MenuService {
     // Common items
     {
       id: 'history',
-      label: 'History',
+      label: 'SIDEBAR.MENU_ITEMS.HISTORY',
       icon: 'history',
       route: '/history',
-      roles: ['admin', 'superAdmin', 'student', 'coach']
+      roles: ['student']
     },
     {
       id: 'profile',
-      label: 'Profile',
+      label: 'SIDEBAR.MENU_ITEMS.PROFILE',
       icon: 'profile',
-      route: '/profile',
-      roles: ['admin', 'superAdmin', 'student', 'coach'],
+      route: '/profile/current-user-123',
+      roles: ['student'],
       divider: true
     },
     {
+      id: 'coach-profile',
+      label: 'SIDEBAR.MENU_ITEMS.PROFILE',
+      icon: 'profile',
+      route: '/profile/1',
+      roles: ['coach'],
+      divider: true
+    },
+    {
+      id: 'manageJobs',
+      label: 'SIDEBAR.MENU_ITEMS.MG_JOBS',
+      icon: 'jobs',
+      route: '/jobs',
+      roles: ['admin', 'superAdmin']
+    },
+    {
+      id: 'manager',
+      label: 'SIDEBAR.MENU_ITEMS.ADMINS',
+      icon: 'manager',
+      route: '/manager',
+      roles: ['superAdmin']
+    },
+    {
       id: 'settings',
-      label: 'Settings',
+      label: 'SIDEBAR.MENU_ITEMS.SETTINGS',
       icon: 'settings',
       route: '/settings',
       roles: ['admin', 'superAdmin', 'student', 'coach']
     },
     {
-      id: 'help',
-      label: 'Help & Support',
-      icon: 'help',
-      route: '/help',
-      roles: ['admin', 'superAdmin', 'student', 'coach']
-    },
-    {
       id: 'logout',
-      label: 'Log out',
+      label: 'SIDEBAR.MENU_ITEMS.LOGOUT',
       icon: 'logout',
       roles: ['admin', 'superAdmin', 'student', 'coach']
     }
