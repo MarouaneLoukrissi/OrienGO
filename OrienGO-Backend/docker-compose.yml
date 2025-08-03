@@ -1,0 +1,52 @@
+# a top-level
+services:
+  postgres:
+
+    image: postgres:16
+
+    container_name: oriengo_postgres
+    environment:
+      POSTGRES_USER: postgres #default
+      POSTGRES_PASSWORD: "0000"
+      POSTGRES_DB: oriengo_db #default is postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - oriengo-net
+
+#  oriengo-app:
+#
+#    build:
+#      context: .
+#      dockerfile: Dockerfile #build: .
+#
+#    container_name: oriengo_app
+#    environment:
+#      MEDIA_UPLOAD_DIR: /app/uploads
+#    ports:
+#      - "8877:8877"
+#    restart: on-failure
+#    depends_on:
+#      - postgres #the service not the image
+#    volumes:
+#      - ./uploads:/app/uploads  # host:container
+#    networks:
+#      - oriengo-net
+
+  maildev:
+
+    image: maildev/maildev
+
+    container_name: maildev
+    ports:
+      - "1080:1080"   # Web UI
+      - "1025:1025"   # SMTP server
+
+# add a top-level for clarity
+volumes:
+  pgdata:
+
+networks:
+  oriengo-net:
