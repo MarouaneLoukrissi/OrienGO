@@ -1,4 +1,4 @@
-package com.example.oriengo.exceptionHandlers;
+package com.example.oriengo.exceptionHandler;
 
 import com.example.oriengo.exception.PathVarException;
 import com.example.oriengo.exception.Privilege.PrivilegeCreationException;

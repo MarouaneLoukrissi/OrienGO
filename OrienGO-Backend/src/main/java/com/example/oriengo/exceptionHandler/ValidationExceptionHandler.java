@@ -1,4 +1,4 @@
-package com.example.oriengo.exceptionHandlers;
+package com.example.oriengo.exceptionHandler;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

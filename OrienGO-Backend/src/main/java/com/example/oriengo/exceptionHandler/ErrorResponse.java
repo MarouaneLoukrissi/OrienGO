@@ -1,4 +1,4 @@
-package com.example.oriengo.exceptionHandlers;
+package com.example.oriengo.exceptionHandler;
 
 
 import lombok.AllArgsConstructor;
