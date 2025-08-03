@@ -1,0 +1,41 @@
+/* Additional custom styles if needed */
+.router-link-active {
+  color: #f97316 !important;
+}
+
+/* Ensure smooth transitions */
+nav a {
+  position: relative;
+}
+
+/* Mobile menu animations */
+.md\:hidden > div {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effects */
+nav a:hover,
+.auth-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Focus states for accessibility */
+nav a:focus,
+.auth-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove focus ring completely */
+a:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  ring: none !important;
+}
+
+/* Ensure active states work properly */
+.router-link-active {
+  color: #f97316 !important;
+  font-weight: 500 !important;
+}

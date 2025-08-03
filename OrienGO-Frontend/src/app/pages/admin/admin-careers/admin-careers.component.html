@@ -1,0 +1,73 @@
+<div class="flex flex-col bg-orange-50 min-h-screen">
+  <div class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Header + Add button -->
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">
+        {{ 'ADMIN_CAREERS.TITLE' | translate }}
+      </h2>
+      <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full text-sm whitespace-nowrap">
+        + {{ 'ADMIN_CAREERS.ADD_BUTTON' | translate }}
+      </button>
+    </div>
+
+    <!-- Responsive Table Container -->
+    <div class="overflow-x-auto bg-[#fff1dd] rounded-lg shadow">
+      <table class="min-w-full text-left text-sm">
+        <thead class="text-gray-800 font-semibold bg-orange-100">
+          <tr class="border-b border-gray-200 whitespace-nowrap">
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.NAME' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.DESCRIPTION' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.SALARY' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.INDUSTRY' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.RIASEC' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_CAREERS.TABLE.ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4">Software Dev</td>
+            <td class="px-4 sm:px-6 py-4">Technology</td>
+            <td class="px-4 sm:px-6 py-4">8000 MAD</td>
+            <td class="px-4 sm:px-6 py-4">Technology</td>
+            <td class="px-4 sm:px-6 py-4">ICR</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.VIEW' | translate }}</span>
+              |
+              <span class="text-green-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.EDIT' | translate }}</span>
+              |
+              <span class="text-red-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.DELETE' | translate }}</span>
+            </td>
+          </tr>
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4">Data Analyst</td>
+            <td class="px-4 sm:px-6 py-4">Arts & Design</td>
+            <td class="px-4 sm:px-6 py-4">9000 MAD</td>
+            <td class="px-4 sm:px-6 py-4">Beta</td>
+            <td class="px-4 sm:px-6 py-4">RC</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.VIEW' | translate }}</span>
+              |
+              <span class="text-green-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.EDIT' | translate }}</span>
+              |
+              <span class="text-red-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.DELETE' | translate }}</span>
+            </td>
+          </tr>
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4">Graphic Design</td>
+            <td class="px-4 sm:px-6 py-4">Business</td>
+            <td class="px-4 sm:px-6 py-4">8000 MAD</td>
+            <td class="px-4 sm:px-6 py-4">Business</td>
+            <td class="px-4 sm:px-6 py-4">SER</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.VIEW' | translate }}</span>
+              |
+              <span class="text-green-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.EDIT' | translate }}</span>
+              |
+              <span class="text-red-600 hover:underline cursor-pointer">{{ 'ADMIN_CAREERS.TABLE.DELETE' | translate }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

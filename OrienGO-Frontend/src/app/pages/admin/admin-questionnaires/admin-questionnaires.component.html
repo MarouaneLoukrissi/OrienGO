@@ -1,0 +1,62 @@
+<div class="flex flex-col bg-orange-50 min-h-screen">
+  <div class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Header with responsive layout -->
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">
+        {{ 'ADMIN_QUESTIONS.TITLE' | translate }}
+      </h2>
+      <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full text-sm whitespace-nowrap">
+        + {{ 'ADMIN_QUESTIONS.BUTTON' | translate }}
+      </button>
+    </div>
+
+    <!-- Responsive Table Container -->
+    <div class="overflow-x-auto bg-[#fff1dd] rounded-lg shadow">
+      <table class="min-w-full text-left text-sm">
+        <thead class="text-gray-800 font-semibold bg-orange-100">
+          <tr class="border-b border-gray-200 whitespace-nowrap">
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_QUESTIONS.TABLE.QUESTION' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_QUESTIONS.TABLE.TYPE' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_QUESTIONS.TABLE.ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4">What is your favorite field?</td>
+            <td class="px-4 sm:px-6 py-4">Full</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.VIEW' | translate }}
+              </span>
+              |
+              <span class="text-green-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.EDIT' | translate }}
+              </span>
+              |
+              <span class="text-red-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.DELETE' | translate }}
+              </span>
+            </td>
+          </tr>
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4">What motivates you at work?</td>
+            <td class="px-4 sm:px-6 py-4">Express</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.VIEW' | translate }}
+              </span>
+              |
+              <span class="text-green-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.EDIT' | translate }}
+              </span>
+              |
+              <span class="text-red-600 hover:underline cursor-pointer">
+                {{ 'ADMIN_QUESTIONS.TABLE.DELETE' | translate }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

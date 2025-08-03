@@ -1,0 +1,75 @@
+<div class="flex flex-col min-h-screen bg-orange-50">
+  <div class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- Header -->
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">
+        {{ 'ADMIN_ADMINS.TITLE' | translate }}
+      </h2>
+      <button class="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 text-sm font-semibold whitespace-nowrap">
+        + {{ 'ADMIN_ADMINS.ADD_BUTTON' | translate }}
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-4 mb-6">
+      <input
+        type="text"
+        placeholder="{{ 'ADMIN_ADMINS.SEARCH_PLACEHOLDER' | translate }}"
+        class="border border-orange-200 rounded px-4 py-2 text-sm w-full sm:w-auto"
+      />
+      <select class="border border-orange-200 rounded px-4 py-2 text-sm w-full sm:w-auto">
+        <option>{{ 'ADMIN_ADMINS.ALL_PERMISSIONS' | translate }}</option>
+      </select>
+      <select class="border border-orange-200 rounded px-4 py-2 text-sm w-full sm:w-auto">
+        <option>{{ 'ADMIN_ADMINS.ALL_STATUSES' | translate }}</option>
+      </select>
+      <input
+        type="date"
+        class="border border-orange-200 rounded px-4 py-2 text-sm w-full sm:w-auto"
+      />
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="overflow-x-auto bg-[#fff1dd] rounded-lg shadow">
+      <table class="min-w-full text-left text-sm">
+        <thead class="text-gray-800 font-semibold bg-orange-100">
+          <tr class="border-b border-gray-200 whitespace-nowrap">
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.NAME' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.EMAIL' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.PERMISSION' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.STATUS' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.CREATED' | translate }}</th>
+            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_ADMINS.TABLE.ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4 font-semibold">Ikram Tifard</td>
+            <td class="px-4 sm:px-6 py-4">ikra&#64;gmail.com</td>
+            <td class="px-4 sm:px-6 py-4">User management</td>
+            <td class="px-4 sm:px-6 py-4">Active</td>
+            <td class="px-4 sm:px-6 py-4">01/07/23</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-500 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.VIEW' | translate }}</span>
+              <span class="text-green-600 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.EDIT' | translate }}</span>
+              <span class="text-red-500 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.DELETE' | translate }}</span>
+            </td>
+          </tr>
+          <tr class="border-t border-gray-200 whitespace-nowrap">
+            <td class="px-4 sm:px-6 py-4 font-semibold">Akram Abou</td>
+            <td class="px-4 sm:px-6 py-4">Abdou&#64;gmail.ma</td>
+            <td class="px-4 sm:px-6 py-4">Career management</td>
+            <td class="px-4 sm:px-6 py-4">Inactive</td>
+            <td class="px-4 sm:px-6 py-4">09/02/25</td>
+            <td class="px-4 sm:px-6 py-4 space-x-2">
+              <span class="text-blue-500 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.VIEW' | translate }}</span>
+              <span class="text-green-600 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.EDIT' | translate }}</span>
+              <span class="text-red-500 hover:underline cursor-pointer">{{ 'ADMIN_ADMINS.ACTIONS.DELETE' | translate }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

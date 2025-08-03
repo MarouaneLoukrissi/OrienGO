@@ -1,0 +1,56 @@
+<div class="flex justify-center items-start min-h-screen bg-orange-50 py-6 px-4 sm:py-8 sm:px-6 lg:px-8 w-full max-w-full">
+  <div class="bg-white rounded-xl shadow-md w-full max-w-5xl p-6 sm:p-10 mx-auto w-full md-lg:max-w-[88rem]">
+
+    <!-- Titre -->
+    <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6 sm:mb-10 text-center sm:text-left">
+      {{ 'MODIFY_PROFILE.TITLE' | translate }}
+    </h2>
+
+    <!-- Avatar + Nom + Email -->
+    <div class="flex flex-col items-center mb-10">
+      <div class="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        <lucide-icon name="User" class="w-8 h-8 text-orange-500"></lucide-icon>
+      </div>
+      <div class="text-xl font-semibold text-center">Douaa Boustane</div>
+      <div class="text-base text-gray-600 text-center">{{ 'MODIFY_PROFILE.ROLE' | translate }}</div>
+      <div class="text-sm text-gray-600 mt-1">
+        <lucide-icon name="Mail" class="inline-block w-4 h-4 mr-1"></lucide-icon>
+        douaa.boustanegmail.com
+      </div>
+    </div>
+
+    <!-- Formulaire responsive -->
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      <input
+        type="text"
+        [placeholder]="'MODIFY_PROFILE.FIRST_NAME' | translate"
+        class="border border-orange-300 rounded-md px-4 py-2 sm:px-6 sm:py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+      <input
+        type="text"
+        [placeholder]="'MODIFY_PROFILE.LAST_NAME' | translate"
+        class="border border-orange-300 rounded-md px-4 py-2 sm:px-6 sm:py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+      <input
+        type="text"
+        [placeholder]="'MODIFY_PROFILE.LOCATION' | translate"
+        class="border border-orange-300 rounded-md px-4 py-2 sm:px-6 sm:py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+      <input
+        type="text"
+        [placeholder]="'MODIFY_PROFILE.PHONE' | translate"
+        class="border border-orange-300 rounded-md px-4 py-2 sm:px-6 sm:py-3 text-base focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+    </form>
+
+      <!-- Boutons responsive et centrés -->
+    <div class="flex flex-col sm:flex-row items-center justify-center mt-8 gap-4 w-full">
+      <button class="w-full sm:w-auto bg-orange-500 text-white px-6 py-2 sm:px-8 sm:py-3 text-base sm:text-lg rounded-md hover:bg-orange-600 transition">
+        {{ 'MODIFY_PROFILE.SAVE' | translate }}
+      </button>
+      <button class="w-full sm:w-auto bg-white border border-gray-300 text-gray-800 px-6 py-2 sm:px-8 sm:py-3 text-base sm:text-lg rounded-md hover:bg-gray-100 transition">
+        {{ 'MODIFY_PROFILE.CANCEL' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

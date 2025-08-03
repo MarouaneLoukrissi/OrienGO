@@ -1,0 +1,226 @@
+<div class="min-h-screen bg-orange-50">
+  <!-- Header -->
+  <header class="border-b border-gray-100">
+    <div class="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="text-center">
+
+        <!-- Lightbulb Icon -->
+        <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+            <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 sm:h-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2.80408 15.4771C2.80408 15.4771 2.94608 17.2151 2.97908 17.7631C3.02308 18.4981 3.30708 19.3191 3.78108 19.8891C4.45008 20.6971 5.23808 20.9821 6.29008 20.9841C7.52708 20.9861 16.5221 20.9861 17.7591 20.9841C18.8111 20.9821 19.5991 20.6971 20.2681 19.8891C20.7421 19.3191 21.0261 18.4981 21.0711 17.7631C21.1031 17.2151 21.2451 15.4771 21.2451 15.4771" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.49597 5.32949V4.95849C8.49597 3.73849 9.48397 2.75049 10.704 2.75049H13.286C14.505 2.75049 15.494 3.73849 15.494 4.95849L15.495 5.32949" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.995 16.6783V15.3843" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.74988 8.38905V11.8561C4.66788 13.1211 6.96588 14.0071 9.48788 14.3581C9.78988 13.2571 10.7829 12.4501 11.9899 12.4501C13.1779 12.4501 14.1909 13.2571 14.4729 14.3681C17.0049 14.0171 19.3119 13.1311 21.2399 11.8561V8.38905C21.2399 6.69505 19.8769 5.33105 18.1829 5.33105H5.81688C4.12288 5.33105 2.74988 6.69505 2.74988 8.38905Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        </div>
+        <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
+          {{ 'PERSONALIZED_JOB_SHEETS.TITLE' | translate }}
+        </h1>
+        <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
+          {{ 'PERSONALIZED_JOB_SHEETS.SUBTITLE' | translate }}
+        </p>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main class="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Search and Filters -->
+    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-3 xxs:p-6 mb-8">
+      <div class="flex flex-col md:flex-wrap md:flex-row gap-4">
+        <!-- Search Input -->
+        <div class="flex-1 relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <input
+            type="text"
+            [placeholder]="'PERSONALIZED_JOB_SHEETS.SEARCH_PLACEHOLDER' | translate"
+            [(ngModel)]="filters.searchTerm"
+            (ngModelChange)="onFiltersChange()"
+            class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-gray-700 placeholder-gray-500"
+          />
+        </div>
+
+        <!-- Sector Filter -->
+        <div class="relative">
+          <select
+            [(ngModel)]="filters.sector"
+            (ngModelChange)="onFiltersChange()"
+            class="text-xs xxs:text-sm xs:text-base appearance-none bg-white border border-gray-200 rounded-xl px-1 py-1 xxs:px-2 xxs:py-2 xs:px-4 xs:py-3 xs:pr-10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-700 cursor-pointer min-w-full md:min-w-[140px]">
+            <option value="">{{ 'PERSONALIZED_JOB_SHEETS.ALL_SECTORS' | translate }}</option>
+            <option value="education">{{ 'PERSONALIZED_JOB_SHEETS.SECTORS.EDUCATION' | translate }}</option>
+            <option value="healthcare">{{ 'PERSONALIZED_JOB_SHEETS.SECTORS.HEALTHCARE' | translate }}</option>
+            <option value="technology">{{ 'PERSONALIZED_JOB_SHEETS.SECTORS.TECHNOLOGY' | translate }}</option>
+            <option value="finance">{{ 'PERSONALIZED_JOB_SHEETS.SECTORS.FINANCE' | translate }}</option>
+            <option value="marketing">{{ 'PERSONALIZED_JOB_SHEETS.SECTORS.MARKETING' | translate }}</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-1 xs:pr-3 pointer-events-none">
+            <svg class="h-3 w-3 xxs:h-4 xxs:w-4 xs:h-5 xs:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Level Filter -->
+        <div class="relative">
+          <select
+            [(ngModel)]="filters.level"
+            (ngModelChange)="onFiltersChange()"
+            class="text-xs xxs:text-sm xs:text-base appearance-none bg-white border border-gray-200 rounded-xl px-1 py-1 xxs:px-2 xxs:py-2 xs:px-4 xs:py-3 xs:pr-10 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-700 cursor-pointer min-w-full md:min-w-[130px]">
+            <option value="">{{ 'PERSONALIZED_JOB_SHEETS.ALL_LEVELS' | translate }}</option>
+            <option value="entry">{{ 'PERSONALIZED_JOB_SHEETS.LEVELS.ENTRY' | translate }}</option>
+            <option value="mid">{{ 'PERSONALIZED_JOB_SHEETS.LEVELS.MID' | translate }}</option>
+            <option value="senior">{{ 'PERSONALIZED_JOB_SHEETS.LEVELS.SENIOR' | translate }}</option>
+            <option value="executive">{{ 'PERSONALIZED_JOB_SHEETS.LEVELS.EXECUTIVE' | translate }}</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-1 xs:pr-3 pointer-events-none">
+            <svg class="h-3 w-3 xxs:h-4 xxs:w-4 xs:h-5 xs:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+      <div class="mb-4 sm:mb-0">
+        <h2 class="text-xl font-semibold text-gray-900 pl-3">
+          {{ filteredJobs.length }} {{ 'PERSONALIZED_JOB_SHEETS.JOBS_FOUND' | translate }}
+        </h2>
+      </div>
+      <div class="flex items-center text-sm text-gray-600 pl-3 sm:pr-3">
+        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19 3H5C3.58579 3 2.87868 3 2.43934 3.4122C2 3.8244 2 4.48782 2 5.81466V6.50448C2 7.54232 2 8.06124 2.2596 8.49142C2.5192 8.9216 2.99347 9.18858 3.94202 9.72255L6.85504 11.3624C7.49146 11.7206 7.80967 11.8998 8.03751 12.0976C8.51199 12.5095 8.80408 12.9935 8.93644 13.5872C9 13.8722 9 14.2058 9 14.8729L9 17.5424C9 18.452 9 18.9067 9.25192 19.2613C9.50385 19.6158 9.95128 19.7907 10.8462 20.1406C12.7248 20.875 13.6641 21.2422 14.3321 20.8244C15 20.4066 15 19.4519 15 17.5424V14.8729C15 14.2058 15 13.8722 15.0636 13.5872C15.1959 12.9935 15.488 12.5095 15.9625 12.0976C16.1903 11.8998 16.5085 11.7206 17.145 11.3624L20.058 9.72255C21.0065 9.18858 21.4808 8.9216 21.7404 8.49142C22 8.06124 22 7.54232 22 6.50448V5.81466C22 4.48782 22 3.8244 21.5607 3.4122C21.1213 3 20.4142 3 19 3Z" stroke="currentColor" stroke-width="2"></path> </g></svg>
+        {{ 'PERSONALIZED_JOB_SHEETS.FILTERED_BY_PROFILE' | translate }}
+      </div>
+    </div>
+
+    <!-- Job Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div
+        *ngFor="let job of filteredJobs; trackBy: trackByJobId"
+        class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-3 xxs:p-6 hover:shadow-lg transition-all duration-300 group">
+
+        <!-- Header -->
+        <div class="flex items-start flex-col xs:flex-row justify-between mb-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
+              <h3 class="text-base xxs:text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
+                {{ job.title }}
+              </h3>
+              <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">
+                {{ job.matchPercentage }} {{ 'PERSONALIZED_JOB_SHEETS.MATCH_PERCENTAGE' | translate }}
+              </span>
+            </div>
+            <p class="text-sm xxs:text-base text-gray-600 font-medium mb-1">{{ job.company }}</p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              {{ job.location }}
+            </div>
+          </div>
+          <div class="flex flex-row xs:flex-col smaller:flex-row justify-center items-center gap-3 xs:gap-2 xs:ml-4 flex-shrink-0">
+            <button
+              class="mt-1 xs:mt-0 p-2 rounded-full hover:bg-gray-100 transition-colors"
+              [class.text-red-500]="job.isFavorite"
+              [class.text-white]="!job.isFavorite"
+              (click)="toggleFavorite(job)">
+              <svg [attr.stroke]="job.isFavorite ? 'none' : '#9BA3AF'" class="w-5 h-5" viewBox="0 0 18 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.50019C7.35055 0.577926 4.59429 -0.0161379 2.52763 1.74408C0.460956 3.5043 0.169997 6.44728 1.79296 8.52912C3.14235 10.26 7.22607 13.9106 8.56449 15.0922C8.71418 15.2244 8.78907 15.2905 8.87643 15.3164C8.95261 15.339 9.03602 15.339 9.11229 15.3164C9.19965 15.2905 9.27445 15.2244 9.42423 15.0922C10.7627 13.9106 14.8463 10.26 16.1957 8.52912C17.8187 6.44728 17.5632 3.48579 15.461 1.74408C13.3588 0.00237875 10.6494 0.577926 9 2.50019Z" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="mt-1 xs:mt-0 p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-400">
+              <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 0.791748C11.5548 0.791748 10.1805 2.16598 10.1805 3.86119C10.1805 4.04622 10.1969 4.22741 10.2283 4.40342L5.76044 7.53091C5.73774 7.54679 5.71625 7.56377 5.696 7.58173C5.17491 7.1738 4.51861 6.93064 3.80553 6.93064C2.11032 6.93064 0.736084 8.3049 0.736084 10.0001C0.736084 11.6953 2.11032 13.0695 3.80553 13.0695C4.51861 13.0695 5.17491 12.8263 5.696 12.4184C5.71625 12.4364 5.73774 12.4534 5.76044 12.4692L10.2283 15.5968C10.1969 15.7727 10.1805 15.954 10.1805 16.139C10.1805 17.8342 11.5548 19.2084 13.25 19.2084C14.9452 19.2084 16.3194 17.8342 16.3194 16.139C16.3194 14.4438 14.9452 13.0695 13.25 13.0695C12.2557 13.0695 11.3718 13.5423 10.8109 14.2753L6.58036 11.3139C6.76928 10.9156 6.87497 10.4702 6.87497 10.0001C6.87497 9.52994 6.76928 9.08454 6.58036 8.68627L10.8109 5.72486C11.3718 6.45787 12.2557 6.93064 13.25 6.93064C14.9452 6.93064 16.3194 5.5564 16.3194 3.86119C16.3194 2.16598 14.9452 0.791748 13.25 0.791748ZM11.5972 3.86119C11.5972 2.94839 12.3372 2.20841 13.25 2.20841C14.1628 2.20841 14.9028 2.94839 14.9028 3.86119C14.9028 4.774 14.1628 5.51397 13.25 5.51397C12.3372 5.51397 11.5972 4.774 11.5972 3.86119ZM3.80553 8.3473C2.89272 8.3473 2.15275 9.08728 2.15275 10.0001C2.15275 10.9129 2.89272 11.6529 3.80553 11.6529C4.71833 11.6529 5.45831 10.9129 5.45831 10.0001C5.45831 9.08728 4.71833 8.3473 3.80553 8.3473ZM13.25 14.4862C12.3372 14.4862 11.5972 15.2262 11.5972 16.139C11.5972 17.0518 12.3372 17.7917 13.25 17.7917C14.1628 17.7917 14.9028 17.0518 14.9028 16.139C14.9028 15.2262 14.1628 14.4862 13.25 14.4862Z" fill="currentColor" stroke="currentColor" stroke-width="0.000213333"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 text-sm break-words xxs:text-base mb-4 leading-relaxed">{{ job.description }}</p>
+
+        <!-- Job Details -->
+        <div class="flex flex-wrap items-center gap-4 mb-4 text-sm">
+          <div class="flex items-center text-gray-600">
+            <span class="font-medium">$ {{ job.salaryRange }}</span>
+          </div>
+          <div class="flex items-center text-gray-500">
+            <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            {{ job.experience }} {{ 'PERSONALIZED_JOB_SHEETS.YEARS' | translate }}
+          </div>
+        </div>
+
+        <!-- Employment Type & Demand -->
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs xxs:text-sm font-medium">
+            {{ job.employmentType }}
+          </span>
+          <span
+            class="px-3 py-1 rounded-full text-xs xxs:text-sm font-medium"
+            [ngClass]="{
+              'bg-green-100 text-green-700': job.demandLevel === 'stable',
+              'bg-blue-100 text-blue-700': job.demandLevel === 'high',
+              'bg-emerald-100 text-emerald-700': job.demandLevel === 'very-high'
+            }">
+            {{ getDemandText(job.demandLevel) }}
+          </span>
+        </div>
+
+        <!-- Required Skills -->
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold text-gray-900 mb-2">{{ 'PERSONALIZED_JOB_SHEETS.REQUIRED_SKILLS' | translate }}</h4>
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngFor="let skill of job.requiredSkills"
+              class="truncate xxs:whitespace-normal xxs:overflow-visible xxs:text-clip px-3 py-1 bg-orange-50 text-orange-700 rounded-lg text-sm border border-orange-200">
+              {{ skill }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Advantages -->
+        <div class="mb-6">
+          <h4 class="text-sm font-semibold text-gray-900 mb-2">{{ 'PERSONALIZED_JOB_SHEETS.ADVANTAGES' | translate }}</h4>
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngFor="let advantage of job.advantages"
+              class="truncate xxs:whitespace-normal xxs:overflow-visible xxs:text-clip px-3 py-1 bg-green-50 text-green-700 rounded-lg text-sm border border-green-200">
+              {{ advantage }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button
+            class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-xl font-semibold transition-colors focus:outline-none"
+            (click)="viewDetails(job)">
+            {{ 'PERSONALIZED_JOB_SHEETS.VIEW_DETAILS' | translate }}
+          </button>
+          <button
+            class="sm:flex-shrink-0 px-6 py-3 border-2 border-orange-500 text-orange-500 hover:bg-orange-50 rounded-xl font-semibold transition-colors focus:outline-none"
+            (click)="saveJobToggle(job)">
+            {{ job.isSaved ? ('PERSONALIZED_JOB_SHEETS.SAVED' | translate) : ('PERSONALIZED_JOB_SHEETS.SAVE' | translate) }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredJobs.length === 0" class="text-center pt-16 pb-20">
+      <div class="max-w-md mx-auto">
+        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ 'PERSONALIZED_JOB_SHEETS.EMPTY_STATE.TITLE' | translate }}</h3>
+        <p class="text-gray-600 mb-4">{{ 'PERSONALIZED_JOB_SHEETS.EMPTY_STATE.DESCRIPTION' | translate }}</p>
+        <button
+          (click)="clearFilters()"
+          class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+          {{ 'PERSONALIZED_JOB_SHEETS.EMPTY_STATE.CLEAR_FILTERS' | translate }}
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

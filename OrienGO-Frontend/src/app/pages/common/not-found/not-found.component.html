@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-gray-50 flex flex-col">
+      <!-- Header with Logo -->
+      <header class="flex items-center justify-between p-6">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <div (click)="goHome()" class="w-14 h-10 sm:w-16 sm:h-12 lg:w-18 lg:h-14 hover:cursor-pointer rounded-lg flex items-center justify-center flex-shrink-0">
+            <img src="../../../assets/images/logo/logoOrienGo.png" [alt]="'ERROR_404.LOGO_ALT' | translate" class="w-full h-auto" />
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 flex items-center justify-center px-6 py-12">
+        <div class="max-w-md w-full text-center">
+          <!-- 404 Icon -->
+          <div class="mb-8">
+            <div class="w-24 h-24 mx-auto bg-brand-orange rounded-full flex items-center justify-center mb-6">
+              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ 'ERROR_404.TITLE' | translate }}</h1>
+          <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ 'ERROR_404.SUBTITLE' | translate }}</h2>
+          <p class="text-gray-600 mb-8 leading-relaxed">
+            {{ 'ERROR_404.DESCRIPTION' | translate }}
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="space-y-4">
+            <button
+              (click)="goHome()"
+              class="w-full bg-brand-orange hover:bg-brand-orange-dark text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
+            >
+              {{ 'ERROR_404.GO_TO_HOMEPAGE' | translate }}
+            </button>
+
+            <button
+              (click)="goBack()"
+              class="w-full border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 font-medium py-3 px-6 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            >
+              {{ 'ERROR_404.GO_BACK' | translate }}
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="py-6 text-center text-sm text-gray-500">
+        <p>{{ 'ERROR_404.FOOTER_TEXT' | translate }}</p>
+      </footer>
+    </div>
