@@ -20,6 +20,7 @@ public interface JobMapper {
     @Mapping(target = "version", ignore = true)
     Job toEntity(JobRequestDto dto);
     
+    @Mapping(target = "tags", ignore = true)
     JobResponseDto toResponseDto(Job entity);
     
     List<JobResponseDto> toResponseDtoList(List<Job> entities);

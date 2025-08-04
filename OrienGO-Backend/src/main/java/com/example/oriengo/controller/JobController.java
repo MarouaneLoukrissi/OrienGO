@@ -8,6 +8,7 @@ import com.example.oriengo.service.JobService;
 import com.example.oriengo.exception.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/jobs")
+@Transactional(readOnly = true)
 public class JobController {
     private final JobService service;
     private final JobMapper mapper;
@@ -41,12 +43,14 @@ public class JobController {
     }
 
     @PostMapping
+    @Transactional
     public JobResponseDto create(@Valid @RequestBody JobRequestDto requestDto) {
         Job savedJob = service.create(requestDto);
         return mapper.toResponseDto(savedJob);
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<JobResponseDto> update(@PathVariable Long id, @Valid @RequestBody JobRequestDto requestDto) {
         try {
             Job updatedJob = service.update(id, requestDto);
@@ -57,6 +61,7 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!service.findById(id).isPresent()) {
             return ResponseEntity.notFound().build();

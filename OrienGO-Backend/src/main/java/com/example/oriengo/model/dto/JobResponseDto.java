@@ -30,5 +30,6 @@ public class JobResponseDto {
     private Double riasecConventional;
     private Set<String> tags;
     private boolean softDeleted;
+    private boolean active;
     private Long version;
 } 

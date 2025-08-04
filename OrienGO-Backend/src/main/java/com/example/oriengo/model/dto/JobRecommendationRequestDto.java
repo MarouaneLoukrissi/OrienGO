@@ -23,7 +23,7 @@ public class JobRecommendationRequestDto {
     @NotNull(message = "Match percentage is required")
     @Min(value = 0, message = "Match percentage must be at least 0")
     @Max(value = 100, message = "Match percentage cannot exceed 100")
-    private Integer matchPercentagen;
+    private Integer matchPercentage;
     
     private boolean highlighted = false;
 } 

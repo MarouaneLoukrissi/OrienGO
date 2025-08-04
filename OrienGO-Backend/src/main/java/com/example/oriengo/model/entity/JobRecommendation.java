@@ -43,7 +43,7 @@ public class JobRecommendation implements Serializable {
     private Set<PersonalizedJob> personalizedJobs = new HashSet<>();
 
     @Column(name = "match_percentage", nullable = false)
-    private Integer matchPercentagen;
+    private Integer matchPercentage;
 
     @Column(name = "highlighted", nullable = false)
     private boolean highlighted = false; // To flag top-2 or top-3 jobs
