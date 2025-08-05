@@ -1,4 +1,4 @@
-package com.example.oriengo.exception;
+package com.example.oriengo.exception.custom;
 
 public class ResourceNotFoundException extends RuntimeException {
     

@@ -1,9 +1,9 @@
-package com.example.oriengo.exceptionHandler;
+package com.example.oriengo.exception.handler;
 
-import com.example.oriengo.exception.ResourceNotFoundException;
-import com.example.oriengo.exceptionHandler.dto.ErrorResponse;
-import com.example.oriengo.exceptionHandler.exceptions.BusinessException;
-import com.example.oriengo.exceptionHandler.exceptions.ValidationException;
+import com.example.oriengo.exception.custom.ResourceNotFoundException;
+import com.example.oriengo.exception.handler.dto.ErrorResponse;
+import com.example.oriengo.exception.handler.exceptions.BusinessException;
+import com.example.oriengo.exception.handler.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

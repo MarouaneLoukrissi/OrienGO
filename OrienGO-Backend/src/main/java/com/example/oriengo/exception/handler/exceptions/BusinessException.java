@@ -1,4 +1,4 @@
-package com.example.oriengo.exceptionHandler.exceptions;
+package com.example.oriengo.exception.handler.exceptions;
 
 /**
  * Exception pour les erreurs de logique métier

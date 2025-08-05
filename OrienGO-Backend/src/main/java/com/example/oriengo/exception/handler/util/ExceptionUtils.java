@@ -1,7 +1,7 @@
-package com.example.oriengo.exceptionHandler.util;
+package com.example.oriengo.exception.handler.util;
 
-import com.example.oriengo.exceptionHandler.exceptions.BusinessException;
-import com.example.oriengo.exceptionHandler.exceptions.ValidationException;
+import com.example.oriengo.exception.handler.exceptions.BusinessException;
+import com.example.oriengo.exception.handler.exceptions.ValidationException;
 
 /**
  * Utilitaire pour la gestion des exceptions

@@ -4,11 +4,11 @@ import com.example.oriengo.model.dto.JobRecommendationRequestDto;
 import com.example.oriengo.model.entity.JobRecommendation;
 import com.example.oriengo.model.entity.TestResult;
 import com.example.oriengo.model.entity.Job;
-import com.example.oriengo.model.mapper.JobRecommendationMapper;
+import com.example.oriengo.mapper.JobRecommendationMapper;
 import com.example.oriengo.repository.JobRecommendationRepository;
 import com.example.oriengo.repository.TestResultRepository;
 import com.example.oriengo.repository.JobRepository;
-import com.example.oriengo.exception.ResourceNotFoundException;
+import com.example.oriengo.exception.custom.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

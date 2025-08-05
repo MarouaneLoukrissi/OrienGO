@@ -4,11 +4,11 @@ import com.example.oriengo.model.dto.StudentJobLinkRequestDto;
 import com.example.oriengo.model.entity.StudentJobLink;
 import com.example.oriengo.model.entity.Student;
 import com.example.oriengo.model.entity.Job;
-import com.example.oriengo.model.mapper.StudentJobLinkMapper;
+import com.example.oriengo.mapper.StudentJobLinkMapper;
 import com.example.oriengo.repository.StudentJobLinkRepository;
 import com.example.oriengo.repository.StudentRepository;
 import com.example.oriengo.repository.JobRepository;
-import com.example.oriengo.exception.ResourceNotFoundException;
+import com.example.oriengo.exception.custom.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.example.oriengo.model.mapper;
+package com.example.oriengo.mapper;
 
 import com.example.oriengo.model.dto.JobRecommendationRequestDto;
 import com.example.oriengo.model.dto.JobRecommendationResponseDto;
