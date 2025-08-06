@@ -1,4 +1,4 @@
-# a top-level
+# a top level
 services:
   postgres:
 
@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: "0000"
       POSTGRES_DB: oriengo_db #default is postgres
     ports:
-      - "5435:5432"
+      - "5436:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:

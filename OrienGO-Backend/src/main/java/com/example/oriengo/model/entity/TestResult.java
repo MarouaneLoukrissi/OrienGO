@@ -1,6 +1,7 @@
 package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,6 +37,7 @@ public class TestResult implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "test_id", nullable = false, unique = true)
+    @JsonIgnore
     private Test test;
 
     @Enumerated(EnumType.STRING)
@@ -57,6 +59,7 @@ public class TestResult implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "pdf_id", referencedColumnName = "id")
+    @JsonIgnore
     private Media pdf; // Link to generated PDF media
 
     @Column(name = "shared", nullable = false)
@@ -69,8 +72,10 @@ public class TestResult implements Serializable {
     private boolean softDeleted = false;
 
     @OneToMany(mappedBy = "testResult", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<JobRecommendation> jobRecommendations = new HashSet<>();
 
     @OneToMany(mappedBy = "testResult", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<TrainingRecommendation> trainingRecommendations = new HashSet<>();
 }

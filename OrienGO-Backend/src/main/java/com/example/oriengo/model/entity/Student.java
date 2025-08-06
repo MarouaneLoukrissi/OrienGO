@@ -12,6 +12,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Getter
 @Setter
@@ -50,19 +51,23 @@ public class Student extends User implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Set<CoachStudentConnection> connections = new HashSet<>();
 
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Conversation> conversations = new HashSet<>();
 
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Test> tests = new HashSet<>();
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "message_permission", nullable = false)
@@ -75,16 +80,19 @@ public class Student extends User implements Serializable {
     @Builder.Default
     @ToString.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<StudentJobLink> jobLinks = new HashSet<>();
 
     @Builder.Default
     @ToString.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<StudentTrainingLink> trainingLinks = new HashSet<>();
 
     @Builder.Default
     @ToString.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<StudentPersonalizedJobLink> personalizedJobLinks = new HashSet<>();
 
     public boolean hasConnection(Coach coach) {

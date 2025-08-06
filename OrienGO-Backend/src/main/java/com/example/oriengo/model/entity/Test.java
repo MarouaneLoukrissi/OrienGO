@@ -2,6 +2,7 @@ package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.TestStatus;
 import com.example.oriengo.model.enumeration.TestType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,16 +37,18 @@ public class Test implements Serializable {
     @SequenceGenerator(name = "test_seq", sequenceName = "test_seq", allocationSize = 50)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonIgnore
     private Student student;
 
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = true, length = 20)
     private TestType type;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = true, length = 20)
     private TestStatus status = TestStatus.PENDING;
 
     @CreationTimestamp
@@ -55,10 +58,10 @@ public class Test implements Serializable {
     @Column(name = "completed_at", nullable = true)
     private LocalDateTime completedAt;
 
-    @Column(name = "duration_minutes", nullable = false)
+    @Column(name = "duration_minutes", nullable = true)
     private Integer durationMinutes;
 
-    @Column(name = "questions_count", nullable = false)
+    @Column(name = "questions_count", nullable = true)
     private Integer questionsCount; //20 or 60
 
     @Builder.Default
@@ -68,9 +71,11 @@ public class Test implements Serializable {
             joinColumns = @JoinColumn(name = "test_id"),
             inverseJoinColumns = @JoinColumn(name = "question_id")
     )
+    @JsonIgnore
     private Set<Question> questions = new HashSet<>();
 
     @OneToOne(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private TestResult result;
 
     @Builder.Default

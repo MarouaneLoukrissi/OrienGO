@@ -1,6 +1,7 @@
 package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.GenderType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -99,7 +100,7 @@ public class User implements Serializable {
     private LocalDateTime lastLoginAt;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -109,11 +110,12 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Token> tokens = new HashSet<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Media> mediaFiles = new HashSet<>(); //photo_profile, cover_photo, pdf, ...
 
 //    @Builder.Default
@@ -122,9 +124,10 @@ public class User implements Serializable {
 
     @Builder.Default
     @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Notification> notifications = new HashSet<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, optional = false)
     private NotificationSettings notificationSettings;
 
     @Column(name = "deleted_at")

@@ -51,9 +51,6 @@ public class Token implements Serializable {
     private LocalDateTime revokedAt; //When a user logs out or resets their password, old tokens get revoked.
 
     @Column(nullable = false)
-    private boolean expired = false;
-
-    @Column(nullable = false)
     private boolean revoked = false;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
