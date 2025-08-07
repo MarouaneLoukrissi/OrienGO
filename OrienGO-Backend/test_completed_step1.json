@@ -1,0 +1,15 @@
+{
+  "firstName": "Marie",
+  "lastName": "Martin",
+  "email": "marie.martin@email.com",
+  "phoneNumber": "0123456789",
+  "age": "22",
+  "gender": "FEMALE",
+  "school": "Université de Lyon",
+  "fieldOfStudy": "Psychologie",
+  "educationLevel": "BACHELOR",
+  "location": "Lyon, France",
+  "profileVisibility": "PUBLIC",
+  "accountPrivacy": "PUBLIC",
+  "messagePermission": "ALLOWED"
+} 
