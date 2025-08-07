@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.EnumMap;
 import com.example.oriengo.model.dto.QuestionDTO;
 import java.util.ArrayList;
+import com.example.oriengo.model.enumeration.GenderType;
 
 @RequiredArgsConstructor
 @Service
@@ -86,11 +87,41 @@ public class TestService {
         return testDTO;
     }
 
-
     @Transactional
     public TestDTO createStudentAndTestWithRandomQuestions(StudentDTO studentDto, TestType type) {
-        // 1. Créer le Student
-        Student student = studentMapper.toEntity(studentDto);
+        // 1. Créer le Student manuellement pour s'assurer que tous les champs obligatoires sont définis
+        Student student = new Student();
+        student.setFirstName(studentDto.getFirstName());
+        student.setLastName(studentDto.getLastName());
+        student.setEmail(studentDto.getEmail());
+        student.setPhoneNumber(studentDto.getPhoneNumber());
+        
+        // Gérer l'âge - convertir String en int ou utiliser 0 par défaut
+        try {
+            student.setAge(studentDto.getAge() != null ? Integer.parseInt(studentDto.getAge()) : 0);
+        } catch (NumberFormatException e) {
+            student.setAge(0);
+        }
+        
+        // Gérer le genre - convertir String en GenderType ou utiliser null
+        if (studentDto.getGender() != null && !studentDto.getGender().trim().isEmpty()) {
+            try {
+                student.setGender(GenderType.valueOf(studentDto.getGender().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                student.setGender(null);
+            }
+        }
+        
+        student.setSchool(studentDto.getSchool());
+        student.setFieldOfStudy(studentDto.getFieldOfStudy());
+        student.setEducationLevel(studentDto.getEducationLevel());
+        student.setLocation(studentDto.getLocation());
+        student.setProfileVisibility(studentDto.getProfileVisibility());
+        student.setAccountPrivacy(studentDto.getAccountPrivacy());
+        student.setMessagePermission(studentDto.getMessagePermission());
+        student.setEnabled(true); // Activer le compte par défaut
+        student.setPassword("defaultPassword"); // Mot de passe temporaire
+        
         student = studentRepository.save(student);
 
         // 2. Tirage aléatoire des questions
@@ -157,61 +188,20 @@ public class TestService {
         return testDTO;
     }
 
-
-    @Transactional
-    public Optional<TestDTO> completeTest(Long id, TestDTO dto) {
-        return testRepository.findById(id)
-                .filter(t -> !t.isSoftDeleted())
-                .map(existing -> {
-                    existing.setStatus(TestStatus.COMPLETED);
-                    existing.setCompletedAt(LocalDateTime.now());
-                    if (dto.getDurationMinutes() != null) {
-                        existing.setDurationMinutes(dto.getDurationMinutes());
-                    }
-                    if (dto.getQuestionsCount() != null) {
-                        existing.setQuestionsCount(dto.getQuestionsCount());
-                    }
-                    Test updated = testRepository.save(existing);
-                    return testMapper.toDto(updated);
-                });
-    }
-
-    @Transactional
-    public Optional<TestDTO> cancelTest(Long id) {
-        return testRepository.findById(id)
-                .filter(t -> !t.isSoftDeleted())
-                .map(existing -> {
-                    existing.setStatus(TestStatus.CANCELLED);
-                    Test updated = testRepository.save(existing);
-                    return testMapper.toDto(updated);
-                });
-    }
-
-    @Transactional
-    public boolean softDelete(Long id) {
-        return testRepository.findById(id)
-                .filter(t -> !t.isSoftDeleted())
-                .map(t -> {
-                    t.setSoftDeleted(true);
-                    testRepository.save(t);
-                    return true;
-                }).orElse(false);
-    }
-
     @Transactional
     public TestResult submitTestAndCalculateResults(Long testId, Map<Long, Integer> answers) {
         //  Récupérer le test avec ses questions
         Test test = testRepository.findByIdWithRelations(testId)
                 .orElseThrow(() -> new RuntimeException("Test not found with id " + testId));
 
+        //  Vérifier que toutes les questions sont répondues
+        validateTestCompletion(test.getQuestions(), answers);
+
         //  Calculer les scores par catégorie RIASEC
         Map<Category, Integer> scores = calculateRIASECScores(test.getQuestions(), answers);
 
-        //  Déterminer le type dominant
-        Category dominantType = scores.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse(Category.REALISTIC);
+        //  Déterminer le type dominant (gérer les égalités)
+        Category dominantType = determineDominantType(scores);
 
         // Créer le TestResult
         TestResult testResult = TestResult.builder()
@@ -236,34 +226,95 @@ public class TestService {
         return testResult;
     }
 
-    private Map<Category, Integer> calculateRIASECScores(Set<Question> questions, Map<Long, Integer> answers) {
-        Map<Category, Integer> scores = new EnumMap<>(Category.class);
-        
-        // Initialiser les scores à 0
-        for (Category category : Category.values()) {
-            scores.put(category, 0);
-        }
-
-        // Calculer les scores
+    private void validateTestCompletion(Set<Question> questions, Map<Long, Integer> answers) {
+        // Vérifier que toutes les questions ont une réponse
         for (Question question : questions) {
             Integer answer = answers.get(question.getId());
+            if (answer == null || answer < 1 || answer > 5) {
+                throw new RuntimeException("Test incomplet : Question " + question.getId() + 
+                    " n'a pas de réponse valide. Toutes les questions doivent être répondues avec une valeur entre 1 et 5.");
+            }
+        }
+        
+        // Vérifier qu'il n'y a pas de réponses en trop
+        if (answers.size() > questions.size()) {
+            throw new RuntimeException("Trop de réponses fournies. Le test contient " + 
+                questions.size() + " questions mais " + answers.size() + " réponses ont été fournies.");
+        }
+    }
+
+    private Map<Category, Integer> calculateRIASECScores(Set<Question> questions, Map<Long, Integer> answers) {
+        Map<Category, Integer> scores = new EnumMap<>(Category.class);
+        Map<Category, Integer> questionCounts = new EnumMap<>(Category.class);
+        
+        // Initialiser les scores et compteurs à 0
+        for (Category category : Category.values()) {
+            scores.put(category, 0);
+            questionCounts.put(category, 0);
+        }
+
+        // Compter les questions par catégorie et calculer les scores
+        for (Question question : questions) {
+            Category category = question.getCategory();
+            questionCounts.put(category, questionCounts.get(category) + 1);
+            
+            Integer answer = answers.get(question.getId());
             if (answer != null && answer >= 1 && answer <= 5) {
-                // Ajouter le score à la catégorie correspondante
-                Category category = question.getCategory();
                 scores.put(category, scores.get(category) + answer);
             }
         }
 
-        // Convertir en pourcentages
-        int totalQuestions = questions.size();
-        if (totalQuestions > 0) {
-            for (Category category : Category.values()) {
-                int score = scores.get(category);
-                int percentage = (score * 100) / (totalQuestions * 5); // 5 = max score par question
+        // Convertir en pourcentages (basé sur toutes les questions de la catégorie)
+        for (Category category : Category.values()) {
+            int score = scores.get(category);
+            int questionCount = questionCounts.get(category);
+            
+            if (questionCount > 0) {
+                // Calculer le pourcentage : (score actuel / score max possible) * 100
+                int maxPossibleScore = questionCount * 5; // 5 = max score par question
+                int percentage = (score * 100) / maxPossibleScore;
                 scores.put(category, percentage);
+            } else {
+                scores.put(category, 0);
             }
         }
 
         return scores;
+    }
+
+    private Category determineDominantType(Map<Category, Integer> scores) {
+        // Trouver le score maximum
+        int maxScore = scores.values().stream().mapToInt(Integer::intValue).max().orElse(0);
+        
+        // Trouver toutes les catégories avec le score maximum
+        List<Category> dominantCategories = scores.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(maxScore))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        
+        // Si une seule catégorie dominante, la retourner
+        if (dominantCategories.size() == 1) {
+            return dominantCategories.get(0);
+        }
+        
+        // En cas d'égalité, utiliser une logique de priorité basée sur l'ordre RIASEC
+        // Ordre de priorité : REALISTIC > INVESTIGATIVE > ARTISTIC > SOCIAL > ENTERPRISING > CONVENTIONAL
+        Category[] priorityOrder = {
+            Category.REALISTIC,
+            Category.INVESTIGATIVE, 
+            Category.ARTISTIC,
+            Category.SOCIAL,
+            Category.ENTERPRISING,
+            Category.CONVENTIONAL
+        };
+        
+        for (Category priorityCategory : priorityOrder) {
+            if (dominantCategories.contains(priorityCategory)) {
+                return priorityCategory;
+            }
+        }
+        
+        // Fallback
+        return Category.REALISTIC;
     }
 }
