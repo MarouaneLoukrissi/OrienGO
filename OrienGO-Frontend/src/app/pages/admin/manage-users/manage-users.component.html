@@ -1,96 +1,1022 @@
-<div class="flex flex-col min-h-screen bg-orange-50">
-  <div class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+<div class="min-h-screen bg-orange-100">
+  <div class="max-w-[88rem] mx-auto p-6">
 
-    <!-- Header -->
-    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
-      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <!-- User Icon -->
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-brand-orange-dark rounded-full mb-4">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+        </svg>
+      </div>
+      
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
         {{ 'ADMIN_USERS.TITLE' | translate }}
-      </h2>
-      <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full text-sm whitespace-nowrap">
-        + {{ 'ADMIN_USERS.ADD_BUTTON' | translate }}
-      </button>
+      </h1>
+      <p class="text-gray-600 text-sm sm:text-base">
+        {{ 'ADMIN_USERS.SUBTITLE' | translate }}
+      </p>
     </div>
 
-    <!-- Filters -->
+    <!-- Search and Filters -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <input
         type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
         placeholder="{{ 'ADMIN_USERS.SEARCH_PLACEHOLDER' | translate }}"
-        class="px-4 py-2 border border-gray-300 rounded-md text-sm w-full"
+        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
       />
-      <select class="px-4 py-2 border border-gray-300 rounded-md text-sm w-full">
-        <option>{{ 'ADMIN_USERS.FILTER_ROLE' | translate }}</option>
-        <option>Student</option>
-        <option>Teacher</option>
+      <select 
+        [(ngModel)]="selectedRole"
+        (change)="onRoleChange()"
+        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
+        <option value="">{{ 'ADMIN_USERS.FILTER_ROLE' | translate }}</option>
+        <option value="student">Student</option>
+        <option value="coach">Coach</option>
       </select>
-      <select class="px-4 py-2 border border-gray-300 rounded-md text-sm w-full">
-        <option>{{ 'ADMIN_USERS.FILTER_STATUS' | translate }}</option>
-        <option>Active</option>
-        <option>Inactive</option>
+      <select 
+        [(ngModel)]="selectedStatus"
+        (change)="onStatusChange()"
+        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
+        <option value="">{{ 'ADMIN_USERS.FILTER_STATUS' | translate }}</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
       </select>
       <input
         type="date"
-        class="px-4 py-2 border border-gray-300 rounded-md text-sm w-full"
+        [(ngModel)]="selectedDate"
+        (change)="onDateChange()"
+        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
         placeholder="{{ 'ADMIN_USERS.FILTER_DATE' | translate }}"
       />
     </div>
 
+    <!-- Action Buttons -->
+    <div class="flex justify-between items-center mb-6">
+      <button
+        (click)="resetFilters()"
+        class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 font-medium transition-colors">
+        {{ 'ADMIN_USERS.RESET_FILTERS' | translate }}
+      </button>
+      <button 
+        (click)="openAddUserModal()"
+        class="px-6 py-3 bg-brand-orange-dark hover:bg-orange-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+        + {{ 'ADMIN_USERS.ADD_BUTTON' | translate }}
+      </button>
+    </div>
+
     <!-- Table -->
-    <div class="overflow-x-auto bg-[#fff1dd] rounded-lg shadow">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
       <table class="min-w-full text-left text-sm">
-        <thead class="text-gray-800 font-semibold bg-orange-100">
-          <tr class="border-b border-gray-200 whitespace-nowrap">
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.NAME' | translate }}</th>
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.EMAIL' | translate }}</th>
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.ROLE' | translate }}</th>
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.STATUS' | translate }}</th>
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.CREATED' | translate }}</th>
-            <th class="px-4 sm:px-6 py-3">{{ 'ADMIN_USERS.TABLE.ACTIONS' | translate }}</th>
+        <thead class="bg-orange-200">
+          <tr class="border-b border-gray-200">
+            <th 
+              (click)="onSort('firstName')"
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              {{ 'ADMIN_USERS.TABLE.NAME' | translate }}
+              <span *ngIf="sortField === 'firstName'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('email')"
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              {{ 'ADMIN_USERS.TABLE.EMAIL' | translate }}
+              <span *ngIf="sortField === 'email'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('role')"
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              {{ 'ADMIN_USERS.TABLE.ROLE' | translate }}
+              <span *ngIf="sortField === 'role'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('status')"
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              {{ 'ADMIN_USERS.TABLE.STATUS' | translate }}
+              <span *ngIf="sortField === 'status'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('createdAt')"
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              {{ 'ADMIN_USERS.TABLE.CREATED' | translate }}
+              <span *ngIf="sortField === 'createdAt'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">{{ 'ADMIN_USERS.TABLE.ACTIONS' | translate }}</th>
           </tr>
         </thead>
-        <tbody class="text-gray-700">
-          <tr class="border-t border-gray-200 whitespace-nowrap">
-            <td class="px-4 sm:px-6 py-4">Ikram Tifard</td>
-            <td class="px-4 sm:px-6 py-4">ikram&#64;gmail.com</td>
-            <td class="px-4 sm:px-6 py-4">Student</td>
-            <td class="px-4 sm:px-6 py-4">Active</td>
-            <td class="px-4 sm:px-6 py-4">01/07/23</td>
-            <td class="px-4 sm:px-6 py-4 space-x-2">
-              <span class="text-blue-600 hover:underline cursor-pointer">
-                {{ 'ADMIN_USERS.ACTIONS.VIEW' | translate }}
-              </span>
-              |
-              <span class="text-green-600 hover:underline cursor-pointer">
-                {{ 'ADMIN_USERS.ACTIONS.EDIT' | translate }}
-              </span>
-              |
-              <span class="text-red-600 hover:underline cursor-pointer">
-                {{ 'ADMIN_USERS.ACTIONS.DELETE' | translate }}
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let user of users" class="hover:bg-orange-100 transition-colors">
+            <td class="px-6 py-4">
+              <div>
+                <div class="font-semibold text-gray-900">{{ user.firstName }} {{ user.lastName }}</div>
+                <div class="text-sm text-gray-500 mt-1">{{ user.role === 'student' ? 'Student' : 'Coach' }}</div>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-gray-900">{{ user.email }}</td>
+            <td class="px-6 py-4">
+              <span class="bg-brand-orange-dark text-white px-3 py-1 rounded-full text-xs font-medium">
+                {{ user.role === 'student' ? 'Student' : 'Coach' }}
               </span>
             </td>
-          </tr>
-          <tr class="border-t border-gray-200 whitespace-nowrap">
-            <td class="px-4 sm:px-6 py-4">Akram Abou</td>
-            <td class="px-4 sm:px-6 py-4">abdou&#64;gmail.ma</td>
-            <td class="px-4 sm:px-6 py-4">Teacher</td>
-            <td class="px-4 sm:px-6 py-4">Inactive</td>
-            <td class="px-4 sm:px-6 py-4">09/02/25</td>
-            <td class="px-4 sm:px-6 py-4 space-x-2">
-              <span class="text-blue-600 hover:underline cursor-pointer">
+            <td class="px-6 py-4">
+              <span [class]="user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'" 
+                    class="px-3 py-1 rounded-full text-xs font-medium">
+                {{ user.status === 'active' ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td class="px-6 py-4 text-gray-900">{{ user.createdAt }}</td>
+            <td class="px-6 py-4">
+              <span 
+                (click)="openViewUserModal(user)"
+                class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
                 {{ 'ADMIN_USERS.ACTIONS.VIEW' | translate }}
               </span>
-              |
-              <span class="text-green-600 hover:underline cursor-pointer">
+              <span class="text-gray-300 mx-2">|</span>
+              <span 
+                (click)="openEditUserModal(user)"
+                class="text-green-600 hover:text-green-700 cursor-pointer font-medium hover:underline transition-colors">
                 {{ 'ADMIN_USERS.ACTIONS.EDIT' | translate }}
               </span>
-              |
-              <span class="text-red-600 hover:underline cursor-pointer">
+              <span class="text-gray-300 mx-2">|</span>
+              <span 
+                (click)="deleteUser(user)"
+                class="text-red-600 hover:text-red-700 cursor-pointer font-medium hover:underline transition-colors">
                 {{ 'ADMIN_USERS.ACTIONS.DELETE' | translate }}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div *ngIf="showAddUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-800">
+            {{ 'ADMIN_USERS.MODAL.ADD_TITLE' | translate }}
+          </h3>
+          <button 
+            (click)="closeAddUserModal()"
+            class="text-gray-400 hover:text-gray-600 text-2xl">
+            ×
+          </button>
+        </div>
+
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" class="space-y-4">
+          <!-- Informations de base -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.FIRST_NAME' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="firstName"
+                [class.border-red-500]="addUserForm.get('firstName')?.invalid && addUserForm.get('firstName')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_USERS.MODAL.FIRST_NAME_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('firstName', addUserForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('firstName', addUserForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.LAST_NAME' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="lastName"
+                [class.border-red-500]="addUserForm.get('lastName')?.invalid && addUserForm.get('lastName')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_USERS.MODAL.LAST_NAME_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('lastName', addUserForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('lastName', addUserForm) }}
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.EMAIL' | translate }} *
+              </label>
+              <input
+                type="email"
+                formControlName="email"
+                [class.border-red-500]="addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_USERS.MODAL.EMAIL_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('email', addUserForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('email', addUserForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.ROLE' | translate }} *
+              </label>
+              <select
+                formControlName="role"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option *ngFor="let role of getAvailableRoles()" [value]="role">
+                  {{ role === 'student' ? 'Student' : 'Coach' }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.PASSWORD' | translate }} *
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                [class.border-red-500]="addUserForm.get('password')?.invalid && addUserForm.get('password')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_USERS.MODAL.PASSWORD_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('password', addUserForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('password', addUserForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_USERS.MODAL.CONFIRM_PASSWORD' | translate }} *
+              </label>
+              <input
+                type="password"
+                formControlName="confirmPassword"
+                [class.border-red-500]="addUserForm.get('confirmPassword')?.invalid && addUserForm.get('confirmPassword')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_USERS.MODAL.CONFIRM_PASSWORD_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="addUserForm.errors?.['passwordMismatch'] && addUserForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
+                {{ 'ADMIN_USERS.MODAL.PASSWORD_MISMATCH' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs communs pour tous les rôles -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERSONAL_INFO' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.AGE' | translate }}
+                </label>
+                <input
+                  type="number"
+                  formControlName="age"
+                  [class.border-red-500]="addUserForm.get('age')?.invalid && addUserForm.get('age')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.AGE_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('age', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('age', addUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.GENDER' | translate }}
+                </label>
+                <select
+                  formControlName="gender"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
+                  <option value="male">{{ 'ADMIN_USERS.MODAL.MALE' | translate }}</option>
+                  <option value="female">{{ 'ADMIN_USERS.MODAL.FEMALE' | translate }}</option>
+                  <option value="other">{{ 'ADMIN_USERS.MODAL.OTHER' | translate }}</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.PHONE_NUMBER' | translate }}
+                </label>
+                <input
+                  type="tel"
+                  formControlName="phoneNumber"
+                  [class.border-red-500]="addUserForm.get('phoneNumber')?.invalid && addUserForm.get('phoneNumber')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.PHONE_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('phoneNumber', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('phoneNumber', addUserForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs spécifiques aux étudiants -->
+          <div *ngIf="isStudentRole()" class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.STUDENT_INFO' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.SCHOOL' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="school"
+                  [class.border-red-500]="addUserForm.get('school')?.invalid && addUserForm.get('school')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.SCHOOL_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('school', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('school', addUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.FIELD_OF_STUDY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="fieldOfStudy"
+                  [class.border-red-500]="addUserForm.get('fieldOfStudy')?.invalid && addUserForm.get('fieldOfStudy')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.FIELD_OF_STUDY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('fieldOfStudy', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('fieldOfStudy', addUserForm) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.EDUCATION_LEVEL_LABEL' | translate }} *
+                </label>
+                <select
+                  formControlName="educationLevel"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
+                  <option *ngFor="let level of educationLevels" [value]="level">
+                    {{ getEducationLevelLabel(level) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.CITY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="city"
+                  [class.border-red-500]="addUserForm.get('city')?.invalid && addUserForm.get('city')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.CITY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('city', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('city', addUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.REGION' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="region"
+                  [class.border-red-500]="addUserForm.get('region')?.invalid && addUserForm.get('region')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.REGION_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('region', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('region', addUserForm) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.COUNTRY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="country"
+                  [class.border-red-500]="addUserForm.get('country')?.invalid && addUserForm.get('country')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.COUNTRY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('country', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('country', addUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.ADDRESS' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="address"
+                  [class.border-red-500]="addUserForm.get('address')?.invalid && addUserForm.get('address')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.ADDRESS_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('address', addUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('address', addUserForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs de permissions pour tous les rôles -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERMISSIONS' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="messagePermission"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
+                  <option *ngFor="let permission of messagePermissions" [value]="permission">
+                    {{ getMessagePermissionLabel(permission) }}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="accountPrivacy"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
+                  <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
+                    {{ getAccountPrivacyLabel(privacy) }}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="profileVisibility"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
+                  <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
+                    {{ getVisibilityStatusLabel(visibility) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Boutons -->
+          <div class="flex justify-end space-x-3 pt-6 border-t">
+            <button
+              type="button"
+              (click)="closeAddUserModal()"
+              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+              {{ 'ADMIN_USERS.MODAL.CANCEL' | translate }}
+            </button>
+            <button
+              type="submit"
+              [disabled]="addUserForm.invalid"
+              class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 font-medium transition-colors">
+              {{ 'ADMIN_USERS.MODAL.ADD' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- View User Modal -->
+  <div *ngIf="showViewUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-800">
+            {{ 'ADMIN_USERS.MODAL.VIEW_TITLE' | translate }}
+          </h3>
+          <button 
+            (click)="closeViewUserModal()"
+            class="text-gray-400 hover:text-gray-600 text-2xl">
+            ×
+          </button>
+        </div>
+
+        <div *ngIf="selectedUser" class="space-y-6">
+          <!-- Informations de base -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.BASIC_INFO' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.FIRST_NAME' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.firstName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.LAST_NAME' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.lastName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.EMAIL' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.email }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.ROLE' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.role === 'student' ? 'Student' : 'Coach' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Informations personnelles -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERSONAL_INFO' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div *ngIf="selectedUser.age">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.AGE' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.age }}</p>
+              </div>
+              <div *ngIf="selectedUser.gender">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.GENDER' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.gender }}</p>
+              </div>
+              <div *ngIf="selectedUser.phoneNumber">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.PHONE_NUMBER' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.phoneNumber }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Informations spécifiques aux étudiants -->
+          <div *ngIf="selectedUser.role === 'student'" class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.STUDENT_INFO' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div *ngIf="selectedUser.school">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.SCHOOL' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.school }}</p>
+              </div>
+              <div *ngIf="selectedUser.fieldOfStudy">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.FIELD_OF_STUDY' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.fieldOfStudy }}</p>
+              </div>
+              <div *ngIf="selectedUser.educationLevel">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.EDUCATION_LEVEL_LABEL' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.educationLevel }}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div *ngIf="selectedUser.city">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.CITY' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.city }}</p>
+              </div>
+              <div *ngIf="selectedUser.region">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.REGION' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.region }}</p>
+              </div>
+              <div *ngIf="selectedUser.country">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.COUNTRY' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.country }}</p>
+              </div>
+              <div *ngIf="selectedUser.address">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.ADDRESS' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.address }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Permissions -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERMISSIONS' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div *ngIf="selectedUser.messagePermission">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}</label>
+                <p class="text-gray-900">{{ getMessagePermissionLabel(selectedUser.messagePermission) }}</p>
+              </div>
+              <div *ngIf="selectedUser.accountPrivacy">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}</label>
+                <p class="text-gray-900">{{ getAccountPrivacyLabel(selectedUser.accountPrivacy) }}</p>
+              </div>
+              <div *ngIf="selectedUser.profileVisibility">
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}</label>
+                <p class="text-gray-900">{{ getVisibilityStatusLabel(selectedUser.profileVisibility) }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Informations système -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.SYSTEM_INFO' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.CREATED_AT' | translate }}</label>
+                <p class="text-gray-900">{{ selectedUser.createdAt }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_USERS.MODAL.STATUS' | translate }}</label>
+                <p class="text-gray-900">
+                  <span [class]="selectedUser.status === 'active' ? 'text-green-600' : 'text-red-600'">
+                    {{ selectedUser.status === 'active' ? 'Active' : 'Inactive' }}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bouton de fermeture -->
+          <div class="flex justify-end pt-6 border-t">
+            <button
+              type="button"
+              (click)="closeViewUserModal()"
+              class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+              {{ 'ADMIN_USERS.MODAL.CLOSE' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit User Modal -->
+  <div *ngIf="showEditUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-800">
+            {{ 'ADMIN_USERS.MODAL.EDIT_TITLE' | translate }}
+          </h3>
+          <button 
+            (click)="closeEditUserModal()"
+            class="text-gray-400 hover:text-gray-600 text-2xl">
+            ×
+          </button>
+        </div>
+
+        <form [formGroup]="editUserForm" (ngSubmit)="onEditSubmit()" class="space-y-6">
+          <!-- Informations de base -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.BASIC_INFO' | translate }}
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.FIRST_NAME' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="firstName"
+                  [class.border-red-500]="editUserForm.get('firstName')?.invalid && editUserForm.get('firstName')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.FIRST_NAME_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('firstName', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('firstName', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.LAST_NAME' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  [class.border-red-500]="editUserForm.get('lastName')?.invalid && editUserForm.get('lastName')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.LAST_NAME_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('lastName', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('lastName', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.EMAIL' | translate }} *
+                </label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  [class.border-red-500]="editUserForm.get('email')?.invalid && editUserForm.get('email')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.EMAIL_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('email', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('email', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.ROLE' | translate }} *
+                </label>
+                <select
+                  formControlName="role"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option *ngFor="let role of getAvailableRoles()" [value]="role">
+                    {{ role === 'student' ? 'Student' : 'Coach' }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs communs pour tous les rôles -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERSONAL_INFO' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.AGE' | translate }}
+                </label>
+                <input
+                  type="number"
+                  formControlName="age"
+                  [class.border-red-500]="editUserForm.get('age')?.invalid && editUserForm.get('age')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.AGE_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('age', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('age', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.GENDER' | translate }}
+                </label>
+                <select
+                  formControlName="gender"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
+                  <option value="male">{{ 'ADMIN_USERS.MODAL.MALE' | translate }}</option>
+                  <option value="female">{{ 'ADMIN_USERS.MODAL.FEMALE' | translate }}</option>
+                  <option value="other">{{ 'ADMIN_USERS.MODAL.OTHER' | translate }}</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.PHONE_NUMBER' | translate }}
+                </label>
+                <input
+                  type="tel"
+                  formControlName="phoneNumber"
+                  [class.border-red-500]="editUserForm.get('phoneNumber')?.invalid && editUserForm.get('phoneNumber')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.PHONE_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('phoneNumber', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('phoneNumber', editUserForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs spécifiques aux étudiants -->
+          <div *ngIf="isStudentRoleEdit()" class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.STUDENT_INFO' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.SCHOOL' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="school"
+                  [class.border-red-500]="editUserForm.get('school')?.invalid && editUserForm.get('school')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.SCHOOL_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('school', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('school', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.FIELD_OF_STUDY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="fieldOfStudy"
+                  [class.border-red-500]="editUserForm.get('fieldOfStudy')?.invalid && editUserForm.get('fieldOfStudy')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.FIELD_OF_STUDY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('fieldOfStudy', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('fieldOfStudy', editUserForm) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.EDUCATION_LEVEL_LABEL' | translate }} *
+                </label>
+                <select
+                  formControlName="educationLevel"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
+                  <option *ngFor="let level of educationLevels" [value]="level">
+                    {{ getEducationLevelLabel(level) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.CITY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="city"
+                  [class.border-red-500]="editUserForm.get('city')?.invalid && editUserForm.get('city')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.CITY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('city', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('city', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.REGION' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="region"
+                  [class.border-red-500]="editUserForm.get('region')?.invalid && editUserForm.get('region')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.REGION_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('region', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('region', editUserForm) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.COUNTRY' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="country"
+                  [class.border-red-500]="editUserForm.get('country')?.invalid && editUserForm.get('country')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.COUNTRY_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('country', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('country', editUserForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.ADDRESS' | translate }} *
+                </label>
+                <input
+                  type="text"
+                  formControlName="address"
+                  [class.border-red-500]="editUserForm.get('address')?.invalid && editUserForm.get('address')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_USERS.MODAL.ADDRESS_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('address', editUserForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('address', editUserForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Champs de permissions pour tous les rôles -->
+          <div class="border-t pt-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">
+              {{ 'ADMIN_USERS.MODAL.PERMISSIONS' | translate }}
+            </h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="messagePermission"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
+                  <option *ngFor="let permission of messagePermissions" [value]="permission">
+                    {{ getMessagePermissionLabel(permission) }}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="accountPrivacy"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
+                  <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
+                    {{ getAccountPrivacyLabel(privacy) }}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_USERS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}
+                </label>
+                <select
+                  formControlName="profileVisibility"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
+                  <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
+                    {{ getVisibilityStatusLabel(visibility) }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Boutons -->
+          <div class="flex justify-end space-x-3 pt-6 border-t">
+            <button
+              type="button"
+              (click)="closeEditUserModal()"
+              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+              {{ 'ADMIN_USERS.MODAL.CANCEL' | translate }}
+            </button>
+            <button
+              type="submit"
+              [disabled]="editUserForm.invalid"
+              class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 font-medium transition-colors">
+              {{ 'ADMIN_USERS.MODAL.UPDATE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
