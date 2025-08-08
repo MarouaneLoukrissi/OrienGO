@@ -1,9 +1,6 @@
 package com.example.oriengo.model.entity;
 
-import com.example.oriengo.model.enumeration.AccountPrivacy;
-import com.example.oriengo.model.enumeration.EducationLevel;
-import com.example.oriengo.model.enumeration.MessagePermission;
-import com.example.oriengo.model.enumeration.VisibilityStatus;
+import com.example.oriengo.model.enumeration.*;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -86,24 +83,5 @@ public class Student extends User implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<StudentPersonalizedJobLink> personalizedJobLinks = new HashSet<>();
-
-    public boolean hasConnection(Coach coach) {
-        return connections.stream().anyMatch(c -> c.getCoach().equals(coach));
-    }
-
-    public CoachStudentConnection connectTo(Coach coach) {
-        CoachStudentConnection connection = CoachStudentConnection.builder()
-                .coach(coach)
-                .student(this)
-                .build();
-        this.connections.add(connection);
-        coach.getConnections().add(connection);
-        return connection;
-    }
-
-    public void disconnectFrom(Coach coach) {
-        this.connections.removeIf(c -> c.getCoach().equals(coach));
-        coach.getConnections().removeIf(c -> c.getStudent().equals(this));
-    }
 
 }

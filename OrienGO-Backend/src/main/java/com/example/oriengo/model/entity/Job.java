@@ -50,8 +50,27 @@ public class Job implements Serializable {
     @Column(name = "job_market", length = 100)
     private String jobMarket; // e.g. "High demand", "Stable"
 
+    // RIASEC attributes
+    @Column(name = "riasec_realistic", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecRealistic;
+
+    @Column(name = "riasec_investigative", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecInvestigative;
+
+    @Column(name = "riasec_artistic", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecArtistic;
+
+    @Column(name = "riasec_social", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecSocial;
+
+    @Column(name = "riasec_enterprising", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecEnterprising;
+
+    @Column(name = "riasec_conventional", columnDefinition = "DECIMAL(5,2)")
+    private Double riasecConventional;
+
     @Builder.Default
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "job_tags", joinColumns = @JoinColumn(name = "job_id"))
     @Column(name = "tag", length = 50)
     private Set<String> tags = new HashSet<>(); // e.g. ["Listen", "Teamwork"]
@@ -75,6 +94,9 @@ public class Job implements Serializable {
 
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
+
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
 
     @Version
     private Long version;

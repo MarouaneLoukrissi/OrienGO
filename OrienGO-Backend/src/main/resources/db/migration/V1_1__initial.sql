@@ -6,6 +6,7 @@ create table jobs
     category             varchar(50)   not null
         constraint jobs_category_check
             check ((category)::text = ANY
+
                    (ARRAY [('HEALTH'::character varying)::text, ('EDUCATION'::character varying)::text, ('TECH'::character varying)::text, ('BUSINESS'::character varying)::text, ('ARTS'::character varying)::text])),
     description          varchar(1000) not null,
     education            varchar(100)  not null,
@@ -97,6 +98,7 @@ create table questions
     category     varchar(20)   not null
         constraint questions_category_check
             check ((category)::text = ANY
+
                    (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     soft_deleted boolean       not null,
     text         varchar(1000) not null
@@ -163,6 +165,7 @@ create table trainings
     type         varchar(50)  not null
         constraint trainings_type_check
             check ((type)::text = ANY
+
                    (ARRAY [('UNIVERSITY'::character varying)::text, ('VOCATIONAL'::character varying)::text, ('BOOTCAMP'::character varying)::text, ('CERTIFICATION'::character varying)::text, ('ONLINE_COURSE'::character varying)::text, ('INTERNSHIP'::character varying)::text, ('APPRENTICESHIP'::character varying)::text, ('WORKSHOP'::character varying)::text, ('SEMINAR'::character varying)::text, ('SELF_TAUGHT'::character varying)::text])),
     version      bigint
 );
@@ -213,6 +216,7 @@ create table users
     first_name        varchar(50)  not null,
     gender            varchar(10)
         constraint users_gender_check
+
             check ((gender)::text = ANY
                    (ARRAY [('MALE'::character varying)::text, ('FEMALE'::character varying)::text])),
     is_deleted        boolean      not null,
@@ -244,6 +248,7 @@ create table admins
     admin_level varchar(255) not null
         constraint admins_admin_level_check
             check ((admin_level)::text = ANY
+
                    (ARRAY [('MANAGER'::character varying)::text, ('STANDARD_ADMIN'::character varying)::text])),
     department  varchar(255) not null
         constraint admins_department_check
@@ -266,6 +271,7 @@ create table coaches
     account_privacy    varchar(255) not null
         constraint coaches_account_privacy_check
             check ((account_privacy)::text = ANY
+
                    (ARRAY [('PRIVATE'::character varying)::text, ('PUBLIC'::character varying)::text])),
     message_permission varchar(255) not null
         constraint coaches_message_permission_check
@@ -295,6 +301,7 @@ create table medias
     type         varchar(255) not null
         constraint medias_type_check
             check ((type)::text = ANY
+
                    (ARRAY [('PROFILE_PHOTO'::character varying)::text, ('COVER_PHOTO'::character varying)::text, ('PROFILE_PDF'::character varying)::text, ('RESULT_PDF'::character varying)::text])),
     url          varchar(500) not null,
     user_id      bigint       not null
@@ -348,6 +355,7 @@ create table notifications
     type         varchar(50)   not null
         constraint notifications_type_check
             check ((type)::text = ANY
+
                    (ARRAY [('TEST_COMPLETED_FAST'::character varying)::text, ('TEST_COMPLETED_FULL'::character varying)::text, ('CONNECTION_REQUEST_RECEIVED'::character varying)::text, ('CONNECTION_ACCEPTED'::character varying)::text, ('PROFILE_VIEWED'::character varying)::text, ('NEW_MESSAGE_RECEIVED'::character varying)::text, ('ADDED_TO_GROUP'::character varying)::text, ('NEW_JOB_MATCHED'::character varying)::text, ('TEST_REMINDER'::character varying)::text, ('TEST_SUMMARY_PDF_AVAILABLE'::character varying)::text])),
     url          varchar(512),
     version      bigint,
@@ -370,6 +378,7 @@ create table students
     account_privacy    varchar(255) not null
         constraint students_account_privacy_check
             check ((account_privacy)::text = ANY
+
                    (ARRAY [('PRIVATE'::character varying)::text, ('PUBLIC'::character varying)::text])),
     education_level    varchar(255) not null
         constraint students_education_level_check
@@ -407,6 +416,7 @@ create table coach_student_connections
     status       varchar(255) not null
         constraint coach_student_connections_status_check
             check ((status)::text = ANY
+
                    (ARRAY [('PENDING'::character varying)::text, ('ACCEPTED'::character varying)::text, ('REJECTED'::character varying)::text])),
     coach_id     bigint       not null
         constraint fkf0atgg5908wonrg1tnhvpl1ys
@@ -528,6 +538,7 @@ create table tests
     status           varchar(20)  not null
         constraint tests_status_check
             check ((status)::text = ANY
+
                    (ARRAY [('PENDING'::character varying)::text, ('IN_PROGRESS'::character varying)::text, ('COMPLETED'::character varying)::text, ('CANCELLED'::character varying)::text])),
     type             varchar(20)  not null
         constraint tests_type_check
@@ -568,6 +579,7 @@ create table test_results
     dominant_type             varchar(20) not null
         constraint test_results_dominant_type_check
             check ((dominant_type)::text = ANY
+
                    (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     dominant_type_description varchar(20),
     downloaded                boolean     not null,
@@ -706,6 +718,7 @@ create table test_result_scores
     type       varchar(20) not null
         constraint test_result_scores_type_check
             check ((type)::text = ANY
+
                    (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     primary key (result_id, type)
 );
@@ -725,6 +738,7 @@ create table tokens
     token_type  varchar(50)  not null
         constraint tokens_token_type_check
             check ((token_type)::text = ANY
+
                    (ARRAY [('ACCESS'::character varying)::text, ('REFRESH'::character varying)::text, ('PASSWORD_RESET'::character varying)::text, ('EMAIL_VERIFICATION'::character varying)::text])),
     token_value varchar(512) not null
         constraint idx_token_value
