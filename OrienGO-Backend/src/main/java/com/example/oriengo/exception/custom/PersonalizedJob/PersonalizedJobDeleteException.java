@@ -1,0 +1,10 @@
+package com.example.oriengo.exception.custom.PersonalizedJob;
+
+import com.example.oriengo.exception.custom.AppException;
+import org.springframework.http.HttpStatus;
+
+public class PersonalizedJobDeleteException extends AppException {
+    public PersonalizedJobDeleteException(HttpStatus httpStatus, String message) {
+        super(httpStatus, message);
+    }
+}

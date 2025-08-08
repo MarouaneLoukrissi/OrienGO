@@ -2,23 +2,23 @@ package com.example.oriengo.model.dto;
 
 import com.example.oriengo.model.enumeration.LinkType;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentJobLinkRequestDto {
-    
-    @NotNull(message = "Student ID is required")
+
+    @NotNull(message = "{studentJobLink.studentId.notNull}")
+    @Positive(message = "{studentJobLink.studentId.positive}")
     private Long studentId;
-    
-    @NotNull(message = "Job ID is required")
+
+    @NotNull(message = "{studentJobLink.jobId.notNull}")
+    @Positive(message = "{studentJobLink.jobId.positive}")
     private Long jobId;
-    
-    @NotNull(message = "Link type is required")
+
+    @NotNull(message = "{studentJobLink.type.notNull}")
     private LinkType type;
-} 
+}

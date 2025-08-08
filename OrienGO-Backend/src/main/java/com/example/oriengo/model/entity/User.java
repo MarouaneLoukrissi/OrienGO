@@ -58,6 +58,7 @@ public class User implements Serializable {
     private int age;
 
     @Column(length = 10)
+    @Enumerated(EnumType.STRING)
     private GenderType gender;
 
     @Column(name="phone_number", length = 20)

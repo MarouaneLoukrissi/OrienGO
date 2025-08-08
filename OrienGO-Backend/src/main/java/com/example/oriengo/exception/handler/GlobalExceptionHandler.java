@@ -1,240 +1,181 @@
 package com.example.oriengo.exception.handler;
 
-import com.example.oriengo.exception.custom.ResourceNotFoundException;
-import com.example.oriengo.exception.handler.dto.ErrorResponse;
-import com.example.oriengo.exception.handler.exceptions.BusinessException;
-import com.example.oriengo.exception.handler.exceptions.ValidationException;
+import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationCreationException;
+import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationDeleteException;
+import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationGetException;
+import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationUpdateException;
+import com.example.oriengo.exception.custom.Jobs.JobCreationException;
+import com.example.oriengo.exception.custom.Jobs.JobDeleteException;
+import com.example.oriengo.exception.custom.Jobs.JobGetException;
+import com.example.oriengo.exception.custom.Jobs.JobUpdateException;
+import com.example.oriengo.exception.custom.PathVarException;
+import com.example.oriengo.exception.custom.PersonalizedJob.PersonalizedJobCreationException;
+import com.example.oriengo.exception.custom.PersonalizedJob.PersonalizedJobDeleteException;
+import com.example.oriengo.exception.custom.PersonalizedJob.PersonalizedJobGetException;
+import com.example.oriengo.exception.custom.PersonalizedJob.PersonalizedJobUpdateException;
+import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkCreationException;
+import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkDeleteException;
+import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkGetException;
+import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkUpdateException;
+import com.example.oriengo.exception.custom.StudentPersonalizedJobLink.StudentPersonalizedJobLinkCreationException;
+import com.example.oriengo.exception.custom.StudentPersonalizedJobLink.StudentPersonalizedJobLinkDeleteException;
+import com.example.oriengo.exception.custom.StudentPersonalizedJobLink.StudentPersonalizedJobLinkGetException;
+import com.example.oriengo.exception.custom.StudentPersonalizedJobLink.StudentPersonalizedJobLinkUpdateException;
+import com.example.oriengo.payload.response.ApiResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.nio.file.AccessDeniedException;
 import java.util.Map;
 
+@Order(2)
 @RestControllerAdvice
+@RequiredArgsConstructor
+@Slf4j
 public class GlobalExceptionHandler {
 
-    /**
-     * Gère les exceptions ResourceNotFoundException
-     */
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(
-            ResourceNotFoundException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.NOT_FOUND.value())
-                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
+    private final MessageSource messageSource; // Injected
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    @ExceptionHandler(JobCreationException.class)
+    public ResponseEntity<?> handleJobCreationException(JobCreationException ex) {
+        return buildResponse("JOB_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
-    /**
-     * Gère les exceptions BusinessException
-     */
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessException(
-            BusinessException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(JobDeleteException.class)
+    public ResponseEntity<?> handleJobDeleteException(JobDeleteException ex) {
+        return buildResponse("JOB_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(JobUpdateException.class)
+    public ResponseEntity<?> handleJobUpdateException(JobUpdateException ex) {
+        return buildResponse("JOB_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(JobGetException.class)
+    public ResponseEntity<?> handleJobGetException(JobGetException ex) {
+        return buildResponse("JOB_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
-    /**
-     * Gère les exceptions ValidationException
-     */
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(
-            ValidationException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(JobRecommendationCreationException.class)
+    public ResponseEntity<?> handleJobRecommendationCreationException(JobRecommendationCreationException ex) {
+        return buildResponse("JOB_RECOMMENDATION_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(JobRecommendationUpdateException.class)
+    public ResponseEntity<?> handleJobRecommendationUpdateException(JobRecommendationUpdateException ex) {
+        return buildResponse("JOB_RECOMMENDATION_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(JobRecommendationDeleteException.class)
+    public ResponseEntity<?> handleJobRecommendationDeleteException(JobRecommendationDeleteException ex) {
+        return buildResponse("JOB_RECOMMENDATION_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(JobRecommendationGetException.class)
+    public ResponseEntity<?> handleJobRecommendationGetException(JobRecommendationGetException ex) {
+        return buildResponse("JOB_RECOMMENDATION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
-    /**
-     * Gère les exceptions de validation (Bean Validation)
-     */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(
-            MethodArgumentNotValidException ex, WebRequest request) {
-        
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("Validation failed")
-                .path(request.getDescription(false))
-                .validationErrors(errors)
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(PersonalizedJobCreationException.class)
+    public ResponseEntity<?> handlePersonalizedJobCreationException(PersonalizedJobCreationException ex) {
+        return buildResponse("PERSONALIZED_JOB_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(PersonalizedJobUpdateException.class)
+    public ResponseEntity<?> handleJobRecommendationUpdateException(PersonalizedJobUpdateException ex) {
+        return buildResponse("PERSONALIZED_JOB_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(PersonalizedJobDeleteException.class)
+    public ResponseEntity<?> handleJobRecommendationDeleteException(PersonalizedJobDeleteException ex) {
+        return buildResponse("PERSONALIZED_JOB_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(PersonalizedJobGetException.class)
+    public ResponseEntity<?> handlePersonalizedJobGetException(PersonalizedJobGetException ex) {
+        return buildResponse("PERSONALIZED_JOB_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
-    /**
-     * Gère les exceptions IllegalArgumentException
-     */
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
-            IllegalArgumentException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(StudentJobLinkCreationException.class)
+    public ResponseEntity<?> handleStudentJobLinkCreationException(StudentJobLinkCreationException ex) {
+        return buildResponse("STUDENT_JOB_LINK_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentJobLinkUpdateException.class)
+    public ResponseEntity<?> handleStudentJobLinkUpdateException(StudentJobLinkUpdateException ex) {
+        return buildResponse("STUDENT_JOB_LINK_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentJobLinkDeleteException.class)
+    public ResponseEntity<?> handleStudentJobLinkDeleteException(StudentJobLinkDeleteException ex) {
+        return buildResponse("STUDENT_JOB_LINK_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentJobLinkGetException.class)
+    public ResponseEntity<?> handleStudentJobLinkGetException(StudentJobLinkGetException ex) {
+        return buildResponse("STUDENT_JOB_LINK_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
-    /**
-     * Gère les exceptions génériques
-     */
+    @ExceptionHandler(StudentPersonalizedJobLinkCreationException.class)
+    public ResponseEntity<?> handleStudentPersonalizedJobLinkCreationException(StudentPersonalizedJobLinkCreationException ex) {
+        return buildResponse("STUDENT_PERSONALIZED_JOB_LINK_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentPersonalizedJobLinkUpdateException.class)
+    public ResponseEntity<?> handleStudentPersonalizedJobLinkUpdateException(StudentPersonalizedJobLinkUpdateException ex) {
+        return buildResponse("STUDENT_PERSONALIZED_JOB_LINK_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentPersonalizedJobLinkDeleteException.class)
+    public ResponseEntity<?> handleStudentPersonalizedJobLinkDeleteException(StudentPersonalizedJobLinkDeleteException ex) {
+        return buildResponse("STUDENT_PERSONALIZED_LINK_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(StudentPersonalizedJobLinkGetException.class)
+    public ResponseEntity<?> handleStudentPersonalizedJobLinkGetException(StudentPersonalizedJobLinkGetException ex) {
+        return buildResponse("STUDENT_PERSONALIZED_LINK_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+
+
+    @ExceptionHandler(PathVarException.class)
+    public ResponseEntity<?> handlePathVarException(PathVarException ex) {
+        return buildResponse("PATH_VAR_ERROR", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Object>> handleAccessDenied(AccessDeniedException ex) {
+        return buildResponse("ACCESS_DENIED", HttpStatusCode.valueOf(401), "You do not have permission to perform this operation.", null);
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNotFound(NoHandlerFoundException ex) {
+        String message = messageSource.getMessage("error.404", null, LocaleContextHolder.getLocale());
+        return buildResponse("NOT_FOUND", HttpStatus.NOT_FOUND, message, null);
+    }
+
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiResponse<Object>> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        String message = messageSource.getMessage("error.method.not.allowed", null, LocaleContextHolder.getLocale());
+        return buildResponse("METHOD_NOT_ALLOWED", HttpStatus.METHOD_NOT_ALLOWED, message, null);
+    }
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(
-            Exception ex, WebRequest request) {
-        
-        // En mode développement, on peut afficher plus de détails
-        String message = "An unexpected error occurred";
-        String trace = null;
-        
-        // En mode développement, on peut afficher la stack trace
-        if (isDevelopmentMode()) {
-            message = ex.getMessage();
-            trace = getStackTrace(ex);
-        }
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+    public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception ex) {
+        log.error("Unhandled exception occurred", ex); // log the stack trace safely
+        String message = messageSource.getMessage(
+                "internal.server.error",
+                null,
+                LocaleContextHolder.getLocale()
+        );
+        return buildResponse("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, message, null);
+    }
+    private ResponseEntity<ApiResponse<Object>> buildResponse(String code, HttpStatusCode status, String message, Map<String, String> errors) {
+        ApiResponse<Object> response = ApiResponse.<Object>builder()
+                .code(code)
+                .status(status.value())
                 .message(message)
-                .path(request.getDescription(false))
-                .trace(trace)
+                .data(null)
+                .errors(errors)
                 .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.status(status).body(response);
     }
 
-    /**
-     * Gère les exceptions de contrainte de base de données
-     */
-    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
-    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(
-            org.springframework.dao.DataIntegrityViolationException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.CONFLICT.value())
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message("Data integrity violation: " + ex.getMostSpecificCause().getMessage())
-                .path(request.getDescription(false))
-                .build();
+}
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    /**
-     * Gère les exceptions de contrainte unique
-     */
-    @ExceptionHandler(org.springframework.dao.DuplicateKeyException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateKeyException(
-            org.springframework.dao.DuplicateKeyException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.CONFLICT.value())
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message("Duplicate key violation: " + ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    /**
-     * Gère les exceptions de type non supporté
-     */
-    @ExceptionHandler(org.springframework.web.HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> handleHttpMediaTypeNotSupportedException(
-            org.springframework.web.HttpMediaTypeNotSupportedException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
-                .error(HttpStatus.UNSUPPORTED_MEDIA_TYPE.getReasonPhrase())
-                .message("Unsupported media type: " + ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
-    }
-
-    /**
-     * Gère les exceptions de méthode HTTP non autorisée
-     */
-    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(
-            org.springframework.web.HttpRequestMethodNotSupportedException ex, WebRequest request) {
-        
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.METHOD_NOT_ALLOWED.value())
-                .error(HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase())
-                .message("Method not allowed: " + ex.getMessage())
-                .path(request.getDescription(false))
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.METHOD_NOT_ALLOWED);
-    }
-
-    /**
-     * Détermine si on est en mode développement
-     */
-    private boolean isDevelopmentMode() {
-        String profile = System.getProperty("spring.profiles.active");
-        return profile == null || profile.contains("dev") || profile.contains("development");
-    }
-
-    /**
-     * Récupère la stack trace d'une exception
-     */
-    private String getStackTrace(Exception ex) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ex.toString()).append("\n");
-        for (StackTraceElement element : ex.getStackTrace()) {
-            sb.append("\tat ").append(element.toString()).append("\n");
-        }
-        return sb.toString();
-    }
-} 

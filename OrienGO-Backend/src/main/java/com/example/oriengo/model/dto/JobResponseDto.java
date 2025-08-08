@@ -21,7 +21,6 @@ public class JobResponseDto {
     private String education;
     private String salaryRange;
     private String jobMarket;
-    // RIASEC attributes
     private Double riasecRealistic;
     private Double riasecInvestigative;
     private Double riasecArtistic;

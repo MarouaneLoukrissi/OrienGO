@@ -1,12 +1,20 @@
 package com.example.oriengo.service;
 
+import com.example.oriengo.exception.custom.Jobs.JobCreationException;
+import com.example.oriengo.exception.custom.Jobs.JobDeleteException;
+import com.example.oriengo.exception.custom.Jobs.JobGetException;
+import com.example.oriengo.exception.custom.Jobs.JobUpdateException;
+import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.model.dto.JobRequestDto;
 import com.example.oriengo.model.entity.Job;
 import com.example.oriengo.model.enumeration.JobCategory;
 import com.example.oriengo.mapper.JobMapper;
 import com.example.oriengo.repository.JobRepository;
-import com.example.oriengo.exception.custom.ResourceNotFoundException;
-import com.example.oriengo.exception.handler.exceptions.BusinessException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -16,146 +24,140 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Slf4j
+@RequiredArgsConstructor
 public class JobService {
     private final JobRepository repository;
     private final JobMapper mapper;
+    private final MessageSource messageSource; // Injected
 
-    public JobService(JobRepository repository, JobMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
+    private String getMessage(String key, Object... args) {
+        return messageSource.getMessage(key, args, LocaleContextHolder.getLocale());
     }
 
     public List<Job> findAll() {
-        return repository.findAll();
+        try {
+            log.info("Fetching jobs");
+            List<Job> jobs = repository.findAll();
+            log.info("Found {} jobs", jobs.size());
+            return jobs;
+        } catch (Exception e) {
+            log.error("Failed to fetch jobs : {}", e.getMessage(), e);
+            throw new JobGetException(HttpStatus.NOT_FOUND, getMessage("job.not.found"));
+        }
     }
 
-    public Optional<Job> findById(Long id) {
-        return repository.findById(id);
+    public Job findById(Long id) {
+        if (id == null) {
+            log.warn("Attempted to fetch job with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.id.empty"));
+        }
+
+        log.info("Fetching job with ID: {}", id);
+
+        return repository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Job not found with ID: {}", id);
+                    return new JobGetException(HttpStatus.NOT_FOUND, getMessage("job.not.found"));
+                });
     }
 
     public Job create(JobRequestDto requestDto) {
+        if (requestDto == null) {
+            log.warn("job request cannot be null");
+            throw new JobCreationException(HttpStatus.BAD_REQUEST, getMessage("job.dto.empty"));
+        }
         try {
-            // Validations métier simplifiées
-            if (requestDto == null) {
-                throw new BusinessException("Job request cannot be null");
-            }
-            
-            if (!StringUtils.hasText(requestDto.getTitle())) {
-                throw new BusinessException("Job title is required");
-            }
-            
-            if (!StringUtils.hasText(requestDto.getDescription())) {
-                throw new BusinessException("Job description is required");
-            }
-            
-            // Validation des scores RIASEC
-            validateRiasScore(requestDto.getRiasecRealistic(), "Realistic");
-            validateRiasScore(requestDto.getRiasecInvestigative(), "Investigative");
-            validateRiasScore(requestDto.getRiasecArtistic(), "Artistic");
-            validateRiasScore(requestDto.getRiasecSocial(), "Social");
-            validateRiasScore(requestDto.getRiasecEnterprising(), "Enterprising");
-            validateRiasScore(requestDto.getRiasecConventional(), "Conventional");
-            
-            Job entity = mapper.toEntity(requestDto);
-            return repository.save(entity);
+            log.info("Starting creation of new job");
+            Job job = mapper.toEntity(requestDto);
+            Job savedJob = repository.save(job);
+            log.info("Job created successfully with ID: {}", savedJob.getId());
+            return savedJob;
         } catch (Exception e) {
+            log.error("Unexpected error during job creation : {}", e.getMessage(), e);
             throw new RuntimeException("Error creating job: " + e.getMessage(), e);
         }
     }
 
     public Job update(Long id, JobRequestDto requestDto) {
+        if (id == null) {
+            log.warn("Attempted to update job with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.id.empty"));
+        } else if (requestDto == null) {
+            log.warn("job request cannot be null");
+            throw new JobUpdateException(HttpStatus.BAD_REQUEST, getMessage("job.dto.empty"));
+        }
         try {
-            // Validations métier simplifiées
-            if (requestDto == null) {
-                throw new BusinessException("Job request cannot be null");
-            }
-            
-            if (!StringUtils.hasText(requestDto.getTitle())) {
-                throw new BusinessException("Job title is required");
-            }
-            
-            if (!StringUtils.hasText(requestDto.getDescription())) {
-                throw new BusinessException("Job description is required");
-            }
-            
-            Job existingEntity = repository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
-            
+            Job existingEntity = findById(id);
             mapper.updateEntityFromDto(requestDto, existingEntity);
-            return repository.save(existingEntity);
+            Job savedJob = repository.save(existingEntity);
+            log.info("Job updated successfully with ID: {}", savedJob.getId());
+            return savedJob;
         } catch (Exception e) {
             throw new RuntimeException("Error updating job: " + e.getMessage(), e);
         }
     }
 
     public void deleteById(Long id) {
+        if (id == null) {
+            log.warn("Attempted hard delete with null job ID");
+            throw new JobDeleteException(HttpStatus.BAD_REQUEST, getMessage("job.id.empty"));
+        }
         try {
-            Job job = repository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
-            
-            // Validation métier : empêcher la suppression d'un job actif
-            if (job.isActive()) {
-                throw new BusinessException("Cannot delete an active job");
-            }
-            
-            repository.deleteById(id);
+            log.info("Attempting delete for job with ID: {}", id);
+            Job job = findById(id);
+            repository.deleteById(job.getId());
+            log.info("Successfully deleted job with ID: {}", job.getId());
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting job: " + e.getMessage(), e);
+            log.error("Error during delete of job with ID {}: {}", id, e.getMessage(), e);
+            throw new JobDeleteException(HttpStatus.CONFLICT, getMessage("job.delete.failed"));
         }
     }
 
     public List<Job> findByCategory(String category) {
+        if (category == null) {
+            log.warn("Attempted to fetch job with null category");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.category.null"));
+        } else if(category.isEmpty()){
+            log.warn("Attempted to fetch job with empty category");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.category.empty"));
+        }
         try {
-            if (category == null) {
-                throw new BusinessException("Category cannot be null");
-            }
-            
-            if (!StringUtils.hasText(category)) {
-                throw new BusinessException("Category cannot be empty");
-            }
-            
             JobCategory jobCategory = JobCategory.valueOf(category.toUpperCase());
             return repository.findByCategory(jobCategory);
         } catch (IllegalArgumentException e) {
-            throw new BusinessException("Invalid job category: " + category + ". Valid categories are: " +
-                String.join(", ", JobCategory.values().toString()));
+            String message = getMessage("job.category.invalid", category, String.join(", ", JobCategory.values().toString()));
+            throw new JobGetException(HttpStatus.BAD_REQUEST, message);
         } catch (Exception e) {
-            throw new RuntimeException("Error finding jobs by category: " + e.getMessage(), e);
+            log.error("Failed to fetch job : {}", e.getMessage(), e);
+            throw new JobGetException(HttpStatus.NOT_FOUND, getMessage("job.not.found"));
         }
     }
 
     public List<Job> findByTitleContaining(String title) {
+        if (title == null) {
+            log.warn("Attempted to fetch job with null title");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.title.null"));
+        } else if(title.isEmpty()){
+            log.warn("Attempted to fetch job with empty title");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("job.title.empty"));
+        }
         try {
-            if (title == null) {
-                throw new BusinessException("Title cannot be null");
-            }
-            
-            if (!StringUtils.hasText(title)) {
-                throw new BusinessException("Title cannot be empty");
-            }
-            
-            return repository.findByTitleContainingIgnoreCase(title);
+            log.info("Fetching jobs with title = {}", title);
+            List<Job> jobs = repository.findByTitleContainingIgnoreCase(title);
+            log.info("Found {} jobs", jobs.size());
+            return jobs;
         } catch (Exception e) {
-            throw new RuntimeException("Error finding jobs by title: " + e.getMessage(), e);
+            log.error("Failed to fetch jobs with title = {}: {}", title, e.getMessage(), e);
+            throw new JobGetException(HttpStatus.NOT_FOUND, getMessage("job.not.found"));
         }
     }
 
-    public List<Job> findActiveJobs() {
-        try {
-            return repository.findBySoftDeletedFalse();
-        } catch (Exception e) {
-            throw new RuntimeException("Error finding active jobs: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Validation d'un score RIASEC
-     */
-    private void validateRiasScore(Double score, String type) {
-        if (score != null) {
-            if (score < 0 || score > 100) {
-                throw new BusinessException(type + " RIASEC score must be between 0 and 100");
-            }
-        }
-    }
+//    public List<Job> findActiveJobs() {
+//        try {
+//            return repository.findBySoftDeletedFalse();
+//        } catch (Exception e) {
+//            throw new RuntimeException("Error finding active jobs: " + e.getMessage(), e);
+//        }
+//    }
 } 
