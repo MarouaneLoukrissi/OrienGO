@@ -1,22 +1,71 @@
 create table jobs
 (
-    id           bigint        not null
+    id                   bigint        not null
         primary key,
-    category     varchar(50)   not null
+    active               boolean       not null,
+    category             varchar(50)   not null
         constraint jobs_category_check
             check ((category)::text = ANY
-                   ((ARRAY ['HEALTH'::character varying, 'EDUCATION'::character varying, 'TECH'::character varying, 'BUSINESS'::character varying, 'ARTS'::character varying])::text[])),
-    description  varchar(1000) not null,
-    education    varchar(100),
-    job_market   varchar(100),
-    salary_range varchar(100),
-    soft_deleted boolean       not null,
-    title        varchar(100)  not null,
-    version      bigint
+                   (ARRAY [('HEALTH'::character varying)::text, ('EDUCATION'::character varying)::text, ('TECH'::character varying)::text, ('BUSINESS'::character varying)::text, ('ARTS'::character varying)::text])),
+    description          varchar(1000) not null,
+    education            varchar(100)  not null,
+    job_market           varchar(100)  not null,
+    riasec_artistic      numeric(5, 2) not null
+        constraint chk_riasec_artistic
+            check ((riasec_artistic >= (0)::numeric) AND (riasec_artistic <= (100)::numeric)),
+    riasec_conventional  numeric(5, 2) not null
+        constraint chk_riasec_conventional
+            check ((riasec_conventional >= (0)::numeric) AND (riasec_conventional <= (100)::numeric)),
+    riasec_enterprising  numeric(5, 2) not null
+        constraint chk_riasec_enterprising
+            check ((riasec_enterprising >= (0)::numeric) AND (riasec_enterprising <= (100)::numeric)),
+    riasec_investigative numeric(5, 2) not null
+        constraint chk_riasec_investigative
+            check ((riasec_investigative >= (0)::numeric) AND (riasec_investigative <= (100)::numeric)),
+    riasec_realistic     numeric(5, 2) not null
+        constraint chk_riasec_realistic
+            check ((riasec_realistic >= (0)::numeric) AND (riasec_realistic <= (100)::numeric)),
+    riasec_social        numeric(5, 2) not null
+        constraint chk_riasec_social
+            check ((riasec_social >= (0)::numeric) AND (riasec_social <= (100)::numeric)),
+    salary_range         varchar(100)  not null,
+    soft_deleted         boolean       not null,
+    title                varchar(100)  not null,
+    version              bigint
 );
+
+comment on table jobs is 'Table des emplois avec scores RIASEC en pourcentage (0-100). Tous les champs sont obligatoires.';
+
+comment on column jobs.education is 'Niveau d''éducation requis (obligatoire)';
+
+comment on column jobs.job_market is 'État du marché du travail (obligatoire)';
+
+comment on column jobs.riasec_artistic is 'Score RIASEC Artistic en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.riasec_conventional is 'Score RIASEC Conventional en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.riasec_enterprising is 'Score RIASEC Enterprising en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.riasec_investigative is 'Score RIASEC Investigative en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.riasec_realistic is 'Score RIASEC Realistic en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.riasec_social is 'Score RIASEC Social en pourcentage (0-100, obligatoire)';
+
+comment on column jobs.salary_range is 'Fourchette de salaire (obligatoire)';
 
 alter table jobs
     owner to postgres;
+
+create index idx_job_category
+    on jobs (category);
+
+create index idx_jobs_category_active
+    on jobs (category, active);
+
+create index idx_jobs_riasec_scores
+    on jobs (riasec_realistic, riasec_investigative, riasec_artistic, riasec_social, riasec_enterprising,
+             riasec_conventional);
 
 create table job_tags
 (
@@ -28,9 +77,6 @@ create table job_tags
 
 alter table job_tags
     owner to postgres;
-
-create index idx_job_category
-    on jobs (category);
 
 create table privileges
 (
@@ -51,13 +97,16 @@ create table questions
     category     varchar(20)   not null
         constraint questions_category_check
             check ((category)::text = ANY
-                   ((ARRAY ['REALISTIC'::character varying, 'INVESTIGATIVE'::character varying, 'ARTISTIC'::character varying, 'SOCIAL'::character varying, 'ENTERPRISING'::character varying, 'CONVENTIONAL'::character varying])::text[])),
+                   (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     soft_deleted boolean       not null,
     text         varchar(1000) not null
 );
 
 alter table questions
     owner to postgres;
+
+create index idx_question_riasec_type
+    on questions (category);
 
 create table answer_options
 (
@@ -75,9 +124,6 @@ alter table answer_options
 
 create index idx_answer_option_question
     on answer_options (question_id);
-
-create index idx_question_riasec_type
-    on questions (category);
 
 create table roles
 (
@@ -117,12 +163,15 @@ create table trainings
     type         varchar(50)  not null
         constraint trainings_type_check
             check ((type)::text = ANY
-                   ((ARRAY ['UNIVERSITY'::character varying, 'VOCATIONAL'::character varying, 'BOOTCAMP'::character varying, 'CERTIFICATION'::character varying, 'ONLINE_COURSE'::character varying, 'INTERNSHIP'::character varying, 'APPRENTICESHIP'::character varying, 'WORKSHOP'::character varying, 'SEMINAR'::character varying, 'SELF_TAUGHT'::character varying])::text[])),
+                   (ARRAY [('UNIVERSITY'::character varying)::text, ('VOCATIONAL'::character varying)::text, ('BOOTCAMP'::character varying)::text, ('CERTIFICATION'::character varying)::text, ('ONLINE_COURSE'::character varying)::text, ('INTERNSHIP'::character varying)::text, ('APPRENTICESHIP'::character varying)::text, ('WORKSHOP'::character varying)::text, ('SEMINAR'::character varying)::text, ('SELF_TAUGHT'::character varying)::text])),
     version      bigint
 );
 
 alter table trainings
     owner to postgres;
+
+create index idx_training_type
+    on trainings (type);
 
 create table job_training_links
 (
@@ -149,9 +198,6 @@ create table training_specializations
 alter table training_specializations
     owner to postgres;
 
-create index idx_training_type
-    on trainings (type);
-
 create table users
 (
     user_type         varchar(31)  not null,
@@ -162,14 +208,13 @@ create table users
     deleted_at        timestamp(6),
     email             varchar(365) not null
         constraint uq_users_email
-            unique
-        constraint idx_users_email
             unique,
     enabled           boolean      not null,
     first_name        varchar(50)  not null,
-    gender            smallint
+    gender            varchar(10)
         constraint users_gender_check
-            check ((gender >= 0) AND (gender <= 1)),
+            check ((gender)::text = ANY
+                   (ARRAY [('MALE'::character varying)::text, ('FEMALE'::character varying)::text])),
     is_deleted        boolean      not null,
     last_login_at     timestamp(6),
     last_name         varchar(50)  not null,
@@ -185,16 +230,25 @@ create table users
 alter table users
     owner to postgres;
 
+create index idx_users_last_seen
+    on users (last_seen);
+
+create index idx_users_enabled
+    on users (enabled);
+
+create index idx_users_suspended
+    on users (suspended);
+
 create table admins
 (
     admin_level varchar(255) not null
         constraint admins_admin_level_check
             check ((admin_level)::text = ANY
-                   ((ARRAY ['MANAGER'::character varying, 'STANDARD_ADMIN'::character varying])::text[])),
+                   (ARRAY [('MANAGER'::character varying)::text, ('STANDARD_ADMIN'::character varying)::text])),
     department  varchar(255) not null
         constraint admins_department_check
             check ((department)::text = ANY
-                   ((ARRAY ['TECH'::character varying, 'OPERATIONS'::character varying, 'HR'::character varying, 'FINANCE'::character varying])::text[])),
+                   (ARRAY [('TECH'::character varying)::text, ('OPERATIONS'::character varying)::text, ('HR'::character varying)::text, ('FINANCE'::character varying)::text])),
     id          bigint       not null
         primary key
         constraint fkanhsicqm3lc8ya77tr7r0je18
@@ -212,15 +266,15 @@ create table coaches
     account_privacy    varchar(255) not null
         constraint coaches_account_privacy_check
             check ((account_privacy)::text = ANY
-                   ((ARRAY ['PRIVATE'::character varying, 'PUBLIC'::character varying])::text[])),
+                   (ARRAY [('PRIVATE'::character varying)::text, ('PUBLIC'::character varying)::text])),
     message_permission varchar(255) not null
         constraint coaches_message_permission_check
             check ((message_permission)::text = ANY
-                   ((ARRAY ['NETWORK'::character varying, 'ALL'::character varying, 'NO_ONE'::character varying])::text[])),
+                   (ARRAY [('NETWORK'::character varying)::text, ('ALL'::character varying)::text, ('NO_ONE'::character varying)::text])),
     profile_visibility varchar(255) not null
         constraint coaches_profile_visibility_check
             check ((profile_visibility)::text = ANY
-                   ((ARRAY ['PUBLIC'::character varying, 'NETWORK_ONLY'::character varying, 'PRIVATE'::character varying])::text[])),
+                   (ARRAY [('PUBLIC'::character varying)::text, ('NETWORK_ONLY'::character varying)::text, ('PRIVATE'::character varying)::text])),
     id                 bigint       not null
         primary key
         constraint fkbyei1g9vs5d057vur8psubw3x
@@ -241,7 +295,7 @@ create table medias
     type         varchar(255) not null
         constraint medias_type_check
             check ((type)::text = ANY
-                   ((ARRAY ['PROFILE_PHOTO'::character varying, 'COVER_PHOTO'::character varying, 'PROFILE_PDF'::character varying, 'RESULT_PDF'::character varying])::text[])),
+                   (ARRAY [('PROFILE_PHOTO'::character varying)::text, ('COVER_PHOTO'::character varying)::text, ('PROFILE_PDF'::character varying)::text, ('RESULT_PDF'::character varying)::text])),
     url          varchar(500) not null,
     user_id      bigint       not null
         constraint fkl96wo4x1syvvt7mxih064je28
@@ -294,7 +348,7 @@ create table notifications
     type         varchar(50)   not null
         constraint notifications_type_check
             check ((type)::text = ANY
-                   ((ARRAY ['TEST_COMPLETED_FAST'::character varying, 'TEST_COMPLETED_FULL'::character varying, 'CONNECTION_REQUEST_RECEIVED'::character varying, 'CONNECTION_ACCEPTED'::character varying, 'PROFILE_VIEWED'::character varying, 'NEW_MESSAGE_RECEIVED'::character varying, 'ADDED_TO_GROUP'::character varying, 'NEW_JOB_MATCHED'::character varying, 'TEST_REMINDER'::character varying, 'TEST_SUMMARY_PDF_AVAILABLE'::character varying])::text[])),
+                   (ARRAY [('TEST_COMPLETED_FAST'::character varying)::text, ('TEST_COMPLETED_FULL'::character varying)::text, ('CONNECTION_REQUEST_RECEIVED'::character varying)::text, ('CONNECTION_ACCEPTED'::character varying)::text, ('PROFILE_VIEWED'::character varying)::text, ('NEW_MESSAGE_RECEIVED'::character varying)::text, ('ADDED_TO_GROUP'::character varying)::text, ('NEW_JOB_MATCHED'::character varying)::text, ('TEST_REMINDER'::character varying)::text, ('TEST_SUMMARY_PDF_AVAILABLE'::character varying)::text])),
     url          varchar(512),
     version      bigint,
     recipient_id bigint        not null
@@ -316,11 +370,11 @@ create table students
     account_privacy    varchar(255) not null
         constraint students_account_privacy_check
             check ((account_privacy)::text = ANY
-                   ((ARRAY ['PRIVATE'::character varying, 'PUBLIC'::character varying])::text[])),
+                   (ARRAY [('PRIVATE'::character varying)::text, ('PUBLIC'::character varying)::text])),
     education_level    varchar(255) not null
         constraint students_education_level_check
             check ((education_level)::text = ANY
-                   ((ARRAY ['MIDDLE_SCHOOL'::character varying, 'HIGH_SCHOOL'::character varying, 'POST_SECONDARY'::character varying, 'UNIVERSITY'::character varying, 'GRADUATE'::character varying, 'OTHER'::character varying])::text[])),
+                   (ARRAY [('MIDDLE_SCHOOL'::character varying)::text, ('HIGH_SCHOOL'::character varying)::text, ('POST_SECONDARY'::character varying)::text, ('UNIVERSITY'::character varying)::text, ('GRADUATE'::character varying)::text, ('OTHER'::character varying)::text])),
     field_of_study     varchar(100),
     address            varchar(255),
     city               varchar(100),
@@ -329,11 +383,11 @@ create table students
     message_permission varchar(255) not null
         constraint students_message_permission_check
             check ((message_permission)::text = ANY
-                   ((ARRAY ['NETWORK'::character varying, 'ALL'::character varying, 'NO_ONE'::character varying])::text[])),
+                   (ARRAY [('NETWORK'::character varying)::text, ('ALL'::character varying)::text, ('NO_ONE'::character varying)::text])),
     profile_visibility varchar(255) not null
         constraint students_profile_visibility_check
             check ((profile_visibility)::text = ANY
-                   ((ARRAY ['PUBLIC'::character varying, 'NETWORK_ONLY'::character varying, 'PRIVATE'::character varying])::text[])),
+                   (ARRAY [('PUBLIC'::character varying)::text, ('NETWORK_ONLY'::character varying)::text, ('PRIVATE'::character varying)::text])),
     school             varchar(100),
     id                 bigint       not null
         primary key
@@ -353,7 +407,7 @@ create table coach_student_connections
     status       varchar(255) not null
         constraint coach_student_connections_status_check
             check ((status)::text = ANY
-                   ((ARRAY ['PENDING'::character varying, 'ACCEPTED'::character varying, 'REJECTED'::character varying])::text[])),
+                   (ARRAY [('PENDING'::character varying)::text, ('ACCEPTED'::character varying)::text, ('REJECTED'::character varying)::text])),
     coach_id     bigint       not null
         constraint fkf0atgg5908wonrg1tnhvpl1ys
             references coaches,
@@ -423,7 +477,8 @@ create table student_job_links
     created_at timestamp(6) not null,
     type       varchar(20)  not null
         constraint student_job_links_type_check
-            check ((type)::text = ANY ((ARRAY ['SAVED'::character varying, 'FAVORITE'::character varying])::text[])),
+            check ((type)::text = ANY
+                   (ARRAY [('SAVED'::character varying)::text, ('FAVORITE'::character varying)::text])),
     job_id     bigint       not null
         constraint fk5vxgw4h1evdpxemkd9mu15ohp
             references jobs,
@@ -445,7 +500,8 @@ create table student_training_links
     created_at  timestamp(6) not null,
     type        varchar(20)  not null
         constraint student_training_links_type_check
-            check ((type)::text = ANY ((ARRAY ['SAVED'::character varying, 'FAVORITE'::character varying])::text[])),
+            check ((type)::text = ANY
+                   (ARRAY [('SAVED'::character varying)::text, ('FAVORITE'::character varying)::text])),
     student_id  bigint       not null
         constraint fkn3gmhpwfbrrb3r5ar842xv2sy
             references students,
@@ -472,10 +528,11 @@ create table tests
     status           varchar(20)  not null
         constraint tests_status_check
             check ((status)::text = ANY
-                   ((ARRAY ['PENDING'::character varying, 'IN_PROGRESS'::character varying, 'COMPLETED'::character varying, 'CANCELLED'::character varying])::text[])),
+                   (ARRAY [('PENDING'::character varying)::text, ('IN_PROGRESS'::character varying)::text, ('COMPLETED'::character varying)::text, ('CANCELLED'::character varying)::text])),
     type             varchar(20)  not null
         constraint tests_type_check
-            check ((type)::text = ANY ((ARRAY ['FAST'::character varying, 'COMPLETE'::character varying])::text[])),
+            check ((type)::text = ANY
+                   (ARRAY [('FAST'::character varying)::text, ('COMPLETE'::character varying)::text])),
     student_id       bigint       not null
         constraint fk5jo5ip3k2nd4n33tms38306o1
             references students
@@ -483,6 +540,12 @@ create table tests
 
 alter table tests
     owner to postgres;
+
+create index idx_tests_student
+    on tests (student_id);
+
+create index idx_tests_status
+    on tests (status);
 
 create table test_questions
 (
@@ -505,7 +568,7 @@ create table test_results
     dominant_type             varchar(20) not null
         constraint test_results_dominant_type_check
             check ((dominant_type)::text = ANY
-                   ((ARRAY ['REALISTIC'::character varying, 'INVESTIGATIVE'::character varying, 'ARTISTIC'::character varying, 'SOCIAL'::character varying, 'ENTERPRISING'::character varying, 'CONVENTIONAL'::character varying])::text[])),
+                   (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     dominant_type_description varchar(20),
     downloaded                boolean     not null,
     key_points                varchar(4000),
@@ -525,6 +588,12 @@ create table test_results
 
 alter table test_results
     owner to postgres;
+
+create index idx_result_test
+    on test_results (test_id);
+
+create index idx_result_dominant
+    on test_results (dominant_type);
 
 create table job_recommendations
 (
@@ -577,6 +646,12 @@ create table personalized_jobs
 alter table personalized_jobs
     owner to postgres;
 
+create index idx_job_expiry
+    on personalized_jobs (expiration_date);
+
+create index idx_personalized_job_category
+    on personalized_jobs (category);
+
 create table job_advantages
 (
     job_id    bigint not null
@@ -599,12 +674,6 @@ create table job_required_skills
 alter table job_required_skills
     owner to postgres;
 
-create index idx_job_expiry
-    on personalized_jobs (expiration_date);
-
-create index idx_personalized_job_category
-    on personalized_jobs (category);
-
 create table student_personalized_job_links
 (
     id                  bigint       not null
@@ -612,7 +681,8 @@ create table student_personalized_job_links
     created_at          timestamp(6) not null,
     type                varchar(20)  not null
         constraint student_personalized_job_links_type_check
-            check ((type)::text = ANY ((ARRAY ['SAVED'::character varying, 'FAVORITE'::character varying])::text[])),
+            check ((type)::text = ANY
+                   (ARRAY [('SAVED'::character varying)::text, ('FAVORITE'::character varying)::text])),
     personalized_job_id bigint       not null
         constraint fkgxrxd97fdqe4gt2be7ubu412p
             references personalized_jobs,
@@ -636,38 +706,26 @@ create table test_result_scores
     type       varchar(20) not null
         constraint test_result_scores_type_check
             check ((type)::text = ANY
-                   ((ARRAY ['REALISTIC'::character varying, 'INVESTIGATIVE'::character varying, 'ARTISTIC'::character varying, 'SOCIAL'::character varying, 'ENTERPRISING'::character varying, 'CONVENTIONAL'::character varying])::text[])),
+                   (ARRAY [('REALISTIC'::character varying)::text, ('INVESTIGATIVE'::character varying)::text, ('ARTISTIC'::character varying)::text, ('SOCIAL'::character varying)::text, ('ENTERPRISING'::character varying)::text, ('CONVENTIONAL'::character varying)::text])),
     primary key (result_id, type)
 );
 
 alter table test_result_scores
     owner to postgres;
 
-create index idx_result_test
-    on test_results (test_id);
-
-create index idx_result_dominant
-    on test_results (dominant_type);
-
-create index idx_tests_student
-    on tests (student_id);
-
-create index idx_tests_status
-    on tests (status);
-
 create table tokens
 (
     id          bigint       not null
         primary key,
     created_at  timestamp(6) not null,
+    expired     boolean      not null,
     expires_at  timestamp(6) not null,
     revoked     boolean      not null,
     revoked_at  timestamp(6),
-    token_hash  varchar(255),
     token_type  varchar(50)  not null
         constraint tokens_token_type_check
             check ((token_type)::text = ANY
-                   ((ARRAY ['ACCESS'::character varying, 'REFRESH'::character varying, 'PASSWORD_RESET'::character varying, 'EMAIL_VERIFICATION'::character varying])::text[])),
+                   (ARRAY [('ACCESS'::character varying)::text, ('REFRESH'::character varying)::text, ('PASSWORD_RESET'::character varying)::text, ('EMAIL_VERIFICATION'::character varying)::text])),
     token_value varchar(512) not null
         constraint idx_token_value
             unique,
@@ -699,15 +757,6 @@ create table training_recommendations
 alter table training_recommendations
     owner to postgres;
 
-create index idx_users_last_seen
-    on users (last_seen);
-
-create index idx_users_enabled
-    on users (enabled);
-
-create index idx_users_suspended
-    on users (suspended);
-
 create table users_roles
 (
     user_id bigint not null
@@ -721,6 +770,7 @@ create table users_roles
 
 alter table users_roles
     owner to postgres;
+
 create sequence answer_option_seq
     increment by 50;
 
@@ -830,5 +880,3 @@ create sequence users_seq
     increment by 50;
 
 alter sequence users_seq owner to postgres;
-
-

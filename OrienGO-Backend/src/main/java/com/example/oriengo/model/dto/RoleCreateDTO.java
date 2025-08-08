@@ -13,8 +13,8 @@ import java.util.Set;
 @Builder
 public class RoleCreateDTO {
 
-    @NotBlank(message = "Role name must not be blank")
-    @Size(min = 2, max = 50, message = "Role name must be between 2 and 50 characters")
+    @NotBlank(message = "{role.name.notblank}")
+    @Size(min = 2, max = 50, message = "{role.name.size}")
     private String name;
     private Set<Long> privilegeIds;
 }

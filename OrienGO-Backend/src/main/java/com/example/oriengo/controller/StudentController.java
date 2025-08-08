@@ -1,8 +1,13 @@
 package com.example.oriengo.controller;
 
+import com.example.oriengo.mapper.StudentMapper;
 import com.example.oriengo.model.dto.StudentCreateDTO;
+import com.example.oriengo.model.dto.StudentResponseDTO;
+import com.example.oriengo.model.entity.Admin;
 import com.example.oriengo.model.entity.Student;
+import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,68 +19,149 @@ import java.util.List;
 @RestController
 @RequestMapping("api/student")
 @RequiredArgsConstructor
+@Validated
 public class StudentController {
 
     private final StudentService studentService;
+    private final StudentMapper studentMapper;
 
     @GetMapping
-    public ResponseEntity<List<Student>> getStudents(){
+    public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getStudents(){
         List<Student> students = studentService.getStudents(false);
-        return ResponseEntity.ok(students);
+        List<StudentResponseDTO> studentResps = studentMapper.toDTO(students);
+        ApiResponse<List<StudentResponseDTO>> response = ApiResponse.<List<StudentResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Students fetched successfully")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("deleted")
-    public ResponseEntity<List<Student>> getDeletedStudents(){
+    public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getDeletedStudents(){
         List<Student> students = studentService.getStudents(true);
-        return ResponseEntity.ok(students);
+        List<StudentResponseDTO> studentResps = studentMapper.toDTO(students);
+        ApiResponse<List<StudentResponseDTO>> response = ApiResponse.<List<StudentResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted students fetched successfully")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> getStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id, false);
-        return ResponseEntity.ok(student);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/deleted/{id}")
-    public ResponseEntity<Student> getDeletedStudentById(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> getDeletedStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id, true);
-        return ResponseEntity.ok(student);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Student> getStudentByEmail(@PathVariable String email){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> getStudentByEmail(@PathVariable String email){
         Student student = studentService.getStudentByEmail(email, false);
-        return ResponseEntity.ok(student);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("deleted/email/{email}")
-    public ResponseEntity<Student> getDeletedStudentByEmail(@PathVariable String email){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> getDeletedStudentByEmail(@PathVariable String email){
         Student student = studentService.getStudentByEmail(email, true);
-        return ResponseEntity.ok(student);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/hard/{id}")
-    public ResponseEntity<Void> hardDeleteStudent(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<Void>> hardDeleteStudent(@PathVariable Long id){
         studentService.hardDeleteStudent(id);
-        return ResponseEntity.noContent().build();
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .code("STUDENT_DELETED")
+                .status(204)
+                .message("Student hard deleted successfully")
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> softDeleteStudent(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<Void>> softDeleteStudent(@PathVariable Long id){
         studentService.softDeleteStudent(id);
-        return ResponseEntity.noContent().build();
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .code("SUCCESS")
+                .status(204)
+                .message("Student soft deleted successfully")
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/restore/{id}")
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> restoreStudent(@PathVariable Long id) {
+        Student student = studentService.restoreStudent(id);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("STUDENT_RESTORED")
+                .status(200)
+                .message("Student restored successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@Validated @RequestBody StudentCreateDTO studentInfo){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> createStudent(@Valid @RequestBody StudentCreateDTO studentInfo){
         Student student = studentService.createStudent(studentInfo);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(201)
+                .message("Student created successfully")
+                .data(studentResp)
+                .build();
         URI location = URI.create("/api/student/" + student.getId());
-        return ResponseEntity.created(location).body(student);
+        return ResponseEntity.created(location).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @Validated @RequestBody StudentCreateDTO studentInfo){
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentCreateDTO studentInfo){
         Student student = studentService.updateStudent(id, studentInfo);
-        return ResponseEntity.ok(student);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("STUDENT_UPDATED")
+                .status(200)
+                .message("Student updated successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
     }
 }

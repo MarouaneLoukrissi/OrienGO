@@ -12,4 +12,6 @@ public interface CoachRepository extends JpaRepository<Coach, Long> {
     Optional<Coach> findByIdAndIsDeleted(Long id, boolean deleted);
     Optional<Coach> findByEmailAndIsDeleted(String email, boolean deleted);
     List<Coach> findByIsDeleted(boolean deleted);
+
+    boolean existsByEmailAndIsDeletedFalse(String originalEmail);
 }

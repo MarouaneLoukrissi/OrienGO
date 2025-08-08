@@ -3,36 +3,42 @@ package com.example.oriengo.model.dto;
 import com.example.oriengo.model.enumeration.GenderType;
 import com.example.oriengo.validations.ValidPhoneNumber;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CoachCreateDTO {
-    @NotBlank(message = "First name is required")
-    @Size(min = 2, max = 50, message = "First name must be at most 50 characters")
+    @NotBlank(message = "{coach.firstname.notblank}")
+    @Size(min = 2, max = 50, message = "{coach.firstname.size}")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
-    @Size(min = 2, max = 50, message = "Last name must be at most 50 characters")
+    @NotBlank(message = "{coach.lastname.notblank}")
+    @Size(min = 2, max = 50, message = "{coach.lastname.size}")
     private String lastName;
 
-    @NotNull(message = "Age is required")
-    @Min(value = 10, message = "Age must be at least 10")
-    @Max(value = 120, message = "Age must be at most 120")
+    @NotNull(message = "{coach.age.notnull}")
+    @Min(value = 10, message = "{coach.age.min}")
+    @Max(value = 120, message = "{coach.age.max}")
     private Integer age;
 
-    @Size(max = 10, message = "Gender must be at most 10 characters")
+    @Size(max = 10, message = "{coach.gender.size}")
     private GenderType gender;
 
-    @Size(max = 20, message = "Phone number must be at most 20 characters")
-    @Pattern(regexp = "^\\+?[1-9][0-9]{7,19}$", message = "Phone number must contain 8 to 20 digits and start with + or non-zero")
-    @ValidPhoneNumber(message = "Invalid phone number format")
+    @Size(max = 20, message = "{coach.phoneNumber.size}")
+    @Pattern(regexp = "^\\+?[1-9][0-9]{7,19}$", message = "{coach.phoneNumber.pattern}")
+    @ValidPhoneNumber(message = "{coach.phoneNumber.invalid}")
     private String phoneNumber;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email format is invalid")
-    @Size(max = 365, message = "Email must be at most 365 characters")
+    @NotBlank(message = "{coach.email.notblank}")
+    @Email(message = "{coach.email.email}")
+    @Size(max = 365, message = "{coach.email.size}")
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
+    @NotBlank(message = "{coach.password.notblank}")
+    @Size(min = 8, max = 255, message = "{coach.password.size}")
     private String password;
 
 //    @NotBlank(message = "Confirm password is required")

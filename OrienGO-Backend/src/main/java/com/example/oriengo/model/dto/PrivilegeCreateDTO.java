@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class PrivilegeCreateDTO {
 
-    @NotBlank(message = "Privilege name is required")
-    @Size(max = 100, message = "Privilege name must be at most 100 characters")
+    @NotBlank(message = "{privilege.name.required}")
+    @Size(max = 100, message = "{privilege.name.size}")
     private String name;
 }

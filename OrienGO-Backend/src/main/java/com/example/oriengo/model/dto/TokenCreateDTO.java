@@ -13,18 +13,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TokenCreateDTO {
 
-    @NotBlank(message = "Token value is required")
-    @Size(max = 512, message = "Token value must be at most 512 characters")
+    @NotBlank(message = "{token.tokenValue.notBlank}")
+    @Size(max = 512, message = "{token.tokenValue.size}")
     private String tokenValue;
 
-    @NotNull(message = "Token type is required")
+    @NotNull(message = "{token.tokenType.notNull}")
     private TokenType tokenType;
 
-    @NotNull(message = "Expiration date is required")
-    @Future(message = "Expiration date must be in the future")
+    @NotNull(message = "{token.expiredAt.notNull}")
+    @Future(message = "{token.expiredAt.future}")
     private LocalDateTime expiredAt;
 
-    @NotNull(message = "User ID is required")
+    @NotNull(message = "{token.userId.notNull}")
     private Long userId;
+
 }
 
