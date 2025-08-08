@@ -4,6 +4,7 @@ import com.example.oriengo.model.enumeration.MediaType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -56,6 +57,10 @@ public class Media implements Serializable {
     @CreationTimestamp
     @Column(name="created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name="updated_at", updatable = false)
+    private LocalDateTime UpdatedAt;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

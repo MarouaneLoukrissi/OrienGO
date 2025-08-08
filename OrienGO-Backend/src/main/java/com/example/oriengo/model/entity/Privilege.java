@@ -1,5 +1,6 @@
 package com.example.oriengo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,6 +38,7 @@ public class Privilege implements Serializable {
 
     @Builder.Default
     @ManyToMany(mappedBy = "privileges", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
 }

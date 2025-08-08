@@ -1,5 +1,7 @@
 package com.example.oriengo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serial;
@@ -36,6 +38,8 @@ public class Role implements Serializable {
 
     @Builder.Default
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     @Builder.Default

@@ -4,5 +4,6 @@ public enum Department {
     TECH,
     OPERATIONS,
     HR,
-    FINANCE
+    FINANCE,
+    OTHERS
 }
