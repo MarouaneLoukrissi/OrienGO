@@ -3,6 +3,14 @@
 ## Vue d'ensemble
 Ce fichier documente les données de test insérées dans les tables principales utilisées par votre application.
 
+## ⚠️ IMPORTANT : Scores RIASEC en Pourcentage
+**Les scores RIASEC sont maintenant exprimés en pourcentage (0-100) au lieu de l'échelle 1-5.**
+
+### Conversion des Scores
+- **Ancienne échelle** : 1.0 à 5.0
+- **Nouvelle échelle** : 0% à 100%
+- **Formule de conversion** : `(ancien_score / 5.0) * 100.0`
+
 ## Utilisateurs de Test
 
 ### Admin Principal
@@ -33,23 +41,23 @@ Ce fichier documente les données de test insérées dans les tables principales
 
 1. **Développeur Full-Stack** (TECH)
    - Salaire: 45,000 - 65,000 EUR/an
-   - RIASEC: INVESTIGATIVE (4.2), ENTERPRISING (3.9)
+   - RIASEC: INVESTIGATIVE (84%), ENTERPRISING (78%)
 
 2. **Psychologue Clinicien** (HEALTH)
    - Salaire: 35,000 - 50,000 EUR/an
-   - RIASEC: SOCIAL (4.8), INVESTIGATIVE (4.5)
+   - RIASEC: SOCIAL (96%), INVESTIGATIVE (90%)
 
 3. **Chef de Projet Marketing** (BUSINESS)
    - Salaire: 40,000 - 60,000 EUR/an
-   - RIASEC: ENTERPRISING (4.6), SOCIAL (4.2)
+   - RIASEC: ENTERPRISING (92%), SOCIAL (84%)
 
 4. **Designer UX/UI** (ARTS)
    - Salaire: 35,000 - 55,000 EUR/an
-   - RIASEC: ARTISTIC (4.7), SOCIAL (3.8)
+   - RIASEC: ARTISTIC (94%), SOCIAL (76%)
 
 5. **Ingénieur Data Scientist** (TECH)
    - Salaire: 50,000 - 70,000 EUR/an
-   - RIASEC: INVESTIGATIVE (4.8), CONVENTIONAL (4.1)
+   - RIASEC: INVESTIGATIVE (96%), CONVENTIONAL (82%)
 
 ## Tests et Résultats
 
@@ -115,7 +123,7 @@ Ce fichier documente les données de test insérées dans les tables principales
 
 - ✅ users, students, admins
 - ✅ roles, privileges, roles_privileges
-- ✅ jobs (avec scores RIASEC)
+- ✅ jobs (avec scores RIASEC en pourcentage)
 - ✅ questions, answer_options
 - ✅ tests, test_results, test_result_scores
 - ✅ job_recommendations
