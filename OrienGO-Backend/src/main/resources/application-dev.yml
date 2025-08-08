@@ -1,11 +1,14 @@
 server:
   port: 8888
 
+media:
+  upload-cover-image-dir: uploads/images/cover
+  upload-profile-image-dir: uploads/images/profile
+  upload-pdf-dir: uploads/pdfs
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5435/oriengo_db
     username: postgres
     password: "0000"
     driver-class-name: org.postgresql.Driver
-media:
-  upload-dir: uploads/

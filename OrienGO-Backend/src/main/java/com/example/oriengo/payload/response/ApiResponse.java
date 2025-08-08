@@ -16,5 +16,5 @@ public class ApiResponse<T> {
     private T data;            // Actual payload (AdminResponseDTO, list, etc.)
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Map<String, String> errors; // Changed to Map for validation errors
+    private Map<String, String> errors; // Changed to Map for validation errors
 }

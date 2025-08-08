@@ -67,7 +67,7 @@ public class Notification implements Serializable {
     @Column(name = "send_email", nullable = false)
     private boolean sendEmail = true; // set from user preferences
 
-    @Version
-    private Long version;
+//    @Version
+//    private Long version;
 
 }

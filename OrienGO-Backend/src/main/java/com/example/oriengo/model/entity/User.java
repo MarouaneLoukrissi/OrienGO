@@ -1,6 +1,7 @@
 package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.GenderType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -138,6 +139,10 @@ public class User implements Serializable {
     public boolean isOnline() {
         return lastSeen != null && lastSeen.isAfter(LocalDateTime.now().minusMinutes(1));
     }
+
+//    @Version
+//    @Column(name = "version", nullable = false)
+//    private Long version;
 
     public void addRole(Role role) {
         roles.add(role);
