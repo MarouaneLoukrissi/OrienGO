@@ -1,14 +1,25 @@
 package com.example.oriengo.exception.handler;
 
+import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionCreationException;
+import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionDeleteException;
+import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionGetException;
+import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionUpdateException;
 import com.example.oriengo.exception.custom.PathVarException;
-import com.example.oriengo.exception.custom.Test.TestCreationException;
-import com.example.oriengo.exception.custom.Test.TestDeleteException;
-import com.example.oriengo.exception.custom.Test.TestGetException;
-import com.example.oriengo.exception.custom.Test.TestUpdateException;
+import com.example.oriengo.exception.custom.Question.*;
+import com.example.oriengo.exception.custom.Test.*;
+import com.example.oriengo.exception.custom.TestQuestion.TestQuestionGetException;
 import com.example.oriengo.exception.custom.TestResult.TestResultCreationException;
 import com.example.oriengo.exception.custom.TestResult.TestResultDeleteException;
 import com.example.oriengo.exception.custom.TestResult.TestResultGetException;
 import com.example.oriengo.exception.custom.TestResult.TestResultUpdateException;
+import com.example.oriengo.exception.custom.Training.TrainingCreationException;
+import com.example.oriengo.exception.custom.Training.TrainingDeleteException;
+import com.example.oriengo.exception.custom.Training.TrainingGetException;
+import com.example.oriengo.exception.custom.Training.TrainingUpdateException;
+import com.example.oriengo.exception.custom.TrainingRecommendation.TrainingRecommendationCreationException;
+import com.example.oriengo.exception.custom.TrainingRecommendation.TrainingRecommendationDeleteException;
+import com.example.oriengo.exception.custom.TrainingRecommendation.TrainingRecommendationGetException;
+import com.example.oriengo.exception.custom.TrainingRecommendation.TrainingRecommendationUpdateException;
 import com.example.oriengo.payload.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +46,10 @@ public class GlobalExceptionHandler {
 
     private final MessageSource messageSource; // Injected
 
-//    @ExceptionHandler(QuestionRestoreException.class)
-//    public ResponseEntity<?> handleTestRestoreException(QuestionRestoreException ex) {
-//        return buildResponse("TEST_RESTORE_FAILED", ex.getStatusCode(), ex.getReason(), null);
-//    }
+    @ExceptionHandler(TestRestoreException.class)
+    public ResponseEntity<?> handleTestRestoreException(TestRestoreException ex) {
+        return buildResponse("TEST_RESTORE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
 
     @ExceptionHandler(TestCreationException.class)
     public ResponseEntity<?> handleTestCreationException(TestCreationException ex) {
@@ -55,6 +66,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TestGetException.class)
     public ResponseEntity<?> handleTestGetException(TestGetException ex) {
         return buildResponse("TEST_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    @ExceptionHandler(TestSaveException.class)
+    public ResponseEntity<?> handleTestSaveException(TestSaveException ex) {
+        return buildResponse("TEST_SAVE_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
     @ExceptionHandler(TestResultCreationException.class)
@@ -74,7 +90,88 @@ public class GlobalExceptionHandler {
         return buildResponse("TEST_RESULT_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
     }
 
+    @ExceptionHandler(AnswerOptionCreationException.class)
+    public ResponseEntity<?> handleAnswerOptionCreationException(AnswerOptionCreationException ex) {
+        return buildResponse("ANSWER_OPTION_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(AnswerOptionUpdateException.class)
+    public ResponseEntity<?> handleAnswerOptionUpdateException(AnswerOptionUpdateException ex) {
+        return buildResponse("ANSWER_OPTION_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(AnswerOptionDeleteException.class)
+    public ResponseEntity<?> handleAnswerOptionDeleteException(AnswerOptionDeleteException ex) {
+        return buildResponse("ANSWER_OPTION_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(AnswerOptionGetException.class)
+    public ResponseEntity<?> handleAnswerOptionGetException(AnswerOptionGetException ex) {
+        return buildResponse("ANSWER_OPTION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
 
+    @ExceptionHandler(QuestionCreationException.class)
+    public ResponseEntity<?> handleQuestionCreationException(QuestionCreationException ex) {
+        return buildResponse("QUESTION_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(QuestionUpdateException.class)
+    public ResponseEntity<?> handleQuestionUpdateException(QuestionUpdateException ex) {
+        return buildResponse("QUESTION_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(QuestionDeleteException.class)
+    public ResponseEntity<?> handleQuestionDeleteException(QuestionDeleteException ex) {
+        return buildResponse("QUESTION_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(QuestionGetException.class)
+    public ResponseEntity<?> handleQuestionGetException(QuestionGetException ex) {
+        return buildResponse("QUESTION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(QuestionRestoreException.class)
+    public ResponseEntity<?> handleQuestionRestoreException(QuestionRestoreException ex) {
+        return buildResponse("QUESTION_RESTORE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(QuestionSaveException.class)
+    public ResponseEntity<?> handleQuestionSaveException(QuestionSaveException ex) {
+        return buildResponse("QUESTION_SAVE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    @ExceptionHandler(TestQuestionGetException.class)
+    public ResponseEntity<?> handleTestQuestionGetException(TestQuestionGetException ex) {
+        return buildResponse("TEST_QUESTION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    @ExceptionHandler(TrainingCreationException.class)
+    public ResponseEntity<?> handleTrainingCreationException(TrainingCreationException ex) {
+        return buildResponse("TRAINING_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingUpdateException.class)
+    public ResponseEntity<?> handleTrainingUpdateException(TrainingUpdateException ex) {
+        return buildResponse("TRAINING_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingDeleteException.class)
+    public ResponseEntity<?> handleTrainingDeleteException(TrainingDeleteException ex) {
+        return buildResponse("TRAINING_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingGetException.class)
+    public ResponseEntity<?> handleTrainingGetException(TrainingGetException ex) {
+        return buildResponse("TRAINING_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    @ExceptionHandler(TrainingRecommendationCreationException.class)
+    public ResponseEntity<?> handleTrainingRecommendationCreationException(TrainingRecommendationCreationException ex) {
+        return buildResponse("TRAINING_RECOMMENDATION_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingRecommendationUpdateException.class)
+    public ResponseEntity<?> handleTrainingRecommendationUpdateException(TrainingRecommendationUpdateException ex) {
+        return buildResponse("TRAINING_RECOMMENDATION_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingRecommendationDeleteException.class)
+    public ResponseEntity<?> handleTrainingRecommendationDeleteException(TrainingRecommendationDeleteException ex) {
+        return buildResponse("TRAINING_RECOMMENDATION_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(TrainingRecommendationGetException.class)
+    public ResponseEntity<?> handleTrainingRecommendationGetException(TrainingRecommendationGetException ex) {
+        return buildResponse("TRAINING_RECOMMENDATION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<ApiResponse<Object>> handleMaxSizeException(MaxUploadSizeExceededException ex) {
         String message = messageSource.getMessage("error.file.too.large", null, LocaleContextHolder.getLocale());
@@ -86,7 +183,8 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Object>> handleAccessDenied(AccessDeniedException ex) {
-        return buildResponse("ACCESS_DENIED", HttpStatusCode.valueOf(401), "You do not have permission to perform this operation.", null);
+        String message = messageSource.getMessage("error.access.denied", null, LocaleContextHolder.getLocale());
+        return buildResponse("ACCESS_DENIED", HttpStatus.UNAUTHORIZED, message, null);
     }
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleNotFound(NoHandlerFoundException ex) {
@@ -121,6 +219,4 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(status).body(response);
     }
-
 }
-
