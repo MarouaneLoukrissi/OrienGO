@@ -1,19 +1,17 @@
-<div class="min-h-screen bg-orange-100">
-  <div class="max-w-[88rem] mx-auto p-6">
+<div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[88rem] mx-auto">
 
     <!-- Header Section -->
-    <div class="text-center mb-8">
+    <div class="text-center mb-12">
       <!-- User Icon -->
-      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-brand-orange-dark rounded-full mb-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-        </svg>
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-14 h-14 sm:w-16 sm:h-16 md:w-[68px] md:h-[68px] text-white" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="0.36"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.25C6.37665 1.25 4.25 3.37665 4.25 6C4.25 8.62335 6.37665 10.75 9 10.75C11.6234 10.75 13.75 8.62335 13.75 6C13.75 3.37665 11.6234 1.25 9 1.25ZM5.75 6C5.75 4.20507 7.20507 2.75 9 2.75C10.7949 2.75 12.25 4.20507 12.25 6C12.25 7.79493 10.7949 9.25 9 9.25C7.20507 9.25 5.75 7.79493 5.75 6Z" fill="#ffffff"></path> <path d="M15 2.25C14.5858 2.25 14.25 2.58579 14.25 3C14.25 3.41421 14.5858 3.75 15 3.75C16.2426 3.75 17.25 4.75736 17.25 6C17.25 7.24264 16.2426 8.25 15 8.25C14.5858 8.25 14.25 8.58579 14.25 9C14.25 9.41421 14.5858 9.75 15 9.75C17.0711 9.75 18.75 8.07107 18.75 6C18.75 3.92893 17.0711 2.25 15 2.25Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.67815 13.5204C5.07752 12.7208 6.96067 12.25 9 12.25C11.0393 12.25 12.9225 12.7208 14.3219 13.5204C15.7 14.3079 16.75 15.5101 16.75 17C16.75 18.4899 15.7 19.6921 14.3219 20.4796C12.9225 21.2792 11.0393 21.75 9 21.75C6.96067 21.75 5.07752 21.2792 3.67815 20.4796C2.3 19.6921 1.25 18.4899 1.25 17C1.25 15.5101 2.3 14.3079 3.67815 13.5204ZM4.42236 14.8228C3.26701 15.483 2.75 16.2807 2.75 17C2.75 17.7193 3.26701 18.517 4.42236 19.1772C5.55649 19.8253 7.17334 20.25 9 20.25C10.8267 20.25 12.4435 19.8253 13.5776 19.1772C14.733 18.517 15.25 17.7193 15.25 17C15.25 16.2807 14.733 15.483 13.5776 14.8228C12.4435 14.1747 10.8267 13.75 9 13.75C7.17334 13.75 5.55649 14.1747 4.42236 14.8228Z" fill="#ffffff"></path> <path d="M18.1607 13.2674C17.7561 13.1787 17.3561 13.4347 17.2674 13.8393C17.1787 14.2439 17.4347 14.6439 17.8393 14.7326C18.6317 14.9064 19.2649 15.2048 19.6829 15.5468C20.1014 15.8892 20.25 16.2237 20.25 16.5C20.25 16.7507 20.1294 17.045 19.7969 17.3539C19.462 17.665 18.9475 17.9524 18.2838 18.1523C17.8871 18.2717 17.6624 18.69 17.7818 19.0867C17.9013 19.4833 18.3196 19.708 18.7162 19.5886C19.5388 19.3409 20.2743 18.9578 20.8178 18.4529C21.3637 17.9457 21.75 17.2786 21.75 16.5C21.75 15.6352 21.2758 14.912 20.6328 14.3859C19.9893 13.8593 19.1225 13.4783 18.1607 13.2674Z" fill="#ffffff"></path> </g></svg>
       </div>
       
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+      <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
         {{ 'ADMIN_USERS.TITLE' | translate }}
       </h1>
-      <p class="text-gray-600 text-sm sm:text-base">
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
         {{ 'ADMIN_USERS.SUBTITLE' | translate }}
       </p>
     </div>
@@ -25,12 +23,12 @@
         [(ngModel)]="searchTerm"
         (input)="onSearchChange()"
         placeholder="{{ 'ADMIN_USERS.SEARCH_PLACEHOLDER' | translate }}"
-        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
+        class="outline-none px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
       />
       <select 
         [(ngModel)]="selectedRole"
         (change)="onRoleChange()"
-        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
+        class="cursor-pointer px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
         <option value="">{{ 'ADMIN_USERS.FILTER_ROLE' | translate }}</option>
         <option value="student">Student</option>
         <option value="coach">Coach</option>
@@ -38,7 +36,7 @@
       <select 
         [(ngModel)]="selectedStatus"
         (change)="onStatusChange()"
-        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
+        class="cursor-pointer px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors bg-white">
         <option value="">{{ 'ADMIN_USERS.FILTER_STATUS' | translate }}</option>
         <option value="active">Active</option>
         <option value="inactive">Inactive</option>
@@ -47,33 +45,33 @@
         type="date"
         [(ngModel)]="selectedDate"
         (change)="onDateChange()"
-        class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
+        class="cursor-pointer outline-none px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
         placeholder="{{ 'ADMIN_USERS.FILTER_DATE' | translate }}"
       />
     </div>
 
     <!-- Action Buttons -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
       <button
         (click)="resetFilters()"
-        class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 font-medium transition-colors">
+        class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 font-medium transition-colors">
         {{ 'ADMIN_USERS.RESET_FILTERS' | translate }}
       </button>
       <button 
         (click)="openAddUserModal()"
-        class="px-6 py-3 bg-brand-orange-dark hover:bg-orange-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+        class="px-6 py-3 bg-brand-orange hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition-all">
         + {{ 'ADMIN_USERS.ADD_BUTTON' | translate }}
       </button>
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <table class="min-w-full text-left text-sm">
-        <thead class="bg-orange-200">
+        <thead class="bg-orange-100">
           <tr class="border-b border-gray-200">
             <th 
               (click)="onSort('firstName')"
-              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
               {{ 'ADMIN_USERS.TABLE.NAME' | translate }}
               <span *ngIf="sortField === 'firstName'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -81,7 +79,7 @@
             </th>
             <th 
               (click)="onSort('email')"
-              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
               {{ 'ADMIN_USERS.TABLE.EMAIL' | translate }}
               <span *ngIf="sortField === 'email'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -89,7 +87,7 @@
             </th>
             <th 
               (click)="onSort('role')"
-              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
               {{ 'ADMIN_USERS.TABLE.ROLE' | translate }}
               <span *ngIf="sortField === 'role'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -97,7 +95,7 @@
             </th>
             <th 
               (click)="onSort('status')"
-              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
               {{ 'ADMIN_USERS.TABLE.STATUS' | translate }}
               <span *ngIf="sortField === 'status'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -105,7 +103,7 @@
             </th>
             <th 
               (click)="onSort('createdAt')"
-              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-300 transition-colors cursor-pointer select-none">
+              class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
               {{ 'ADMIN_USERS.TABLE.CREATED' | translate }}
               <span *ngIf="sortField === 'createdAt'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -115,7 +113,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let user of users" class="hover:bg-orange-100 transition-colors">
+          <tr *ngFor="let user of users" class="hover:bg-orange-50 transition-colors">
             <td class="px-6 py-4">
               <div>
                 <div class="font-semibold text-gray-900">{{ user.firstName }} {{ user.lastName }}</div>
@@ -124,7 +122,7 @@
             </td>
             <td class="px-6 py-4 text-gray-900">{{ user.email }}</td>
             <td class="px-6 py-4">
-              <span class="bg-brand-orange-dark text-white px-3 py-1 rounded-full text-xs font-medium">
+              <span class="bg-brand-orange text-white px-3 py-1 rounded-full text-xs font-medium">
                 {{ user.role === 'student' ? 'Student' : 'Coach' }}
               </span>
             </td>
@@ -234,7 +232,7 @@
               </label>
               <select
                 formControlName="role"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
                 <option *ngFor="let role of getAvailableRoles()" [value]="role">
                   {{ role === 'student' ? 'Student' : 'Coach' }}
                 </option>
@@ -289,6 +287,8 @@
                 </label>
                 <input
                   type="number"
+                  min="0"
+                  max="100"
                   formControlName="age"
                   [class.border-red-500]="addUserForm.get('age')?.invalid && addUserForm.get('age')?.touched"
                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -305,8 +305,9 @@
                 </label>
                 <select
                   formControlName="gender"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !addUserForm.get('gender')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
                   <option value="male">{{ 'ADMIN_USERS.MODAL.MALE' | translate }}</option>
                   <option value="female">{{ 'ADMIN_USERS.MODAL.FEMALE' | translate }}</option>
                   <option value="other">{{ 'ADMIN_USERS.MODAL.OTHER' | translate }}</option>
@@ -378,8 +379,9 @@
                 </label>
                 <select
                   formControlName="educationLevel"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !addUserForm.get('educationLevel')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
                   <option *ngFor="let level of educationLevels" [value]="level">
                     {{ getEducationLevelLabel(level) }}
                   </option>
@@ -469,8 +471,9 @@
                 </label>
                 <select
                   formControlName="messagePermission"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !addUserForm.get('messagePermission')?.value}"                  
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
                   <option *ngFor="let permission of messagePermissions" [value]="permission">
                     {{ getMessagePermissionLabel(permission) }}
                   </option>
@@ -483,8 +486,9 @@
                 </label>
                 <select
                   formControlName="accountPrivacy"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !addUserForm.get('accountPrivacy')?.value}"                  
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
                   <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
                     {{ getAccountPrivacyLabel(privacy) }}
                   </option>
@@ -497,8 +501,9 @@
                 </label>
                 <select
                   formControlName="profileVisibility"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !addUserForm.get('profileVisibility')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
                   <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
                     {{ getVisibilityStatusLabel(visibility) }}
                   </option>
@@ -760,7 +765,7 @@
                 </label>
                 <select
                   formControlName="role"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  class="cursor-pointer w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
                   <option *ngFor="let role of getAvailableRoles()" [value]="role">
                     {{ role === 'student' ? 'Student' : 'Coach' }}
                   </option>
@@ -782,6 +787,8 @@
                 </label>
                 <input
                   type="number"
+                  min="0"
+                  max="100"
                   formControlName="age"
                   [class.border-red-500]="editUserForm.get('age')?.invalid && editUserForm.get('age')?.touched"
                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -798,8 +805,9 @@
                 </label>
                 <select
                   formControlName="gender"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !editUserForm.get('gender')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_GENDER' | translate }}</option>
                   <option value="male">{{ 'ADMIN_USERS.MODAL.MALE' | translate }}</option>
                   <option value="female">{{ 'ADMIN_USERS.MODAL.FEMALE' | translate }}</option>
                   <option value="other">{{ 'ADMIN_USERS.MODAL.OTHER' | translate }}</option>
@@ -871,8 +879,9 @@
                 </label>
                 <select
                   formControlName="educationLevel"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !editUserForm.get('educationLevel')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden> {{ 'ADMIN_USERS.MODAL.SELECT_EDUCATION_LEVEL' | translate }}</option>
                   <option *ngFor="let level of educationLevels" [value]="level">
                     {{ getEducationLevelLabel(level) }}
                   </option>
@@ -962,8 +971,9 @@
                 </label>
                 <select
                   formControlName="messagePermission"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !editUserForm.get('messagePermission')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_PERMISSION' | translate }}</option>
                   <option *ngFor="let permission of messagePermissions" [value]="permission">
                     {{ getMessagePermissionLabel(permission) }}
                   </option>
@@ -976,8 +986,9 @@
                 </label>
                 <select
                   formControlName="accountPrivacy"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !editUserForm.get('accountPrivacy')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_ACCOUNT_PRIVACY' | translate }}</option>
                   <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
                     {{ getAccountPrivacyLabel(privacy) }}
                   </option>
@@ -990,8 +1001,9 @@
                 </label>
                 <select
                   formControlName="profileVisibility"
-                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option value="">{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
+                  [ngClass]="{'text-gray-400': !editUserForm.get('profileVisibility')?.value}"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="" disabled selected hidden>{{ 'ADMIN_USERS.MODAL.SELECT_PROFILE_VISIBILITY' | translate }}</option>
                   <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
                     {{ getVisibilityStatusLabel(visibility) }}
                   </option>

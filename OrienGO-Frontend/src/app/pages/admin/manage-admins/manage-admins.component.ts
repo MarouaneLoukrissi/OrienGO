@@ -239,7 +239,7 @@ export class ManageAdminsComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
       role: ['admin', [Validators.required]],
       age: [null, [Validators.min(18), Validators.max(100)]],
-      gender: [''],
+      gender: [null],
       phoneNumber: ['', [Validators.pattern(/^\+?[0-9\s\-\(\)]+$/)]],
       messagePermission: [MessagePermission.ALL, [Validators.required]],
       accountPrivacy: [AccountPrivacy.PUBLIC, [Validators.required]],

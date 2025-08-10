@@ -1,18 +1,18 @@
-<div class="min-h-screen bg-orange-100">
-  <div class="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[88rem] mx-auto">
     <!-- Header Section -->
-    <div class="text-center mb-8">
+    <div class="text-center mb-12">
       <!-- Question Icon -->
-      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-brand-orange-dark rounded-full mb-4">
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
         <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
       
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+      <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
         {{ 'ADMIN_QUESTIONS.TITLE' | translate }}
       </h1>
-      <p class="text-gray-600 text-sm sm:text-base">
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
         {{ 'ADMIN_QUESTIONS.SUBTITLE' | translate }}
       </p>
     </div>
@@ -25,7 +25,7 @@
             type="text"
             [(ngModel)]="searchTerm"
             (input)="onSearchChange()"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
             [placeholder]="'ADMIN_QUESTIONS.SEARCH_PLACEHOLDER' | translate"
           />
         </div>
@@ -34,8 +34,8 @@
           <select
             [(ngModel)]="selectedCategory"
             (change)="onCategoryChange()"
-            class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
-            <option value="">{{ 'ADMIN_QUESTIONS.FILTER_CATEGORY' | translate }}</option>
+            class="cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="">{{ 'ADMIN_QUESTIONS.ALL' | translate }}</option>
             <option *ngFor="let category of categories" [value]="category">
               {{ getCategoryLabel(category) }}
             </option>
@@ -43,29 +43,29 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center">
+      <div class="flex flex-wrap justify-between items-center gap-4">
         <button
           (click)="resetFilters()"
-          class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+          class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
           {{ 'ADMIN_QUESTIONS.RESET_FILTERS' | translate }}
         </button>
 
         <button
           (click)="openAddQuestionModal()"
-          class="px-6 py-3 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
           {{ 'ADMIN_QUESTIONS.ADD_BUTTON' | translate }}
         </button>
       </div>
     </div>
 
     <!-- Tableau des questions -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-orange-200">
+        <thead class="bg-orange-100">
           <tr>
             <th 
               (click)="onSort('text')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_QUESTIONS.TABLE.QUESTION' | translate }}
               <span *ngIf="sortField === 'text'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -73,7 +73,7 @@
             </th>
             <th 
               (click)="onSort('category')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_QUESTIONS.TABLE.CATEGORY' | translate }}
               <span *ngIf="sortField === 'category'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -88,15 +88,15 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let question of questions" class="hover:bg-orange-100 transition-colors">
+          <tr *ngFor="let question of questions" class="hover:bg-orange-50 transition-colors">
             <td class="px-4 sm:px-6 py-4">
               <div>
                 <div class="font-semibold text-gray-900">{{ question.text }}</div>
-                <div class="text-sm text-gray-500 mt-1">ID: {{ question.id }}</div>
+                <!--<div class="text-sm text-gray-500 mt-1">ID: {{ question.id }}</div>-->
               </div>
             </td>
             <td class="px-4 sm:px-6 py-4">
-              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange-dark text-white">
+              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange text-white">
                 {{ getCategoryLabel(question.category) }}
               </span>
             </td>
@@ -106,7 +106,7 @@
               </span>
             </td>
             <td class="px-4 sm:px-6 py-4">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap space-x-2">
                 <span 
                   (click)="openViewQuestionModal(question)"
                   class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
@@ -162,9 +162,10 @@
               </label>
               <select
                 formControlName="category"
+                [ngClass]="{'text-gray-400': !addQuestionForm.get('category')?.value}"
                 [class.border-red-500]="addQuestionForm.get('category')?.invalid && addQuestionForm.get('category')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark">
-                <option value="">{{ 'ADMIN_QUESTIONS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_QUESTIONS.MODAL.SELECT_CATEGORY' | translate }}</option>
                 <option *ngFor="let category of categories" [value]="category">
                   {{ getCategoryLabel(category) }}
                 </option>
@@ -183,7 +184,7 @@
               formControlName="text"
               rows="4"
               [class.border-red-500]="addQuestionForm.get('text')?.invalid && addQuestionForm.get('text')?.touched"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange"
               [placeholder]="'ADMIN_QUESTIONS.MODAL.QUESTION_TEXT_PLACEHOLDER' | translate"
             ></textarea>
             <div *ngIf="getErrorMessage('text', addQuestionForm)" class="text-red-500 text-xs mt-1">
@@ -245,7 +246,7 @@
               <label class="block text-sm font-medium text-gray-700 mb-1">
                 {{ 'ADMIN_QUESTIONS.MODAL.CATEGORY' | translate }}
               </label>
-              <span class="px-2 py-1 text-xs rounded-full bg-brand-orange-dark text-white">
+              <span class="px-2 py-1 text-xs rounded-full bg-brand-orange text-white">
                 {{ getCategoryLabel(selectedQuestion.category) }}
               </span>
             </div>
@@ -332,9 +333,10 @@
               </label>
               <select
                 formControlName="category"
+                [ngClass]="{'text-gray-400': !editQuestionForm.get('category')?.value}"
                 [class.border-red-500]="editQuestionForm.get('category')?.invalid && editQuestionForm.get('category')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark">
-                <option value="">{{ 'ADMIN_QUESTIONS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_QUESTIONS.MODAL.SELECT_CATEGORY' | translate }}</option>
                 <option *ngFor="let category of categories" [value]="category">
                   {{ getCategoryLabel(category) }}
                 </option>
@@ -353,7 +355,7 @@
               formControlName="text"
               rows="4"
               [class.border-red-500]="editQuestionForm.get('text')?.invalid && editQuestionForm.get('text')?.touched"
-              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange"
               [placeholder]="'ADMIN_QUESTIONS.MODAL.QUESTION_TEXT_PLACEHOLDER' | translate"
             ></textarea>
             <div *ngIf="getErrorMessage('text', editQuestionForm)" class="text-red-500 text-xs mt-1">

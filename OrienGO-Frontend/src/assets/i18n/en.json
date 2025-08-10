@@ -304,6 +304,7 @@
     "SEARCH_PLACEHOLDER": "Search by question text",
     "FILTER_CATEGORY": "Filter by Category",
     "RESET_FILTERS": "Reset Filters",
+    "ALL": "All Categories",
     "TABLE": {
       "QUESTION": "Question",
       "CATEGORY": "Category",
@@ -355,7 +356,9 @@
     "ADD_BUTTON": "Add Job",
     "SEARCH_PLACEHOLDER": "Search by title, description, education",
     "FILTER_CATEGORY": "Filter by Category",
+    "ALL": "All Categories",
     "FILTER_JOB_MARKET": "Filter by Job Market",
+    "ALLJM": "All Job Markets",
     "RESET_FILTERS": "Reset Filters",
     "TABLE": {
       "TITLE": "Title",
@@ -413,8 +416,8 @@
     "SUBTITLE": "Manage admin accounts and permissions",
     "ADD_BUTTON": "Add an Admin",
     "SEARCH_PLACEHOLDER": "Search by name or email",
-    "FILTER_ROLE": "Filter by Role",
-    "FILTER_STATUS": "Filter by Status",
+    "FILTER_ROLE": "All Roles",
+    "FILTER_STATUS": "All Statuses",
     "RESET_FILTERS": "Reset Filters",
     "ALL_PERMISSIONS": "All Permissions",
     "ALL_STATUSES": "All Statuses",

@@ -145,13 +145,13 @@ export class AdminQuestionnairesComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.addQuestionForm = this.fb.group({
-      category: ['', Validators.required],
+      category: [null, Validators.required],
       text: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       answerOptions: this.fb.array([])
     });
 
     this.editQuestionForm = this.fb.group({
-      category: ['', Validators.required],
+      category: [null, Validators.required],
       text: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       answerOptions: this.fb.array([])
     });

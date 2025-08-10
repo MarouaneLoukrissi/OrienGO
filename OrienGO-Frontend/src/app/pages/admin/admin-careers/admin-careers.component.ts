@@ -163,7 +163,7 @@ export class AdminCareersComponent implements OnInit {
     this.addJobForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      category: ['', Validators.required],
+      category: [null, Validators.required],
       education: ['', [Validators.required, Validators.maxLength(100)]],
       salaryRange: ['', [Validators.required, Validators.maxLength(100)]],
       jobMarket: ['', [Validators.required, Validators.maxLength(100)]],
@@ -173,7 +173,7 @@ export class AdminCareersComponent implements OnInit {
     this.editJobForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      category: ['', Validators.required],
+      category: [null, Validators.required],
       education: ['', [Validators.required, Validators.maxLength(100)]],
       salaryRange: ['', [Validators.required, Validators.maxLength(100)]],
       jobMarket: ['', [Validators.required, Validators.maxLength(100)]],

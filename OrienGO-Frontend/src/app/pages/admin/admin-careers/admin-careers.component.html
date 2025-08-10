@@ -1,41 +1,39 @@
-<div class="min-h-screen bg-orange-100">
-  <div class="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[88rem] mx-auto">
     <!-- Header Section -->
-    <div class="text-center mb-8">
+    <div class="text-center mb-12">
       <!-- Briefcase Icon -->
-      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-brand-orange-dark rounded-full mb-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
-        </svg>
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 sm:h-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2.80408 15.4771C2.80408 15.4771 2.94608 17.2151 2.97908 17.7631C3.02308 18.4981 3.30708 19.3191 3.78108 19.8891C4.45008 20.6971 5.23808 20.9821 6.29008 20.9841C7.52708 20.9861 16.5221 20.9861 17.7591 20.9841C18.8111 20.9821 19.5991 20.6971 20.2681 19.8891C20.7421 19.3191 21.0261 18.4981 21.0711 17.7631C21.1031 17.2151 21.2451 15.4771 21.2451 15.4771" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.49597 5.32949V4.95849C8.49597 3.73849 9.48397 2.75049 10.704 2.75049H13.286C14.505 2.75049 15.494 3.73849 15.494 4.95849L15.495 5.32949" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.995 16.6783V15.3843" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.74988 8.38905V11.8561C4.66788 13.1211 6.96588 14.0071 9.48788 14.3581C9.78988 13.2571 10.7829 12.4501 11.9899 12.4501C13.1779 12.4501 14.1909 13.2571 14.4729 14.3681C17.0049 14.0171 19.3119 13.1311 21.2399 11.8561V8.38905C21.2399 6.69505 19.8769 5.33105 18.1829 5.33105H5.81688C4.12288 5.33105 2.74988 6.69505 2.74988 8.38905Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
       </div>
       
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+      <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
         {{ 'ADMIN_CAREERS.TITLE' | translate }}
       </h1>
-      <p class="text-gray-600 text-sm sm:text-base">
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
         {{ 'ADMIN_CAREERS.SUBTITLE' | translate }}
       </p>
     </div>
 
     <!-- Barre de recherche et filtres -->
     <div class="mb-6 space-y-4">
-      <div class="flex flex-col sm:flex-row gap-4">
-        <div class="flex-1">
+      <div class="flex flex-wrap flex-col sm:flex-row gap-4">
+        <div class="flex-1 min-w-0 sm:min-w-[320px]">
           <input
             type="text"
             [(ngModel)]="searchTerm"
             (input)="onSearchChange()"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
             [placeholder]="'ADMIN_CAREERS.SEARCH_PLACEHOLDER' | translate"
           />
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-2">
+        <div class="min-w-0 flex flex-wrap flex-col sm:flex-row gap-2">
           <select
             [(ngModel)]="selectedCategory"
             (change)="onCategoryChange()"
-            class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
-            <option value="">{{ 'ADMIN_CAREERS.FILTER_CATEGORY' | translate }}</option>
+            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="" selected>{{ 'ADMIN_CAREERS.ALL' | translate }}</option>
             <option *ngFor="let category of jobCategories" [value]="category">
               {{ getJobCategoryLabel(category) }}
             </option>
@@ -44,8 +42,8 @@
           <select
             [(ngModel)]="selectedJobMarket"
             (change)="onJobMarketChange()"
-            class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark focus:border-brand-orange-dark transition-colors">
-            <option value="">{{ 'ADMIN_CAREERS.FILTER_JOB_MARKET' | translate }}</option>
+            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="" selected>{{ 'ADMIN_CAREERS.ALLJM' | translate }}</option>
             <option *ngFor="let market of getUniqueJobMarkets()" [value]="market">
               {{ market }}
             </option>
@@ -53,29 +51,29 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center">
+      <div class="flex flex-wrap gap-4 justify-between items-center">
         <button
           (click)="resetFilters()"
-          class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+          class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
           {{ 'ADMIN_CAREERS.RESET_FILTERS' | translate }}
         </button>
 
         <button
           (click)="openAddJobModal()"
-          class="px-6 py-3 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
           {{ 'ADMIN_CAREERS.ADD_BUTTON' | translate }}
         </button>
       </div>
     </div>
 
     <!-- Tableau des postes -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-orange-200">
+        <thead class="bg-orange-100">
           <tr>
             <th 
               (click)="onSort('title')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_CAREERS.TABLE.TITLE' | translate }}
               <span *ngIf="sortField === 'title'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -83,7 +81,7 @@
             </th>
             <th 
               (click)="onSort('category')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_CAREERS.TABLE.CATEGORY' | translate }}
               <span *ngIf="sortField === 'category'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -91,7 +89,7 @@
             </th>
             <th 
               (click)="onSort('education')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_CAREERS.TABLE.EDUCATION' | translate }}
               <span *ngIf="sortField === 'education'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -99,7 +97,7 @@
             </th>
             <th 
               (click)="onSort('salaryRange')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_CAREERS.TABLE.SALARY_RANGE' | translate }}
               <span *ngIf="sortField === 'salaryRange'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -107,7 +105,7 @@
             </th>
             <th 
               (click)="onSort('jobMarket')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-300 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
               {{ 'ADMIN_CAREERS.TABLE.JOB_MARKET' | translate }}
               <span *ngIf="sortField === 'jobMarket'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
@@ -117,7 +115,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let job of jobs" class="hover:bg-orange-100 transition-colors">
+          <tr *ngFor="let job of jobs" class="hover:bg-orange-50 transition-colors">
             <td class="px-4 sm:px-6 py-4">
               <div>
                 <div class="font-semibold text-gray-900">{{ job.title }}</div>
@@ -125,7 +123,7 @@
               </div>
             </td>
             <td class="px-4 sm:px-6 py-4">
-              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange-dark text-white">
+              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange text-white">
                 {{ getJobCategoryLabel(job.category) }}
               </span>
             </td>
@@ -133,7 +131,7 @@
             <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.salaryRange }}</td>
             <td class="px-4 sm:px-6 py-4">
               <span 
-                [class]="'px-3 py-1 text-xs font-medium rounded-full ' + 
+                [class]="'whitespace-nowrap px-3 py-1 text-xs font-medium rounded-full ' + 
                   (job.jobMarket === 'High demand' ? 'bg-green-100 text-green-800' : 
                    job.jobMarket === 'Stable' ? 'bg-blue-100 text-blue-800' :
                    'bg-gray-100 text-gray-800')">
@@ -141,7 +139,7 @@
               </span>
             </td>
             <td class="px-4 sm:px-6 py-4">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center space-x-2">
                 <span 
                   (click)="openViewJobModal(job)"
                   class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
@@ -213,9 +211,10 @@
               </label>
               <select
                 formControlName="category"
+                [ngClass]="{'text-gray-400': !addJobForm.get('category')?.value}"
                 [class.border-red-500]="addJobForm.get('category')?.invalid && addJobForm.get('category')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option value="">{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
                 <option *ngFor="let category of jobCategories" [value]="category">
                   {{ getJobCategoryLabel(category) }}
                 </option>
@@ -505,9 +504,10 @@
               </label>
               <select
                 formControlName="category"
+                [ngClass]="{'text-gray-400': !editJobForm.get('category')?.value}"
                 [class.border-red-500]="editJobForm.get('category')?.invalid && editJobForm.get('category')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option value="">{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
                 <option *ngFor="let category of jobCategories" [value]="category">
                   {{ getJobCategoryLabel(category) }}
                 </option>

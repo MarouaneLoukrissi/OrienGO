@@ -305,6 +305,7 @@
     "SEARCH_PLACEHOLDER": "Rechercher par texte de question",
     "FILTER_CATEGORY": "Filtrer par Catégorie",
     "RESET_FILTERS": "Réinitialiser les Filtres",
+    "ALL": "Tous les Catégories",
     "TABLE": {
       "QUESTION": "Question",
       "CATEGORY": "Catégorie",
@@ -356,7 +357,9 @@
     "ADD_BUTTON": "Ajouter un Poste",
     "SEARCH_PLACEHOLDER": "Rechercher par titre, description, éducation",
     "FILTER_CATEGORY": "Filtrer par Catégorie",
+    "ALL": "Tous les Catégories",
     "FILTER_JOB_MARKET": "Filtrer par Marché du Travail",
+    "ALLJM": "Tous les Marchés du Travails",
     "RESET_FILTERS": "Réinitialiser les Filtres",
     "TABLE": {
       "TITLE": "Titre",
@@ -414,8 +417,8 @@
     "SUBTITLE": "Gérer les comptes administrateurs et les permissions",
     "ADD_BUTTON": "Ajouter un admin",
     "SEARCH_PLACEHOLDER": "Rechercher par nom ou email",
-    "FILTER_ROLE": "Filtrer par Rôle",
-    "FILTER_STATUS": "Filtrer par Statut",
+    "FILTER_ROLE": "Tous les rôles",
+    "FILTER_STATUS": "Tous les statuts",
     "RESET_FILTERS": "Réinitialiser les filtres",
     "ALL_PERMISSIONS": "Toutes les permissions",
     "ALL_STATUSES": "Tous les statuts",

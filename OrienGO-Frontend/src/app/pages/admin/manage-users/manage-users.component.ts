@@ -44,7 +44,7 @@ interface User {
   phoneNumber?: string;
   school?: string;
   fieldOfStudy?: string;
-  educationLevel?: string;
+  educationLevel?: EducationLevel;
   city?: string;
   region?: string;
   country?: string;
@@ -100,7 +100,7 @@ export class ManageUsersComponent implements OnInit {
       phoneNumber: '+212-6-12-34-56-78',
       school: 'Université Hassan II',
       fieldOfStudy: 'Informatique',
-      educationLevel: 'University',
+      educationLevel: EducationLevel.UNIVERSITY,
       city: 'beni mellal',
       region: 'Bnei Mellal khenifra',
       country: 'Maroc',
@@ -137,7 +137,7 @@ export class ManageUsersComponent implements OnInit {
       phoneNumber: '+212-6-11-22-33-44',
       school: 'Lycée Mohammed V',
       fieldOfStudy: 'Sciences Physiques',
-      educationLevel: 'High School',
+      educationLevel: EducationLevel.HIGH_SCHOOL,
       city: 'Rabat',
       region: 'Rabat-Salé-Kénitra',
       country: 'Maroc',
@@ -174,7 +174,7 @@ export class ManageUsersComponent implements OnInit {
       phoneNumber: '+212-6-99-88-77-66',
       school: 'École Nationale de Commerce et de Gestion',
       fieldOfStudy: 'Gestion des Entreprises',
-      educationLevel: 'University',
+      educationLevel: EducationLevel.UNIVERSITY,
       city: 'Fès',
       region: 'Fès-Meknès',
       country: 'Maroc',
@@ -196,7 +196,7 @@ export class ManageUsersComponent implements OnInit {
       phoneNumber: '+212-6-44-33-22-11',
       school: 'Institut Supérieur de Technologie',
       fieldOfStudy: 'Génie Civil',
-      educationLevel: 'Post-Secondary',
+      educationLevel: EducationLevel.POST_SECONDARY,
       city: 'Marrakech',
       region: 'Marrakech-Safi',
       country: 'Maroc',
@@ -233,7 +233,7 @@ export class ManageUsersComponent implements OnInit {
       phoneNumber: '+212-6-33-44-55-66',
       school: 'Université Ibn Zohr',
       fieldOfStudy: 'Médecine',
-      educationLevel: 'Graduate',
+      educationLevel: EducationLevel.GRADUATE,
       city: 'Agadir',
       region: 'Souss-Massa',
       country: 'Maroc',
@@ -248,6 +248,7 @@ export class ManageUsersComponent implements OnInit {
 
   // Liste des utilisateurs (filtrée et triée)
   users: User[] = [];
+  form: any;
 
   constructor(
     private fb: FormBuilder,
@@ -263,7 +264,7 @@ export class ManageUsersComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
       role: ['student', [Validators.required]],
       age: [null, [Validators.min(13), Validators.max(100)]],
-      gender: [''],
+      gender: [null],
       phoneNumber: ['', [Validators.pattern(/^\+?[0-9\s\-\(\)]+$/)]],
       school: [''],
       fieldOfStudy: [''],
@@ -300,6 +301,11 @@ export class ManageUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.form = this.fb.group({
+      accountPrivacy: ['']
+    });
+
     // S'abonner aux changements de rôle pour mettre à jour la validation
     this.addUserForm.get('role')?.valueChanges.subscribe(role => {
       this.updateFormValidation(role, this.addUserForm);
