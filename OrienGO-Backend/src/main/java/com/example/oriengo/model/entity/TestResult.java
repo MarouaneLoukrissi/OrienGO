@@ -52,7 +52,7 @@ public class TestResult implements Serializable {
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn(name = "type", length = 20)
     @Column(name = "percentage", nullable = false)
-    private Map<Category, Integer> scores = new EnumMap<>(Category.class); //scores.put(Category.REALISTIC, 44);
+    private Map<Category, Double> scores = new EnumMap<>(Category.class); //scores.put(Category.REALISTIC, 44);
 
     @Column(name = "key_points", length = 4000)
     private String keyPoints; // e.g., "key points of your profile ..."
@@ -75,7 +75,7 @@ public class TestResult implements Serializable {
     @JsonIgnore
     private Set<JobRecommendation> jobRecommendations = new HashSet<>();
 
-    @OneToMany(mappedBy = "testResult", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<TrainingRecommendation> trainingRecommendations = new HashSet<>();
+//    @OneToMany(mappedBy = "testResult", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private Set<TrainingRecommendation> trainingRecommendations = new HashSet<>();
 }

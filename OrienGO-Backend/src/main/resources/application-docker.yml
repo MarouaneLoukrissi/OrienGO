@@ -3,9 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5436/oriengo_db
+    url: jdbc:postgresql://postgres:5432/oriengo_db
     username: postgres
     password: "0000"
     driver-class-name: org.postgresql.Driver
 media:
-  upload-dir: ${MEDIA_UPLOAD_DIR:/app/uploads}
+  upload-images-dir: ${MEDIA_UPLOAD_IMAGES_DIR:/app/uploads/images}
+  upload-pdfs-dir: ${MEDIA_UPLOAD_PDFS_DIR:/app/uploads/pdfs}

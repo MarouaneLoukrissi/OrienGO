@@ -1,12 +1,19 @@
 package com.example.oriengo.controller;
 
+import com.example.oriengo.mapper.TestResultMapper;
+import com.example.oriengo.model.dto.TestResultCreateDTO;
+import com.example.oriengo.model.dto.TestResultResponseDTO;
 import com.example.oriengo.model.entity.TestResult;
+import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.TestResultService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/test-results")
@@ -14,29 +21,82 @@ import java.util.List;
 public class TestResultController {
 
     private final TestResultService testResultService;
+    private final TestResultMapper testResultMapper;
 
     @GetMapping
-    public ResponseEntity<List<TestResult>> getAll() {
-        return ResponseEntity.ok(testResultService.getAll());
+    public ResponseEntity<ApiResponse<List<TestResultResponseDTO>>> getAll() {
+        List<TestResult> results = testResultService.getAll();
+        List<TestResultResponseDTO> dtoList = testResultMapper.toDTO(results);
+
+        ApiResponse<List<TestResultResponseDTO>> response = ApiResponse.<List<TestResultResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Test results fetched successfully")
+                .data(dtoList)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TestResult> getById(@PathVariable Long id) {
-        return testResultService.getById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<TestResultResponseDTO>> getById(@PathVariable Long id) {
+        TestResult result = testResultService.getById(id)
+                .orElseThrow(() -> new RuntimeException("TestResult not found with ID " + id)); // Or your custom exception
+
+        TestResultResponseDTO dto = testResultMapper.toDTO(result);
+        ApiResponse<TestResultResponseDTO> response = ApiResponse.<TestResultResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Test result fetched successfully")
+                .data(dto)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/test/{testId}")
-    public ResponseEntity<TestResult> getByTestId(@PathVariable Long testId) {
-        return testResultService.getByTestId(testId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<TestResultResponseDTO>> getByTestId(@PathVariable Long testId) {
+        TestResult result = testResultService.getByTestId(testId)
+                .orElseThrow(() -> new RuntimeException("TestResult not found for test ID " + testId));
+
+        TestResultResponseDTO dto = testResultMapper.toDTO(result);
+        ApiResponse<TestResultResponseDTO> response = ApiResponse.<TestResultResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Test result fetched successfully")
+                .data(dto)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<TestResult>> getByStudentId(@PathVariable Long studentId) {
+    public ResponseEntity<ApiResponse<List<TestResultResponseDTO>>> getByStudentId(@PathVariable Long studentId) {
         List<TestResult> results = testResultService.getByStudentId(studentId);
-        return ResponseEntity.ok(results);
+        List<TestResultResponseDTO> dtoList = testResultMapper.toDTO(results);
+
+        ApiResponse<List<TestResultResponseDTO>> response = ApiResponse.<List<TestResultResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Test results fetched successfully")
+                .data(dtoList)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{testId}/submit")
+    public ResponseEntity<ApiResponse<TestResultResponseDTO>> createTestResult(@Valid @RequestBody TestResultCreateDTO dto) {
+        TestResult result = testResultService.createTestResult(dto);
+        TestResultResponseDTO responseDTO = testResultMapper.toDTO(result);
+        ApiResponse<TestResultResponseDTO> response = ApiResponse.<TestResultResponseDTO>builder()
+                .code("SUCCESS")
+                .status(201)
+                .message("Test result created successfully")
+                .data(responseDTO)
+                .build();
+
+        URI location = URI.create("/api/test-results/" + result.getId());
+        return ResponseEntity.created(location).body(response);
     }
 }

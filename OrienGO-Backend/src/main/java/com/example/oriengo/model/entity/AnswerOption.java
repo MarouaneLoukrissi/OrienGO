@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -39,4 +41,7 @@ public class AnswerOption implements Serializable {
 
     @Column(nullable = false, length = 500)
     private String text;  // The answer text shown to users
+
+    @OneToMany(mappedBy = "chosenAnswer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<TestQuestion> testQuestions = new HashSet<>();
 }

@@ -65,14 +65,9 @@ public class Test implements Serializable {
     private Integer questionsCount; //20 or 60
 
     @Builder.Default
-    @ManyToMany
-    @JoinTable(
-            name = "test_questions",
-            joinColumns = @JoinColumn(name = "test_id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id")
-    )
     @JsonIgnore
-    private Set<Question> questions = new HashSet<>();
+    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TestQuestion> testQuestions = new HashSet<>();
 
     @OneToOne(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -81,5 +76,4 @@ public class Test implements Serializable {
     @Builder.Default
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
-
 }
