@@ -71,9 +71,11 @@ public class User implements Serializable {
     @Column(nullable = false, length = 255)
     private transient String password;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean enabled = false;
 
+    @Builder.Default
     @Column(name="token_expired", nullable = false)
     private boolean tokenExpired = false;
 
@@ -88,6 +90,7 @@ public class User implements Serializable {
     @Column(name="last_seen")
     private LocalDateTime lastSeen;
 
+    @Builder.Default
     @Column(name="suspended", nullable = false)
     private boolean suspended = false;
 
@@ -134,6 +137,7 @@ public class User implements Serializable {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 

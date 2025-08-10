@@ -50,6 +50,7 @@ public class Training implements Serializable {
     @Column(name = "type", nullable = false, length = 50)
     private TrainingType type; // e.g., UNIVERSITY, BOOTCAMP, VOCATIONAL
 
+    @Builder.Default
     @Column(name = "highlighted", nullable = false)
     private boolean highlighted = false;
 
@@ -64,6 +65,7 @@ public class Training implements Serializable {
     @OneToMany(mappedBy = "training", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<StudentTrainingLink> studentLinks = new HashSet<>();
 
+    @Builder.Default
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
 

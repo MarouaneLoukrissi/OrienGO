@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 public class JobRecommendationController {
 
     private final JobRecommendationService service;
-    private final JobRecommendationMapper mapper;
+    private final JobRecommendationMapper jobRecommendationMapper;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<JobRecommendationResponseDto>>> getAll() {
         List<JobRecommendation> recommendations = service.findAll();
         List<JobRecommendationResponseDto> dtos = recommendations.stream()
-                .map(mapper::toResponseDto)
+                .map(jobRecommendationMapper::toResponseDto)
                 .collect(Collectors.toList());
 
         ApiResponse<List<JobRecommendationResponseDto>> response = ApiResponse.<List<JobRecommendationResponseDto>>builder()
@@ -45,7 +45,7 @@ public class JobRecommendationController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<JobRecommendationResponseDto>> getById(@PathVariable Long id) {
         JobRecommendation entity = service.findById(id);
-        JobRecommendationResponseDto dto = mapper.toResponseDto(entity);
+        JobRecommendationResponseDto dto = jobRecommendationMapper.toResponseDto(entity);
 
         ApiResponse<JobRecommendationResponseDto> response = ApiResponse.<JobRecommendationResponseDto>builder()
                 .code("SUCCESS")
@@ -60,7 +60,7 @@ public class JobRecommendationController {
     @PostMapping
     public ResponseEntity<ApiResponse<JobRecommendationResponseDto>> create(@Valid @RequestBody JobRecommendationRequestDto requestDto) {
         JobRecommendation saved = service.create(requestDto);
-        JobRecommendationResponseDto dto = mapper.toResponseDto(saved);
+        JobRecommendationResponseDto dto = jobRecommendationMapper.toResponseDto(saved);
 
         ApiResponse<JobRecommendationResponseDto> response = ApiResponse.<JobRecommendationResponseDto>builder()
                 .code("SUCCESS")
@@ -76,7 +76,7 @@ public class JobRecommendationController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<JobRecommendationResponseDto>> update(@PathVariable Long id, @Valid @RequestBody JobRecommendationRequestDto requestDto) {
         JobRecommendation updated = service.update(id, requestDto);
-        JobRecommendationResponseDto dto = mapper.toResponseDto(updated);
+        JobRecommendationResponseDto dto = jobRecommendationMapper.toResponseDto(updated);
 
         ApiResponse<JobRecommendationResponseDto> response = ApiResponse.<JobRecommendationResponseDto>builder()
                 .code("JOB_RECOMMENDATION_UPDATED")

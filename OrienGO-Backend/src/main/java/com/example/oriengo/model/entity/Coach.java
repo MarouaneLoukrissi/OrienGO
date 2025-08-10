@@ -44,10 +44,12 @@ public class Coach extends User implements Serializable {
     @OneToMany(mappedBy = "coach", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Conversation> conversations = new HashSet<>();
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "message_permission", nullable = false)
     private MessagePermission messagePermission = MessagePermission.NETWORK;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountPrivacy accountPrivacy = AccountPrivacy.PUBLIC;

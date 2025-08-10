@@ -37,6 +37,7 @@ public class TrainingRecommendation implements Serializable {
     @Column(name = "match_percentage", nullable = false)
     private Integer matchPercentage;
 
+    @Builder.Default
     @Column(name = "highlighted", nullable = false)
     private boolean highlighted = false;
 

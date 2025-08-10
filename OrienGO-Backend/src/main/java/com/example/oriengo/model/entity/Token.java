@@ -50,9 +50,11 @@ public class Token implements Serializable {
     @Column(name = "revoked_at")
     private LocalDateTime revokedAt; //When a user logs out or resets their password, old tokens get revoked.
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean revoked = false;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean expired = false;
 

@@ -47,6 +47,7 @@ public class TestResult implements Serializable {
     @Column(name = "dominant_type_description", length = 20)
     private String dominantTypeDescription; // e.g., "You are a Realistic type, practical and hands-on..."
 
+    @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "test_result_scores", joinColumns = @JoinColumn(name = "result_id"))
     @MapKeyEnumerated(EnumType.STRING)
@@ -62,12 +63,15 @@ public class TestResult implements Serializable {
     @JsonIgnore
     private Media pdf; // Link to generated PDF media
 
+    @Builder.Default
     @Column(name = "shared", nullable = false)
     private boolean shared = false; // If user shared the result externally
 
+    @Builder.Default
     @Column(name = "downloaded", nullable = false)
     private boolean downloaded = false; // If user downloaded PDF
 
+    @Builder.Default
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
 

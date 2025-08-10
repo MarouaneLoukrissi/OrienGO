@@ -4,6 +4,7 @@ import com.example.oriengo.model.dto.QuestionResponseDTO;
 import com.example.oriengo.model.entity.Question;
 import com.example.oriengo.model.dto.QuestionDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 public interface QuestionMapper {
     QuestionMapper INSTANCE = Mappers.getMapper(QuestionMapper.class);
     // Map Question entity to QuestionResponseDTO, MapStruct auto maps answerOptions
+    @Mapping(target = "answerOptions", source = "answerOptions")
     QuestionResponseDTO toDTO(Question question);
 
     List<QuestionResponseDTO> toDTO(List<Question> question);

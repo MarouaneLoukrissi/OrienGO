@@ -28,7 +28,7 @@ public class StudentCreateDTO {
     @Max(value = 120, message = "{age.max}")
     private Integer age;
 
-    @Size(max = 10, message = "{gender.size}")
+    @NotNull(message = "{gender.notNull}")
     private GenderType gender;
 
     @Size(max = 20, message = "{phoneNumber.size}")

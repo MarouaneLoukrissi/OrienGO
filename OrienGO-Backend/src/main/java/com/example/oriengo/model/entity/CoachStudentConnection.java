@@ -33,6 +33,7 @@ public class CoachStudentConnection {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ConnectionStatus status = ConnectionStatus.PENDING;

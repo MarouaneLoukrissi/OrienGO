@@ -28,7 +28,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JobService {
     private final JobRepository repository;
-    private final JobMapper mapper;
+    private final JobMapper jobMapper;
     private final MessageSource messageSource; // Injected
 
     private String getMessage(String key, Object... args) {
@@ -69,7 +69,7 @@ public class JobService {
         }
         try {
             log.info("Starting creation of new job");
-            Job job = mapper.toEntity(requestDto);
+            Job job = jobMapper.toEntity(requestDto);
             Job savedJob = repository.save(job);
             log.info("Job created successfully with ID: {}", savedJob.getId());
             return savedJob;
@@ -89,7 +89,7 @@ public class JobService {
         }
         try {
             Job existingEntity = findById(id);
-            mapper.updateEntityFromDto(requestDto, existingEntity);
+            jobMapper.updateEntityFromDto(requestDto, existingEntity);
             Job savedJob = repository.save(existingEntity);
             log.info("Job updated successfully with ID: {}", savedJob.getId());
             return savedJob;

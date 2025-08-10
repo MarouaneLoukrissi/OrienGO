@@ -23,5 +23,4 @@ public class TestResponseDTO {
     private Integer durationMinutes;
     private Integer questionsCount;
     private boolean softDeleted;
-
 }

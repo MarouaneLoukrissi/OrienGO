@@ -92,9 +92,11 @@ public class Job implements Serializable {
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<StudentJobLink> studentLinks = new HashSet<>();
 
+    @Builder.Default
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
 
+    @Builder.Default
     @Column(name = "active", nullable = false)
     private boolean active = true;
 

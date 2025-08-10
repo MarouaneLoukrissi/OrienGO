@@ -34,30 +34,39 @@ public class NotificationSettings implements Serializable {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean testCompletedFast = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean testCompletedFull = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean connectionRequests = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean profileViews = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean newMessages = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean addedToGroup = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean newJobs = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean testReminders = true;
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean receiveEmailNotifications = true;
 

@@ -7,6 +7,7 @@ import com.example.oriengo.model.dto.StudentCreateDTO;
 import com.example.oriengo.model.entity.Location;
 import com.example.oriengo.model.entity.Role;
 import com.example.oriengo.model.entity.Student;
+import com.example.oriengo.model.enumeration.AccountPrivacy;
 import com.example.oriengo.repository.RoleRepository;
 import com.example.oriengo.repository.StudentRepository;
 import jakarta.transaction.Transactional;
@@ -190,7 +191,7 @@ public class StudentService {
 
             Student student = studentMapper.toEntity(dto);
             student.setPassword(student.getPassword()); //encoder.encode(student.getPassword())
-            student.setEnabled(true);
+//            student.setEnabled(true);
 
             String roleName = "STUDENT";
             Role role = roleRepository.findByName(roleName)

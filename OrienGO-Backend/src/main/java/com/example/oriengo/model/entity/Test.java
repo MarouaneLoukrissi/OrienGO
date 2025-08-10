@@ -47,8 +47,9 @@ public class Test implements Serializable {
     @Column(nullable = true, length = 20)
     private TestType type;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 20)
+    @Column(nullable = false, length = 20)
     private TestStatus status = TestStatus.PENDING;
 
     @CreationTimestamp

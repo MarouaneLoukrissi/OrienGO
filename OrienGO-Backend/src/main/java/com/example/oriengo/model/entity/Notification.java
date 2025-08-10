@@ -49,6 +49,7 @@ public class Notification implements Serializable {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+
     @Builder.Default
     @Column(nullable = false)
     private boolean read = false;
@@ -60,6 +61,7 @@ public class Notification implements Serializable {
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipient; // can be Student or CoachRepository
 
+    @Builder.Default
     @Column(nullable = false)
     private boolean deleted = false;
 

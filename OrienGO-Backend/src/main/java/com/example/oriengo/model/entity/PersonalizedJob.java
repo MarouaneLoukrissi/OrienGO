@@ -87,6 +87,7 @@ public class PersonalizedJob implements Serializable {
         @Column(name = "expiration_date")
         private LocalDate expirationDate;
 
+        @Builder.Default
         @Column(name = "highlighted", nullable = false)
         private boolean highlighted = false;
 
@@ -98,6 +99,7 @@ public class PersonalizedJob implements Serializable {
         @OneToMany(mappedBy = "personalizedJob", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
         private Set<StudentPersonalizedJobLink> studentLinks = new HashSet<>();
 
+        @Builder.Default
         @Column(name = "soft_deleted", nullable = false)
         private boolean softDeleted = false;
 

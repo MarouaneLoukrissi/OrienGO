@@ -66,10 +66,12 @@ public class Student extends User implements Serializable {
     private Set<Test> tests = new HashSet<>();
 
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "message_permission", nullable = false)
     private MessagePermission messagePermission = MessagePermission.NETWORK;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountPrivacy accountPrivacy = AccountPrivacy.PUBLIC;
