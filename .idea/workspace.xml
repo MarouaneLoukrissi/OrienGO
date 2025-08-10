@@ -1,7 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4592d4a-2f4b-4d96-ac0f-3873aa8b5b89" name="Changes" comment="" />
+    <list default="true" id="e4592d4a-2f4b-4d96-ac0f-3873aa8b5b89" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/StudentPersonalizedJobLinkController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/AppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/JobRecommendation/JobRecommendationCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/JobRecommendation/JobRecommendationDeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/JobRecommendation/JobRecommendationGetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/JobRecommendation/JobRecommendationUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/Jobs/JobCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/Jobs/JobDeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/Jobs/JobGetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/Jobs/JobUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/PathVarException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/PersonalizedJob/PersonalizedJobCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/PersonalizedJob/PersonalizedJobDeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/PersonalizedJob/PersonalizedJobGetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/PersonalizedJob/PersonalizedJobUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentJobLink/StudentJobLinkCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentJobLink/StudentJobLinkDeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentJobLink/StudentJobLinkGetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentJobLink/StudentJobLinkUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentPersonalizedJobLink/StudentPersonalizedJobLinkCreationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentPersonalizedJobLink/StudentPersonalizedJobLinkDeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentPersonalizedJobLink/StudentPersonalizedJobLinkGetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/StudentPersonalizedJobLink/StudentPersonalizedJobLinkUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/ValidationExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/mapper/StudentPersonalizedJobLinkMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/StudentPersonalizedJobLinkRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/StudentPersonalizedJobLinkResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/README_TEST_DATA.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/azure-pipelines.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/configuration/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/JobRecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/JobRecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/PersonalizedJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/PersonalizedJobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/StudentJobLinkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/controller/StudentJobLinkController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/custom/ResourceNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/dto/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/exceptions/BusinessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/exceptions/ValidationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/exception/handler/util/ExceptionUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobRecommendationRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobRecommendationRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/JobResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/PersonalizedJobRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/PersonalizedJobRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/StudentJobLinkRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/dto/StudentJobLinkRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/repository/PersonalizedJobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/repository/PersonalizedJobRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/repository/StudentJobLinkRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/repository/StudentJobLinkRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/JobRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/JobRecommendationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/PersonalizedJobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/PersonalizedJobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/StudentJobLinkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/StudentJobLinkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/StudentPersonalizedJobLinkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/java/com/example/oriengo/service/StudentPersonalizedJobLinkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/db/migration/V1_1__initial.sql" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/db/migration/V1_1__initial.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/db/migration/V1_2__add_riasec_to_jobs.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/db/migration/V1_3__add_active_column_to_jobs.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/i18n/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/i18n/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/i18n/messages_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/OrienGO-Backend/src/main/resources/i18n/messages_fr.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,21 +78,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MarouaneLoukrissi"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MarouaneLoukrissi&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MarouaneLoukrissi/OrienGO.git",
-    "accountId": "bd889480-2e70-49c9-af21-e82993ea63c0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MarouaneLoukrissi/OrienGO.git&quot;,
+    &quot;accountId&quot;: &quot;bd889480-2e70-49c9-af21-e82993ea63c0&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="30MnZlfCNWxIOjADvLwU9CTpjBM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,11 +102,12 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "marouane-backend",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Documents/OrienGO",
+    "last_opened_file_path": "D:/Documents/OrienGO-marouane-backend/OrienGO-Backend",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -59,6 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1753446366818</updated>
       <workItem from="1753446367973" duration="176000" />
+      <workItem from="1754250700470" duration="59000" />
     </task>
     <servers />
   </component>

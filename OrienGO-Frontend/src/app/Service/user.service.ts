@@ -29,8 +29,8 @@ export class UserService {
   //public currentUser$ = this.currentUserSubject.asObservable();
   private currentUserSubject = new BehaviorSubject<User>({
     id: '1',
-    name: 'Alex Johnson',
-    email: 'alex@example.com',
+    name: 'Badr Icame',
+    email: 'badricame@example.com',
     role: 'student' // Default role for demo
   });
 

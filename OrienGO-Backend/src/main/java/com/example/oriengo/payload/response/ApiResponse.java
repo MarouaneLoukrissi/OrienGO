@@ -2,7 +2,6 @@ package com.example.oriengo.payload.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
 import java.util.Map;
 
 @Getter

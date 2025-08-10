@@ -59,6 +59,7 @@ public class User implements Serializable {
     private int age;
 
     @Column(length = 10)
+    @Enumerated(EnumType.STRING)
     private GenderType gender;
 
     @Column(name="phone_number", length = 20)
@@ -140,6 +141,10 @@ public class User implements Serializable {
     public boolean isOnline() {
         return lastSeen != null && lastSeen.isAfter(LocalDateTime.now().minusMinutes(1));
     }
+
+//    @Version
+//    @Column(name = "version", nullable = false)
+//    private Long version;
 
     public void addRole(Role role) {
         roles.add(role);

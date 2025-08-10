@@ -52,24 +52,4 @@ public class Coach extends User implements Serializable {
     @Column(nullable = false)
     private AccountPrivacy accountPrivacy = AccountPrivacy.PUBLIC;
 
-    public boolean hasConnection(Student student) {
-        return connections.stream()
-                .anyMatch(c -> c.getStudent().equals(student));
-    }
-
-    public CoachStudentConnection connectTo(Student student) {
-        CoachStudentConnection connection = CoachStudentConnection.builder()
-                .coach(this)
-                .student(student)
-                .build();
-        this.connections.add(connection);
-        student.getConnections().add(connection);
-        return connection;
-    }
-
-    public void disconnectFrom(Student student) {
-        this.connections.removeIf(c -> c.getStudent().equals(student));
-        student.getConnections().removeIf(c -> c.getCoach().equals(this));
-    }
-
 }
