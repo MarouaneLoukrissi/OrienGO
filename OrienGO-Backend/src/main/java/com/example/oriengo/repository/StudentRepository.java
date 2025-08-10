@@ -3,6 +3,7 @@ package com.example.oriengo.repository;
 import com.example.oriengo.model.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,4 +14,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByEmailAndIsDeleted(String email, boolean deleted);
 
     boolean existsByEmailAndIsDeletedFalse(String originalEmail);
+
+    Optional<Student> findByIdAndIsDeletedFalse(Long studentId);
 }

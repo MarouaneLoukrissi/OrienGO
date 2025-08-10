@@ -1,18 +1,25 @@
 create table jobs
 (
-    id           bigint        not null
+    id                   bigint        not null
         primary key,
-    category     varchar(50)   not null
+    active               boolean       not null,
+    category             varchar(50)   not null
         constraint jobs_category_check
             check ((category)::text = ANY
         ((ARRAY ['HEALTH'::character varying, 'EDUCATION'::character varying, 'TECH'::character varying, 'BUSINESS'::character varying, 'ARTS'::character varying])::text[])),
-    description  varchar(1000) not null,
-    education    varchar(100),
-    job_market   varchar(100),
-    salary_range varchar(100),
-    soft_deleted boolean       not null,
-    title        varchar(100)  not null,
-    version      bigint
+    description          varchar(1000) not null,
+    education            varchar(100),
+    job_market           varchar(100),
+    riasec_artistic      numeric(5, 2),
+    riasec_conventional  numeric(5, 2),
+    riasec_enterprising  numeric(5, 2),
+    riasec_investigative numeric(5, 2),
+    riasec_realistic     numeric(5, 2),
+    riasec_social        numeric(5, 2),
+    salary_range         varchar(100),
+    soft_deleted         boolean       not null,
+    title                varchar(100)  not null,
+    version              bigint
 );
 
 alter table jobs
@@ -167,9 +174,9 @@ create table users
             unique,
     enabled           boolean      not null,
     first_name        varchar(50)  not null,
-    gender            smallint
+    gender            varchar(10)
         constraint users_gender_check
-            check ((gender >= 0) AND (gender <= 1)),
+            check ((gender)::text = ANY ((ARRAY ['MALE'::character varying, 'FEMALE'::character varying])::text[])),
     is_deleted        boolean      not null,
     last_login_at     timestamp(6),
     last_name         varchar(50)  not null,
@@ -234,6 +241,7 @@ create table medias
 (
     id           bigint       not null
         primary key,
+    updated_at   timestamp(6),
     content_type varchar(100) not null,
     created_at   timestamp(6),
     name         varchar(255) not null,
@@ -296,7 +304,6 @@ create table notifications
             check ((type)::text = ANY
         ((ARRAY ['TEST_COMPLETED_FAST'::character varying, 'TEST_COMPLETED_FULL'::character varying, 'CONNECTION_REQUEST_RECEIVED'::character varying, 'CONNECTION_ACCEPTED'::character varying, 'PROFILE_VIEWED'::character varying, 'NEW_MESSAGE_RECEIVED'::character varying, 'ADDED_TO_GROUP'::character varying, 'NEW_JOB_MATCHED'::character varying, 'TEST_REMINDER'::character varying, 'TEST_SUMMARY_PDF_AVAILABLE'::character varying])::text[])),
     url          varchar(512),
-    version      bigint,
     recipient_id bigint        not null
         constraint fkqqnsjxlwleyjbxlmm213jaj3f
             references users
@@ -678,7 +685,8 @@ create table tokens
             unique,
     user_id     bigint       not null
         constraint fk2dylsfo39lgjyqml2tbe0b0ss
-            references users
+            references users,
+    expired     boolean      not null
 );
 
 alter table tokens

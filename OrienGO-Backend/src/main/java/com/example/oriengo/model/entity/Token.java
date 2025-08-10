@@ -53,6 +53,9 @@ public class Token implements Serializable {
     @Column(nullable = false)
     private boolean revoked = false;
 
+    @Column(nullable = false)
+    private boolean expired = false;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
