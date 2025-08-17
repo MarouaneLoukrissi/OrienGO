@@ -1,0 +1,147 @@
+<div class="min-h-screen bg-orange-50 w-full">
+  <div class="mx-auto w-full max-w-[82rem] pb-4 sm:pb-8 md:pb-12 lg:pb-16">
+    <!-- Hero Section -->
+    <section class="flex flex-col-reverse md:flex-row items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 justify-center gap-4 sm:gap-6 lg:gap-44">
+      <!-- Text Content -->
+      <div class="w-full lg:w-1/2 text-center md:text-left mb-6 lg:mb-0">
+        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 leading-tight mb-3 sm:mb-4">
+          {{ 'HOME.HERO.TITLE_LINE1' | translate }}
+          <span class="hidden md:inline"><br /></span>
+          {{ 'HOME.HERO.TITLE_LINE2' | translate }}
+        </h2>
+        <p class="text-sm sm:text-base lg:text-lg text-gray-700 mb-4 sm:mb-6 max-w-2xl mx-auto md:mx-0 leading-relaxed">
+          {{ 'HOME.HERO.DESCRIPTION' | translate }}
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-4">
+          <button class="w-[75%] sm:w-auto bg-[#f0713f] text-white px-4 sm:px-6 py-3 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-[#db6237] transition-all duration-200 transform hover:scale-105 shadow-lg">
+            {{ 'HOME.HERO.START_TEST' | translate }}
+          </button>
+          <button class="w-[75%] sm:w-auto border-2 border-[#f0713f] text-[#f0713f] px-4 sm:px-6 py-3 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-orange-100 transition-all duration-200 transform hover:scale-105">
+            {{ 'HOME.HERO.LEARN_MORE' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Image Content -->
+      <div class="flex items-center justify-center">
+        <div class="relative w-full max-w-xs sm:max-w-xs md:max-w-sm">
+          <img
+            src="assets/images/home/HomeImage.png"
+            alt="Hero Image"
+            class="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+          />
+          <!-- Decorative elements -->
+          <div class="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-yellow-400 rounded-full opacity-80"></div>
+          <div class="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 bg-[#f0713f] rounded-full opacity-80"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Section -->
+    <section class="mt-8 sm:mt-12 lg:mt-16">
+      <div class="mx-auto w-full max-w-[82rem] px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-xl p-4 sm:p-6 md:p-8 lg:p-10">
+          <div class="text-center mb-6 sm:mb-8 lg:mb-12">
+            <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center mb-2 sm:mb-3 text-gray-800">
+              {{ 'HOME.WHY.TITLE' | translate }}
+            </h3>
+            <p class="text-xs sm:text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              {{ 'HOME.WHY.DESCRIPTION' | translate }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            <!-- Test RIASEC Card -->
+            <div #fadeBlock class="text-center bg-[#ffeee5] p-3 sm:p-4 lg:p-6 rounded-xl opacity-0 translate-y-8 transition-all duration-[2000ms] hover:transform hover:scale-105 hover:shadow-lg">
+              <div class="flex justify-center mb-2 sm:mb-3 text-2xl sm:text-3xl lg:text-4xl">
+                <div class="w-16 h-16 sm:w-16 sm:h-16 rounded-full bg-[#f0713f] flex items-center justify-center">
+                  <svg width="36" height="36" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5629 1.29821C15.4679 0.585141 14.117 0.376063 12.9088 0.567006C11.702 0.757746 10.4349 1.3856 9.68886 2.59168C9.3998 3.05902 9.21536 3.56969 9.13385 4.11151C7.95968 4.03288 6.77129 4.38896 5.8782 5.13379C4.97382 5.88802 4.39611 7.01648 4.39611 8.38526C4.39611 8.83421 4.45776 9.29473 4.58012 9.76481C4.13447 9.85913 3.70545 10.0238 3.30398 10.2504C1.97813 10.9989 1.04657 12.3599 0.678693 13.8326C0.304055 15.3323 0.483684 17.0701 1.55078 18.5587C2.09135 19.3129 2.82354 19.9537 3.74345 20.4575C3.51579 20.7622 3.32343 21.0907 3.16716 21.4348C2.52873 22.8403 2.48066 24.5057 2.96838 25.97C3.46302 27.4551 4.54634 28.8306 6.25436 29.4881C7.36749 29.9166 8.63922 29.9997 10.0333 29.7123C10.097 30.4241 10.2912 31.0709 10.6247 31.6366C11.339 32.8476 12.5354 33.4187 13.7081 33.4921C14.8284 33.5621 16.0637 33.167 17 32.3687C17.9363 33.167 19.1715 33.5621 20.2919 33.4921C21.4646 33.4187 22.661 32.8476 23.3753 31.6366C23.7087 31.0709 23.903 30.4241 23.9667 29.7123C25.3607 29.9997 26.6325 29.9166 27.7457 29.4881C29.4536 28.8306 30.5369 27.4551 31.0316 25.97C31.5194 24.5057 31.4712 22.8403 30.8328 21.4348C30.6765 21.0907 30.4842 20.7622 30.2565 20.4575C31.1765 19.9537 31.9086 19.3129 32.4492 18.5587C33.5163 17.0701 33.6959 15.3323 33.3213 13.8326C32.9534 12.3599 32.0219 10.9989 30.696 10.2504C30.2945 10.0238 29.8655 9.85913 29.4198 9.76481C29.5422 9.29473 29.6039 8.83421 29.6039 8.38526C29.6039 7.01648 29.0262 5.88802 28.1217 5.13379C27.2286 4.38896 26.0403 4.03288 24.8661 4.11151C24.7847 3.56969 24.6002 3.05902 24.3111 2.59168C23.565 1.3856 22.298 0.757746 21.0911 0.567006C19.883 0.376063 18.5321 0.585141 17.4371 1.29821C16.9791 1.59646 17.0208 1.59646 16.5629 1.29821ZM18.5049 29.0777V25.2932C18.5067 24.5741 18.6699 23.5186 19.0908 22.6997C19.4859 21.9308 19.9919 21.5402 20.7623 21.5402C21.5934 21.5402 22.2673 20.866 22.2673 20.0341C22.2673 19.2023 21.5934 18.5279 20.7623 18.5279C19.8803 18.5279 19.1324 18.74 18.5049 19.0841V17.7626C18.5067 17.0435 18.6699 15.9881 19.0908 15.1691C19.4859 14.4002 19.9919 14.0096 20.7623 14.0096C21.5934 14.0096 22.2673 13.3353 22.2673 12.5035C22.2673 11.6717 21.5934 10.9974 20.7623 10.9974C19.8803 10.9974 19.1324 11.2094 18.5049 11.5535V4.96298C18.5075 4.3678 18.7506 4.03669 19.0788 3.82292C19.4654 3.57119 20.0426 3.45085 20.6216 3.54236C21.2019 3.63409 21.5808 3.90056 21.7518 4.17713C21.8904 4.40117 22.0589 4.89935 21.6365 5.88581C21.3522 6.54941 21.5786 7.32149 22.176 7.72625C22.7735 8.13101 23.5737 8.05459 24.0839 7.54406C24.6355 6.99217 25.6344 6.98048 26.1948 7.44784C26.4192 7.63493 26.594 7.91846 26.594 8.38526C26.594 8.89133 26.3822 9.7195 25.5575 10.8751C25.1352 11.4667 25.1955 12.2758 25.7009 12.7982C26.2062 13.3205 27.0123 13.407 27.6168 13.0037C28.2651 12.5711 28.7849 12.63 29.2172 12.874C29.7255 13.1609 30.2048 13.7767 30.4013 14.5633C30.591 15.3227 30.4884 16.1264 30.0035 16.8029C29.5199 17.4776 28.5147 18.2182 26.5347 18.5485C25.8024 18.6706 25.2686 19.3088 25.2773 20.0516C25.2858 20.7944 25.8344 21.4201 26.5692 21.5251C27.3218 21.6326 27.8105 22.0598 28.0928 22.6811C28.3949 23.3465 28.4409 24.2226 28.1762 25.0175C27.9183 25.7915 27.4026 26.3928 26.6651 26.6766C25.9247 26.9616 24.7098 27.0213 22.89 26.1935C22.3641 25.9543 21.7479 26.0375 21.3041 26.4074C20.8602 26.7775 20.6672 27.3691 20.8073 27.9299C20.9931 28.674 21.3002 30.4109 20.1041 30.4857C19.2776 30.5373 18.5093 29.9082 18.5049 29.0777ZM15.495 4.96298C15.4925 4.3678 15.2493 4.03669 14.9211 3.82292C14.5346 3.57119 13.9574 3.45085 13.3784 3.54236C12.798 3.63409 12.4192 3.90056 12.2481 4.17713C12.1095 4.40117 11.9411 4.89935 12.3635 5.88581C12.6477 6.54941 12.4214 7.32149 11.824 7.72625C11.2266 8.13101 10.4262 8.05459 9.91608 7.54406C9.36462 6.99217 8.36547 6.98048 7.80509 7.44784C7.58076 7.63493 7.406 7.91846 7.406 8.38526C7.406 8.89133 7.61772 9.7195 8.44251 10.8751C8.86479 11.4667 8.80443 12.2758 8.29905 12.7982C7.79369 13.3205 6.98757 13.407 6.38309 13.0037C5.7348 12.5711 5.2151 12.63 4.7828 12.874C4.27451 13.1609 3.79518 13.7767 3.59871 14.5633C3.40899 15.3227 3.51155 16.1264 3.99642 16.8029C4.48013 17.4776 5.48523 18.2182 7.46529 18.5485C8.19749 18.6706 8.73135 19.3088 8.72273 20.0516C8.7141 20.7944 8.16555 21.4201 7.43072 21.5251C6.6782 21.6326 6.1895 22.0598 5.90726 22.6811C5.60508 23.3465 5.55909 24.2226 5.82383 25.0175C6.08165 25.7915 6.59733 26.3928 7.33484 26.6766C8.07531 26.9616 9.29022 27.0213 11.1099 26.1935C11.6358 25.9543 12.2521 26.0375 12.6959 26.4074C13.1398 26.7775 13.3328 27.3691 13.1927 27.9299C13.0068 28.674 12.6999 30.4109 13.8959 30.4857C14.7224 30.5373 15.4907 29.9082 15.495 29.0777V29.0708V25.2938C15.4932 24.5747 15.3302 23.5189 14.9091 22.6997C14.514 21.9308 14.0081 21.5402 13.2376 21.5402C12.4065 21.5402 11.7327 20.866 11.7327 20.0341C11.7327 19.2023 12.4065 18.5279 13.2376 18.5279C14.1197 18.5279 14.8676 18.74 15.495 19.0841V17.7632C15.4932 17.0441 15.3302 15.9883 14.9091 15.1691C14.514 14.4002 14.0081 14.0096 13.2376 14.0096C12.4065 14.0096 11.7327 13.3353 11.7327 12.5035C11.7327 11.6717 12.4065 10.9974 13.2376 10.9974C14.1197 10.9974 14.8676 11.2094 15.495 11.5535V4.96298Z" fill="#FFFFFF" stroke="black" stroke-width="0.00064"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-bold text-[#333] text-sm sm:text-base lg:text-lg mb-2">
+                {{ 'HOME.WHY.TEST.TITLE' | translate }}
+              </h4>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {{ 'HOME.WHY.TEST.DESCRIPTION' | translate }}
+              </p>
+            </div>
+
+            <!-- Recommendations Card -->
+            <div #fadeBlock class="text-center bg-[#fff9e0] p-3 sm:p-4 lg:p-6 rounded-xl opacity-0 translate-y-8 transition-all duration-[2000ms] hover:transform hover:scale-105 hover:shadow-lg">
+              <div class="flex justify-center mb-2 sm:mb-3 text-2xl sm:text-3xl lg:text-4xl">
+                <div class="w-16 h-16 sm:w-16 sm:h-16 rounded-full bg-[#CEB44B] flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 0.5C13.7366 0.5 10.5465 1.46771 7.8331 3.28075C5.11969 5.09379 3.00484 7.67074 1.756 10.6857C0.507149 13.7007 0.180394 17.0183 0.81705 20.219C1.45371 23.4197 3.02518 26.3597 5.33275 28.6673C7.64031 30.9748 10.5803 32.5463 13.781 33.183C16.9817 33.8196 20.2993 33.4929 23.3143 32.244C26.3293 30.9952 28.9062 28.8803 30.7193 26.1669C32.5323 23.4535 33.5 20.2634 33.5 17C33.4948 12.6255 31.7548 8.43167 28.6616 5.33844C25.5683 2.24521 21.3745 0.505161 17 0.5ZM17 30.5C14.33 30.5 11.7199 29.7082 9.49981 28.2248C7.27975 26.7414 5.54942 24.633 4.52763 22.1662C3.50585 19.6994 3.23851 16.985 3.75941 14.3663C4.28031 11.7475 5.56606 9.34207 7.45407 7.45406C9.34207 5.56605 11.7475 4.2803 14.3663 3.7594C16.985 3.2385 19.6994 3.50584 22.1662 4.52763C24.633 5.54941 26.7414 7.27974 28.2248 9.4998C29.7082 11.7199 30.5 14.33 30.5 17C30.4956 20.5791 29.0719 24.0103 26.5411 26.5411C24.0103 29.0719 20.5791 30.4956 17 30.5ZM17 5.75C14.775 5.75 12.5999 6.4098 10.7498 7.64597C8.89979 8.88213 7.45785 10.6391 6.60636 12.6948C5.75488 14.7505 5.53209 17.0125 5.96617 19.1948C6.40026 21.3771 7.47171 23.3816 9.04506 24.955C10.6184 26.5283 12.623 27.5998 14.8052 28.0338C16.9875 28.4679 19.2495 28.2451 21.3052 27.3936C23.3609 26.5422 25.1179 25.1002 26.354 23.2502C27.5902 21.4001 28.25 19.225 28.25 17C28.2468 14.0173 27.0605 11.1577 24.9515 9.04856C22.8424 6.93946 19.9827 5.75318 17 5.75ZM17 25.25C15.3683 25.25 13.7733 24.7661 12.4166 23.8596C11.0598 22.9531 10.0024 21.6646 9.378 20.1571C8.75358 18.6497 8.5902 16.9908 8.90853 15.3905C9.22686 13.7902 10.0126 12.3202 11.1664 11.1664C12.3202 10.0126 13.7902 9.22685 15.3905 8.90852C16.9909 8.59019 18.6497 8.75357 20.1571 9.37799C21.6646 10.0024 22.9531 11.0598 23.8596 12.4165C24.7662 13.7733 25.25 15.3683 25.25 17C25.2476 19.1873 24.3777 21.2843 22.831 22.831C21.2843 24.3777 19.1873 25.2476 17 25.25ZM17 11C15.8133 11 14.6533 11.3519 13.6666 12.0112C12.6799 12.6705 11.9109 13.6075 11.4567 14.7039C11.0026 15.8003 10.8838 17.0067 11.1153 18.1705C11.3468 19.3344 11.9183 20.4035 12.7574 21.2426C13.5965 22.0818 14.6656 22.6532 15.8295 22.8847C16.9934 23.1162 18.1998 22.9974 19.2961 22.5433C20.3925 22.0892 21.3295 21.3201 21.9888 20.3334C22.6481 19.3467 23 18.1867 23 17C23 15.4087 22.3679 13.8826 21.2426 12.7574C20.1174 11.6321 18.5913 11 17 11ZM17 20C16.4067 20 15.8266 19.8241 15.3333 19.4944C14.8399 19.1648 14.4554 18.6962 14.2284 18.1481C14.0013 17.5999 13.9419 16.9967 14.0577 16.4147C14.1734 15.8328 14.4591 15.2982 14.8787 14.8787C15.2982 14.4591 15.8328 14.1734 16.4147 14.0576C16.9967 13.9419 17.5999 14.0013 18.1481 14.2284C18.6962 14.4554 19.1648 14.8399 19.4944 15.3333C19.8241 15.8266 20 16.4067 20 17C20 17.7957 19.6839 18.5587 19.1213 19.1213C18.5587 19.6839 17.7957 20 17 20Z" fill="#FFFFFF"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-bold text-[#333] text-sm sm:text-base lg:text-lg mb-2">
+                {{ 'HOME.WHY.RECOMMENDATIONS.TITLE' | translate }}
+              </h4>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {{ 'HOME.WHY.RECOMMENDATIONS.DESCRIPTION' | translate }}
+              </p>
+            </div>
+
+            <!-- Support Card -->
+            <div #fadeBlock class="text-center bg-[#ffeee5] p-3 sm:p-4 lg:p-6 rounded-xl opacity-0 translate-y-8 transition-all duration-[2000ms] hover:transform hover:scale-105 hover:shadow-lg">
+              <div class="flex justify-center mb-2 sm:mb-3 text-2xl sm:text-3xl lg:text-4xl">
+                <div class="w-16 h-16 sm:w-16 sm:h-16 rounded-full bg-[#f0713f] flex items-center justify-center">
+                  <svg width="36" height="36" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.7403 15.305C12.5903 15.29 12.4103 15.29 12.2453 15.305C8.67533 15.185 5.84033 12.26 5.84033 8.66C5.84033 4.985 8.81033 2 12.5003 2C16.1754 2 19.1604 4.985 19.1604 8.66C19.1454 12.26 16.3104 15.185 12.7403 15.305Z" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M23.6149 5C26.5249 5 28.8649 7.355 28.8649 10.25C28.8649 13.085 26.6149 15.395 23.8099 15.5C23.6899 15.485 23.5549 15.485 23.4199 15.5" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.24008 20.84C1.61008 23.27 1.61008 27.23 5.24008 29.645C9.36508 32.405 16.1301 32.405 20.2551 29.645C23.8851 27.215 23.8851 23.255 20.2551 20.84C16.1451 18.095 9.38008 18.095 5.24008 20.84Z" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M26.5103 29C27.5903 28.775 28.6103 28.34 29.4503 27.695C31.7903 25.94 31.7903 23.045 29.4503 21.29C28.6253 20.66 27.6203 20.24 26.5553 20" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-bold text-[#333] text-sm sm:text-base lg:text-lg mb-2">
+                {{ 'HOME.WHY.SUPPORT.TITLE' | translate }}
+              </h4>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {{ 'HOME.WHY.SUPPORT.DESCRIPTION' | translate }}
+              </p>
+            </div>
+
+            <!-- Reliability Card -->
+            <div #fadeBlock class="text-center bg-[#fff9e0] p-3 sm:p-4 lg:p-6 rounded-xl opacity-0 translate-y-8 transition-all duration-[2000ms] hover:transform hover:scale-105 hover:shadow-lg">
+              <div class="flex justify-center mb-2 sm:mb-3 text-2xl sm:text-3xl lg:text-4xl">
+                <div class="w-16 h-16 sm:w-16 sm:h-16 rounded-full bg-[#CEB44B] flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9998 24.3334C20.121 24.3334 25.0832 19.3712 25.0832 13.2501C25.0832 7.12893 20.121 2.16675 13.9998 2.16675C7.87868 2.16675 2.9165 7.12893 2.9165 13.2501C2.9165 19.3712 7.87868 24.3334 13.9998 24.3334Z" stroke="#FFFFFF" stroke-width="4"/>
+                    <path d="M6.63926 22.75L5.63088 26.4281C4.63601 30.0568 4.13857 31.8711 4.80237 32.8645C5.03501 33.2125 5.34708 33.492 5.70922 33.6763C6.74255 34.2024 8.33801 33.3712 11.5289 31.7085C12.5907 31.1553 13.1216 30.8787 13.6855 30.8185C13.8947 30.7962 14.1053 30.7962 14.3144 30.8185C14.8784 30.8787 15.4093 31.1553 16.4711 31.7085C19.662 33.3712 21.2575 34.2024 22.2908 33.6763C22.6529 33.492 22.965 33.2125 23.1976 32.8645C23.8615 31.8711 23.364 30.0568 22.3692 26.4281L21.3608 22.75" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-bold text-[#333] text-sm sm:text-base lg:text-lg mb-2">
+                {{ 'HOME.WHY.RELIABILITY.TITLE' | translate }}
+              </h4>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                {{ 'HOME.WHY.RELIABILITY.DESCRIPTION' | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="pb-12 mt-12">
+      <div class="mx-auto w-full max-w-[82rem] px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-12 px-8 rounded-2xl shadow-xl">
+          <h2 class="text-2xl lg:text-3xl font-bold mb-4">
+            {{ 'RIASEC.CTA.TITLE' | translate }}
+          </h2>
+          <p class="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
+            {{ 'RIASEC.CTA.DESCRIPTION' | translate }}
+          </p>
+          <button class="py-3 sm:py-4 bg-white text-orange-600 font-semibold px-8 rounded-xl text-lg hover:bg-orange-50 transform hover:scale-105 transition-all duration-200 shadow-lg">
+            {{ 'RIASEC.CTA.BUTTON' | translate }}
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

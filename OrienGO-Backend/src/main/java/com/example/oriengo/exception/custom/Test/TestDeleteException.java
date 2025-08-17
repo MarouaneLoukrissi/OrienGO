@@ -1,0 +1,10 @@
+package com.example.oriengo.exception.custom.Test;
+
+import com.example.oriengo.exception.custom.AppException;
+import org.springframework.http.HttpStatus;
+
+public class TestDeleteException extends AppException {
+    public TestDeleteException(HttpStatus httpStatus, String message) {
+        super(httpStatus, message);
+    }
+}

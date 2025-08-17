@@ -1,0 +1,1189 @@
+{
+  "Generating PDF...": "Génération du fichier PDF...",
+  "PAGINATION": {
+    "PREVIOUS": "Précédent",
+    "NEXT": "Suivant"
+  },
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "WELCOME_LINE1": "Bienvenue",
+    "WELCOME_LINE2": "sur OrienGo !",
+    "WITH_GOOGLE": "Continuer avec Google",
+    "WITH_LINKEDIN": "Continuer avec Linkedin",
+    "EMAIL_LABEL": "Email :",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PASSWORD_LABEL": "Mot de passe :",
+    "PASSWORD_PLACEHOLDER": "Mot de passe",
+    "FORGOT_PASSWORD": "Mot de passe oublié ?",
+    "SIGNIN": "Connexion",
+    "NO_ACCOUNT": "Vous n'avez pas de compte ?",
+    "SIGNUP_LINK": "S'inscrire"
+  },
+  "SIGNUP": {
+    "TITLE": "Créer un compte",
+    "WITH_GOOGLE": "Continuer avec Google",
+    "WITH_LINKEDIN": "Continuer avec Linkedin",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom",
+    "EMAIL": "Email",
+    "PASSWORD": "Mot de passe",
+    "GENDER": "Genre",
+    "SCHOOL_LEVEL": "Niveau scolaire",
+    "SUBMIT": "S'inscrire",
+    "ALREADY_HAVE_ACCOUNT": "Vous avez déjà un compte ?",
+    "LOGIN_LINK": "Se connecter"
+  },
+  "RESET": {
+    "NEW_PASSWORD": "Nouveau mot de passe",
+    "NEW_PASSWORD_PLACEHOLDER": "Au moins 8 caractères",
+    "CONFIRM_PASSWORD": "Réécrire le mot de passe",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Répétez le mot de passe",
+    "SUBMIT": "Changer"
+  },
+  "FORGOT": {
+    "TITLE": "Mot de passe oublié",
+    "EMAIL_LABEL": "Adresse email",
+    "EMAIL_PLACEHOLDER": "exemple@domaine.com",
+    "SUBMIT": "Envoyer le code"
+  },
+  "VERIFY": {
+    "TITLE": "Vérifier le code",
+    "SUBTITLE": "Code reçu par e-mail",
+    "BUTTON": "Vérifier"
+  },
+  "HOME": {
+    "HEADER": {
+      "SIGN_UP": "Inscription",
+      "LOGIN": "Connexion"
+    },
+    "HERO": {
+      "TITLE_LINE1": "Trouvez votre voie",
+      "TITLE_LINE2": "avec OrienGo",
+      "DESCRIPTION": "Une plateforme intelligente pour découvrir les métiers faits pour vous grâce au test RIASEC et à l'intelligence artificielle",
+      "START_TEST": "Commencer le test RIASEC",
+      "LEARN_MORE": "En savoir plus"
+    },
+    "WHY": {
+      "TITLE": "Pourquoi choisir OrienGo ?",
+      "DESCRIPTION": "Notre approche scientifique et personnalisée vous aide à découvrir les métiers qui correspondent vraiment à votre personnalité",
+      "TEST": {
+        "TITLE": "Test RIASEC",
+        "DESCRIPTION": "Évaluation basée sur 6 dimensions de personnalité professionnelle"
+      },
+      "RECOMMENDATIONS": {
+        "TITLE": "Recommandations",
+        "DESCRIPTION": "Métiers et filières d'études selon votre profil"
+      },
+      "SUPPORT": {
+        "TITLE": "Accompagnement",
+        "DESCRIPTION": "Suivi personnalisé dans votre parcours d'orientation"
+      },
+      "RELIABILITY": {
+        "TITLE": "Fiabilité",
+        "DESCRIPTION": "Méthode reconnue utilisée par les conseillers d'orientation"
+      }
+    },
+    "CTA": {
+      "TITLE": "Prêt à découvrir votre avenir professionnel ?",
+      "DESCRIPTION": "Passez le test RIASEC maintenant et recevez vos recommandations personnalisées",
+      "BUTTON": "Commencer le test - 20 minutes"
+    }
+  },
+  "HEADER": {
+    "HOME": "Accueil",
+    "LEARN_MORE": "En savoir plus",
+    "SIGNUP": "Inscription",
+    "LOGIN": "Connexion"
+  },
+  "RIASEC": {
+    "TITLE": "Découvrez le test RIASEC",
+    "DESCRIPTION": "Une méthode scientifique reconnue pour identifier vos intérêts professionnels et vous guider vers les métiers qui vous correspondent.",
+    "WHAT": {
+      "TITLE": "Qu'est-ce que le test RIASEC ?",
+      "DESCRIPTION": "Le test RIASEC est un outil d'évaluation psychologique développé par le psychologue américain John Holland. Il identifie 6 types de personnalités professionnelles pour vous aider à choisir une carrière correspondant à vos intérêts et aptitudes.",
+      "LI1": "Méthode scientifiquement validée",
+      "LI2": "Utilisée par les conseillers d'orientation",
+      "LI3": "Reconnue à l'international",
+      "LI4": "Basée sur des décennies de recherche",
+      "CARD_TITLE": "6 dimensions",
+      "CARD_DESC": "Évaluez votre personnalité selon 6 grandes dimensions d'orientation professionnelle."
+    },
+    "DIMENSIONS": {
+      "TITLE": "Les 6 dimensions RIASEC",
+      "REALISTIC": {
+        "TITLE": "Réaliste",
+        "DESCRIPTION": "Préfère les activités pratiques, le travail manuel et les environnements structurés."
+      },
+      "INVESTIGATIVE": {
+        "TITLE": "Investigateur",
+        "DESCRIPTION": "Aime analyser, comprendre et résoudre des problèmes complexes."
+      },
+      "ARTISTIC": {
+        "TITLE": "Artistique",
+        "DESCRIPTION": "Recherche la créativité, l'expression personnelle et l'innovation."
+      },
+      "SOCIAL": {
+        "TITLE": "Social",
+        "DESCRIPTION": "Privilégie l'aide aux autres, la collaboration et la communication."
+      },
+      "ENTERPRISING": {
+        "TITLE": "Entrepreneurial",
+        "DESCRIPTION": "Aime diriger, persuader et atteindre des objectifs ambitieux."
+      },
+      "CONVENTIONAL": {
+        "TITLE": "Conventionnel",
+        "DESCRIPTION": "Préfère l'organisation, la précision et les environnements structurés."
+      }
+    },
+    "HOW": {
+      "TITLE": "Comment ça fonctionne ?",
+      "QUIZ": {
+        "TITLE": "Questionnaire",
+        "DESCRIPTION": "Répondez à 60 questions sur vos préférences et intérêts."
+      },
+      "ANALYSIS": {
+        "TITLE": "Analyse",
+        "DESCRIPTION": "Vos réponses sont analysées selon les 6 dimensions RIASEC."
+      },
+      "PROFILE": {
+        "TITLE": "Profil",
+        "DESCRIPTION": "Recevez votre profil personnalisé selon vos dimensions dominantes."
+      },
+      "RECOMMEND": {
+        "TITLE": "Recommandations",
+        "DESCRIPTION": "Découvrez les métiers et formations adaptés à votre profil."
+      }
+    },
+    "CTA": {
+      "TITLE": "Prêt à découvrir votre avenir professionnel ?",
+      "DESCRIPTION": "Passez le test RIASEC maintenant et recevez vos recommandations personnalisées",
+      "BUTTON": "Commencer le test - 20 minutes"
+    }
+  },
+  "SUPERADMIN_DASHBOARD": {
+    "HEADER": {
+      "WELCOME": "Bienvenue, Super Admin!"
+    }
+  },
+  "ADMIN_DASHBOARD": {
+    "MENU": {
+      "DASHBOARD": "Tableau de bord",
+      "USERS": "Utilisateurs",
+      "QUESTIONNAIRES": "Questionnaires",
+      "PROFILES": "Profils de carrière",
+      "LOGOUT": "Se déconnecter"
+    },
+    "HEADER": {
+      "WELCOME": "Bienvenue, Admin !",
+      "STATS": "Statistiques de la plateforme"
+    },
+    "STATS": {
+      "USERS": "Utilisateurs",
+      "FULL_TESTS": "Tests complets effectués",
+      "QUESTIONNAIRES": "Questionnaires",
+      "PROFILES": "Profils de carrière",
+      "EXPRESS": "Tests express effectués"
+    },
+    "CHART": {
+      "TITLE": "Répartition des profils RIASEC",
+      "INVESTIGATOR": "Investigateur",
+      "ENTREPRENEUR": "Entrepreneur",
+      "SOCIAL": "Social",
+      "ARTISTIC": "Artistique",
+      "REALISTIC": "Réaliste",
+      "CONVENTIONAL": "Conventionnel"
+    }
+  },
+  "ADMIN_USERS": {
+    "TITLE": "Gérer les utilisateurs",
+    "SUBTITLE": "Gérer les comptes utilisateurs et les permissions",
+    "ADD_BUTTON": "Ajouter un utilisateur",
+    "SEARCH_PLACEHOLDER": "Rechercher par nom ou email",
+    "FILTER_ROLE": "Tous les rôles",
+    "FILTER_STATUS": "Tous les statuts",
+    "FILTER_DATE": "Toutes les dates",
+    "RESET_FILTERS": "Réinitialiser les filtres",
+    "TABLE": {
+      "NAME": "Nom",
+      "EMAIL": "Email",
+      "ROLE": "Rôle",
+      "STATUS": "Statut",
+      "CREATED": "Créé le",
+      "ACTIONS": "Actions"
+    },
+    "ACTIONS": {
+      "VIEW": "Voir",
+      "EDIT": "Modifier",
+      "DELETE": "Supprimer"
+    },
+    "MODAL": {
+      "ADD_TITLE": "Ajouter un nouvel utilisateur",
+      "FIRST_NAME": "Prénom",
+      "FIRST_NAME_PLACEHOLDER": "Entrez le prénom",
+      "LAST_NAME": "Nom",
+      "LAST_NAME_PLACEHOLDER": "Entrez le nom",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "Entrez l'adresse email",
+      "ROLE": "Rôle",
+      "PASSWORD": "Mot de passe",
+      "PASSWORD_PLACEHOLDER": "Entrez le mot de passe",
+      "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Confirmez votre mot de passe",
+      "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",
+      "CANCEL": "Annuler",
+      "ADD": "Ajouter l'utilisateur",
+      "REQUIRED_FIELD": "Ce champ est requis",
+      "INVALID_EMAIL": "Veuillez entrer une adresse email valide",
+      "MIN_LENGTH": "Minimum {{min}} caractères requis",
+      "MAX_LENGTH": "Maximum {{max}} caractères autorisés",
+      "MIN_VALUE": "Valeur minimum est {{min}}",
+      "MAX_VALUE": "Valeur maximum est {{max}}",
+      "INVALID_PATTERN": "Format invalide",
+      "PERSONAL_INFO": "Informations personnelles",
+      "STUDENT_INFO": "Informations étudiant",
+      "PERMISSIONS": "Permissions",
+      "AGE": "Âge",
+      "AGE_PLACEHOLDER": "Entrez l'âge",
+      "GENDER": "Genre",
+      "SELECT_GENDER": "Sélectionnez le genre",
+      "MALE": "Homme",
+      "FEMALE": "Femme",
+      "OTHER": "Autre",
+      "PHONE_NUMBER": "Numéro de téléphone",
+      "PHONE_PLACEHOLDER": "Entrez le numéro de téléphone",
+      "SCHOOL": "École",
+      "SCHOOL_PLACEHOLDER": "Entrez le nom de l'école",
+      "FIELD_OF_STUDY": "Domaine d'études",
+      "FIELD_OF_STUDY_PLACEHOLDER": "Entrez le domaine d'études",
+      "EDUCATION_LEVEL_LABEL": "Niveau d'éducation",
+      "SELECT_EDUCATION_LEVEL": "Sélectionner le niveau d'éducation",
+      "CITY": "Ville",
+      "CITY_PLACEHOLDER": "Entrez la ville",
+      "REGION": "Région",
+      "REGION_PLACEHOLDER": "Entrez la région",
+      "COUNTRY": "Pays",
+      "COUNTRY_PLACEHOLDER": "Entrez le pays",
+      "ADDRESS": "Adresse",
+      "ADDRESS_PLACEHOLDER": "Entrez l'adresse",
+      "MESSAGE_PERMISSION_LABEL": "Permission de messages",
+      "SELECT_PERMISSION": "Sélectionner la permission",
+      "ACCOUNT_PRIVACY_LABEL": "Confidentialité du compte",
+      "SELECT_ACCOUNT_PRIVACY": "Sélectionner la confidentialité",
+      "PROFILE_VISIBILITY_LABEL": "Visibilité du profil",
+      "SELECT_PROFILE_VISIBILITY": "Sélectionner la visibilité",
+      "EDUCATION_LEVEL": {
+        "MIDDLE_SCHOOL": "Collège",
+        "HIGH_SCHOOL": "Lycée",
+        "POST_SECONDARY": "Post-bac (ex: BTS/DUT/Prépa)",
+        "UNIVERSITY": "Université",
+        "GRADUATE": "Études supérieures (Master, Doctorat)",
+        "OTHER": "Autre"
+      },
+      "MESSAGE_PERMISSION": {
+        "NETWORK": "Réseau",
+        "ALL": "Tous",
+        "NO_ONE": "Personne"
+      },
+      "ACCOUNT_PRIVACY": {
+        "PRIVATE": "Privé",
+        "PUBLIC": "Public"
+      },
+      "PROFILE_VISIBILITY": {
+        "PUBLIC": "Public",
+        "NETWORK_ONLY": "Réseau uniquement",
+        "PRIVATE": "Privé"
+      },
+      "VIEW_TITLE": "Voir les détails de l'utilisateur",
+      "EDIT_TITLE": "Modifier l'utilisateur",
+      "BASIC_INFO": "Informations de base",
+      "SYSTEM_INFO": "Informations système",
+      "CREATED_AT": "Créé le",
+      "STATUS": "Statut",
+      "CLOSE": "Fermer",
+      "UPDATE": "Mettre à jour l'utilisateur"
+    }
+  },
+  "ADMIN_QUESTIONS": {
+    "TITLE": "Gestion de la Banque de Questions",
+    "SUBTITLE": "Gérer les questions du test RIASEC et les options de réponse",
+    "ADD_BUTTON": "Ajouter une Question",
+    "SEARCH_PLACEHOLDER": "Rechercher par texte de question",
+    "FILTER_CATEGORY": "Filtrer par Catégorie",
+    "RESET_FILTERS": "Réinitialiser les Filtres",
+    "ALL": "Tous les Catégories",
+    "TABLE": {
+      "QUESTION": "Question",
+      "CATEGORY": "Catégorie",
+      "OPTIONS": "Options de Réponse",
+      "OPTIONS_COUNT": "options",
+      "ACTIONS": "Actions",
+      "VIEW": "Voir",
+      "EDIT": "Modifier",
+      "DELETE": "Supprimer"
+    },
+    "MODAL": {
+      "ADD_TITLE": "Ajouter une Nouvelle Question",
+      "VIEW_TITLE": "Voir les Détails de la Question",
+      "EDIT_TITLE": "Modifier la Question",
+      "BASIC_INFO": "Informations de Base",
+      "SYSTEM_INFO": "Informations Système",
+      "CATEGORY": "Catégorie",
+      "QUESTION_TEXT": "Texte de la Question",
+      "QUESTION_TEXT_PLACEHOLDER": "Entrez le texte de la question",
+      "ANSWER_OPTIONS": "Options de Réponse",
+      "ID": "ID",
+      "SOFT_DELETED": "Supprimé en Douceur",
+      "SELECT_CATEGORY": "Sélectionner une catégorie",
+      "CANCEL": "Annuler",
+      "ADD": "Ajouter la Question",
+      "UPDATE": "Mettre à Jour",
+      "CLOSE": "Fermer",
+      "REQUIRED_FIELD": "Ce champ est requis",
+      "MIN_LENGTH": "Minimum {{min}} caractères requis",
+      "MAX_LENGTH": "Maximum {{max}} caractères autorisés"
+    },
+    "CATEGORY": {
+      "REALISTIC": "Réaliste",
+      "INVESTIGATIVE": "Investigateur",
+      "ARTISTIC": "Artistique",
+      "SOCIAL": "Social",
+      "ENTERPRISING": "Entreprenant",
+      "CONVENTIONAL": "Conventionnel"
+    },
+    "ERRORS": {
+      "REQUIRED_FIELD": "Ce champ est requis",
+      "MIN_LENGTH": "Minimum {{min}} caractères requis",
+      "MAX_LENGTH": "Maximum {{max}} caractères autorisés"
+    }
+  },
+  "ADMIN_CAREERS": {
+    "TITLE": "Gestion des Carrières",
+    "SUBTITLE": "Gérer les offres d'emploi et les opportunités de carrière",
+    "ADD_BUTTON": "Ajouter un Poste",
+    "SEARCH_PLACEHOLDER": "Rechercher par titre, description, éducation",
+    "FILTER_CATEGORY": "Filtrer par Catégorie",
+    "ALL": "Tous les Catégories",
+    "FILTER_JOB_MARKET": "Filtrer par Marché du Travail",
+    "ALLJM": "Tous les Marchés du Travails",
+    "RESET_FILTERS": "Réinitialiser les Filtres",
+    "TABLE": {
+      "TITLE": "Titre",
+      "CATEGORY": "Catégorie",
+      "EDUCATION": "Éducation",
+      "SALARY_RANGE": "Fourchette de Salaire",
+      "JOB_MARKET": "Marché du Travail",
+      "ACTIONS": "Actions",
+      "VIEW": "Voir",
+      "EDIT": "Modifier",
+      "DELETE": "Supprimer"
+    },
+    "MODAL": {
+      "ADD_TITLE": "Ajouter un Nouveau Poste",
+      "VIEW_TITLE": "Voir les Détails du Poste",
+      "EDIT_TITLE": "Modifier le Poste",
+      "BASIC_INFO": "Informations de Base",
+      "SYSTEM_INFO": "Informations Système",
+      "TITLE": "Titre",
+      "TITLE_PLACEHOLDER": "Entrez le titre du poste",
+      "CATEGORY": "Catégorie",
+      "EDUCATION": "Éducation",
+      "EDUCATION_PLACEHOLDER": "Entrez l'exigence d'éducation",
+      "SALARY_RANGE": "Fourchette de Salaire",
+      "SALARY_RANGE_PLACEHOLDER": "Entrez la fourchette de salaire (ex: 15,000 - 25,000 MAD)",
+      "JOB_MARKET": "Marché du Travail",
+      "JOB_MARKET_PLACEHOLDER": "Entrez le statut du marché du travail (ex: Forte demande, Stable)",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION_PLACEHOLDER": "Entrez la description du poste",
+      "TAGS": "Tags",
+      "TAGS_PLACEHOLDER": "Entrez les tags séparés par des virgules (ex: JavaScript, React, Node.js)",
+      "ID": "ID",
+      "VERSION": "Version",
+      "SOFT_DELETED": "Supprimé en Douceur",
+      "SELECT_CATEGORY": "Sélectionner une catégorie",
+      "CANCEL": "Annuler",
+      "ADD": "Ajouter le Poste",
+      "UPDATE": "Mettre à Jour",
+      "CLOSE": "Fermer",
+      "REQUIRED_FIELD": "Ce champ est requis",
+      "MIN_LENGTH": "Minimum {{min}} caractères requis",
+      "MAX_LENGTH": "Maximum {{max}} caractères autorisés"
+    },
+    "JOB_CATEGORY": {
+      "REALISTIC": "Réaliste",
+      "INVESTIGATIVE": "Investigateur",
+      "ARTISTIC": "Artistique",
+      "SOCIAL": "Social",
+      "ENTERPRISING": "Entreprenant",
+      "CONVENTIONAL": "Conventionnel"
+    }
+  },
+  "ADMIN_ADMINS": {
+    "TITLE": "Gérer les admins",
+    "SUBTITLE": "Gérer les comptes administrateurs et les permissions",
+    "ADD_BUTTON": "Ajouter un admin",
+    "SEARCH_PLACEHOLDER": "Rechercher par nom ou email",
+    "FILTER_ROLE": "Tous les rôles",
+    "FILTER_STATUS": "Tous les statuts",
+    "RESET_FILTERS": "Réinitialiser les filtres",
+    "ALL_PERMISSIONS": "Toutes les permissions",
+    "ALL_STATUSES": "Tous les statuts",
+    "ALL_DATES": "Toutes les dates",
+    "TABLE": {
+      "NAME": "Nom",
+      "EMAIL": "Email",
+      "PERMISSION": "Permission",
+      "STATUS": "Statut",
+      "CREATED": "Créé le",
+      "ACTIONS": "Actions"
+    },
+    "ACTIONS": {
+      "VIEW": "Voir",
+      "EDIT": "Modifier",
+      "DELETE": "Supprimer"
+    },
+    "MODAL": {
+      "ADD_TITLE": "Ajouter un nouvel admin",
+      "FIRST_NAME": "Prénom",
+      "FIRST_NAME_PLACEHOLDER": "Entrez le prénom",
+      "LAST_NAME": "Nom",
+      "LAST_NAME_PLACEHOLDER": "Entrez le nom",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "Entrez l'adresse email",
+      "ROLE": "Rôle",
+      "PASSWORD": "Mot de passe",
+      "PASSWORD_PLACEHOLDER": "Entrez le mot de passe",
+      "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Confirmez votre mot de passe",
+      "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",
+      "CANCEL": "Annuler",
+      "ADD": "Ajouter l'admin",
+      "REQUIRED_FIELD": "Ce champ est requis",
+      "INVALID_EMAIL": "Veuillez entrer une adresse email valide",
+      "MIN_LENGTH": "Minimum {{min}} caractères requis",
+      "MAX_LENGTH": "Maximum {{max}} caractères autorisés",
+      "MIN_VALUE": "Valeur minimum est {{min}}",
+      "MAX_VALUE": "Valeur maximum est {{max}}",
+      "INVALID_PATTERN": "Format invalide",
+      "ADMIN_INFO": "Informations de l'admin",
+      "AGE": "Âge",
+      "AGE_PLACEHOLDER": "Entrez l'âge",
+      "GENDER": "Genre",
+      "SELECT_GENDER": "Sélectionnez le genre",
+      "MALE": "Homme",
+      "FEMALE": "Femme",
+      "OTHER": "Autre",
+      "PHONE_NUMBER": "Numéro de téléphone",
+      "PHONE_PLACEHOLDER": "Entrez le numéro de téléphone",
+      "MESSAGE_PERMISSION_LABEL": "Permission de messages",
+      "ACCOUNT_PRIVACY_LABEL": "Confidentialité du compte",
+      "PROFILE_VISIBILITY_LABEL": "Visibilité du profil",
+      "DEPARTMENT_LABEL": "Département",
+      "SELECT_PERMISSION": "Sélectionner la permission",
+      "SELECT_ACCOUNT_PRIVACY": "Sélectionner la confidentialité",
+      "SELECT_PROFILE_VISIBILITY": "Sélectionner la visibilité",
+      "SELECT_DEPARTMENT": "Sélectionner le département",
+      "MESSAGE_PERMISSION": {
+        "ALL": "Tous les messages",
+        "CONTACTS_ONLY": "Contacts uniquement",
+        "NONE": "Aucun message"
+      },
+      "ACCOUNT_PRIVACY": {
+        "PUBLIC": "Public",
+        "PRIVATE": "Privé",
+        "FRIENDS_ONLY": "Amis uniquement"
+      },
+      "PROFILE_VISIBILITY": {
+        "VISIBLE": "Visible",
+        "HIDDEN": "Masqué"
+      },
+      "DEPARTMENT": {
+        "TECH": "Technologie",
+        "OPERATIONS": "Opérations",
+        "HR": "Ressources humaines",
+        "FINANCE": "Finance",
+        "OTHERS": "Autres"
+      }
+    },
+    "VIEW_MODAL": {
+      "TITLE": "Voir les détails de l'admin",
+      "CLOSE": "Fermer",
+      "EDIT": "Modifier"
+    },
+    "EDIT_MODAL": {
+      "TITLE": "Modifier l'admin",
+      "CANCEL": "Annuler",
+      "SAVE_CHANGES": "Enregistrer les modifications"
+    }
+  },
+  "UNAUTHORIZED": {
+    "TITLE": "Accès refusé",
+    "MESSAGE": "Vous n'avez pas la permission d'accéder à cette page.",
+    "BACK": "Retour au tableau de bord"
+  },
+  "SETTINGS_COACH": {
+    "TITLE": "Paramètres",
+    "SUBTITLE": "Gérez votre disponibilité, emplois et visibilité",
+    "NOTIFICATIONS": "Notifications",
+    "RECEIVE_NOTIFICATIONS": "Recevoir les notifications par e-mail",
+    "NEW_JOB_ALERTS": "Notifications pour les nouveaux emplois",
+    "CONFIDENTIAL": "Confidentiel",
+    "ALLOW_CONTACT": "Permettre aux étudiants de me contacter",
+    "PROFILE_VISIBILITY": "Visibilité du profil aux étudiants",
+    "MANAGE_AVAILABILITY": "Gérer ma disponibilité"
+  },
+  "DASHBOARD_COACH": {
+    "WELCOME": "Bienvenue, {{name}} !",
+    "SUBTITLE": "Voici la moyenne des résultats des tests de carrière de vos coachés",
+    "RADAR_TITLE": "Graphique radar – Profil complet",
+    "BAR_TITLE": "Graphique en barres – Scores détaillés",
+    "DETAIL_SCORES": "Scores détaillés",
+    "DOMINANT_PROFILE": "Profil dominant de vos coachés",
+    "PERCENT": "{{value}}%",
+    "PROFILES": {
+      "R": {
+        "NAME": "Réaliste (R)",
+        "DESC": "Pratique, concret, orienté action"
+      },
+      "I": {
+        "NAME": "Investigateur (I)",
+        "DESC": "Analytique, curieux, scientifique"
+      },
+      "A": {
+        "NAME": "Artistique (A)",
+        "DESC": "Créatif, expressif, original"
+      },
+      "S": {
+        "NAME": "Social (S)",
+        "DESC": "Altruiste, coopératif, bienveillant"
+      },
+      "E": {
+        "NAME": "Entrepreneurial (E)",
+        "DESC": "Persuasif, ambitieux, énergique"
+      },
+      "C": {
+        "NAME": "Conventionnel (C)",
+        "DESC": "Organisé, précis, méthodique"
+      }
+    },
+    "SCORES": [
+    {
+      "LABEL": "Réaliste (R)",
+      "DESCRIPTION": "Pratique, manuel, orienté vers l'action",
+      "TAGS": ["Manipulation d'outils", "Activités concrètes", "Résolution pratique de problèmes"]
+    },
+    {
+      "LABEL": "Investigateur (I)",
+      "DESCRIPTION": "Analytique, curieux, scientifique",
+      "TAGS": ["Recherche", "Analyse", "Expérimentation"]
+    },
+    {
+      "LABEL": "Artistique (A)",
+      "DESCRIPTION": "Créatif, expressif, original",
+      "TAGS": ["Créativité", "Expression artistique", "Innovation"]
+    },
+    {
+      "LABEL": "Social (S)",
+      "DESCRIPTION": "Altruiste, coopératif, bienveillant",
+      "TAGS": ["Aide aux autres", "Communication", "Enseignement"]
+    },
+    {
+      "LABEL": "Entreprenant (E)",
+      "DESCRIPTION": "Persuasif, ambitieux, énergique",
+      "TAGS": ["Leadership", "Persuasion", "Prise de risque"]
+    },
+    {
+      "LABEL": "Conventionnel (C)",
+      "DESCRIPTION": "Organisé, précis, méthodique",
+      "TAGS": ["Organisation", "Précision", "Procédures"]
+    }
+  ]
+  },
+  "MY_NETWORK": {
+    "TAB_MY_NETWORK": "Mon réseau",
+    "TAB_MY_PENDINGS": "En attente",
+    "TITLE": "Mes étudiants",
+    "SORTED_BY": "Trié par :",
+    "RECENTLY_ADDED": "Récemment ajoutés",
+    "SEARCH": "Rechercher par nom",
+    "RELATIONS": "relations",
+    "CONNECTED_ON": "Connecté le",
+    "MESSAGE": "Message",
+    "REMOVE": "Supprimer",
+    "ADD_STUDENT": "Ajouter un étudiant",
+    "INPUT_PLACEHOLDER": "Entrez le code ou l'email de l'étudiant",
+    "SEND_REQUEST": "Envoyer la demande"
+  },
+  "MY_PENDINGS": {
+    "TAB_MY_NETWORK": "Mon réseau",
+    "TAB_MY_PENDINGS": "En attente",
+    "TITLE": "Mes étudiants (En attente)",
+    "SORTED_BY": "Trié par :",
+    "RECENTLY_ADDED": "Récemment ajoutés",
+    "SEARCH": "Rechercher par nom",
+    "RELATIONS": "en attente",
+    "REMOVE": "Supprimer",
+    "ADD_STUDENT": "Ajouter un étudiant",
+    "INPUT_PLACEHOLDER": "Entrez le code ou l'email de l'étudiant",
+    "SEND_REQUEST": "Envoyer la demande"
+  },
+  "MODIFY_PROFILE": {
+    "TITLE": "Modifier mon profil",
+    "FIRST_NAME": "Prénom",
+    "LAST_NAME": "Nom",
+    "LOCATION": "Lieu",
+    "PHONE": "Numéro de téléphone",
+    "SAVE": "Sauvegarder",
+    "CANCEL": "Annuler",
+    "ROLE": "Coach"
+  },
+  "PROFILE_COACH": {
+    "FULL_NAME": "Nom complet",
+    "PHONE": "Téléphone",
+    "LOCATION": "Lieu",
+    "MODIFY": "Modifier",
+    "RELATIONS": "500 relations",
+    "DOWNLOAD_PDF": "PDF",
+    "SHARE": "Partager",
+    "PERSONAL_INFORMATION": "Informations personnelles",
+    "DOMINANT_STUDENT_PROFILE": "Profil dominant de ses étudiants",
+    "PROFILE_LABEL": "Réaliste",
+    "PROFILE_DESC": "Pratique et orienté action",
+    "MATCH": "correspondance",
+    "DOMINANT_RIASEC": "Profil RIASEC dominant",
+    "TESTS_FULL": "Accès aux tests complets",
+    "TESTS_EXPRESS": "Accès aux tests express",
+    "FAVORITE_JOBS": "Accès aux emplois favoris",
+    "TRAINING_COURSES": "Accès aux formations",
+    "SCHOOL": "Lycée Victor Hugo • Terminale scientifique",
+    "JOINED_SINCE": "Membre depuis janvier 2024",
+    "PHOTO": "Ajouter une photo de couverture",
+    "CONNECT": "Se connecter",
+    "MESSAGE": "Message"
+  },
+  "RESULTS": {
+    "TITLE": "Vos résultats RIASEC",
+    "SUBTITLE": "Félicitations ! Voici votre profil RIASEC dominant basé sur votre test",
+    "DOWNLOAD": "Télécharger PDF",
+    "SHARE": "Partager",
+    "YOUR_DOMINANT_PROFILE": "Votre profil dominant",
+    "REALISTIC": "Réaliste",
+    "REALISTIC_DESC": "Pratique, réaliste, orienté action",
+    "MATCH": "Correspondance",
+    "CHART_RADAR": "Graphique radar – Profil complet",
+    "CHART_BAR": "Graphique en barres – Scores détaillés",
+    "DETAILED_SCORES": "Scores détaillés",
+    "KEY_POINTS": "Points clés du profil de {{name}}",
+    "CTA": {
+      "TITLE": "Prêt pour la prochaine étape ?",
+      "DESC": "Maintenant que vous connaissez votre profil, découvrez les carrières et formations qui lui correspondent.",
+      "BTN": "Voir mes recommandations"
+    }
+  },
+  "COACHNETWORK": {
+    "TITLE": "Mes Réseaux",
+    "DESCRIPTION": "Gérez vos enseignants connectés, envoyez des messages et entretenez votre réseau éducatif.",
+    "TAB": {
+      "NETWORK": "Mon réseau",
+      "PENDINGS": "Mes en attente"
+    },
+    "ADD_STUDENT": "Ajouter un étudiant",
+    "PLACEHOLDER": "Entrez le code ou l'email du coach",
+    "SEARCH": "Rechercher",
+    "MY_STUDENTS": "Mes étudiants",
+    "RELATIONS": "relations",
+    "PENDINGS": "en attente",
+    "SORTED_BY": "Trié par :",
+    "SORT": {
+      "RECENT": "Ajoutés récemment",
+      "NAME": "Nom",
+      "OLDEST": "Les plus anciens"
+    },
+    "SEARCH_PLACEHOLDER": "Rechercher par nom",
+    "MESSAGE": "Message",
+    "ACCEPT": "Accepter",
+    "REMOVE": "Supprimer",
+    "EMPTY": "Aucun coach trouvé"
+  },
+  "profile": {
+    "addCoverPhoto": "Ajouter une photo de couverture",
+    "connect": "Se connecter",
+    "message": "Message",
+    "share": "Partager",
+    "pdf": "PDF",
+    "dominantCoacheesProfile": "Profil RIASEC dominant des coachés",
+    "personalInformations": "Informations personnelles",
+    "about": "À propos",
+    "modify": "Modifier",
+    "fullName": "Nom complet",
+    "phone": "Téléphone",
+    "email": "Email",
+    "location": "Localisation",
+    "dominantProfileOf": "Profil dominant de",
+    "my": "mes",
+    "hisHer": "ses",
+    "coachees": "coachés",
+    "match": "correspondance",
+    "relations": "relations"
+  },
+  "stats": {
+    "totalSessions": "Sessions totales",
+    "activeCoachees": "Coachés actifs",
+    "completionRate": "Taux de completion",
+    "avgRating": "Note moyenne"
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "SUBTITLE": "Restez informé de vos dernières notifications et mises à jour importantes",
+    "NEW": "nouveau",
+    "MARK_ALL_READ": "Tout marquer comme lu",
+    "NO_NOTIFICATIONS": "Aucune notification",
+    "ALL_CAUGHT_UP": "Vous êtes à jour !",
+    "NO_FILTER_NOTIFICATIONS": "Aucune notification {{filter}} trouvée.",
+    "LOAD_MORE": "Charger plus de notifications",
+    "LOADING": "Chargement...",
+    "FILTERS": {
+      "ALL": "Toutes",
+      "UNREAD": "Non lues",
+      "READ": "Lues",
+      "APPLICATIONS": "Candidatures",
+      "JOBS": "Travail",
+      "INTERVIEWS": "Entretiens",
+      "COACHING": "Coaching",
+      "TESTS": "Tests",
+      "SYSTEM": "Système"
+    },
+    "ROLES": {
+      "STUDENT": "Étudiant",
+      "COACH": "Coach"
+    },
+    "TYPES": {
+      "APPLICATION_SUBMITTED": "Candidature Soumise",
+      "APPLICATION_ACCEPTED": "Candidature Acceptée",
+      "APPLICATION_REJECTED": "Candidature Rejetée",
+      "INTERVIEW_SCHEDULED": "Entretien Programmé",
+      "INTERVIEW_REMINDER": "Rappel d'Entretien",
+      "COACHING_SESSION": "Session de Coaching",
+      "TEST_ASSIGNED": "Test Assigné",
+      "TEST_COMPLETED": "Test Terminé",
+      "SYSTEM_UPDATE": "Mise à Jour Système"
+    },
+    "TIME": {
+      "JUST_NOW": "À l'instant",
+      "MINUTES_AGO": "Il y a {{count}} minutes",
+      "HOURS_AGO": "Il y a {{count}} heures",
+      "DAYS_AGO": "Il y a {{count}} jours",
+      "WEEKS_AGO": "Il y a {{count}} semaines"
+    }
+  },
+  "SETTINGS": {
+    "TITLE": "Paramètres",
+    "SUBTITLE": {
+      "STUDENT": "Gérez vos préférences de compte, notifications et paramètres de confidentialité pour personnaliser votre expérience d'apprentissage",
+      "COACH": "Configurez vos préférences de coaching, paramètres de notification et visibilité du profil pour optimiser votre expérience de mentorat",
+      "ADMIN": "Contrôlez les paramètres système, les permissions de gestion des utilisateurs et les préférences administratives pour la supervision de la plateforme",
+      "SUPERADMIN": "Accédez aux contrôles système complets, paramètres de maintenance et fonctionnalités administratives avancées pour une gestion complète de la plateforme"
+    },
+    "DEMO_TEXT": "Démo : Basculer entre les rôles d'utilisateur",
+    "ROLES": {
+      "STUDENT": "Étudiant",
+      "COACH": "Coach",
+      "ADMIN": "Administrateur",
+      "SUPERADMIN": "Super Administrateur"
+    },
+    "SECTIONS": {
+      "NOTIFICATIONS": "Notifications",
+      "PRIVACY": "Confidentialité et Sécurité",
+      "CONFIDENTIAL": "Paramètres Confidentiels",
+      "ADMIN_CONTROLS": "Contrôles Administrateur",
+      "DANGER_ZONE": "Zone de Danger"
+    },
+    "NOTIFICATIONS": {
+      "EMAIL_NOTIFICATIONS": "Recevoir les notifications par e-mail",
+      "NEW_JOBS": "Notifications pour les nouveaux emplois",
+      "TEST_REMINDERS": "Rappels de tests à terminer",
+      "SYSTEM_ALERTS": "Alertes système et maintenance",
+      "COACHING_UPDATES": "Mises à jour des sessions de coaching",
+      "STUDENT_PROGRESS": "Notifications de progression des étudiants"
+    },
+    "PRIVACY": {
+      "VISIBILITY_TO_TEACHERS": "Visibilité du profil aux enseignants",
+      "VISIBILITY_TO_STUDENTS": "Visibilité du profil aux étudiants",
+      "VISIBILITY_TO_COACHES": "Visibilité du profil aux coaches",
+      "PUBLIC_PROFILE": "Visibilité du profil public",
+      "MODIFY_PASSWORD": "Modifier le Mot de Passe"
+    },
+    "ADMIN": {
+      "USER_MANAGEMENT": "Permissions de gestion des utilisateurs",
+      "SYSTEM_MAINTENANCE": "Accès à la maintenance système",
+      "DATA_EXPORT": "Permissions d'exportation de données"
+    },
+    "DANGER": {
+      "DELETE_ACCOUNT": "Supprimer le Compte",
+      "DELETE_USER_DATA": "Supprimer les Données Utilisateur",
+      "RESET_SYSTEM": "Réinitialiser le Système",
+      "PURGE_DATABASE": "Purger la Base de Données"
+    }
+  },
+  "EXPRESSTEST": {
+    "NAVIGATION": {
+      "BACK": "Retour",
+      "PREVIOUS": "Précédent",
+      "NEXT": "Suivant",
+      "SUBMIT": "Soumettre"
+    },
+    "QUESTIONNAIRE": {
+      "TIME_REMAINING": "Temps restant",
+      "ANSWERS_PROGRESS": "{answeredQuestions, plural, =0 {0 réponse} =1 {1 réponse} other {{answeredQuestions} réponses}} sur {totalQuestions}",
+      "QUESTION_COUNTER": "Question {currentQuestion} sur {totalQuestions}",
+      "INSTRUCTION": "Choisissez la réponse qui vous correspond le mieux"
+    },
+    "QUESTIONS": {
+      "EXERCISE_FREQUENCY": "À quelle fréquence faites-vous de l'exercice par semaine ?",
+      "WAKE_UP_TIME": "Quelle est votre heure de réveil préférée ?",
+      "STRESS_LEVEL": "Comment évalueriez-vous votre niveau de stress actuel ?",
+      "OF":"de"
+    },
+    "ANSWERS": {
+      "TITLE": "Réponses",
+      "NEVER": "Jamais",
+      "SOMETIMES": "Parfois",
+      "OFTEN": "Souvent",
+      "ALWAYS": "Toujours"
+    }
+  },
+  "PREFERENCES_FAVORITES": {
+    "TITLE": "Préférences et Favoris",
+    "DESCRIPTION": "Gérez vos favoris, intérêts et paramètres de notification",
+    "FAVORITE_JOBS": {
+      "TITLE": "Emplois favoris",
+      "SALARY": "Salaire",
+      "ADDED_ON": "Ajouté le",
+      "MATCH": "Correspondance",
+      "VIEW_DETAILS": "Voir les détails"
+    },
+    "FAVORITE_TRAININGS": {
+      "TITLE": "Formations favorites",
+      "ADDED_ON": "Ajouté le",
+      "MATCH": "Correspondance",
+      "VIEW_DETAILS": "Voir les détails"
+    }
+  },
+  "SAVED": {
+    "TITLE": "Sauvegardé",
+    "DESCRIPTION": "Gérez vos emplois et formations sauvegardés",
+    "SAVED_JOBS": {
+      "TITLE": "Emplois sauvegardés",
+      "SALARY": "Salaire",
+      "ADDED_ON": "Ajouté le",
+      "MATCH": "Correspondance",
+      "VIEW_DETAILS": "Voir les détails"
+    },
+    "SAVED_TRAININGS": {
+      "TITLE": "Formations sauvegardées",
+      "ADDED_ON": "Ajouté le",
+      "MATCH": "Correspondance",
+      "VIEW_DETAILS": "Voir les détails"
+    }
+  },
+  "TEST_HISTORY": {
+    "TITLE": "Historique des Tests",
+    "DESCRIPTION": "Suivez l'évolution de votre profil RIASEC au fil du temps",
+    "STATS": {
+      "TOTAL_TESTS": "Tests Totaux",
+      "AVERAGE_SCORE": "Score Moyen",
+      "HIGHEST_SCORE": "Score le Plus Élevé",
+      "LAST_TEST": "Dernier Test"
+    },
+    "FILTERS": {
+      "TITLE": "Filtres",
+      "ALL": "Tous",
+      "LAST_30_DAYS": "30 derniers jours",
+      "LAST_6_MONTHS": "6 derniers mois",
+      "LAST_YEAR": "Dernière année"
+    },
+    "TEST_CARD": {
+      "DURATION": "Durée",
+      "MINUTES": "min",
+      "DOMINANT_SCORE": "Score Dominant",
+      "CURRENT_RESULT": "Résultat Actuel",
+      "VIEW_DETAILS": "Voir les détails",
+      "DOWNLOAD_PDF": "Télécharger PDF",
+      "DELETE": "Supprimer",
+      "RESUME": "Reprendre"
+    },
+    "EMPTY_STATE": {
+      "TITLE": "Aucun test trouvé",
+      "DESCRIPTION": "Changez vos filtres ou passez votre premier test",
+      "TAKE_TEST": "Passer un test"
+    },
+    "CHART": {
+      "TITLE": "Évolution de votre profil"
+    }
+  },
+  "PERSONALIZED_JOB_SHEETS": {
+    "TITLE": "Fiches d'emploi personnalisées",
+    "SUBTITLE": "Explorez les emplois qui correspondent à votre profil RIASEC et découvrez les opportunités disponibles",
+    "SEARCH_PLACEHOLDER": "Rechercher un emploi ou une entreprise...",
+    "ALL_SECTORS": "Tous les secteurs",
+    "SECTORS": {
+      "EDUCATION": "Éducation",
+      "HEALTHCARE": "Santé",
+      "TECHNOLOGY": "Technologie",
+      "FINANCE": "Finance",
+      "MARKETING": "Marketing"
+    },
+    "ALL_LEVELS": "Tous les niveaux",
+    "LEVELS": {
+      "ENTRY": "Niveau débutant",
+      "MID": "Niveau intermédiaire",
+      "SENIOR": "Niveau senior",
+      "EXECUTIVE": "Exécutif"
+    },
+    "JOBS_FOUND": "emplois trouvés",
+    "FILTERED_BY_PROFILE": "Filtré par compatibilité avec votre profil",
+    "MATCH_PERCENTAGE": "% Compatible",
+    "YEARS": "années",
+    "REQUIRED_SKILLS": "Compétences requises :",
+    "ADVANTAGES": "Avantages :",
+    "VIEW_DETAILS": "Voir les détails",
+    "SAVE": "Sauvegarder",
+    "SAVED": "Sauvegardé",
+    "DEMAND_LEVELS": {
+      "STABLE": "Demande stable",
+      "HIGH": "Forte demande",
+      "VERY_HIGH": "Très forte demande"
+    },
+    "EMPTY_STATE": {
+      "TITLE": "Aucun emploi trouvé",
+      "DESCRIPTION": "Essayez d'ajuster vos critères de recherche ou vos filtres pour trouver plus d'opportunités.",
+      "CLEAR_FILTERS": "Effacer les filtres"
+    },
+    "BACK_TO_RECOMMENDATIONS": "Retour aux recommandations"
+  },
+  "MY_NETWORKS": {
+    "TITLE": "Mes Réseaux",
+    "SUBTITLE": "Gérez vos enseignants connectés, envoyez des messages et maintenez votre réseau éducatif.",
+    "TAB_NETWORK": "Mon réseau",
+    "TAB_PENDINGS": "Mes en attente",
+    "ADD_COACH": {
+      "TITLE": "Ajouter un Coach",
+      "PLACEHOLDER": "Entrez le code ou l'email du coach",
+      "SEARCH_BUTTON": "Rechercher"
+    },
+    "MY_COACHS": "Mes Coachs",
+    "RELATIONS": "relations",
+    "PENDINGS": "en attente",
+    "SORTED_BY": "Trié par :",
+    "SORT_OPTIONS": {
+      "RECENT": "Récemment ajouté",
+      "NAME": "Nom",
+      "OLDEST": "Plus ancien en premier"
+    },
+    "SEARCH_PLACEHOLDER": "Rechercher par nom",
+    "ACTIONS": {
+      "MESSAGE": "Message",
+      "ACCEPT": "Accepter",
+      "REMOVE": "Supprimer"
+    },
+    "EMPTY_STATE": "Aucun coach trouvé"
+  },
+  "STUDENTPROFILE": {
+    "ADD_COVER_PHOTO": "Ajouter une photo de couverture",
+    "CONNECT": "Se connecter",
+    "MESSAGE": "Message",
+    "SHARE": "Partager",
+    "PDF": "PDF",
+    "RIASEC_PROFILE": "Profil RIASEC",
+    "PERSONAL_INFORMATIONS": "Informations personnelles",
+    "ABOUT": "À propos",
+    "MODIFY": "Modifier",
+    "FULL_NAME": "Nom complet",
+    "PHONE": "Téléphone",
+    "SCHOOL": "École",
+    "EMAIL": "Email",
+    "LOCATION": "Localisation",
+    "CLASS": "Classe",
+    "DOMINANT_PROFILE": "Profil dominant",
+    "MATCH": "correspondance",
+    "RELATIONS": "relations",
+    "MEMBER_SINCE": "Membre depuis",
+    "PROFILE_PICTURE_ALT": "photo de profil"
+  },
+  "RECOMMENDATIONS": {
+    "RETRY": "Réessayer",
+    "PERSONALIZED_RECOMMENDATIONS": "Recommandations Personnalisées",
+    "DISCOVER_CAREERS_DESCRIPTION": "Découvrez les carrières et programmes de formation qui correspondent parfaitement à votre profil",
+    "RIASEC": "RIASEC",
+    "RECOMMENDED_CAREERS_TITLE": "Carrières Recommandées pour Votre Profil",
+    "MATCH": "Correspondance",
+    "EDUCATION": "Formation",
+    "SALARY": "Salaire",
+    "JOB_MARKET": "Marché du Travail",
+    "LEARN_MORE": "En Savoir Plus",
+    "ART_DESIGN_SCHOOL": "École d'Art/Design",
+    "SPECIALIZATIONS": "Spécialisations",
+    "EXPLORE_DETAILED_JOB_PROFILES": "Explorez les Profils d'Emploi Détaillés",
+    "DISCOVER_COMPLETE_DATABASE": "Découvrez une base de données complète d'emplois avec salaires, formations et opportunités de carrière.",
+    "SEE_JOB_PROFILES": "Voir les Profils d'Emploi"
+  },
+  "RIASEC_RESULTS": {
+    "TITLE": "Vos Résultats RIASEC",
+    "SUBTITLE": "Félicitations ! Voici votre profil de personnalité professionnelle basé sur vos réponses.",
+    "DOWNLOAD_PDF": "Télécharger PDF",
+    "SHARE": "Partager",
+    "DOMINANT_PROFILE": "Votre Profil Dominant",
+    "REALISTIC": "Réaliste (R)",
+    "REALISTIC_SHORT": "Réaliste",
+    "REALISTIC_DESCRIPTION": "Pratique, concret, orienté action",
+    "INVESTIGATIVE_DESCRIPTION": "Analytique, curieux, scientifique, aime la recherche et la résolution de problèmes",
+    "ARTISTIC_DESCRIPTION": "Créatif, expressif, original, valorise l'innovation et l'expression de soi",
+    "SOCIAL_DESCRIPTION": "Altruiste, coopératif, bienveillant, axé sur l'aide et l'enseignement aux autres",
+    "ENTERPRISING_DESCRIPTION": "Persuasif, ambitieux, énergique, aime le leadership et la prise de risques",
+    "CONVENTIONAL_DESCRIPTION": "Organisé, précis, méthodique, valorise la structure et les procédures",
+    "INVESTIGATIVE": "Investigateur",
+    "INVESTIGATOR": "Investigateur",
+    "ARTISTIC": "Artistique",
+    "SOCIAL": "Social",
+    "ENTERPRISING": "Entreprenant",
+    "CONVENTIONAL": "Conventionnel",
+    "RADAR_CHART_TITLE": "Graphique Radar – Profil Complet",
+    "BAR_CHART_TITLE": "Graphique en Barres – Scores Détaillés",
+    "DETAILED_SCORES": "Scores Détaillés",
+    "KEY_POINTS_TITLE": "Points Clés du Profil",
+    "NEXT_STEP_TITLE": "Prêt pour la Prochaine Étape ?",
+    "NEXT_STEP_DESCRIPTION": "Maintenant que vous connaissez votre profil, découvrez les carrières et programmes de formation qui lui correspondent.",
+    "SEE_RECOMMENDATIONS": "Voir mes Recommandations",
+    "LETTERS": {
+      "R": "R",
+      "I": "I",
+      "A": "A",
+      "S": "S",
+      "E": "E",
+      "C": "C"
+    }
+  },
+  "ERROR_404": {
+    "TITLE": "404",
+    "SUBTITLE": "Page non trouvée",
+    "DESCRIPTION": "Désolé, nous n'avons pas pu trouver la page que vous recherchez. La page a peut-être été déplacée, supprimée, ou l'URL pourrait être incorrecte.",
+    "GO_TO_HOMEPAGE": "Aller à l'accueil",
+    "GO_BACK": "Retour",
+    "FOOTER_TEXT": "© 2025 OrienGO. Tous droits réservés.",
+    "LOGO_ALT": "Logo"
+  },
+  "NAVBAR": {
+    "NAVIGATION": {
+      "HOME": "Accueil",
+      "LEARN_MORE": "En savoir plus"
+    },
+    "AUTH": {
+      "SIGN_UP": "S'inscrire",
+      "LOG_IN": "Se connecter",
+      "LOGIN": "Connexion"
+    },
+    "LOGO_ALT": "Logo"
+  },
+  "FOOTER": {
+    "COMPANY": {
+      "DESCRIPTION": "Une plateforme intelligente pour découvrir les métiers faits pour vous grâce au test RIASEC et à l'intelligence artificielle."
+    },
+    "NAVIGATION": {
+      "TITLE": "Navigation",
+      "HOME": "Accueil",
+      "TEST": "Test RIASEC",
+      "CAREERS": "Métiers",
+      "ABOUT": "À propos"
+    },
+    "SERVICES": {
+      "TITLE": "Services",
+      "RECOMMENDATIONS": "Recommandations",
+      "GUIDANCE": "Accompagnement",
+      "TRAINING": "Formations",
+      "RESOURCES": "Ressources"
+    },
+    "CONTACT": {
+      "TITLE": "Contact",
+      "EMAIL": "contact@orientgo.fr"
+    },
+    "BOTTOM": {
+      "COPYRIGHT": "© {{year}} OrienGo. Tous droits réservés.",
+      "PRIVACY_POLICY": "Politique de confidentialité",
+      "LEGAL_NOTICE": "Mentions légales",
+      "TERMS": "CGU"
+    }
+  },
+  "SIDEBAR": {
+    "BRAND_NAME": "OrienGO",
+    "DEVICE_TYPE": "Appareil:",
+    "PREFERENCES_SAVED": "Préférences sauvegardées ✓",
+    "MOBILE_NO_PREFERENCES": "Mobile - pas de préférences sauvegardées",
+    "SWITCH_ROLE_DEMO": "Changer de Rôle (Démo):",
+    "ROLES": {
+      "STUDENT": "Étudiant",
+      "COACH": "Coach",
+      "ADMIN": "Administrateur",
+      "SUPER_ADMIN": "Super Administrateur"
+    },
+    "RESET_PREFERENCES": "Réinitialiser les Préférences",
+    "COPYRIGHT": "© 2025 OrienGO",
+    "MENU_ITEMS": {
+      "DASHBOARD": "Tableau de Bord",
+      "NOTIFICATIONS": "Notifications",
+      "RIASEC": "Test RIASEC",
+      "NETWORK": "Réseau Professionnel",
+      "SAVED": "Éléments Sauvegardés",
+      "HISTORY": "Historique",
+      "PROFILE": "Profil",
+      "FAVORITES": "Favoris",
+      "SETTINGS": "Paramètres",
+      "LOGOUT": "Déconnexion",
+      "USERS": "Gestion des Utilisateurs",
+      "ADMINS": "Gestion des Admins",
+      "MG_JOBS": "Gestion des postes",
+      "ANALYTICS": "Analytiques",
+      "REPORTS": "Rapports",
+      "STUDENTS": "Étudiants",
+      "COACHING": "Sessions de Coaching",
+      "JOBS": "Opportunités d'Emploi",
+      "MANAGER": "Tableau de Bord Manager",
+      "QUESTIONS": "Banque de Questions",
+      "CAREER": "Orientation Professionnelle",
+      "SYSTEM": "Paramètres Système"
+    }
+  },
+  "LANDING_PAGE": {
+    "TITLE": "Test d'Orientation Professionnelle",
+    "SUBTITLE": "Découvrez votre profil de personnalité professionnelle RIASEC et obtenez des recommandations personnalisées pour votre carrière",
+    "EXPRESS_TEST": {
+      "TITLE": "Test Express",
+      "DESCRIPTION": "Une évaluation rapide avec 20 questions essentielles pour découvrir vos principales orientations professionnelles.",
+      "DURATION": "15 minutes",
+      "QUESTIONS": "18 questions ciblées",
+      "RESULT": "Résultat immédiat",
+      "BUTTON": "Commencer le Test Express"
+    },
+    "FULL_TEST": {
+      "TITLE": "Test Complet",
+      "DESCRIPTION": "Une évaluation approfondie avec 60 questions pour une analyse détaillée de votre profil professionnel.",
+      "DURATION": "60 minutes",
+      "QUESTIONS": "60 questions détaillées",
+      "RESULT": "Analyse approfondie",
+      "BUTTON": "Commencer le Test Complet"
+    },
+    "WHAT_YOU_GET": {
+      "TITLE": "Ce que vous obtiendrez",
+      "PERSONALIZED_PROFILE": {
+        "TITLE": "Profil Personnalisé",
+        "DESCRIPTION": "Découvrez votre type RIASEC dominant"
+      },
+      "JOB_RECOMMENDATIONS": {
+        "TITLE": "Métiers Recommandés",
+        "DESCRIPTION": "Liste de carrières adaptées à votre profil"
+      },
+      "DETAILED_REPORT": {
+        "TITLE": "Rapport Détaillé",
+        "DESCRIPTION": "Analyse complète téléchargeable"
+      }
+    }
+  }
+}

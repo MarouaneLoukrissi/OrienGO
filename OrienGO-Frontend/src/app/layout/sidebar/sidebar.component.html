@@ -1,0 +1,542 @@
+<div class="flex h-screen">
+  <header>
+    <nav>
+      <button
+        *ngIf="isMobile && !showMobileOverlay"
+        (click)="toggleSidebar()"
+        class="fixed top-4 left-4 z-20 p-3 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-colors duration-200"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Mobile Overlay -->
+      <div
+        *ngIf="isMobile && showMobileOverlay"
+        class="fixed inset-0 bg-black bg-opacity-50 z-40 touch-none"
+        (click)="closeMobileSidebar()"
+        (touchmove)="$event.preventDefault()"
+        [@overlayFade]="getOverlayState()"
+      ></div>
+
+      <div
+        class="sidebar-container bg-orange-50 h-screen flex flex-col transition-all duration-300 ease-in-out border-r border-orange-100 relative z-50"
+        [@slideInOut]="getSidebarState()"
+        [class.fixed]="isMobile"
+        [class.left-0]="isMobile"
+        [class.top-0]="isMobile"
+        [class.transform]="isMobile && !showMobileOverlay"
+        [class.-translate-x-full]="isMobile && !showMobileOverlay"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between p-2 sm:p-0 sm:px-4 lg:p-0 lg:px-4 border-b border-orange-100 min-h-[60px] sm:min-h-[80px]" [class.justify-center]="!isExpanded && !isMobile">
+          <div [ngClass]="{'sm:pl-3 lg:pl-3':!isExpanded}" class="flex items-center space-x-2 sm:space-x-3" [class.justify-center]="!isExpanded && !isMobile" [class.w-full]="!isExpanded && !isMobile">
+            <div (click)="selectItem('dashboard')" class="w-14 h-10 sm:w-16 sm:h-12 lg:w-18 lg:h-14 hover:bg-[#ffe1c0] hover:cursor-pointer rounded-lg flex items-center justify-center flex-shrink-0" [class.mx-auto]="!isExpanded && !isMobile">
+              <img src="../../../assets/images/logo/logoOrienGo.png" alt="Logo" class="w-full h-auto" />
+            </div>
+            <h1
+              class="text-sm sm:text-xl lg:text-2xl font-bold text-gray-800 transition-all duration-300 whitespace-nowrap overflow-hidden"
+              [@fadeInOut]="(isExpanded || (isMobile && showMobileOverlay)) ? 'visible' : 'hidden'"
+            >
+              OrienGO
+            </h1>
+          </div>
+
+          <!-- Desktop Toggle Button / Mobile Close Button -->
+          <button
+            *ngIf="(isExpanded && !isMobile) || (isMobile && showMobileOverlay)"
+            (click)="isMobile ? closeMobileSidebar() : toggleSidebar()"
+            class="p-1 sm:p-2 rounded-lg hover:bg-orange-100 transition-colors duration-200 text-gray-600 hover:text-gray-800 flex-shrink-0 flex items-center justify-center"
+            [ngClass]="{
+              'cursor-ew-resize':!isMobile,
+              }"
+          >
+            <!-- Desktop Switch Icon -->
+            <svg *ngIf="!isMobile" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4C4.34315 4 3 5.34315 3 7V17C3 18.6569 4.34315 20 6 20H18C19.6569 20 21 18.6569 21 17V7C21 5.34315 19.6569 4 18 4H6ZM5 7C5 6.44772 5.44772 6 6 6H9V18H6C5.44772 18 5 17.5523 5 17V7ZM11 18H18C18.5523 18 19 17.5523 19 17V7C19 6.44772 18.5523 6 18 6H11V18Z" fill="currentcolor"></path> </g></svg>
+
+            <!-- Mobile X Icon -->
+            <svg
+              *ngIf="isMobile"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Collapsed Desktop Hover Button -->
+        <div
+          *ngIf="!isExpanded && !isMobile"
+          class="collapsed-hover-area absolute top-0 left-0 w-full h-16 sm:h-20 flex items-center justify-center cursor-pointer group"
+          (click)="toggleSidebar()"
+        >
+          <div class="rounded-2xl cursor-ew-resize opacity-0 border-[6px] border-orange-50 group-hover:opacity-100 transition-all duration-200 bg-orange-100 text-white p-1 sm:p-2 transform scale-90 group-hover:scale-100">
+            <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4C4.34315 4 3 5.34315 3 7V17C3 18.6569 4.34315 20 6 20H18C19.6569 20 21 18.6569 21 17V7C21 5.34315 19.6569 4 18 4H6ZM5 7C5 6.44772 5.44772 6 6 6H9V18H6C5.44772 18 5 17.5523 5 17V7ZM11 18H18C18.5523 18 19 17.5523 19 17V7C19 6.44772 18.5523 6 18 6H11V18Z" fill="#4B5563"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- User Info (when expanded or mobile) -->
+        <div
+          class="px-2 sm:px-4 lg:px-6 py-2 sm:py-4 border-b border-orange-100 transition-all duration-300"
+          [@fadeInOut]="(isExpanded || isMobile) ? 'visible' : 'hidden'"
+          *ngIf="currentUser && (isExpanded || isMobile)"
+        >
+          <div class="flex items-center space-x-2 sm:space-x-3">
+            <div
+              class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-white font-semibold text-xs sm:text-sm lg:text-base"
+              [ngClass]="getRoleColor(currentUser.role)"
+            >
+              {{ currentUser.name.charAt(0) }}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs sm:text-sm lg:text-base font-medium text-gray-900 truncate">{{ currentUser.name }}</p>
+              <p class="text-xs sm:text-xs lg:text-sm text-gray-500 truncate">{{ getRoleDisplayName(currentUser.role) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role Switcher & Device Info (Demo purposes) //OK//-->
+        <div
+          class="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 border-b border-orange-100"
+          [@fadeInOut]="(isExpanded || isMobile) ? 'visible' : 'hidden'"
+          *ngIf="isExpanded || isMobile"
+        >
+          <!-- Device Type Indicator -->
+          <div class="mb-2">
+            <p class="text-xs text-gray-500 mb-1">Device: {{ deviceType | titlecase }}</p>
+            <p class="text-xs text-gray-400" *ngIf="supportsPreferences">
+              Preferences saved ✓
+            </p>
+            <p class="text-xs text-gray-400" *ngIf="!supportsPreferences">
+              Mobile - no preferences saved
+            </p>
+          </div>
+
+          <!-- Role Switcher -->
+          <p class="text-xs text-gray-500 mb-1 sm:mb-2">Switch Role (Demo):</p>
+          <div class="grid grid-cols-2 gap-1 text-xs">
+            <button
+              (click)="switchRole('student')"
+              class="px-1 sm:px-2 py-1 text-xs rounded transition-colors"
+              [class.bg-orange-500]="currentUser?.role === 'student'"
+              [class.text-white]="currentUser?.role === 'student'"
+              [class.bg-gray-200]="currentUser?.role !== 'student'"
+              [class.text-gray-700]="currentUser?.role !== 'student'"
+            >
+              Student
+            </button>
+            <button
+              (click)="switchRole('coach')"
+              class="px-1 sm:px-2 py-1 text-xs rounded transition-colors"
+              [class.bg-orange-500]="currentUser?.role === 'coach'"
+              [class.text-white]="currentUser?.role === 'coach'"
+              [class.bg-gray-200]="currentUser?.role !== 'coach'"
+              [class.text-gray-700]="currentUser?.role !== 'coach'"
+            >
+              Coach
+            </button>
+            <button
+              (click)="switchRole('admin')"
+              class="px-1 sm:px-2 py-1 text-xs rounded transition-colors"
+              [class.bg-orange-500]="currentUser?.role === 'admin'"
+              [class.text-white]="currentUser?.role === 'admin'"
+              [class.bg-gray-200]="currentUser?.role !== 'admin'"
+              [class.text-gray-700]="currentUser?.role !== 'admin'"
+            >
+              Admin
+            </button>
+            <button
+              (click)="switchRole('superAdmin')"
+              class="px-1 sm:px-2 py-1 text-xs rounded transition-colors"
+              [class.bg-orange-500]="currentUser?.role === 'superAdmin'"
+              [class.text-white]="currentUser?.role === 'superAdmin'"
+              [class.bg-gray-200]="currentUser?.role !== 'superAdmin'"
+              [class.text-gray-700]="currentUser?.role !== 'superAdmin'"
+            >
+              Super Admin
+            </button>
+          </div>
+
+          <!-- Reset Preferences Button (Debug) -->
+          <button
+            *ngIf="supportsPreferences"
+            (click)="resetPreferences()"
+            class="mt-2 px-2 py-1 text-xs bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+          >
+            Reset Preferences
+          </button>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 py-2 sm:py-4 lg:py-6 px-2 sm:px-3 lg:px-4 space-y-1 overflow-y-auto overflow-x-hidden">
+          <div
+            *ngFor="let item of menuItems; trackBy: trackByItemId"
+            class="menu-item group relative"
+            [class.active]="activeItem === item.id"
+            [class.highlighted]="item.isHighlighted"
+            (click)="selectItem(item.id)"
+          >
+            <!-- Divider -->
+            <div
+              *ngIf="item.divider"
+              class="border-t border-orange-200 my-1 sm:my-2 mx-2 sm:mx-3"
+              [@fadeInOut]="(isExpanded || isMobile) ? 'visible' : 'hidden'"
+            ></div>
+
+            <!-- Collapsed state: compact icon button -->
+            <div
+              *ngIf="!isExpanded && !isMobile"
+              class="w-10 h-10 sm:w-12 sm:h-12 mx-auto my-1 sm:my-2 flex items-center justify-center rounded-xl cursor-pointer transition-all duration-200 hover:bg-orange-100 group-hover:shadow-sm relative"
+            >
+              <!-- Icon Container -->
+              <div
+                class="flex-shrink-0 text-gray-600 group-hover:text-gray-800 transition-colors duration-200 relative w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center"
+                [class.text-white]="activeItem === item.id"
+                [class.text-orange-600]="item.isHighlighted && activeItem !== item.id"
+              >
+                <!-- Dashboard Icon -->
+                <svg *ngIf="item.icon === 'dashboard'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+
+                <!-- Notifications Icon -->
+                <svg *ngIf="item.icon === 'notifications'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+
+                <!-- RIASEC Icon -->
+                <svg *ngIf="item.icon === 'riasec'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+
+                <!-- Network Icon -->
+                <svg *ngIf="item.icon === 'network'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+
+                <!-- Saved Icon -->
+                <svg *ngIf="item.icon === 'saved'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+
+                <!-- History Icon -->
+                <svg *ngIf="item.icon === 'history'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+
+                <!-- Profile Icon -->
+                <svg *ngIf="item.icon === 'profile'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+
+                <!-- Favorites Icon -->
+                <svg *ngIf="item.icon === 'favorites'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                </svg>
+
+                <!-- Settings Icon -->
+                <svg *ngIf="item.icon === 'settings'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+
+                <!-- Logout Icon -->
+                <svg *ngIf="item.icon === 'logout'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16,17 21,12 16,7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+
+                <!-- Additional Role-Specific Icons -->
+                <svg *ngIf="item.icon === 'users'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'analytics'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'reports'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14,2 14,8 20,8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'students'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'coaching'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  <path d="M8 9h8"/>
+                  <path d="M8 13h6"/>
+                </svg>
+
+                 <svg *ngIf="item.icon === 'jobs'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M16 7V6.2C16 5.0799 16 4.51984 15.782 4.09202C15.5903 3.71569 15.2843 3.40973 14.908 3.21799C14.4802 3 13.9201 3 12.8 3H11.2C10.0799 3 9.51984 3 9.09202 3.21799C8.71569 3.40973 8.40973 3.71569 8.21799 4.09202C8 4.51984 8 5.0799 8 6.2V7M3.02721 10.0263C3.38776 10.3719 7.28572 14 12 14C16.7143 14 20.6122 10.3719 20.9728 10.0263M3.02721 10.0263C3 10.493 3 11.0665 3 11.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V11.8C21 11.0665 21 10.493 20.9728 10.0263M3.02721 10.0263C3.06233 9.4241 3.14276 8.99959 3.32698 8.63803C3.6146 8.07354 4.07354 7.6146 4.63803 7.32698C5.27976 7 6.11984 7 7.8 7H16.2C17.8802 7 18.7202 7 19.362 7.32698C19.9265 7.6146 20.3854 8.07354 20.673 8.63803C20.8572 8.99959 20.9377 9.4241 20.9728 10.0263" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </g>
+                </svg>
+
+                <svg *ngIf="item.icon === 'manager'" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="-38.4 -38.4 1996.80 1996.80" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="30">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="7.68"></g>
+                  <g id="SVGRepo_iconCarrier"> <path d="M276.941 440.584v565.722c0 422.4 374.174 625.468 674.71 788.668l8.02 4.292 8.131-4.292c300.537-163.2 674.71-366.268 674.71-788.668V440.584l-682.84-321.657L276.94 440.584Zm682.73 1479.529c-9.262 0-18.523-2.372-26.993-6.89l-34.9-18.974C588.095 1726.08 164 1495.906 164 1006.306V404.78c0-21.91 12.65-41.788 32.414-51.162L935.727 5.42c15.134-7.228 32.866-7.228 48 0l739.313 348.2c19.765 9.374 32.414 29.252 32.414 51.162v601.525c0 489.6-424.207 719.774-733.779 887.943l-34.899 18.975c-8.47 4.517-17.731 6.889-27.105 6.889Zm467.158-547.652h-313.412l-91.595-91.482v-83.803H905.041v-116.78h-83.69l-58.503-58.504c-1.92.113-3.84.113-5.76.113-176.075 0-319.285-143.21-319.285-319.285 0-176.075 143.21-319.398 319.285-319.398 176.075 0 319.285 143.323 319.285 319.398 0 1.92 0 3.84-.113 5.647l350.57 350.682v313.412Zm-266.654-112.941h153.713v-153.713L958.462 750.155l3.953-37.27c1.017-123.897-91.595-216.621-205.327-216.621S550.744 588.988 550.744 702.72c0 113.845 92.612 206.344 206.344 206.344l47.21-5.309 63.811 63.7h149.873v116.78h116.781v149.986l25.412 25.299Zm-313.4-553.57c0 46.758-37.949 84.706-84.706 84.706-46.758 0-84.706-37.948-84.706-84.706s37.948-84.706 84.706-84.706c46.757 0 84.706 37.948 84.706 84.706" fill-rule="evenodd"></path></g>
+                </svg>
+
+                <svg *ngIf="item.icon === 'questions'" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M12 17V16.9929M12 14.8571C12 11.6429 15 12.3571 15 9.85714C15 8.27919 13.6568 7 12 7C10.6567 7 9.51961 7.84083 9.13733 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+
+                <svg *ngIf="item.icon === 'career'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'system'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+
+              <!-- Badge for notifications (collapsed state) -->
+              <div
+                *ngIf="item.badge && item.badge > 0"
+                class="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+              >
+                {{ item.badge > 99 ? '99+' : item.badge }}
+              </div>
+            </div>
+
+            <!-- Expanded state: full menu item -->
+            <div
+              *ngIf="isExpanded || isMobile"
+              class="flex items-center space-x-3 px-2 sm:px-3 py-2 sm:py-3 lg:py-4 rounded-xl cursor-pointer transition-all duration-200 hover:bg-orange-100 group-hover:shadow-sm relative w-full"
+            >
+              <!-- Icon Container -->
+              <div
+                class="flex-shrink-0 text-gray-600 group-hover:text-gray-800 transition-colors duration-200 relative w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center"
+                [class.text-white]="activeItem === item.id"
+                [class.text-orange-600]="item.isHighlighted && activeItem !== item.id"
+              >
+                <!-- Dashboard Icon -->
+                <svg *ngIf="item.icon === 'dashboard'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+
+                <!-- Notifications Icon -->
+                <svg *ngIf="item.icon === 'notifications'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+
+                <!-- RIASEC Icon -->
+                <svg *ngIf="item.icon === 'riasec'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+
+                <!-- Network Icon -->
+                <svg *ngIf="item.icon === 'network'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'questions'" width="20" height="20" viewBox="0 0 22 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M12 17V16.9929M12 14.8571C12 11.6429 15 12.3571 15 9.85714C15 8.27919 13.6568 7 12 7C10.6567 7 9.51961 7.84083 9.13733 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+
+                <svg *ngIf="item.icon === 'manager'" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="-38.4 -38.4 1996.80 1996.80" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="30">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="7.68"></g>
+                  <g id="SVGRepo_iconCarrier"> <path d="M276.941 440.584v565.722c0 422.4 374.174 625.468 674.71 788.668l8.02 4.292 8.131-4.292c300.537-163.2 674.71-366.268 674.71-788.668V440.584l-682.84-321.657L276.94 440.584Zm682.73 1479.529c-9.262 0-18.523-2.372-26.993-6.89l-34.9-18.974C588.095 1726.08 164 1495.906 164 1006.306V404.78c0-21.91 12.65-41.788 32.414-51.162L935.727 5.42c15.134-7.228 32.866-7.228 48 0l739.313 348.2c19.765 9.374 32.414 29.252 32.414 51.162v601.525c0 489.6-424.207 719.774-733.779 887.943l-34.899 18.975c-8.47 4.517-17.731 6.889-27.105 6.889Zm467.158-547.652h-313.412l-91.595-91.482v-83.803H905.041v-116.78h-83.69l-58.503-58.504c-1.92.113-3.84.113-5.76.113-176.075 0-319.285-143.21-319.285-319.285 0-176.075 143.21-319.398 319.285-319.398 176.075 0 319.285 143.323 319.285 319.398 0 1.92 0 3.84-.113 5.647l350.57 350.682v313.412Zm-266.654-112.941h153.713v-153.713L958.462 750.155l3.953-37.27c1.017-123.897-91.595-216.621-205.327-216.621S550.744 588.988 550.744 702.72c0 113.845 92.612 206.344 206.344 206.344l47.21-5.309 63.811 63.7h149.873v116.78h116.781v149.986l25.412 25.299Zm-313.4-553.57c0 46.758-37.949 84.706-84.706 84.706-46.758 0-84.706-37.948-84.706-84.706s37.948-84.706 84.706-84.706c46.757 0 84.706 37.948 84.706 84.706" fill-rule="evenodd"></path></g>
+                </svg>
+
+                <svg *ngIf="item.icon === 'jobs'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M16 7V6.2C16 5.0799 16 4.51984 15.782 4.09202C15.5903 3.71569 15.2843 3.40973 14.908 3.21799C14.4802 3 13.9201 3 12.8 3H11.2C10.0799 3 9.51984 3 9.09202 3.21799C8.71569 3.40973 8.40973 3.71569 8.21799 4.09202C8 4.51984 8 5.0799 8 6.2V7M3.02721 10.0263C3.38776 10.3719 7.28572 14 12 14C16.7143 14 20.6122 10.3719 20.9728 10.0263M3.02721 10.0263C3 10.493 3 11.0665 3 11.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V11.8C21 11.0665 21 10.493 20.9728 10.0263M3.02721 10.0263C3.06233 9.4241 3.14276 8.99959 3.32698 8.63803C3.6146 8.07354 4.07354 7.6146 4.63803 7.32698C5.27976 7 6.11984 7 7.8 7H16.2C17.8802 7 18.7202 7 19.362 7.32698C19.9265 7.6146 20.3854 8.07354 20.673 8.63803C20.8572 8.99959 20.9377 9.4241 20.9728 10.0263" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </g>
+                </svg>
+
+                <!-- Saved Icon -->
+                <svg *ngIf="item.icon === 'saved'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+
+                <!-- History Icon -->
+                <svg *ngIf="item.icon === 'history'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+
+                <!-- Profile Icon -->
+                <svg *ngIf="item.icon === 'profile'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+
+                <!-- Favorites Icon -->
+                <svg *ngIf="item.icon === 'favorites'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                </svg>
+
+                <!-- Settings Icon -->
+                <svg *ngIf="item.icon === 'settings'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+
+                <!-- Logout Icon -->
+                <svg *ngIf="item.icon === 'logout'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16,17 21,12 16,7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+
+                <!-- Additional Role-Specific Icons -->
+                <svg *ngIf="item.icon === 'users'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'analytics'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'reports'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14,2 14,8 20,8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'students'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'coaching'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  <path d="M8 9h8"/>
+                  <path d="M8 13h6"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'career'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+
+                <svg *ngIf="item.icon === 'system'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+
+              <div
+                class="flex-1 flex items-center justify-between transition-all duration-300 whitespace-nowrap overflow-hidden"
+              >
+                <span
+                  class="font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-200 text-xs sm:text-sm lg:text-base"
+                  [class.text-white]="activeItem === item.id"
+                  [class.text-orange-700]="item.isHighlighted && activeItem !== item.id"
+                >
+                  {{ item.label | translate }}
+                </span>
+
+                <!-- Badge for notifications (expanded state) -->
+                <div
+                  *ngIf="item.badge && item.badge > 0"
+                  [ngClass]="{
+                    'bg-red-500 text-white': activeItem !== 'notifications',
+                    'bg-white text-red-500': activeItem === 'notifications'
+                  }"
+                  class="w-4 h-4 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-white text-xs rounded-full flex items-center justify-center ml-2"
+                >
+                  {{ item.badge > 99 ? '99+' : item.badge }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Tooltip for collapsed state (desktop only) -->
+            <div
+              class="tooltip absolute left-full ml-2 px-2 sm:px-3 py-1 sm:py-2 bg-gray-800 text-white text-xs sm:text-sm rounded-lg opacity-0 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-50 hidden lg:block"
+              [class.group-hover:opacity-100]="!isExpanded && !isMobile"
+              [ngStyle]="!item.divider ? { top: '50%', transform: 'translateY(-50%)' } : { top: '60%', transform: 'translateY(-50%)' }"
+            >
+              {{ item.label }}
+              <div
+                *ngIf="item.badge && item.badge > 0"
+                class="inline-block ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+              >
+                {{ item.badge > 99 ? '99+' : item.badge }}
+              </div>
+              <div class="tooltip-arrow absolute right-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-r-gray-800"></div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Footer -->
+        <div class="p-2 sm:p-3 lg:p-4 border-t border-orange-100">
+          <div
+            class="text-xs text-gray-500 text-center transition-all duration-300"
+            [@fadeInOut]="(isExpanded || isMobile) ? 'visible' : 'hidden'"
+          >
+            <p class="opacity-70">© 2025 OrienGO</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+    <main class="flex-1 overflow-y-auto">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

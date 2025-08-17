@@ -1,0 +1,620 @@
+<div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[88rem] mx-auto">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <!-- Briefcase Icon -->
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 sm:h-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2.80408 15.4771C2.80408 15.4771 2.94608 17.2151 2.97908 17.7631C3.02308 18.4981 3.30708 19.3191 3.78108 19.8891C4.45008 20.6971 5.23808 20.9821 6.29008 20.9841C7.52708 20.9861 16.5221 20.9861 17.7591 20.9841C18.8111 20.9821 19.5991 20.6971 20.2681 19.8891C20.7421 19.3191 21.0261 18.4981 21.0711 17.7631C21.1031 17.2151 21.2451 15.4771 21.2451 15.4771" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.49597 5.32949V4.95849C8.49597 3.73849 9.48397 2.75049 10.704 2.75049H13.286C14.505 2.75049 15.494 3.73849 15.494 4.95849L15.495 5.32949" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.995 16.6783V15.3843" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.74988 8.38905V11.8561C4.66788 13.1211 6.96588 14.0071 9.48788 14.3581C9.78988 13.2571 10.7829 12.4501 11.9899 12.4501C13.1779 12.4501 14.1909 13.2571 14.4729 14.3681C17.0049 14.0171 19.3119 13.1311 21.2399 11.8561V8.38905C21.2399 6.69505 19.8769 5.33105 18.1829 5.33105H5.81688C4.12288 5.33105 2.74988 6.69505 2.74988 8.38905Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </div>
+      
+      <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
+        {{ 'ADMIN_CAREERS.TITLE' | translate }}
+      </h1>
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
+        {{ 'ADMIN_CAREERS.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <!-- Barre de recherche et filtres -->
+    <div class="mb-6 space-y-4">
+      <div class="flex flex-wrap flex-col sm:flex-row gap-4">
+        <div class="flex-1 min-w-0 sm:min-w-[320px]">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchChange()"
+            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
+            [placeholder]="'ADMIN_CAREERS.SEARCH_PLACEHOLDER' | translate"
+          />
+        </div>
+        
+        <div class="min-w-0 flex flex-wrap flex-col sm:flex-row gap-2">
+          <select
+            [(ngModel)]="selectedCategory"
+            (change)="onCategoryChange()"
+            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="" selected>{{ 'ADMIN_CAREERS.ALL' | translate }}</option>
+            <option *ngFor="let category of jobCategories" [value]="category">
+              {{ getJobCategoryLabel(category) }}
+            </option>
+          </select>
+
+          <select
+            [(ngModel)]="selectedJobMarket"
+            (change)="onJobMarketChange()"
+            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="" selected>{{ 'ADMIN_CAREERS.ALLJM' | translate }}</option>
+            <option *ngFor="let market of getUniqueJobMarkets()" [value]="market">
+              {{ market }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4 justify-between items-center">
+        <button
+          (click)="resetFilters()"
+          class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+          {{ 'ADMIN_CAREERS.RESET_FILTERS' | translate }}
+        </button>
+
+        <button
+          (click)="openAddJobModal()"
+          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
+          {{ 'ADMIN_CAREERS.ADD_BUTTON' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Tableau des postes -->
+    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-orange-100">
+          <tr>
+            <th 
+              (click)="onSort('title')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              {{ 'ADMIN_CAREERS.TABLE.TITLE' | translate }}
+              <span *ngIf="sortField === 'title'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('category')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              {{ 'ADMIN_CAREERS.TABLE.CATEGORY' | translate }}
+              <span *ngIf="sortField === 'category'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('education')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              {{ 'ADMIN_CAREERS.TABLE.EDUCATION' | translate }}
+              <span *ngIf="sortField === 'education'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('salaryRange')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              {{ 'ADMIN_CAREERS.TABLE.SALARY_RANGE' | translate }}
+              <span *ngIf="sortField === 'salaryRange'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th 
+              (click)="onSort('jobMarket')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              {{ 'ADMIN_CAREERS.TABLE.JOB_MARKET' | translate }}
+              <span *ngIf="sortField === 'jobMarket'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="px-4 sm:px-6 py-4 text-left text-sm font-semibold text-gray-700">{{ 'ADMIN_CAREERS.TABLE.ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let job of jobs" class="hover:bg-orange-50 transition-colors">
+            <td class="px-4 sm:px-6 py-4">
+              <div>
+                <div class="font-semibold text-gray-900">{{ job.title }}</div>
+                <div class="text-sm text-gray-500 mt-1">{{ job.description.substring(0, 100) }}...</div>
+              </div>
+            </td>
+            <td class="px-4 sm:px-6 py-4">
+              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange text-white">
+                {{ getJobCategoryLabel(job.category) }}
+              </span>
+            </td>
+            <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.education }}</td>
+            <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.salaryRange }}</td>
+            <td class="px-4 sm:px-6 py-4">
+              <span 
+                [class]="'whitespace-nowrap px-3 py-1 text-xs font-medium rounded-full ' + 
+                  (job.jobMarket === 'High demand' ? 'bg-green-100 text-green-800' : 
+                   job.jobMarket === 'Stable' ? 'bg-blue-100 text-blue-800' :
+                   'bg-gray-100 text-gray-800')">
+                {{ job.jobMarket }}
+              </span>
+            </td>
+            <td class="px-4 sm:px-6 py-4">
+              <div class="flex flex-wrap items-center space-x-2">
+                <span 
+                  (click)="openViewJobModal(job)"
+                  class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
+                  {{ 'ADMIN_CAREERS.TABLE.VIEW' | translate }}
+                </span>
+                <span class="text-gray-300">|</span>
+                <span 
+                  (click)="openEditJobModal(job)"
+                  class="text-green-600 hover:text-green-800 cursor-pointer font-medium hover:underline transition-colors">
+                  {{ 'ADMIN_CAREERS.TABLE.EDIT' | translate }}
+                </span>
+                <span class="text-gray-300">|</span>
+                <span 
+                  (click)="deleteJob(job)"
+                  class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
+                  {{ 'ADMIN_CAREERS.TABLE.DELETE' | translate }}
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Add Job Modal -->
+<div *ngIf="showAddJobModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-800">
+          {{ 'ADMIN_CAREERS.MODAL.ADD_TITLE' | translate }}
+        </h3>
+        <button 
+          (click)="closeAddJobModal()"
+          class="text-gray-400 hover:text-gray-600 text-2xl">
+          ×
+        </button>
+      </div>
+
+      <form [formGroup]="addJobForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Basic Information -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="title"
+                [class.border-red-500]="addJobForm.get('title')?.invalid && addJobForm.get('title')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark"
+                [placeholder]="'ADMIN_CAREERS.MODAL.TITLE_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('title', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('title', addJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }} *
+              </label>
+              <select
+                formControlName="category"
+                [ngClass]="{'text-gray-400': !addJobForm.get('category')?.value}"
+                [class.border-red-500]="addJobForm.get('category')?.invalid && addJobForm.get('category')?.touched"
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                <option *ngFor="let category of jobCategories" [value]="category">
+                  {{ getJobCategoryLabel(category) }}
+                </option>
+              </select>
+              <div *ngIf="getErrorMessage('category', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('category', addJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="education"
+                [class.border-red-500]="addJobForm.get('education')?.invalid && addJobForm.get('education')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.EDUCATION_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('education', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('education', addJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="salaryRange"
+                [class.border-red-500]="addJobForm.get('salaryRange')?.invalid && addJobForm.get('salaryRange')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.SALARY_RANGE_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('salaryRange', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('salaryRange', addJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="jobMarket"
+                [class.border-red-500]="addJobForm.get('jobMarket')?.invalid && addJobForm.get('jobMarket')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.JOB_MARKET_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('jobMarket', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('jobMarket', addJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="tags"
+                [class.border-red-500]="addJobForm.get('tags')?.invalid && addJobForm.get('tags')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.TAGS_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('tags', addJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('tags', addJobForm) }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }} *
+          </label>
+          <textarea
+            formControlName="description"
+            rows="4"
+            [class.border-red-500]="addJobForm.get('description')?.invalid && addJobForm.get('description')?.touched"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            [placeholder]="'ADMIN_CAREERS.MODAL.DESCRIPTION_PLACEHOLDER' | translate"
+          ></textarea>
+          <div *ngIf="getErrorMessage('description', addJobForm)" class="text-red-500 text-xs mt-1">
+            {{ getErrorMessage('description', addJobForm) }}
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end space-x-3 pt-4">
+          <button
+            type="button"
+            (click)="closeAddJobModal()"
+            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
+            {{ 'ADMIN_CAREERS.MODAL.CANCEL' | translate }}
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
+            {{ 'ADMIN_CAREERS.MODAL.ADD' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- View Job Modal -->
+<div *ngIf="showViewJobModal && selectedJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-800">
+          {{ 'ADMIN_CAREERS.MODAL.VIEW_TITLE' | translate }}
+        </h3>
+        <button 
+          (click)="closeViewJobModal()"
+          class="text-gray-400 hover:text-gray-600 text-2xl">
+          ×
+        </button>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Basic Information -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.title }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }}
+              </label>
+              <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+                {{ getJobCategoryLabel(selectedJob.category) }}
+              </span>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.education }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.salaryRange }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }}
+              </label>
+              <span 
+                [class]="'px-2 py-1 text-xs rounded-full ' + 
+                  (selectedJob.jobMarket === 'High demand' ? 'bg-green-100 text-green-800' : 
+                   selectedJob.jobMarket === 'Stable' ? 'bg-blue-100 text-blue-800' :
+                   'bg-gray-100 text-gray-800')">
+                {{ selectedJob.jobMarket }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }}
+          </label>
+          <p class="text-gray-900">{{ selectedJob.description }}</p>
+        </div>
+
+        <!-- Tags -->
+        <div *ngIf="selectedJob.tags && selectedJob.tags.length > 0">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }}
+          </label>
+          <div class="flex flex-wrap gap-2">
+            <span 
+              *ngFor="let tag of selectedJob.tags"
+              class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="border-t pt-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_CAREERS.MODAL.SYSTEM_INFO' | translate }}
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.ID' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.id }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.VERSION' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.version }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.SOFT_DELETED' | translate }}
+              </label>
+              <p class="text-gray-900">{{ selectedJob.softDeleted ? 'Oui' : 'Non' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end pt-4">
+          <button
+            (click)="closeViewJobModal()"
+            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
+            {{ 'ADMIN_CAREERS.MODAL.CLOSE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Job Modal -->
+<div *ngIf="showEditJobModal && editingJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-800">
+          {{ 'ADMIN_CAREERS.MODAL.EDIT_TITLE' | translate }}
+        </h3>
+        <button 
+          (click)="closeEditJobModal()"
+          class="text-gray-400 hover:text-gray-600 text-2xl">
+          ×
+        </button>
+      </div>
+
+      <form [formGroup]="editJobForm" (ngSubmit)="onEditSubmit()" class="space-y-6">
+        <!-- Basic Information -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="title"
+                [class.border-red-500]="editJobForm.get('title')?.invalid && editJobForm.get('title')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.TITLE_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('title', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('title', editJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }} *
+              </label>
+              <select
+                formControlName="category"
+                [ngClass]="{'text-gray-400': !editJobForm.get('category')?.value}"
+                [class.border-red-500]="editJobForm.get('category')?.invalid && editJobForm.get('category')?.touched"
+                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                <option *ngFor="let category of jobCategories" [value]="category">
+                  {{ getJobCategoryLabel(category) }}
+                </option>
+              </select>
+              <div *ngIf="getErrorMessage('category', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('category', editJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="education"
+                [class.border-red-500]="editJobForm.get('education')?.invalid && editJobForm.get('education')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.EDUCATION_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('education', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('education', editJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="salaryRange"
+                [class.border-red-500]="editJobForm.get('salaryRange')?.invalid && editJobForm.get('salaryRange')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.SALARY_RANGE_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('salaryRange', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('salaryRange', editJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="jobMarket"
+                [class.border-red-500]="editJobForm.get('jobMarket')?.invalid && editJobForm.get('jobMarket')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.JOB_MARKET_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('jobMarket', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('jobMarket', editJobForm) }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }} *
+              </label>
+              <input
+                type="text"
+                formControlName="tags"
+                [class.border-red-500]="editJobForm.get('tags')?.invalid && editJobForm.get('tags')?.touched"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                [placeholder]="'ADMIN_CAREERS.MODAL.TAGS_PLACEHOLDER' | translate"
+              />
+              <div *ngIf="getErrorMessage('tags', editJobForm)" class="text-red-500 text-xs mt-1">
+                {{ getErrorMessage('tags', editJobForm) }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }} *
+          </label>
+          <textarea
+            formControlName="description"
+            rows="4"
+            [class.border-red-500]="editJobForm.get('description')?.invalid && editJobForm.get('description')?.touched"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            [placeholder]="'ADMIN_CAREERS.MODAL.DESCRIPTION_PLACEHOLDER' | translate"
+          ></textarea>
+          <div *ngIf="getErrorMessage('description', editJobForm)" class="text-red-500 text-xs mt-1">
+            {{ getErrorMessage('description', editJobForm) }}
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end space-x-3 pt-4">
+          <button
+            type="button"
+            (click)="closeEditJobModal()"
+            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
+            {{ 'ADMIN_CAREERS.MODAL.CANCEL' | translate }}
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
+            {{ 'ADMIN_CAREERS.MODAL.UPDATE' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

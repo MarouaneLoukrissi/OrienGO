@@ -1,0 +1,76 @@
+<div class="relative w-full h-80 px-6">
+  <!-- Y-axis labels -->
+  <div class="absolute left-4 text-center top-0 bottom-6 flex flex-col justify-between text-xs text-gray-400 font-medium z-10">
+    <div>100</div>
+    <div>75</div>
+    <div>50</div>
+    <div>25</div>
+    <div>0</div>
+  </div>
+
+  <!-- Y-axis vertical line -->
+  <div class="absolute left-10 top-0 bottom-6 w-px bg-gray-400 z-10"></div>
+
+  <!-- X-axis horizontal line -->
+  <div class="absolute left-10 bottom-6 right-4 h-px bg-gray-400 z-10"></div>
+
+  <!-- Grid lines -->
+  <div class="absolute top-0 bottom-6 left-10 right-4 z-0 flex flex-col justify-between">
+    <div class="w-full border-t border-dashed border-gray-300"></div>
+    <div class="w-full border-t border-dashed border-gray-300"></div>
+    <div class="w-full border-t border-dashed border-gray-300"></div>
+    <div class="w-full border-t border-dashed border-gray-300"></div>
+    <div class="w-full border-t border-dashed border-gray-300"></div>
+  </div>
+
+  <!-- Bars -->
+  <div
+    class="absolute bottom-6 left-10 right-4 flex items-end justify-between gap-x-2 pl-2"
+    style="height: 295.5px;"
+  >
+    <div 
+      *ngFor="let bar of bars; let i = index"
+      #barElements
+      class="flex flex-col items-center flex-1 min-w-[4px]"
+      (mouseenter)="showTooltip(bar, $event)"
+      (mousemove)="moveTooltip($event)"
+      (mouseleave)="hideTooltip()"
+    >
+      <!-- Value on top -->
+      <div class="text-xs font-medium text-gray-600 mb-1">{{ bar.value }}</div>
+
+      <!-- Bar -->
+      <div
+        [ngClass]="{
+          'rounded-t-full': barShouldBeRounded(bar),
+          'rounded-t': !barShouldBeRounded(bar),
+          'hover:brightness-110 hover:shadow-md hover:cursor-pointer': true,
+        }"
+        class="transition-all duration-200 w-full transform"
+        [style.height.px]="bar.height"
+        [style.backgroundColor]="bar.color"
+      ></div>
+    </div>
+  </div>
+
+  <!-- X-axis labels -->
+  <div class="absolute bottom-1 left-10 right-4 flex justify-between text-sm text-gray-700 font-medium z-0 pl-2">
+    <div *ngFor="let bar of bars" class="flex-1 text-center">
+      {{ bar.category }}
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div
+    *ngIf="tooltip.visible"
+    class="absolute px-3 py-1 text-sm rounded-lg shadow-lg pointer-events-none transition-all duration-75 text-white z-10"
+    [ngStyle]="{
+      backgroundColor: tooltip.color,
+      top: tooltip.y + 'px',
+      left: tooltip.x + 'px',
+      opacity: 0.95
+    }"
+  >
+    {{ tooltip.text }}
+  </div>
+</div>

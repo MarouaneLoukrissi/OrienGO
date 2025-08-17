@@ -1,0 +1,355 @@
+<div class="min-h-screen bg-orange-50 flex items-center justify-center p-2 smaller:p-4 sm:p-6 lg:p-8">
+  <div class="w-full max-w-[88rem] mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white"  fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 508 508" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M448.8,81.3L371.6,4.1c-2.6-2.6-6.2-4.1-10-4.1H69.2c-7.8,0-14.1,6.3-14.1,14.1v479.8c0,7.8,6.3,14.1,14.1,14.1h369.6 c7.8,0,14.1-6.3,14.1-14.1V91.3C452.9,87.5,451.4,83.9,448.8,81.3z M375.7,48.2l29,29h-29V48.2z M83.3,479.8V28.2h264.2v63 c0,7.8,6.3,14.1,14.1,14.1h63v374.5H83.3z"></path> </g> </g> <g> <g> <path d="M385.5,138.1H234.6c-7.8,0-14.1,6.3-14.1,14.1c0,7.8,6.3,14.1,14.1,14.1h150.9c7.8,0,14.1-6.3,14.1-14.1 C399.6,144.4,393.3,138.1,385.5,138.1z"></path> </g> </g> <g> <g> <path d="M385.5,271.3H234.6c-7.8,0-14.1,6.3-14.1,14.1c0,7.8,6.3,14.1,14.1,14.1h150.9c7.8,0,14.1-6.3,14.1-14.1 C399.6,277.6,393.3,271.3,385.5,271.3z"></path> </g> </g> <g> <g> <path d="M385.5,404.6H234.6c-7.8,0-14.1,6.3-14.1,14.1c0,7.8,6.3,14.1,14.1,14.1h150.9c7.8,0,14.1-6.3,14.1-14.1 C399.6,410.9,393.3,404.6,385.5,404.6z"></path> </g> </g> <g> <g> <path d="M189.1,104.8h-66.6c-7.8,0-14.1,6.3-14.1,14.1v66.6c0,7.8,6.3,14.1,14.1,14.1h66.6c7.8,0,14.1-6.3,14.1-14.1v-66.6 C203.2,111.1,196.9,104.8,189.1,104.8z M175,171.4h-38.4V133H175V171.4z"></path> </g> </g> <g> <g> <path d="M189.1,238.1h-66.6c-7.8,0-14.1,6.3-14.1,14.1v66.6c0,7.8,6.3,14.1,14.1,14.1h66.6c7.8,0,14.1-6.3,14.1-14.1v-66.6 C203.2,244.4,196.9,238.1,189.1,238.1z M175,304.7h-38.4v-38.4H175V304.7z"></path> </g> </g> <g> <g> <path d="M213.3,377.7c-5.6-5.5-14.5-5.5-20,0l-42.9,42.9l-17.8-17.8c-5.5-5.5-14.4-5.5-20,0c-5.5,5.5-5.5,14.4,0,20l27.8,27.8 c2.8,2.8,6.4,4.1,10,4.1c3.6,0,7.2-1.4,10-4.1l52.9-52.9C218.8,392.2,218.8,383.3,213.3,377.7z"></path> </g> </g> </g></svg>
+      </div>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">{{ 'LANDING_PAGE.TITLE' | translate }}</h1>
+      <p class="text-gray-600 text-sm sm:text-base md:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">{{ 'LANDING_PAGE.SUBTITLE' | translate }}</p>
+    </div>
+
+    <!-- Test Options -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- Express Test -->
+      <div class="shadow-lg bg-white p-4 sm:p-6 lg:p-8 rounded-2xl card group hover:scale-[1.01] transform transition-all duration-300 cursor-pointer"
+          (click)="startTest(18)">
+        <div class="flex items-center justify-center w-16 h-16 bg-orange-200 rounded-full mb-6 transition-colors">
+          <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 mb-3">
+          {{ 'LANDING_PAGE.EXPRESS_TEST.TITLE' | translate }}
+        </h3>
+        <p class="text-gray-600 mb-6 text-sm sm:text-base lg:text-lg leading-relaxed">
+          {{ 'LANDING_PAGE.EXPRESS_TEST.DESCRIPTION' | translate }}
+        </p>
+        <div class="space-y-2 mb-6">
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.EXPRESS_TEST.DURATION' | translate }}</span>
+          </div>
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.EXPRESS_TEST.QUESTIONS' | translate }}</span>
+          </div>
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.EXPRESS_TEST.RESULT' | translate }}</span>
+          </div>
+        </div>
+        <button
+          (click)="handleFastTestCreation($event)"
+          [disabled]="fastTestloading"
+          class="w-full text-sm sm:text-base lg:text-lg px-2 py-4 bg-orange-500 hover:bg-orange-700 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+        >
+          <svg
+            *ngIf="fastTestloading"
+            class="animate-spin mr-2 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+          </svg>
+
+          <span *ngIf="!fastTestloading">{{ 'LANDING_PAGE.EXPRESS_TEST.BUTTON' | translate }}</span>
+          <span *ngIf="fastTestloading">Loading...</span>
+        </button>
+
+      </div>
+
+      <!-- Full Test -->
+      <div class="shadow-lg bg-white p-4 sm:p-6 lg:p-8 rounded-2xl card group hover:scale-[1.01] transform transition-all duration-300 cursor-pointer"
+          (click)="startTest(60)">
+        <div class="flex items-center justify-center w-16 h-16 bg-orange-200 rounded-full mb-6 transition-colors">
+          <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3">
+          {{ 'LANDING_PAGE.FULL_TEST.TITLE' | translate }}
+        </h3>
+        <p class="text-gray-600 mb-6 text-sm sm:text-base lg:text-lg leading-relaxed">
+          {{ 'LANDING_PAGE.FULL_TEST.DESCRIPTION' | translate }}
+        </p>
+        <div class="space-y-2 mb-6">
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.FULL_TEST.DURATION' | translate }}</span>
+          </div>
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.FULL_TEST.QUESTIONS' | translate }}</span>
+          </div>
+          <div class="flex items-center text-gray-800">
+            <svg class="w-5 h-5 text-orange-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            <span class="text-sm sm:text-base">{{ 'LANDING_PAGE.FULL_TEST.RESULT' | translate }}</span>
+          </div>
+        </div>
+        <button
+          (click)="handleFullTestCreation($event)"
+          [disabled]="fullTestloading"
+          class="w-full text-sm sm:text-base lg:text-lg px-2 py-4 bg-orange-500 hover:bg-orange-700 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
+        >
+          <svg
+            *ngIf="fullTestloading"
+            class="animate-spin mr-2 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+          </svg>
+
+          <span *ngIf="!fullTestloading">{{ 'LANDING_PAGE.FULL_TEST.BUTTON' | translate }}</span>
+          <span *ngIf="fullTestloading">Loading...</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mb-4">
+      <div class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 ml-2">Uncompleted Tests</div>
+      <!-- Refresh button -->
+      <button 
+        (click)="onRefreshClick()"
+        class="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm"
+        title="Refresh test data">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+        <div class="flex items-center mb-4">
+        <svg class="h-4 w-4 mr-1" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 2.83333C1.5 2.36662 1.5 2.13327 1.59082 1.95501C1.67072 1.79821 1.79821 1.67072 1.95501 1.59082C2.13327 1.5 2.36662 1.5 2.83333 1.5H15.1667C15.6334 1.5 15.8668 1.5 16.045 1.59082C16.2018 1.67072 16.3293 1.79821 16.4092 1.95501C16.5 2.13327 16.5 2.36662 16.5 2.83333V4.28105C16.5 4.48487 16.5 4.58678 16.477 4.68269C16.4566 4.76772 16.4229 4.84901 16.3772 4.92357C16.3257 5.00767 16.2536 5.07973 16.1095 5.22386L11.0572 10.2762C10.9131 10.4202 10.841 10.4923 10.7895 10.5764C10.7437 10.651 10.7101 10.7323 10.6897 10.8173C10.6667 10.9133 10.6667 11.0152 10.6667 11.2189V13.1667L7.33333 16.5V11.2189C7.33333 11.0152 7.33333 10.9133 7.31031 10.8173C7.28989 10.7323 7.25622 10.651 7.21053 10.5764C7.159 10.4923 7.08693 10.4202 6.94281 10.2762L1.89053 5.22386C1.7464 5.07973 1.67433 5.00767 1.6228 4.92357C1.57711 4.84901 1.54344 4.76772 1.52303 4.68269C1.5 4.58678 1.5 4.48487 1.5 4.28105V2.83333Z" stroke="#1F2937" stroke-width="1.92" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-gray-700 font-medium text-lg">{{ 'TEST_HISTORY.FILTERS.TITLE' | translate }}</span>
+        </div>
+        <div class="flex flex-wrap gap-3">
+        <button *ngFor="let filter of filters"
+                class="min-w-full min-[300px]:min-w-0 px-2 xxs:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
+                [ngClass]="filter.active ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                (click)="setActiveFilter(filter.id)">
+            {{ filter.label | translate }}
+        </button>
+        </div>
+    </div>
+    <!-- Paginated Tests Section -->
+    <div *ngIf="getPaginatedUncompletedTests().length > 0; else emptyState" class="space-y-6 mb-8">
+      <div *ngFor="let test of getPaginatedUncompletedTests()" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-1">
+            <div class="flex flex-col smaller:flex-row smaller:items-center mb-4 lg:mb-0">
+                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4 shrink-0">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.25 0.625C3.08335 0.625 3.7702 1.25232 3.86407 2.06049L3.875 2.25V20.125H21.75C22.6475 20.125 23.375 20.8525 23.375 21.75C23.375 22.5834 22.7477 23.2702 21.9395 23.3641L21.75 23.375H3.875C2.16166 23.375 0.757982 22.0492 0.633914 20.3676L0.625 20.125V2.25C0.625 1.35254 1.35254 0.625 2.25 0.625ZM8.75 10.375C9.58335 10.375 10.2702 11.0023 10.3641 11.8105L10.375 12V15.25C10.375 16.1475 9.64746 16.875 8.75 16.875C7.91665 16.875 7.2298 16.2477 7.13593 15.4395L7.125 15.25V12C7.125 11.1025 7.85254 10.375 8.75 10.375ZM15.25 3.875C16.1475 3.875 16.875 4.60255 16.875 5.5V15.25C16.875 16.1475 16.1475 16.875 15.25 16.875C14.3525 16.875 13.625 16.1475 13.625 15.25V5.5C13.625 4.60255 14.3525 3.875 15.25 3.875ZM21.75 7.125C22.6475 7.125 23.375 7.85254 23.375 8.75V15.25C23.375 16.1475 22.6475 16.875 21.75 16.875C20.8525 16.875 20.125 16.1475 20.125 15.25V8.75C20.125 7.85254 20.8525 7.125 21.75 7.125Z" fill="white" stroke="white" stroke-width="0.00064"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">{{ getTextType(test.type) }}</h3>
+                    <div class="flex flex-wrap items-center text-gray-600 text-xs xxs:text-sm">
+                        <span class="flex flex-row ">
+                            <svg class="w-4 h-4 mr-1 shrink-0" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="text-gray-600" d="M11.9 1.4H10.5V0.7C10.5 0.514348 10.4263 0.336301 10.295 0.205025C10.1637 0.0737498 9.98565 0 9.8 0C9.61435 0 9.4363 0.0737498 9.30503 0.205025C9.17375 0.336301 9.1 0.514348 9.1 0.7V1.4H4.9V0.7C4.9 0.514348 4.82625 0.336301 4.69497 0.205025C4.5637 0.0737498 4.38565 0 4.2 0C4.01435 0 3.8363 0.0737498 3.70503 0.205025C3.57375 0.336301 3.5 0.514348 3.5 0.7V1.4H2.1C1.54305 1.4 1.0089 1.62125 0.615076 2.01508C0.221249 2.4089 0 2.94305 0 3.5V11.9C0 12.457 0.221249 12.9911 0.615076 13.3849C1.0089 13.7788 1.54305 14 2.1 14H11.9C12.457 14 12.9911 13.7788 13.3849 13.3849C13.7788 12.9911 14 12.457 14 11.9V3.5C14 2.94305 13.7788 2.4089 13.3849 2.01508C12.9911 1.62125 12.457 1.4 11.9 1.4ZM12.6 11.9C12.6 12.0857 12.5262 12.2637 12.395 12.395C12.2637 12.5262 12.0857 12.6 11.9 12.6H2.1C1.91435 12.6 1.7363 12.5262 1.60503 12.395C1.47375 12.2637 1.4 12.0857 1.4 11.9V7H12.6V11.9ZM12.6 5.6H1.4V3.5C1.4 3.31435 1.47375 3.1363 1.60503 3.00503C1.7363 2.87375 1.91435 2.8 2.1 2.8H3.5V3.5C3.5 3.68565 3.57375 3.8637 3.70503 3.99497C3.8363 4.12625 4.01435 4.2 4.2 4.2C4.38565 4.2 4.5637 4.12625 4.69497 3.99497C4.82625 3.8637 4.9 3.68565 4.9 3.5V2.8H9.1V3.5C9.1 3.68565 9.17375 3.8637 9.30503 3.99497C9.4363 4.12625 9.61435 4.2 9.8 4.2C9.98565 4.2 10.1637 4.12625 10.295 3.99497C10.4263 3.8637 10.5 3.68565 10.5 3.5V2.8H11.9C12.0857 2.8 12.2637 2.87375 12.395 3.00503C12.5262 3.1363 12.6 3.31435 12.6 3.5V5.6Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
+                            </svg>
+                            {{ test.date }}
+                        </span>
+                        <span>&nbsp;• {{ 'TEST_HISTORY.TEST_CARD.DURATION' | translate }}: {{ test.duration }} </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex-1 bg-gray-200 rounded-full h-2 mr-3">
+                    <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" 
+                        [style.width.%]="test.progress || 0"></div>
+                </div>
+                <span class="text-sm font-medium text-gray-700 min-w-max">{{ test.progress || 0 }}%</span>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-wrap gap-3 flex-row justify-between">
+            <!-- Delete Button (Left) -->
+            <button class="gap-1 bg-red-500 py-3 px-5 rounded-lg flex items-center text-white hover:bg-red-600 font-medium text-xs xxs:text-sm transition-colors"
+                    (click)="deleteTest(test.id)">
+                <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier"> 
+                        <path d="M10 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <path d="M14 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                    </g>
+                </svg>
+                {{ 'TEST_HISTORY.TEST_CARD.DELETE' | translate }}
+            </button>
+
+            <!-- Resume Button (Right) -->
+            <button class="gap-1 py-3 px-5 bg-green-500 rounded-lg flex items-center text-white hover:bg-green-600 font-medium text-xs xxs:text-sm transition-colors"
+                    (click)="resumeTest(test.id)">
+                <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier"> 
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2929 1.29289C10.6834 0.902369 11.3166 0.902369 11.7071 1.29289L14.7071 4.29289C14.8946 4.48043 15 4.73478 15 5C15 5.26522 14.8946 5.51957 14.7071 5.70711L11.7071 8.70711C11.3166 9.09763 10.6834 9.09763 10.2929 8.70711C9.90237 8.31658 9.90237 7.68342 10.2929 7.29289L11.573 6.01281C7.90584 6.23349 5 9.2774 5 13C5 16.866 8.13401 20 12 20C15.866 20 19 16.866 19 13C19 12.4477 19.4477 12 20 12C20.5523 12 21 12.4477 21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.16524 6.81226 4.22089 11.5947 4.00896L10.2929 2.70711C9.90237 2.31658 9.90237 1.68342 10.2929 1.29289Z" fill="#ffffff"></path> 
+                    </g>
+                </svg>
+                {{ 'TEST_HISTORY.TEST_CARD.RESUME' | translate }}
+            </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div *ngIf="getUncompletedTests().length > 3" class="flex justify-center items-center space-x-4 mb-8">
+      <!-- Previous Button -->
+      <button 
+        class="flex items-center px-2 py-2.5 sm:px-4 sm:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        [disabled]="currentPage === 1"
+        (click)="goToPreviousPage()">
+        <svg class="w-4 h-4 mr-0 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">{{ 'PAGINATION.PREVIOUS' | translate }}</span>
+      </button>
+
+      <!-- Page Numbers -->
+      <div class="overflow-x-auto  flex items-center space-x-2">
+        <button 
+          *ngFor="let page of getPageNumbers()" 
+          class="px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+          [ngClass]="{
+            'bg-orange-500 text-white': page === currentPage,
+            'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50': page !== currentPage
+          }"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </div>
+
+      <!-- Next Button -->
+      <button 
+        class="flex items-center px-2 py-2.5 sm:px-4 sm:py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        [disabled]="currentPage === getTotalPages()"
+        (click)="goToNextPage()">
+        <span class="hidden sm:inline">{{ 'PAGINATION.NEXT' | translate }}</span>
+        <svg class="w-4 h-4 ml-0 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Empty State Template -->
+    <ng-template #emptyState>
+        <div class="bg-white rounded-xl shadow-md p-12 text-center mb-8">
+        <div class="w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center">
+            <svg class="text-gray-200 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28.6668 3.66659H25.3335V1.99992C25.3335 1.55789 25.1579 1.13397 24.8453 0.821407C24.5328 0.508847 24.1089 0.333252 23.6668 0.333252C23.2248 0.333252 22.8009 0.508847 22.4883 0.821407C22.1758 1.13397 22.0002 1.55789 22.0002 1.99992V3.66659H12.0002V1.99992C12.0002 1.55789 11.8246 1.13397 11.512 0.821407C11.1994 0.508847 10.7755 0.333252 10.3335 0.333252C9.89147 0.333252 9.46755 0.508847 9.15499 0.821407C8.84243 1.13397 8.66683 1.55789 8.66683 1.99992V3.66659H5.3335C4.00741 3.66659 2.73564 4.19337 1.79796 5.13105C0.86028 6.06873 0.333496 7.3405 0.333496 8.66659V28.6666C0.333496 29.9927 0.86028 31.2644 1.79796 32.2021C2.73564 33.1398 4.00741 33.6666 5.3335 33.6666H28.6668C29.9929 33.6666 31.2647 33.1398 32.2024 32.2021C33.14 31.2644 33.6668 29.9927 33.6668 28.6666V8.66659C33.6668 7.3405 33.14 6.06873 32.2024 5.13105C31.2647 4.19337 29.9929 3.66659 28.6668 3.66659ZM30.3335 28.6666C30.3335 29.1086 30.1579 29.5325 29.8453 29.8451C29.5328 30.1577 29.1089 30.3333 28.6668 30.3333H5.3335C4.89147 30.3333 4.46755 30.1577 4.15499 29.8451C3.84242 29.5325 3.66683 29.1086 3.66683 28.6666V16.9999H30.3335V28.6666ZM30.3335 13.6666H3.66683V8.66659C3.66683 8.22456 3.84242 7.80064 4.15499 7.48807C4.46755 7.17551 4.89147 6.99992 5.3335 6.99992H8.66683V8.66659C8.66683 9.10861 8.84243 9.53254 9.15499 9.8451C9.46755 10.1577 9.89147 10.3333 10.3335 10.3333C10.7755 10.3333 11.1994 10.1577 11.512 9.8451C11.8246 9.53254 12.0002 9.10861 12.0002 8.66659V6.99992H22.0002V8.66659C22.0002 9.10861 22.1758 9.53254 22.4883 9.8451C22.8009 10.1577 23.2248 10.3333 23.6668 10.3333C24.1089 10.3333 24.5328 10.1577 24.8453 9.8451C25.1579 9.53254 25.3335 9.10861 25.3335 8.66659V6.99992H28.6668C29.1089 6.99992 29.5328 7.17551 29.8453 7.48807C30.1579 7.80064 30.3335 8.22456 30.3335 8.66659V13.6666Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
+            </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ 'TEST_HISTORY.EMPTY_STATE.TITLE' | translate }}</h3>
+        <p class="text-gray-600 mb-6">{{ 'TEST_HISTORY.EMPTY_STATE.DESCRIPTION' | translate }}</p>
+        <!--<button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+            {{ 'TEST_HISTORY.EMPTY_STATE.TAKE_TEST' | translate }}
+        </button>-->
+        </div>
+    </ng-template>
+    
+    <!-- Features -->
+    <div class="text-center mb-6">
+      <h2 class="text-gray-800 text-lg sm:text-xl lg:text-2xl font-bold text-navy-900 mb-8">
+        {{ 'LANDING_PAGE.WHAT_YOU_GET.TITLE' | translate }}
+      </h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="shadow bg-white p-4 sm:p-6 lg:p-8 rounded-2xl flex flex-col items-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-navy-900 mb-2">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.PERSONALIZED_PROFILE.TITLE' | translate }}
+          </h3>
+          <p class="text-navy-700 text-sm">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.PERSONALIZED_PROFILE.DESCRIPTION' | translate }}
+          </p>
+        </div>
+        <div class="shadow bg-white p-4 sm:p-6 lg:p-8 rounded-2xl flex flex-col items-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-navy-900 mb-2">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.JOB_RECOMMENDATIONS.TITLE' | translate }}
+          </h3>
+          <p class="text-navy-700 text-sm">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.JOB_RECOMMENDATIONS.DESCRIPTION' | translate }}
+          </p>
+        </div>
+        <div class="shadow bg-white p-4 sm:p-6 lg:p-8 rounded-2xl flex flex-col items-center">
+          <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-navy-900 mb-2">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.DETAILED_REPORT.TITLE' | translate }}
+          </h3>
+          <p class="text-navy-700 text-sm">
+            {{ 'LANDING_PAGE.WHAT_YOU_GET.DETAILED_REPORT.DESCRIPTION' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

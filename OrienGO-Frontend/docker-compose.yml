@@ -1,0 +1,9 @@
+version: '3'
+services:
+  angular:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+    command: bash -c "npm install && ng serve --host 0.0.0.0 --disable-host-check"

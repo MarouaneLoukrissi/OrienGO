@@ -1,0 +1,71 @@
+<div class="relative w-full aspect-square">
+  <svg
+    viewBox="0 0 300 300"
+    preserveAspectRatio="xMidYMid meet"
+    class="w-full h-full"
+  >
+    <!-- Grid -->
+    <path 
+      *ngFor="let gridPath of gridLevels"
+      [attr.d]="gridPath"
+      fill="none"
+      stroke="#e5e7eb"
+      stroke-width="1"
+    />
+
+    <!-- Axes -->
+    <line 
+      *ngFor="let axis of axisLines"
+      [attr.x1]="axis.x1"
+      [attr.y1]="axis.y1"
+      [attr.x2]="axis.x2"
+      [attr.y2]="axis.y2"
+      stroke="#e5e7eb"
+      stroke-width="1"
+    />
+
+    <!-- Labels -->
+    <text 
+      *ngFor="let label of labels"
+      [attr.x]="label.x"
+      [attr.y]="label.y"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      class="text-sm font-medium fill-gray-600"
+    >
+      {{ label.category }}
+    </text>
+
+    <!-- Data area -->
+    <path
+      [attr.d]="dataPath"
+      fill="rgba(251, 146, 60, 0.3)"
+      stroke="#fb923c"
+      stroke-width="2"
+    />
+
+    <!-- Data points -->
+    <circle
+      *ngFor="let point of dataPoints; let i = index"
+      [attr.cx]="point.x"
+      [attr.cy]="point.y"
+      [attr.r]="hoverCat === point.category ? 7 : 4"
+      [attr.fill]="point.color"
+      class="data-point cursor-pointer transition-all duration-200 transition-transform duration-200 ease-in-out origin-center"
+      (mouseenter)="onMouseEnter($event, point)"
+      (mouseleave)="onMouseLeave()"
+    />
+  </svg>
+
+  <!-- Tooltip -->
+  <div 
+    *ngIf="tooltip.visible"
+    [style.left.px]="tooltip.x"
+    [style.top.px]="tooltip.y"
+    class="absolute text-white text-xs px-3 py-2 rounded-lg shadow-lg pointer-events-none z-10"
+    [style.backgroundColor]="'#fb923c'"
+  >
+    <div class="font-semibold">{{ tooltip.label }}</div>
+    <div>{{ tooltip.value }}%</div>
+  </div>
+</div>
