@@ -95,6 +95,7 @@ export class ResultsComponent implements OnInit{
   testId: string | null = null;
   testResultId : number | null = null;
   mediaId : number | null = null;
+  pdfFetched : boolean = false;
   
 
   ngOnInit() {
@@ -166,18 +167,18 @@ export class ResultsComponent implements OnInit{
         console.log(res);
 
         // Attempt to fetch PDF if mediaId exists
-        let pdfFetched = false;
+        this.pdfFetched = false;
         if (this.mediaId) {
           try {
             await firstValueFrom(this.mediaService.getMediaFileById(this.mediaId));
-            pdfFetched = true; // PDF exists on backend
+            this.pdfFetched = true; // PDF exists on backend
           } catch (err) {
             console.warn('Failed to fetch PDF from backend, will generate a new one.', err);
           }
         }
 
         // Only upload/generate in background if no PDF exists or fetch failed
-        if (!this.mediaId || !pdfFetched) {
+        if (!this.mediaId || !this.pdfFetched) {
           this.uploadPdfInBackground(this.testResultId);
         }
 
@@ -406,6 +407,8 @@ export class ResultsComponent implements OnInit{
 
     this.testResultService.mapTestResultToMedia(dto).subscribe({
       next: (res) => {
+        this.mediaId=mediaId;
+        this.pdfFetched=true
         console.log('PDF stored in DB and mapped successfully');
       },
       error: (err) => {
