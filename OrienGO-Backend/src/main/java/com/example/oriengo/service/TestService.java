@@ -311,6 +311,12 @@ public class TestService {
                         return new TestResultCreationException(HttpStatus.NOT_FOUND, getMessage("test.not.found", testId));
                     });
 
+            if (test.getStatus() == TestStatus.COMPLETED || test.getCompletedAt() != null) {
+                log.warn("Cannot save test with ID {} because it is already completed", testId);
+                throw new TestSaveException(HttpStatus.BAD_REQUEST,
+                        getMessage("test.already.completed", testId));
+            }
+
             // Update chosen answers in TestQuestion entities
             for (TestQuestion tq : test.getTestQuestions()) {
                 Long questionId = tq.getQuestion().getId();

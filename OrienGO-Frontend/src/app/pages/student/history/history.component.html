@@ -1,202 +1,449 @@
 <div class="min-h-screen bg-orange-50 px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-[88rem] mx-auto">
+  <div class="max-w-[88rem] mx-auto">
     <div class="text-center mb-8">
-        <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
-            <svg class="w-10 h-10 sm:w-12 sm:h-12 md:w-[56px] md:h-[56px] text-white" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M28.6668 3.66659H25.3335V1.99992C25.3335 1.55789 25.1579 1.13397 24.8453 0.821407C24.5328 0.508847 24.1089 0.333252 23.6668 0.333252C23.2248 0.333252 22.8009 0.508847 22.4883 0.821407C22.1758 1.13397 22.0002 1.55789 22.0002 1.99992V3.66659H12.0002V1.99992C12.0002 1.55789 11.8246 1.13397 11.512 0.821407C11.1994 0.508847 10.7755 0.333252 10.3335 0.333252C9.89147 0.333252 9.46755 0.508847 9.15499 0.821407C8.84243 1.13397 8.66683 1.55789 8.66683 1.99992V3.66659H5.3335C4.00741 3.66659 2.73564 4.19337 1.79796 5.13105C0.86028 6.06873 0.333496 7.3405 0.333496 8.66659V28.6666C0.333496 29.9927 0.86028 31.2644 1.79796 32.2021C2.73564 33.1398 4.00741 33.6666 5.3335 33.6666H28.6668C29.9929 33.6666 31.2647 33.1398 32.2024 32.2021C33.14 31.2644 33.6668 29.9927 33.6668 28.6666V8.66659C33.6668 7.3405 33.14 6.06873 32.2024 5.13105C31.2647 4.19337 29.9929 3.66659 28.6668 3.66659ZM30.3335 28.6666C30.3335 29.1086 30.1579 29.5325 29.8453 29.8451C29.5328 30.1577 29.1089 30.3333 28.6668 30.3333H5.3335C4.89147 30.3333 4.46755 30.1577 4.15499 29.8451C3.84242 29.5325 3.66683 29.1086 3.66683 28.6666V16.9999H30.3335V28.6666ZM30.3335 13.6666H3.66683V8.66659C3.66683 8.22456 3.84242 7.80064 4.15499 7.48807C4.46755 7.17551 4.89147 6.99992 5.3335 6.99992H8.66683V8.66659C8.66683 9.10861 8.84243 9.53254 9.15499 9.8451C9.46755 10.1577 9.89147 10.3333 10.3335 10.3333C10.7755 10.3333 11.1994 10.1577 11.512 9.8451C11.8246 9.53254 12.0002 9.10861 12.0002 8.66659V6.99992H22.0002V8.66659C22.0002 9.10861 22.1758 9.53254 22.4883 9.8451C22.8009 10.1577 23.2248 10.3333 23.6668 10.3333C24.1089 10.3333 24.5328 10.1577 24.8453 9.8451C25.1579 9.53254 25.3335 9.10861 25.3335 8.66659V6.99992H28.6668C29.1089 6.99992 29.5328 7.17551 29.8453 7.48807C30.1579 7.80064 30.3335 8.22456 30.3335 8.66659V13.6666Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
-            </svg>
-        </div>
-        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">{{ 'TEST_HISTORY.TITLE' | translate }}</h1>
-        <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">{{ 'TEST_HISTORY.DESCRIPTION' | translate }}</p>
-    </div>
-
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg-up:grid-cols-4 gap-4 mb-8">
-        <div *ngFor="let stat of statsCards" class="bg-white rounded-xl shadow-md  p-2 py-4 xxs-xs:p-6 xxs-xs:py-9 hover:shadow-lg transition-shadow text-center">
-            <div class="text-base xss:text-xl xxs-xs:text-2xl sm:text-3xl font-bold mb-1" [ngClass]="stat.color">{{ stat.value }}</div>
-            <div class="text-gray-600 text-sm">{{ stat.subtitle | translate }}</div>
-        </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-        <div class="flex items-center mb-4">
-        <svg class="h-4 w-4 mr-1" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.5 2.83333C1.5 2.36662 1.5 2.13327 1.59082 1.95501C1.67072 1.79821 1.79821 1.67072 1.95501 1.59082C2.13327 1.5 2.36662 1.5 2.83333 1.5H15.1667C15.6334 1.5 15.8668 1.5 16.045 1.59082C16.2018 1.67072 16.3293 1.79821 16.4092 1.95501C16.5 2.13327 16.5 2.36662 16.5 2.83333V4.28105C16.5 4.48487 16.5 4.58678 16.477 4.68269C16.4566 4.76772 16.4229 4.84901 16.3772 4.92357C16.3257 5.00767 16.2536 5.07973 16.1095 5.22386L11.0572 10.2762C10.9131 10.4202 10.841 10.4923 10.7895 10.5764C10.7437 10.651 10.7101 10.7323 10.6897 10.8173C10.6667 10.9133 10.6667 11.0152 10.6667 11.2189V13.1667L7.33333 16.5V11.2189C7.33333 11.0152 7.33333 10.9133 7.31031 10.8173C7.28989 10.7323 7.25622 10.651 7.21053 10.5764C7.159 10.4923 7.08693 10.4202 6.94281 10.2762L1.89053 5.22386C1.7464 5.07973 1.67433 5.00767 1.6228 4.92357C1.57711 4.84901 1.54344 4.76772 1.52303 4.68269C1.5 4.58678 1.5 4.48487 1.5 4.28105V2.83333Z" stroke="#1F2937" stroke-width="1.92" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-10 h-10 sm:w-12 sm:h-12 md:w-[56px] md:h-[56px] text-white" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28.6668 3.66659H25.3335V1.99992C25.3335 1.55789 25.1579 1.13397 24.8453 0.821407C24.5328 0.508847 24.1089 0.333252 23.6668 0.333252C23.2248 0.333252 22.8009 0.508847 22.4883 0.821407C22.1758 1.13397 22.0002 1.55789 22.0002 1.99992V3.66659H12.0002V1.99992C12.0002 1.55789 11.8246 1.13397 11.512 0.821407C11.1994 0.508847 10.7755 0.333252 10.3335 0.333252C9.89147 0.333252 9.46755 0.508847 9.15499 0.821407C8.84243 1.13397 8.66683 1.55789 8.66683 1.99992V3.66659H5.3335C4.00741 3.66659 2.73564 4.19337 1.79796 5.13105C0.86028 6.06873 0.333496 7.3405 0.333496 8.66659V28.6666C0.333496 29.9927 0.86028 31.2644 1.79796 32.2021C2.73564 33.1398 4.00741 33.6666 5.3335 33.6666H28.6668C29.9929 33.6666 31.2647 33.1398 32.2024 32.2021C33.14 31.2644 33.6668 29.9927 33.6668 28.6666V8.66659C33.6668 7.3405 33.14 6.06873 32.2024 5.13105C31.2647 4.19337 29.9929 3.66659 28.6668 3.66659ZM30.3335 28.6666C30.3335 29.1086 30.1579 29.5325 29.8453 29.8451C29.5328 30.1577 29.1089 30.3333 28.6668 30.3333H5.3335C4.89147 30.3333 4.46755 30.1577 4.15499 29.8451C3.84242 29.5325 3.66683 29.1086 3.66683 28.6666V16.9999H30.3335V28.6666ZM30.3335 13.6666H3.66683V8.66659C3.66683 8.22456 3.84242 7.80064 4.15499 7.48807C4.46755 7.17551 4.89147 6.99992 5.3335 6.99992H8.66683V8.66659C8.66683 9.10861 8.84243 9.53254 9.15499 9.8451C9.46755 10.1577 9.89147 10.3333 10.3335 10.3333C10.7755 10.3333 11.1994 10.1577 11.512 9.8451C11.8246 9.53254 12.0002 9.10861 12.0002 8.66659V6.99992H22.0002V8.66659C22.0002 9.10861 22.1758 9.53254 22.4883 9.8451C22.8009 10.1577 23.2248 10.3333 23.6668 10.3333C24.1089 10.3333 24.5328 10.1577 24.8453 9.8451C25.1579 9.53254 25.3335 9.10861 25.3335 8.66659V6.99992H28.6668C29.1089 6.99992 29.5328 7.17551 29.8453 7.48807C30.1579 7.80064 30.3335 8.22456 30.3335 8.66659V13.6666Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
         </svg>
-        <span class="text-gray-700 font-medium text-lg">{{ 'TEST_HISTORY.FILTERS.TITLE' | translate }}</span>
-        </div>
-        <div class="flex flex-wrap gap-3">
-        <button *ngFor="let filter of filters"
-                class="min-w-full min-[300px]:min-w-0 px-2 xxs:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
-                [ngClass]="filter.active ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                (click)="setActiveFilter(filter.id)">
-            {{ filter.label | translate }}
-        </button>
-        </div>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Test History</h1>
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">View your test history and progress over time</p>
     </div>
 
-    <!-- Test Results or Empty State -->
-    <div *ngIf="getFilteredTests().length > 0; else emptyState" class="space-y-6 mb-8">
-        <div *ngFor="let test of getFilteredTests()" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-            <div class="flex flex-col smaller:flex-row smaller:items-center mb-4 lg:mb-0">
-                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4 shrink-0">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.25 0.625C3.08335 0.625 3.7702 1.25232 3.86407 2.06049L3.875 2.25V20.125H21.75C22.6475 20.125 23.375 20.8525 23.375 21.75C23.375 22.5834 22.7477 23.2702 21.9395 23.3641L21.75 23.375H3.875C2.16166 23.375 0.757982 22.0492 0.633914 20.3676L0.625 20.125V2.25C0.625 1.35254 1.35254 0.625 2.25 0.625ZM8.75 10.375C9.58335 10.375 10.2702 11.0023 10.3641 11.8105L10.375 12V15.25C10.375 16.1475 9.64746 16.875 8.75 16.875C7.91665 16.875 7.2298 16.2477 7.13593 15.4395L7.125 15.25V12C7.125 11.1025 7.85254 10.375 8.75 10.375ZM15.25 3.875C16.1475 3.875 16.875 4.60255 16.875 5.5V15.25C16.875 16.1475 16.1475 16.875 15.25 16.875C14.3525 16.875 13.625 16.1475 13.625 15.25V5.5C13.625 4.60255 14.3525 3.875 15.25 3.875ZM21.75 7.125C22.6475 7.125 23.375 7.85254 23.375 8.75V15.25C23.375 16.1475 22.6475 16.875 21.75 16.875C20.8525 16.875 20.125 16.1475 20.125 15.25V8.75C20.125 7.85254 20.8525 7.125 21.75 7.125Z" fill="white" stroke="white" stroke-width="0.00064"/>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">{{ test.type }}</h3>
-                    <div class="flex flex-wrap items-center text-gray-600 text-xs xxs:text-sm">
-                        <span class="flex flex-row ">
-                            <svg class="w-4 h-4 mr-1 shrink-0" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path class="text-gray-600" d="M11.9 1.4H10.5V0.7C10.5 0.514348 10.4263 0.336301 10.295 0.205025C10.1637 0.0737498 9.98565 0 9.8 0C9.61435 0 9.4363 0.0737498 9.30503 0.205025C9.17375 0.336301 9.1 0.514348 9.1 0.7V1.4H4.9V0.7C4.9 0.514348 4.82625 0.336301 4.69497 0.205025C4.5637 0.0737498 4.38565 0 4.2 0C4.01435 0 3.8363 0.0737498 3.70503 0.205025C3.57375 0.336301 3.5 0.514348 3.5 0.7V1.4H2.1C1.54305 1.4 1.0089 1.62125 0.615076 2.01508C0.221249 2.4089 0 2.94305 0 3.5V11.9C0 12.457 0.221249 12.9911 0.615076 13.3849C1.0089 13.7788 1.54305 14 2.1 14H11.9C12.457 14 12.9911 13.7788 13.3849 13.3849C13.7788 12.9911 14 12.457 14 11.9V3.5C14 2.94305 13.7788 2.4089 13.3849 2.01508C12.9911 1.62125 12.457 1.4 11.9 1.4ZM12.6 11.9C12.6 12.0857 12.5262 12.2637 12.395 12.395C12.2637 12.5262 12.0857 12.6 11.9 12.6H2.1C1.91435 12.6 1.7363 12.5262 1.60503 12.395C1.47375 12.2637 1.4 12.0857 1.4 11.9V7H12.6V11.9ZM12.6 5.6H1.4V3.5C1.4 3.31435 1.47375 3.1363 1.60503 3.00503C1.7363 2.87375 1.91435 2.8 2.1 2.8H3.5V3.5C3.5 3.68565 3.57375 3.8637 3.70503 3.99497C3.8363 4.12625 4.01435 4.2 4.2 4.2C4.38565 4.2 4.5637 4.12625 4.69497 3.99497C4.82625 3.8637 4.9 3.68565 4.9 3.5V2.8H9.1V3.5C9.1 3.68565 9.17375 3.8637 9.30503 3.99497C9.4363 4.12625 9.61435 4.2 9.8 4.2C9.98565 4.2 10.1637 4.12625 10.295 3.99497C10.4263 3.8637 10.5 3.68565 10.5 3.5V2.8H11.9C12.0857 2.8 12.2637 2.87375 12.395 3.00503C12.5262 3.1363 12.6 3.31435 12.6 3.5V5.6Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
-                            </svg>
-                            {{ test.date }}
-                        </span>
-                        <span>&nbsp;• {{ 'TEST_HISTORY.TEST_CARD.DURATION' | translate }}: {{ test.duration }} {{ 'TEST_HISTORY.TEST_CARD.MINUTES' | translate }}</span>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+        <span class="ml-3 text-gray-600">Loading test history...</span>
+    </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <div class="text-center">
-                <div class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-1">
-                <span class="hidden xxs:inline">{{ test.dominantProfile }}</span>
-                <span class="xxs:hidden">{{ getShortProfile(test.dominantProfile) }}</span>
-                </div>
-                <div class="text-xl sm:text-2xl font-bold text-orange-500">{{ test.dominantScore }}%</div>
-                <div class="text-gray-600 text-xs sm:text-sm">{{ 'TEST_HISTORY.TEST_CARD.DOMINANT_SCORE' | translate }}</div>
-            </div>
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 text-center">
+        <svg class="mx-auto h-12 w-12 text-red-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+        </svg>
+        <h3 class="text-lg font-semibold text-red-800 mb-2">Error Loading Data</h3>
+        <p class="text-red-600 mb-4">{{ errorMessage }}</p>
+        <button (click)="refreshData()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">
+            Try Again
+        </button>
+    </div>
+
+    <!-- Main Content - Only show when not loading and no error -->
+    <div *ngIf="!isLoading && !hasError">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div *ngFor="let stat of statsCards" class="bg-white rounded-xl shadow-md p-2 py-4 sm:p-6 sm:py-9 hover:shadow-lg transition-shadow text-center">
+                <div class="truncate max-w-fulltext-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1" [ngClass]="stat.color">{{ stat.value }}</div>
+                <div class="text-gray-600 text-sm">{{ stat.subtitle }}</div>
             </div>
         </div>
 
-        <!-- RIASEC Scores -->
-        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-4 mb-6">
-            <div *ngFor="let key of getRiasecKeys()" class="text-center">
-            <div class="font-bold text-gray-700 mb-2 text-sm sm:text-base">{{ key }}</div>
-            <div class="bg-gray-200 rounded-full h-2 mb-2">
-                <div class="bg-orange-500 h-2 rounded-full riasec-bar transition-all duration-300 ease-in-out hover:scale-y-105"
-                    [style.width.%]="test.scores[key]"></div>
+        <!-- Filters -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex items-center mb-4">
+                <svg class="h-4 w-4 mr-1" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 2.83333C1.5 2.36662 1.5 2.13327 1.59082 1.95501C1.67072 1.79821 1.79821 1.67072 1.95501 1.59082C2.13327 1.5 2.36662 1.5 2.83333 1.5H15.1667C15.6334 1.5 15.8668 1.5 16.045 1.59082C16.2018 1.67072 16.3293 1.79821 16.4092 1.95501C16.5 2.13327 16.5 2.36662 16.5 2.83333V4.28105C16.5 4.48487 16.5 4.58678 16.477 4.68269C16.4566 4.76772 16.4229 4.84901 16.3772 4.92357C16.3257 5.00767 16.2536 5.07973 16.1095 5.22386L11.0572 10.2762C10.9131 10.4202 10.841 10.4923 10.7895 10.5764C10.7437 10.651 10.7101 10.7323 10.6897 10.8173C10.6667 10.9133 10.6667 11.0152 10.6667 11.2189V13.1667L7.33333 16.5V11.2189C7.33333 11.0152 7.33333 10.9133 7.31031 10.8173C7.28989 10.7323 7.25622 10.651 7.21053 10.5764C7.159 10.4923 7.08693 10.4202 6.94281 10.2762L1.89053 5.22386C1.7464 5.07973 1.67433 5.00767 1.6228 4.92357C1.57711 4.84901 1.54344 4.76772 1.52303 4.68269C1.5 4.58678 1.5 4.48487 1.5 4.28105V2.83333Z" stroke="#1F2937" stroke-width="1.92" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-gray-700 font-medium text-lg">Filters</span>
             </div>
-            <div class="text-xs sm:text-sm font-medium text-gray-700">{{ test.scores[key] }}%</div>
-            </div>
-        </div>
-        <hr class="mb-5">
-        <!-- Actions -->
-        <div class="flex flex-wrap gap-3 flex-row justify-between">
             <div class="flex flex-wrap gap-3">
-                <button class="flex items-center text-orange-500 hover:text-orange-600 font-medium text-xs xxs:text-sm">
-                    <svg class="w-4 h-4 mr-1" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.2505 6C10.2505 7.24268 9.24314 8.25 8.00047 8.25C6.75787 8.25 5.75049 7.24268 5.75049 6C5.75049 4.75732 6.75787 3.75 8.00047 3.75C9.24314 3.75 10.2505 4.75732 10.2505 6Z" stroke="currentColor" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8.0009 0.75C4.64266 0.75 1.79995 2.95716 0.844238 6C1.79993 9.04283 4.64266 11.25 8.0009 11.25C11.3591 11.25 14.2018 9.04283 15.1576 6C14.2018 2.95718 11.3591 0.75 8.0009 0.75Z" stroke="currentColor" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    {{ 'TEST_HISTORY.TEST_CARD.VIEW_DETAILS' | translate }}
-                </button>
-                <button class="flex items-center text-orange-500 hover:text-orange-600 font-medium text-xs xxs:text-sm">
-                    <svg class="w-4 h-4 mr-1" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor" stroke-width="0.2"  d="M7.36892 10.0041C7.27419 10.1077 7.14032 10.1667 6.99992 10.1667C6.85952 10.1667 6.72566 10.1077 6.63092 10.0041L3.96424 7.0874C3.77791 6.8836 3.79207 6.56733 3.99587 6.381C4.19968 6.19467 4.51594 6.2088 4.70227 6.4126L6.49992 8.3788V1C6.49992 0.72386 6.72379 0.5 6.99992 0.5C7.27606 0.5 7.49992 0.72386 7.49992 1V8.3788L9.29759 6.4126C9.48392 6.2088 9.80019 6.19467 10.004 6.381C10.2078 6.56733 10.2219 6.8836 10.0356 7.0874L7.36892 10.0041Z" fill="currentColor"/>
-                        <path stroke="currentColor" stroke-width="0.2"  d="M1.5 9C1.5 8.72387 1.27615 8.5 1 8.5C0.72386 8.5 0.5 8.72387 0.5 9V9.0366C0.499987 9.94833 0.499974 10.6832 0.57768 11.2612C0.65836 11.8613 0.830954 12.3665 1.23223 12.7677C1.63351 13.1691 2.13876 13.3417 2.73883 13.4223C3.31681 13.5 4.05169 13.5 4.96342 13.5H9.0366C9.94833 13.5 10.6832 13.5 11.2612 13.4223C11.8613 13.3417 12.3665 13.1691 12.7678 12.7677C13.1691 12.3665 13.3417 11.8613 13.4223 11.2612C13.5 10.6832 13.5 9.94833 13.5 9.0366V9C13.5 8.72387 13.2761 8.5 13 8.5C12.7239 8.5 12.5 8.72387 12.5 9C12.5 9.95693 12.4989 10.6243 12.4313 11.1279C12.3655 11.6171 12.2452 11.8761 12.0607 12.0607C11.8761 12.2452 11.6171 12.3655 11.1279 12.4313C10.6243 12.4989 9.95693 12.5 9 12.5H5C4.04306 12.5 3.37565 12.4989 2.87208 12.4313C2.3829 12.3655 2.12385 12.2452 1.93934 12.0607C1.75483 11.8761 1.63453 11.6171 1.56877 11.1279C1.50106 10.6243 1.5 9.95693 1.5 9Z" fill="currentColor"/>
-                    </svg>
-                    {{ 'TEST_HISTORY.TEST_CARD.DOWNLOAD_PDF' | translate }}
+                <button *ngFor="let filter of filters"
+                        class="w-full min-w-0 sm:w-auto px-2 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
+                        [ngClass]="filter.active ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                        (click)="setActiveFilter(filter.id)">
+                    {{ filter.label }}
                 </button>
             </div>
-            <div *ngIf="test.isCurrent" class="text-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                {{ 'TEST_HISTORY.TEST_CARD.CURRENT_RESULT' | translate }}
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <!-- Empty State Template -->
-    <ng-template #emptyState>
-        <div class="bg-white rounded-xl shadow-md p-12 text-center mb-8">
-        <div class="w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <svg class="text-gray-200 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M28.6668 3.66659H25.3335V1.99992C25.3335 1.55789 25.1579 1.13397 24.8453 0.821407C24.5328 0.508847 24.1089 0.333252 23.6668 0.333252C23.2248 0.333252 22.8009 0.508847 22.4883 0.821407C22.1758 1.13397 22.0002 1.55789 22.0002 1.99992V3.66659H12.0002V1.99992C12.0002 1.55789 11.8246 1.13397 11.512 0.821407C11.1994 0.508847 10.7755 0.333252 10.3335 0.333252C9.89147 0.333252 9.46755 0.508847 9.15499 0.821407C8.84243 1.13397 8.66683 1.55789 8.66683 1.99992V3.66659H5.3335C4.00741 3.66659 2.73564 4.19337 1.79796 5.13105C0.86028 6.06873 0.333496 7.3405 0.333496 8.66659V28.6666C0.333496 29.9927 0.86028 31.2644 1.79796 32.2021C2.73564 33.1398 4.00741 33.6666 5.3335 33.6666H28.6668C29.9929 33.6666 31.2647 33.1398 32.2024 32.2021C33.14 31.2644 33.6668 29.9927 33.6668 28.6666V8.66659C33.6668 7.3405 33.14 6.06873 32.2024 5.13105C31.2647 4.19337 29.9929 3.66659 28.6668 3.66659ZM30.3335 28.6666C30.3335 29.1086 30.1579 29.5325 29.8453 29.8451C29.5328 30.1577 29.1089 30.3333 28.6668 30.3333H5.3335C4.89147 30.3333 4.46755 30.1577 4.15499 29.8451C3.84242 29.5325 3.66683 29.1086 3.66683 28.6666V16.9999H30.3335V28.6666ZM30.3335 13.6666H3.66683V8.66659C3.66683 8.22456 3.84242 7.80064 4.15499 7.48807C4.46755 7.17551 4.89147 6.99992 5.3335 6.99992H8.66683V8.66659C8.66683 9.10861 8.84243 9.53254 9.15499 9.8451C9.46755 10.1577 9.89147 10.3333 10.3335 10.3333C10.7755 10.3333 11.1994 10.1577 11.512 9.8451C11.8246 9.53254 12.0002 9.10861 12.0002 8.66659V6.99992H22.0002V8.66659C22.0002 9.10861 22.1758 9.53254 22.4883 9.8451C22.8009 10.1577 23.2248 10.3333 23.6668 10.3333C24.1089 10.3333 24.5328 10.1577 24.8453 9.8451C25.1579 9.53254 25.3335 9.10861 25.3335 8.66659V6.99992H28.6668C29.1089 6.99992 29.5328 7.17551 29.8453 7.48807C30.1579 7.80064 30.3335 8.22456 30.3335 8.66659V13.6666Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
-            </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ 'TEST_HISTORY.EMPTY_STATE.TITLE' | translate }}</h3>
-        <p class="text-gray-600 mb-6">{{ 'TEST_HISTORY.EMPTY_STATE.DESCRIPTION' | translate }}</p>
-        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-            {{ 'TEST_HISTORY.EMPTY_STATE.TAKE_TEST' | translate }}
-        </button>
-        </div>
-    </ng-template>
-
-    <!-- Evolution Chart -->
-    <div *ngIf="getFilteredTests().length > 0 && chartData.length > 0" class="bg-white rounded-xl shadow-md p-4 sm:p-6">
-        <div class="flex items-center mb-6">
-            <svg class="h-7 w-7 mr-3" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.57153 1.6665V22.6189C2.57153 24.7228 4.27712 26.4284 6.38106 26.4284H27.3334" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6.3811 18.8094L12.0954 13.0951L15.9049 16.9047L25.4287 7.38086" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M25.4286 13.0951V7.38086H19.7144" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h2 class="text-lg sm:text-xl font-bold text-gray-900">{{ 'TEST_HISTORY.CHART.TITLE' | translate }}</h2>
         </div>
 
-        <!-- Chart Container -->
-        <div class="relative overflow-x-auto mt-20">
-            <div class="min-w-full" style="min-width: 240px; min-height:300px">
-                <!-- Chart Area -->
-                <div class="relative ml-8 mr-4">
-                <!-- Y-axis line -->
-                <div class="absolute left-0 -top-0 w-px h-64 bg-gray-300"></div>
-
-                <!-- Y-axis labels -->
-                <div class="absolute text-center -left-8 top-2 h-64 flex flex-col justify-between text-xs text-gray-500">
-                    <span>100%</span>
-                    <span>75%</span>
-                    <span>50%</span>
-                    <span>25%</span>
-                    <span>0%</span>
-                </div>
-
-                <!-- Chart bars container -->
-                <div class="flex items-end justify-between h-64 pl-1 pr-1 relative min-h-full">
-                    <!-- X-axis line -->
-                    <div class="absolute bottom-0 left-0 right-0 h-px bg-gray-300"></div>
-
-                    <div *ngFor="let data of chartData; let i = index" class="flex flex-col items-center flex-1 mx-[2px] relative -bottom-11">
-                        <!-- Bar -->
-                        <div class="relative w-full max-w-12 mb-2">
-                            <div class="chart-bar w-full bg-opacity-80 transition-all duration-500 ease-in-out hover:opacity-[92%] hover:cursor-pointer hover:scale-y-102 rounded-t"
-                                [style.height.px]="(data.score / 100) * 240"
-                                [style.background-color]="data.color"
-                                [title]="data.profile + ': ' + data.score + '%'">
-                            </div>
-                            <!-- Score label - positioned inside bar for high values, outside for low values -->
-                            <div class="absolute left-1/2 transform -translate-x-1/2 text-xs font-medium whitespace-nowrap"
-                                [ngClass]="'text-gray-700'"
-                                [style.top]="'-24px'"
-                                [style.bottom]="'auto'">
-                            {{ data.score }}%
+        <!-- Test Results or Empty State -->
+        <div *ngIf="getFilteredTests().length > 0; else emptyState" class="space-y-6 mb-8">
+            <div *ngFor="let test of getFilteredTests()" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center mb-4 lg:mb-0">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4 shrink-0">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.25 0.625C3.08335 0.625 3.7702 1.25232 3.86407 2.06049L3.875 2.25V20.125H21.75C22.6475 20.125 23.375 20.8525 23.375 21.75C23.375 22.5834 22.7477 23.2702 21.9395 23.3641L21.75 23.375H3.875C2.16166 23.375 0.757982 22.0492 0.633914 20.3676L0.625 20.125V2.25C0.625 1.35254 1.35254 0.625 2.25 0.625ZM8.75 10.375C9.58335 10.375 10.2702 11.0023 10.3641 11.8105L10.375 12V15.25C10.375 16.1475 9.64746 16.875 8.75 16.875C7.91665 16.875 7.2298 16.2477 7.13593 15.4395L7.125 15.25V12C7.125 11.1025 7.85254 10.375 8.75 10.375ZM15.25 3.875C16.1475 3.875 16.875 4.60255 16.875 5.5V15.25C16.875 16.1475 16.1475 16.875 15.25 16.875C14.3525 16.875 13.625 16.1475 13.625 15.25V5.5C13.625 4.60255 14.3525 3.875 15.25 3.875ZM21.75 7.125C22.6475 7.125 23.375 7.85254 23.375 8.75V15.25C23.375 16.1475 22.6475 16.875 21.75 16.875C20.8525 16.875 20.125 16.1475 20.125 15.25V8.75C20.125 7.85254 20.8525 7.125 21.75 7.125Z" fill="white" stroke="white" stroke-width="0.00064"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900">{{ test.type }}</h3>
+                            <div class="flex flex-wrap items-center text-gray-600 text-xs sm:text-sm">
+                                <span class="flex flex-row">
+                                    <svg class="w-4 h-4 mr-1 shrink-0" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="text-gray-600" d="M11.9 1.4H10.5V0.7C10.5 0.514348 10.4263 0.336301 10.295 0.205025C10.1637 0.0737498 9.98565 0 9.8 0C9.61435 0 9.4363 0.0737498 9.30503 0.205025C9.17375 0.336301 9.1 0.514348 9.1 0.7V1.4H4.9V0.7C4.9 0.514348 4.82625 0.336301 4.69497 0.205025C4.5637 0.0737498 4.38565 0 4.2 0C4.01435 0 3.8363 0.0737498 3.70503 0.205025C3.57375 0.336301 3.5 0.514348 3.5 0.7V1.4H2.1C1.54305 1.4 1.0089 1.62125 0.615076 2.01508C0.221249 2.4089 0 2.94305 0 3.5V11.9C0 12.457 0.221249 12.9911 0.615076 13.3849C1.0089 13.7788 1.54305 14 2.1 14H11.9C12.457 14 12.9911 13.7788 13.3849 13.3849C13.7788 12.9911 14 12.457 14 11.9V3.5C14 2.94305 13.7788 2.4089 13.3849 2.01508C12.9911 1.62125 12.457 1.4 11.9 1.4ZM12.6 11.9C12.6 12.0857 12.5262 12.2637 12.395 12.395C12.2637 12.5262 12.0857 12.6 11.9 12.6H2.1C1.91435 12.6 1.7363 12.5262 1.60503 12.395C1.47375 12.2637 1.4 12.0857 1.4 11.9V7H12.6V11.9ZM12.6 5.6H1.4V3.5C1.4 3.31435 1.47375 3.1363 1.60503 3.00503C1.7363 2.87375 1.91435 2.8 2.1 2.8H3.5V3.5C3.5 3.68565 3.57375 3.8637 3.70503 3.99497C3.8363 4.12625 4.01435 4.2 4.2 4.2C4.38565 4.2 4.5637 4.12625 4.69497 3.99497C4.82625 3.8637 4.9 3.68565 4.9 3.5V2.8H9.1V3.5C9.1 3.68565 9.17375 3.8637 9.30503 3.99497C9.4363 4.12625 9.61435 4.2 9.8 4.2C9.98565 4.2 10.1637 4.12625 10.295 3.99497C10.4263 3.8637 10.5 3.68565 10.5 3.5V2.8H11.9C12.0857 2.8 12.2637 2.87375 12.395 3.00503C12.5262 3.1363 12.6 3.31435 12.6 3.5V5.6Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
+                                    </svg>
+                                    {{ formatDate(test.rawDate) }}
+                                </span>
+                                <span>&nbsp;• Duration: {{ test.duration }} </span>
                             </div>
                         </div>
-                        <!-- Profile label -->
-                        <div class="text-xs font-medium text-gray-600 mb-1">{{ data.profile }}</div>
-                        <!-- Date label -->
-                        <div class="text-xs text-gray-500 whitespace-nowrap">
-                            <span class="hidden sm:inline">{{ data.date }}</span>
-                            <span class="sm:hidden">{{ getShortDate(data.date) }}</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                        <div class="text-center">
+                            <div class="px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-1"
+                                [ngStyle]="{'background-color': getProfileBgColor(test.dominantProfile), 'color': '#fff'}">
+                                <span class="hidden sm:inline">{{ test.dominantProfile }}</span>
+                                <span class="sm:hidden">{{ getShortProfile(test.dominantProfile) }}</span>
+                            </div>
+                            <div class="text-xl sm:text-2xl font-bold text-orange-500">{{ formatNumber(test.dominantScore) }}%</div>
+                            <div class="text-gray-600 text-xs sm:text-sm">Dominant Score</div>
                         </div>
                     </div>
                 </div>
+
+                <!-- RIASEC Scores -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-4 mb-6">
+                    <div *ngFor="let key of getRiasecKeys()" class="text-center">
+                        <div class="font-bold text-gray-700 mb-2 text-sm sm:text-base">{{ key }}</div>
+                        <div class="bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-orange-500 h-2 rounded-full riasec-bar transition-all duration-300 ease-in-out hover:scale-y-105"
+                                [style.width.%]="getTestScore(test, key)"></div>
+                        </div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-700">{{ formatNumber(getTestScore(test, key)) }}%</div>
+                    </div>
+                </div>
+                <hr class="mb-5">
+                <!-- Actions -->
+                <div class="flex flex-wrap gap-3 flex-row justify-between">
+                    <div class="flex flex-wrap gap-3">
+                        <button (click)="openDetailsPopup(test)" class="flex items-center text-orange-500 hover:text-orange-600 font-medium text-xs sm:text-sm transition-colors">
+                            <svg class="w-4 h-4 mr-1" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.2505 6C10.2505 7.24268 9.24314 8.25 8.00047 8.25C6.75787 8.25 5.75049 7.24268 5.75049 6C5.75049 4.75732 6.75787 3.75 8.00047 3.75C9.24314 3.75 10.2505 4.75732 10.2505 6Z" stroke="currentColor" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8.0009 0.75C4.64266 0.75 1.79995 2.95716 0.844238 6C1.79993 9.04283 4.64266 11.25 8.0009 11.25C11.3591 11.25 14.2018 9.04283 15.1576 6C14.2018 2.95718 11.3591 0.75 8.0009 0.75Z" stroke="currentColor" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            View Details
+                        </button>
+                        <button 
+                            *ngIf="isPdfAvailable(test)"
+                            (click)="downloadPdf(test)"
+                            [disabled]="isDownloadingPdf"
+                            class="flex items-center font-medium text-xs sm:text-sm transition-colors"
+                            [ngClass]="isDownloadingPdf ? 'text-gray-400 cursor-not-allowed' : 'text-orange-500 hover:text-orange-600'">
+                            <svg *ngIf="!isDownloadingPdf" class="w-4 h-4 mr-1" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="0.2"  d="M7.36892 10.0041C7.27419 10.1077 7.14032 10.1667 6.99992 10.1667C6.85952 10.1667 6.72566 10.1077 6.63092 10.0041L3.96424 7.0874C3.77791 6.8836 3.79207 6.56733 3.99587 6.381C4.19968 6.19467 4.51594 6.2088 4.70227 6.4126L6.49992 8.3788V1C6.49992 0.72386 6.72379 0.5 6.99992 0.5C7.27606 0.5 7.49992 0.72386 7.49992 1V8.3788L9.29759 6.4126C9.48392 6.2088 9.80019 6.19467 10.004 6.381C10.2078 6.56733 10.2219 6.8836 10.0356 7.0874L7.36892 10.0041Z" fill="currentColor"/>
+                                <path stroke="currentColor" stroke-width="0.2"  d="M1.5 9C1.5 8.72387 1.27615 8.5 1 8.5C0.72386 8.5 0.5 8.72387 0.5 9V9.0366C0.499987 9.94833 0.499974 10.6832 0.57768 11.2612C0.65836 11.8613 0.830954 12.3665 1.23223 12.7677C1.63351 13.1691 2.13876 13.3417 2.73883 13.4223C3.31681 13.5 4.05169 13.5 4.96342 13.5H9.0366C9.94833 13.5 10.6832 13.5 11.2612 13.4223C11.8613 13.3417 12.3665 13.1691 12.7678 12.7677C13.1691 12.3665 13.3417 11.8613 13.4223 11.2612C13.5 10.6832 13.5 9.94833 13.5 9.0366V9C13.5 8.72387 13.2761 8.5 13 8.5C12.7239 8.5 12.5 8.72387 12.5 9C12.5 9.95693 12.4989 10.6243 12.4313 11.1279C12.3655 11.6171 12.2452 11.8761 12.0607 12.0607C11.8761 12.2452 11.6171 12.3655 11.1279 12.4313C10.6243 12.4989 9.95693 12.5 9 12.5H5C4.04306 12.5 3.37565 12.4989 2.87208 12.4313C2.3829 12.3655 2.12385 12.2452 1.93934 12.0607C1.75483 11.8761 1.63453 11.6171 1.56877 11.1279C1.50106 10.6243 1.5 9.95693 1.5 9Z" fill="currentColor"/>
+                            </svg>
+                            <div *ngIf="isDownloadingPdf" class="w-4 h-4 mr-1 animate-spin rounded-full border-2 border-orange-500 border-t-transparent"></div>
+                            <span *ngIf="!isDownloadingPdf">Download PDF</span>
+                            <span *ngIf="isDownloadingPdf">Downloading...</span>
+                        </button>
+                        <span *ngIf="!isPdfAvailable(test)" class="flex items-center text-gray-400 font-medium text-xs sm:text-sm">
+                            <svg class="w-4 h-4 mr-1" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="0.2"  d="M7.36892 10.0041C7.27419 10.1077 7.14032 10.1667 6.99992 10.1667C6.85952 10.1667 6.72566 10.1077 6.63092 10.0041L3.96424 7.0874C3.77791 6.8836 3.79207 6.56733 3.99587 6.381C4.19968 6.19467 4.51594 6.2088 4.70227 6.4126L6.49992 8.3788V1C6.49992 0.72386 6.72379 0.5 6.99992 0.5C7.27606 0.5 7.49992 0.72386 7.49992 1V8.3788L9.29759 6.4126C9.48392 6.2088 9.80019 6.19467 10.004 6.381C10.2078 6.56733 10.2219 6.8836 10.0356 7.0874L7.36892 10.0041Z" fill="currentColor"/>
+                                <path stroke="currentColor" stroke-width="0.2"  d="M1.5 9C1.5 8.72387 1.27615 8.5 1 8.5C0.72386 8.5 0.5 8.72387 0.5 9V9.0366C0.499987 9.94833 0.499974 10.6832 0.57768 11.2612C0.65836 11.8613 0.830954 12.3665 1.23223 12.7677C1.63351 13.1691 2.13876 13.3417 2.73883 13.4223C3.31681 13.5 4.05169 13.5 4.96342 13.5H9.0366C9.94833 13.5 10.6832 13.5 11.2612 13.4223C11.8613 13.3417 12.3665 13.1691 12.7678 12.7677C13.1691 12.3665 13.3417 11.8613 13.4223 11.2612C13.5 10.6832 13.5 9.94833 13.5 9.0366V9C13.5 8.72387 13.2761 8.5 13 8.5C12.7239 8.5 12.5 8.72387 12.5 9C12.5 9.95693 12.4989 10.6243 12.4313 11.1279C12.3655 11.6171 12.2452 11.8761 12.0607 12.0607C11.8761 12.2452 11.6171 12.3655 11.1279 12.4313C10.6243 12.4989 9.95693 12.5 9 12.5H5C4.04306 12.5 3.37565 12.4989 2.87208 12.4313C2.3829 12.3655 2.12385 12.2452 1.93934 12.0607C1.75483 11.8761 1.63453 11.6171 1.56877 11.1279C1.50106 10.6243 1.5 9.95693 1.5 9Z" fill="currentColor"/>
+                            </svg>
+                            PDF Not Available
+                        </span>
+                    </div>
+                    <div *ngIf="test.isCurrent" class="text-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                        Current Result
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Chart Legend -->
-        <div class="mt-6 flex flex-wrap justify-center gap-2 sm:gap-4">
-        <div *ngFor="let profile of profileColors" class="flex items-center">
-            <div class="w-3 h-3 rounded-full mr-2" [style.background-color]="profile.color"></div>
-            <span class="text-xs sm:text-sm text-gray-600">
-            <span class="hidden sm:inline">{{ profile.name }}</span>
-            <span class="sm:hidden">{{ profile.short }}</span>
-            </span>
+        <!-- Pagination Controls -->
+        <div *ngIf="totalPages > 1" class="bg-white rounded-xl shadow-md p-4 mb-8">
+            <div class="flex flex-col md:flex-row sm:items-center sm:justify-between gap-4">
+                
+                <!-- Page Info -->
+                <div class="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
+                Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to 
+                {{ Math.min(currentPage * itemsPerPage, totalItems) }} of 
+                {{ totalItems }} tests
+                </div>
+
+                <!-- Pagination Buttons -->
+                <div class="flex items-center justify-center gap-2">
+                
+                <!-- Previous Button -->
+                <button (click)="previousPage()" 
+                        [disabled]="currentPage === 1"
+                        class="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium rounded-lg transition-colors"
+                        [ngClass]="currentPage === 1 ? 
+                                    'text-gray-400 cursor-not-allowed' : 
+                                    'text-gray-700 hover:text-orange-500'">
+                    <span class="hidden sm:inline">Previous</span>
+                    <span class="inline sm:hidden">&lt;</span>
+                </button>
+
+                <!-- Page Numbers -->
+                 <div class="overflow-x-auto whitespace-nowrap">
+                    <button *ngFor="let page of getPageNumbers()" 
+                            (click)="goToPage(page)"
+                            class="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium rounded-lg transition-colors"
+                            [ngClass]="page === currentPage ? 
+                                        'bg-orange-500 text-white' : 
+                                        'text-gray-700 hover:text-orange-500 hover:bg-orange-50'">
+                        {{ page }}
+                    </button>
+                </div>
+
+                <!-- Next Button -->
+                <button (click)="nextPage()" 
+                        [disabled]="currentPage === totalPages"
+                        class="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium rounded-lg transition-colors"
+                        [ngClass]="currentPage === totalPages ? 
+                                    'text-gray-400 cursor-not-allowed' : 
+                                    'text-gray-700 hover:text-orange-500'">
+                    <span class="hidden sm:inline">Next</span>
+                    <span class="inline sm:hidden">&gt;</span>
+                </button>
+                </div>
+            </div>
         </div>
+
+        <!-- Empty State Template -->
+        <ng-template #emptyState>
+            <div class="bg-white rounded-xl shadow-md p-12 text-center mb-8">
+                <div class="w-16 h-16 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                    <svg class="text-gray-200 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M28.6668 3.66659H25.3335V1.99992C25.3335 1.55789 25.1579 1.13397 24.8453 0.821407C24.5328 0.508847 24.1089 0.333252 23.6668 0.333252C23.2248 0.333252 22.8009 0.508847 22.4883 0.821407C22.1758 1.13397 22.0002 1.55789 22.0002 1.99992V3.66659H12.0002V1.99992C12.0002 1.55789 11.8246 1.13397 11.512 0.821407C11.1994 0.508847 10.7755 0.333252 10.3335 0.333252C9.89147 0.333252 9.46755 0.508847 9.15499 0.821407C8.84243 1.13397 8.66683 1.55789 8.66683 1.99992V3.66659H5.3335C4.00741 3.66659 2.73564 4.19337 1.79796 5.13105C0.86028 6.06873 0.333496 7.3405 0.333496 8.66659V28.6666C0.333496 29.9927 0.86028 31.2644 1.79796 32.2021C2.73564 33.1398 4.00741 33.6666 5.3335 33.6666H28.6668C29.9929 33.6666 31.2647 33.1398 32.2024 32.2021C33.14 31.2644 33.6668 29.9927 33.6668 28.6666V8.66659C33.6668 7.3405 33.14 6.06873 32.2024 5.13105C31.2647 4.19337 29.9929 3.66659 28.6668 3.66659ZM30.3335 28.6666C30.3335 29.1086 30.1579 29.5325 29.8453 29.8451C29.5328 30.1577 29.1089 30.3333 28.6668 30.3333H5.3335C4.89147 30.3333 4.46755 30.1577 4.15499 29.8451C3.84242 29.5325 3.66683 29.1086 3.66683 28.6666V16.9999H30.3335V28.6666ZM30.3335 13.6666H3.66683V8.66659C3.66683 8.22456 3.84242 7.80064 4.15499 7.48807C4.46755 7.17551 4.89147 6.99992 5.3335 6.99992H8.66683V8.66659C8.66683 9.10861 8.84243 9.53254 9.15499 9.8451C9.46755 10.1577 9.89147 10.3333 10.3335 10.3333C10.7755 10.3333 11.1994 10.1577 11.512 9.8451C11.8246 9.53254 12.0002 9.10861 12.0002 8.66659V6.99992H22.0002V8.66659C22.0002 9.10861 22.1758 9.53254 22.4883 9.8451C22.8009 10.1577 23.2248 10.3333 23.6668 10.3333C24.1089 10.3333 24.5328 10.1577 24.8453 9.8451C25.1579 9.53254 25.3335 9.10861 25.3335 8.66659V6.99992H28.6668C29.1089 6.99992 29.5328 7.17551 29.8453 7.48807C30.1579 7.80064 30.3335 8.22456 30.3335 8.66659V13.6666Z" fill="currentColor" stroke="currentColor" stroke-width="0.00064"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">No Test Results Found</h3>
+                <p class="text-gray-600 mb-6">You haven't completed any tests yet or no tests match your current filter.</p>
+                <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    Take a Test
+                </button>
+            </div>
+        </ng-template>
+
+        <!-- Evolution Chart -->
+        <div *ngIf="getFilteredTestsAll().length > 0 && chartData.length > 0" class="bg-white rounded-xl shadow-md p-4 sm:p-6">
+            <div class="flex items-center mb-6">
+                <svg class="h-7 w-7 mr-3" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.57153 1.6665V22.6189C2.57153 24.7228 4.27712 26.4284 6.38106 26.4284H27.3334" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.3811 18.8094L12.0954 13.0951L15.9049 16.9047L25.4287 7.38086" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M25.4286 13.0951V7.38086H19.7144" stroke="#FA9433" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900">Progress Evolution</h2>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="relative overflow-x-auto mt-20">
+                <div class="min-w-full" style="min-width: 240px; min-height:300px">
+                    <!-- Chart Area -->
+                    <div class="relative ml-8 mr-4">
+                        <!-- Y-axis line -->
+                        <div class="absolute left-0 -top-0 w-px h-64 bg-gray-300"></div>
+
+                        <!-- Y-axis labels -->
+                        <div class="absolute text-center -left-8 top-2 h-64 flex flex-col justify-between text-xs text-gray-500">
+                            <span>100%</span>
+                            <span>75%</span>
+                            <span>50%</span>
+                            <span>25%</span>
+                            <span>0%</span>
+                        </div>
+
+                        <!-- Chart bars container -->
+                        <div class="flex items-end justify-between h-64 pl-1 pr-1 relative min-h-full">
+                            <!-- X-axis line -->
+                            <div class="absolute bottom-0 left-0 right-0 h-px bg-gray-300"></div>
+
+                            <div *ngFor="let data of chartData; let i = index" class="flex flex-col items-center flex-1 mx-[2px] relative -bottom-11">
+                                <!-- Bar -->
+                                <div class="relative w-full max-w-12 mb-2">
+                                    <div class="chart-bar w-full bg-opacity-80 transition-all duration-500 ease-in-out hover:opacity-[92%] hover:cursor-pointer hover:scale-y-102 rounded-t"
+                                        [style.height.px]="(data.score / 100) * 240"
+                                        [style.background-color]="data.color"
+                                        [title]="data.profile + ': ' + data.score + '%'">
+                                    </div>
+                                    <!-- Score label - positioned inside bar for high values, outside for low values -->
+                                    <div class="absolute left-1/2 transform -translate-x-1/2 text-xs font-medium whitespace-nowrap"
+                                        [ngClass]="'text-gray-700'"
+                                        [style.top]="'-24px'"
+                                        [style.bottom]="'auto'">
+                                        {{ formatNumber(data.score) }}%
+                                    </div>
+                                </div>
+                                <!-- Profile label -->
+                                <div class="text-xs font-medium text-gray-600 mb-1">{{ data.profile }}</div>
+                                <!-- Date label -->
+                                <div class="text-xs text-gray-500 whitespace-nowrap">
+                                    <span class="hidden sm:inline">{{ formatDate(data.date) }}</span>
+                                    <span class="sm:hidden">{{ getShortDate(formatDate(data.date)) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Legend -->
+            <div class="mt-6 flex flex-wrap justify-center gap-2 sm:gap-4">
+                <div *ngFor="let profile of profileColors" class="flex items-center">
+                    <div class="w-3 h-3 rounded-full mr-2" [style.background-color]="profile.color"></div>
+                    <span class="text-xs sm:text-sm text-gray-600">
+                        <span class="hidden sm:inline">{{ profile.name }}</span>
+                        <span class="sm:hidden">{{ profile.short }}</span>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<!-- Details Popup Modal -->
+<div *ngIf="showDetailsPopup && selectedTest" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" (click)="closeDetailsPopup()">
+    <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" (click)="$event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-xl">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">{{ selectedTest.type }} Details</h2>
+                    <p class="text-gray-600 mt-1">Test completed on {{ formatDate(selectedTest.rawDate) }}</p>
+                </div>
+                <button (click)="closeDetailsPopup()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 space-y-8">
+            <!-- Test Overview -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Test Overview</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!--<div class="bg-white p-4 rounded-lg">
+                        <dt class="text-sm font-medium text-gray-500">Test ID</dt>
+                        <dd class="text-lg font-bold text-gray-900">{{ selectedTest.id }}</dd>
+                    </div>-->
+                    <div class="bg-white p-4 rounded-lg">
+                        <dt class="text-sm font-medium text-gray-500">Test Type</dt>
+                        <dd class="text-lg font-bold text-gray-900">{{ selectedTest.type }}</dd>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <dt class="text-sm font-medium text-gray-500">Duration</dt>
+                        <dd class="text-lg font-bold text-gray-900">{{ selectedTest.duration }}</dd>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <dt class="text-sm font-medium text-gray-500">Status</dt>
+                        <dd class="text-lg font-bold text-green-600">
+                            {{ selectedTest.fullTestData?.status || 'COMPLETED' }}
+                            <span *ngIf="selectedTest.isCurrent" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Current
+                            </span>
+                        </dd>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dominant Profile Section -->
+            <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Dominant Profile</h3>
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full mb-4"
+                         [ngStyle]="{'background-color': getProfileBgColor(selectedTest.dominantProfile)}">
+                        <span class="text-3xl font-bold text-white">{{ getProfileShort(selectedTest.dominantProfile) }}</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-900 mb-2">{{ selectedTest.dominantProfile }}</h4>
+                    <div class="text-3xl font-semibold text-orange-500 mb-2">{{ formatNumber(selectedTest.dominantScore) }}%</div>
+                    <p class="text-gray-600">Primary career interest profile</p>
+                </div>
+            </div>
+
+            <!-- RIASEC Scores Breakdown -->
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">RIASEC Scores Breakdown</h3>
+                <div class="space-y-4">
+                    <div *ngFor="let profile of profileColors" class="flex items-center">
+                        <div class="w-20 min-w-20 mr-4">
+                            <div class="text-sm font-medium text-gray-900">{{ profile.short }}</div>
+                            <div class="text-xs text-gray-500">{{ profile.name.split(' (')[0] }}</div>
+                        </div>
+                        <div class="flex-1 mr-4">
+                            <div class="bg-gray-200 rounded-full h-4">
+                                <div class="h-4 rounded-full transition-all duration-500"
+                                     [style.width.%]="getTestScore(selectedTest, profile.short)"
+                                     [style.background-color]="profile.color">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-16 text-right">
+                            <span class="text-lg font-bold text-gray-900">
+                                {{ formatNumber(getTestScore(selectedTest, profile.short)) }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details (from backend) -->
+            <div *ngIf="selectedTest.fullTestData || selectedTest.fullResultData" class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Technical Information</h3>
+                
+                <!-- Test Data -->
+                <div *ngIf="selectedTest.fullTestData" class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-900 mb-3">Test Information</h4>
+                    <div class="bg-white rounded-lg p-4 space-y-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Started At</dt>
+                                <dd class="text-sm text-gray-900">{{ formatDate(selectedTest.fullTestData.startedAt || selectedTest.date) }}</dd>
+                            </div>
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Completed At</dt>
+                                <dd class="text-sm text-gray-900">{{ formatDate(selectedTest.fullTestData.completedAt || selectedTest.rawDate) }}</dd>
+                            </div>
+                            <!--<div>-->
+                                <!--<dt class="text-sm font-medium text-gray-500">Student ID</dt>
+                                <dd class="text-sm text-gray-900">{{ selectedTest.fullTestData.studentId || userId }}</dd>-->
+                            <!--</div>-->
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Duration</dt>
+                                <dd class="text-sm text-gray-900">{{ formatDuration(selectedTest.fullTestData.durationMinutes) || 0 }}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Data -->
+                <div *ngIf="selectedTest.fullResultData" class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-900 mb-3">Result Information</h4>
+                    <div class="bg-white rounded-lg p-4 space-y-3">
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Dominant Category</dt>
+                            <dd class="text-sm text-gray-900">{{ selectedTest.fullResultData.dominantType }}</dd>
+                        </div>
+                        <div *ngIf="selectedTest.fullResultData?.keyPoints">
+                            <dt class="text-sm font-medium text-gray-500">Feedback</dt>
+                            <dd class="text-sm text-gray-900">{{ selectedTest.fullResultData.keyPoints }}</dd>
+                        </div>
+                        <div *ngIf="selectedTest.fullResultData?.dominantTypeDescription">
+                            <dt class="text-sm font-medium text-gray-500">Recommendations</dt>
+                            <dd class="text-sm text-gray-900">{{ selectedTest.fullResultData.dominantTypeDescription }}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="sticky bottom-0 bg-gray-50 border-t border-gray-200 p-6 rounded-b-xl">
+            <div class="flex justify-end space-x-3">
+                <button (click)="closeDetailsPopup()" class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    Close
+                </button>
+                <button 
+                    *ngIf="isPdfAvailable(selectedTest)"
+                    (click)="downloadPdf(selectedTest)"
+                    [disabled]="isDownloadingPdf"
+                    class="px-4 py-2 rounded-lg transition-colors flex items-center"
+                    [ngClass]="isDownloadingPdf ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-orange-500 text-white hover:bg-orange-600'">
+                    <div *ngIf="isDownloadingPdf" class="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    <span *ngIf="!isDownloadingPdf">Download PDF</span>
+                    <span *ngIf="isDownloadingPdf">Downloading...</span>
+                </button>
+                <span *ngIf="!isPdfAvailable(selectedTest)" class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                    PDF Not Available
+                </span>
+            </div>
+        </div>
     </div>
 </div>

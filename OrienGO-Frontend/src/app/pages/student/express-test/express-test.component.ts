@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 export class ExpressTestComponent implements OnInit, OnDestroy {
 
   private routerEventsSub?: Subscription;
+  private isSubmitted = false;
 
   userId : number = 1;
   testId: string | null = null;  
@@ -62,7 +63,7 @@ export class ExpressTestComponent implements OnInit, OnDestroy {
     });
 
     this.routerEventsSub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
+      if (event instanceof NavigationStart && !this.isSubmitted) {
         this.saveQuestions(TestStatus.PENDING, null);
       }
     });
@@ -71,7 +72,9 @@ export class ExpressTestComponent implements OnInit, OnDestroy {
   // 🔹 Detect page refresh / tab close / direct URL change
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
-    this.saveQuestions(TestStatus.PENDING, null);
+    if (!this.isSubmitted) {
+      this.saveQuestions(TestStatus.PENDING, null);
+    }
   }
 
   private loadQuestions(testId: string) {
@@ -130,9 +133,9 @@ export class ExpressTestComponent implements OnInit, OnDestroy {
     if (this.selectedAnswer !== null) {
       this.answers.set(this.currentQuestion.id, this.selectedAnswer);
       this.updateAnsweredCount();
-      this.saveQuestions(TestStatus.PENDING, null)
 
       if (this.currentQuestionIndex < this.totalQuestions - 1) {
+        this.saveQuestions(TestStatus.PENDING, null)
         this.currentQuestionIndex++;
         // Load saved selection if exists
         const saved = this.answers.get(this.currentQuestion.id);
@@ -157,6 +160,7 @@ export class ExpressTestComponent implements OnInit, OnDestroy {
 
   submitTest() {
     const now = new Date().toISOString(); // current local time in ISO format
+    this.isSubmitted = true;
     this.saveQuestions(TestStatus.COMPLETED, now)
     
   }
@@ -236,14 +240,11 @@ export class ExpressTestComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   ngOnDestroy() {
-    if (this.timerIntervalId) {
-      clearInterval(this.timerIntervalId);
+    if (!this.isSubmitted) {
+      this.saveQuestions(TestStatus.PENDING, null);
     }
-    if (this.routerEventsSub) {
-      this.routerEventsSub.unsubscribe();
-    }
-    // Save before component is destroyed
-    this.saveQuestions(TestStatus.PENDING, null);
+    if (this.timerIntervalId) clearInterval(this.timerIntervalId);
+    if (this.routerEventsSub) this.routerEventsSub.unsubscribe();
   }
 
   /*startTimer() {

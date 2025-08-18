@@ -1,0 +1,110 @@
+/* Custom styles for the history component */
+
+.riasec-bar {
+  transition: all 0.3s ease-in-out;
+}
+
+.riasec-bar:hover {
+  transform: scaleY(1.05);
+}
+
+.chart-bar {
+  transition: all 0.5s ease-in-out;
+  border-radius: 4px 4px 0 0;
+}
+
+.chart-bar:hover {
+  opacity: 0.92 !important;
+  cursor: pointer;
+  transform: scaleY(1.02);
+}
+
+/* Modal animation */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+}
+
+/* Pagination styles */
+.pagination-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Scrollbar styling for modal */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Profile color animations */
+.profile-badge {
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-badge:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Button hover effects */
+.action-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effects */
+.test-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.test-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading spinner enhancement */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive utilities for extra small screens */
+@media (max-width: 480px) {
+  .text-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .extra-small-text {
+    font-size: 0.75rem;
+  }
+}
