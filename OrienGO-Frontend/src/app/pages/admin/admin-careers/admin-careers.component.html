@@ -4,9 +4,18 @@
     <div class="text-center mb-12">
       <!-- Briefcase Icon -->
       <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 sm:h-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2.80408 15.4771C2.80408 15.4771 2.94608 17.2151 2.97908 17.7631C3.02308 18.4981 3.30708 19.3191 3.78108 19.8891C4.45008 20.6971 5.23808 20.9821 6.29008 20.9841C7.52708 20.9861 16.5221 20.9861 17.7591 20.9841C18.8111 20.9821 19.5991 20.6971 20.2681 19.8891C20.7421 19.3191 21.0261 18.4981 21.0711 17.7631C21.1031 17.2151 21.2451 15.4771 21.2451 15.4771" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.49597 5.32949V4.95849C8.49597 3.73849 9.48397 2.75049 10.704 2.75049H13.286C14.505 2.75049 15.494 3.73849 15.494 4.95849L15.495 5.32949" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.995 16.6783V15.3843" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.74988 8.38905V11.8561C4.66788 13.1211 6.96588 14.0071 9.48788 14.3581C9.78988 13.2571 10.7829 12.4501 11.9899 12.4501C13.1779 12.4501 14.1909 13.2571 14.4729 14.3681C17.0049 14.0171 19.3119 13.1311 21.2399 11.8561V8.38905C21.2399 6.69505 19.8769 5.33105 18.1829 5.33105H5.81688C4.12288 5.33105 2.74988 6.69505 2.74988 8.38905Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 sm:h-16 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path opacity="0.5" d="M2.80408 15.4771C2.80408 15.4771 2.94608 17.2151 2.97908 17.7631C3.02308 18.4981 3.30708 19.3191 3.78108 19.8891C4.45008 20.6971 5.23808 20.9821 6.29008 20.9841C7.52708 20.9861 16.5221 20.9861 17.7591 20.9841C18.8111 20.9821 19.5991 20.6971 20.2681 19.8891C20.7421 19.3191 21.0261 18.4981 21.0711 17.7631C21.1031 17.2151 21.2451 15.4771 21.2451 15.4771" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.49597 5.32949V4.95849C8.49597 3.73849 9.48397 2.75049 10.704 2.75049H13.286C14.505 2.75049 15.494 3.73849 15.494 4.95849L15.495 5.32949" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M11.995 16.6783V15.3843" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.74988 8.38905V11.8561C4.66788 13.1211 6.96588 14.0071 9.48788 14.3581C9.78988 13.2571 10.7829 12.4501 11.9899 12.4501C13.1779 12.4501 14.1909 13.2571 14.4729 14.3681C17.0049 14.0171 19.3119 13.1311 21.2399 11.8561V8.38905C21.2399 6.69505 19.8769 5.33105 18.1829 5.33105H5.81688C4.12288 5.33105 2.74988 6.69505 2.74988 8.38905Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+        </svg>
       </div>
-      
+
       <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
         {{ 'ADMIN_CAREERS.TITLE' | translate }}
       </h1>
@@ -15,190 +24,294 @@
       </p>
     </div>
 
-    <!-- Barre de recherche et filtres -->
-    <div class="mb-6 space-y-4">
-      <div class="flex flex-wrap flex-col sm:flex-row gap-4">
-        <div class="flex-1 min-w-0 sm:min-w-[320px]">
-          <input
-            type="text"
-            [(ngModel)]="searchTerm"
-            (input)="onSearchChange()"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors"
-            [placeholder]="'ADMIN_CAREERS.SEARCH_PLACEHOLDER' | translate"
-          />
-        </div>
-        
-        <div class="min-w-0 flex flex-wrap flex-col sm:flex-row gap-2">
-          <select
-            [(ngModel)]="selectedCategory"
-            (change)="onCategoryChange()"
-            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
-            <option value="" selected>{{ 'ADMIN_CAREERS.ALL' | translate }}</option>
-            <option *ngFor="let category of jobCategories" [value]="category">
-              {{ getJobCategoryLabel(category) }}
-            </option>
-          </select>
-
-          <select
-            [(ngModel)]="selectedJobMarket"
-            (change)="onJobMarketChange()"
-            class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
-            <option value="" selected>{{ 'ADMIN_CAREERS.ALLJM' | translate }}</option>
-            <option *ngFor="let market of getUniqueJobMarkets()" [value]="market">
-              {{ market }}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap gap-4 justify-between items-center">
-        <button
-          (click)="resetFilters()"
-          class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-          {{ 'ADMIN_CAREERS.RESET_FILTERS' | translate }}
-        </button>
-
-        <button
-          (click)="openAddJobModal()"
-          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
-          {{ 'ADMIN_CAREERS.ADD_BUTTON' | translate }}
-        </button>
+    <!-- Loading Indicator -->
+    <div *ngIf="loading" class="text-center py-8">
+      <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-orange-600 bg-orange-100 rounded-lg">
+        <svg class="w-4 h-4 mr-3 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Loading careers...
       </div>
     </div>
 
-    <!-- Tableau des postes -->
-    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-orange-100">
-          <tr>
-            <th 
-              (click)="onSort('title')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
-              {{ 'ADMIN_CAREERS.TABLE.TITLE' | translate }}
-              <span *ngIf="sortField === 'title'" class="ml-1">
-                {{ sortDirection === 'asc' ? '↑' : '↓' }}
-              </span>
-            </th>
-            <th 
-              (click)="onSort('category')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
-              {{ 'ADMIN_CAREERS.TABLE.CATEGORY' | translate }}
-              <span *ngIf="sortField === 'category'" class="ml-1">
-                {{ sortDirection === 'asc' ? '↑' : '↓' }}
-              </span>
-            </th>
-            <th 
-              (click)="onSort('education')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
-              {{ 'ADMIN_CAREERS.TABLE.EDUCATION' | translate }}
-              <span *ngIf="sortField === 'education'" class="ml-1">
-                {{ sortDirection === 'asc' ? '↑' : '↓' }}
-              </span>
-            </th>
-            <th 
-              (click)="onSort('salaryRange')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
-              {{ 'ADMIN_CAREERS.TABLE.SALARY_RANGE' | translate }}
-              <span *ngIf="sortField === 'salaryRange'" class="ml-1">
-                {{ sortDirection === 'asc' ? '↑' : '↓' }}
-              </span>
-            </th>
-            <th 
-              (click)="onSort('jobMarket')"
-              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
-              {{ 'ADMIN_CAREERS.TABLE.JOB_MARKET' | translate }}
-              <span *ngIf="sortField === 'jobMarket'" class="ml-1">
-                {{ sortDirection === 'asc' ? '↑' : '↓' }}
-              </span>
-            </th>
-            <th class="px-4 sm:px-6 py-4 text-left text-sm font-semibold text-gray-700">{{ 'ADMIN_CAREERS.TABLE.ACTIONS' | translate }}</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let job of jobs" class="hover:bg-orange-50 transition-colors">
-            <td class="px-4 sm:px-6 py-4">
-              <div>
-                <div class="font-semibold text-gray-900">{{ job.title }}</div>
-                <div class="text-sm text-gray-500 mt-1">{{ job.description.substring(0, 100) }}...</div>
-              </div>
-            </td>
-            <td class="px-4 sm:px-6 py-4">
-              <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange text-white">
-                {{ getJobCategoryLabel(job.category) }}
-              </span>
-            </td>
-            <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.education }}</td>
-            <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.salaryRange }}</td>
-            <td class="px-4 sm:px-6 py-4">
-              <span 
-                [class]="'whitespace-nowrap px-3 py-1 text-xs font-medium rounded-full ' + 
-                  (job.jobMarket === 'High demand' ? 'bg-green-100 text-green-800' : 
-                   job.jobMarket === 'Stable' ? 'bg-blue-100 text-blue-800' :
-                   'bg-gray-100 text-gray-800')">
-                {{ job.jobMarket }}
-              </span>
-            </td>
-            <td class="px-4 sm:px-6 py-4">
-              <div class="flex flex-wrap items-center space-x-2">
-                <span 
-                  (click)="openViewJobModal(job)"
-                  class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
-                  {{ 'ADMIN_CAREERS.TABLE.VIEW' | translate }}
+    <!-- Error Message -->
+    <div *ngIf="error" class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+      <div class="flex">
+        <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+        </svg>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">Error</h3>
+          <p class="text-sm text-red-700 mt-1">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="success" class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
+      <div class="flex">
+        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <div class="ml-3">
+          <p class="text-sm text-green-700">{{ success }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading">
+      <!-- Search and Filters -->
+      <div class="mb-6 space-y-4">
+        <div class="flex flex-wrap flex-col sm:flex-row gap-4">
+          <div class="flex-1 min-w-0 sm:min-w-[320px]">
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              (input)="onSearchChange()"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+              placeholder="Search careers by title, description, or education..."
+            />
+          </div>
+          
+          <div class="min-w-0 flex flex-wrap flex-col sm:flex-row gap-2">
+            <select
+              [(ngModel)]="selectedCategory"
+              (change)="onCategoryChange()"
+              class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+              <option value="" selected>All Categories</option>
+              <option *ngFor="let category of jobCategories" [value]="category">
+                {{ getJobCategoryLabel(category) }}
+              </option>
+            </select>
+
+            <select
+              [(ngModel)]="selectedJobMarket"
+              (change)="onJobMarketChange()"
+              class="min-w-0 w-full sm:w-auto flex-1 overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+              <option value="" selected>All Job Markets</option>
+              <option *ngFor="let market of getUniqueJobMarkets()" [value]="market">
+                {{ market }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 justify-between items-center">
+          <button
+            (click)="resetFilters()"
+            class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+            Reset Filters
+          </button>
+
+          <button
+            (click)="openAddJobModal()"
+            class="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
+            Add New Career
+          </button>
+        </div>
+      </div>
+
+      <!-- Jobs Table -->
+      <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-orange-100">
+            <tr>
+              <th 
+                (click)="onSort('title')"
+                class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+                Title
+                <span *ngIf="sortField === 'title'" class="ml-1">
+                  {{ sortDirection === 'asc' ? '↑' : '↓' }}
                 </span>
-                <span class="text-gray-300">|</span>
-                <span 
-                  (click)="openEditJobModal(job)"
-                  class="text-green-600 hover:text-green-800 cursor-pointer font-medium hover:underline transition-colors">
-                  {{ 'ADMIN_CAREERS.TABLE.EDIT' | translate }}
+              </th>
+              <th 
+                (click)="onSort('category')"
+                class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+                Category
+                <span *ngIf="sortField === 'category'" class="ml-1">
+                  {{ sortDirection === 'asc' ? '↑' : '↓' }}
                 </span>
-                <span class="text-gray-300">|</span>
-                <span 
-                  (click)="deleteJob(job)"
-                  class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
-                  {{ 'ADMIN_CAREERS.TABLE.DELETE' | translate }}
+              </th>
+              <th 
+                (click)="onSort('education')"
+                class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+                Education
+                <span *ngIf="sortField === 'education'" class="ml-1">
+                  {{ sortDirection === 'asc' ? '↑' : '↓' }}
                 </span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </th>
+              <th 
+                (click)="onSort('salaryRange')"
+                class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+                Salary Range
+                <span *ngIf="sortField === 'salaryRange'" class="ml-1">
+                  {{ sortDirection === 'asc' ? '↑' : '↓' }}
+                </span>
+              </th>
+              <th 
+                (click)="onSort('jobMarket')"
+                class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+                Job Market
+                <span *ngIf="sortField === 'jobMarket'" class="ml-1">
+                  {{ sortDirection === 'asc' ? '↑' : '↓' }}
+                </span>
+              </th>
+              <th class="px-4 sm:px-6 py-4 text-left text-sm font-semibold text-gray-700">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let job of paginatedJobs" class="hover:bg-orange-50 transition-colors">
+              <td class="px-4 sm:px-6 py-4">
+                <div>
+                  <div class="font-semibold text-gray-900">{{ job.title }}</div>
+                  <div class="text-sm text-gray-500 mt-1">{{ job.description.substring(0, 100) }}...</div>
+                </div>
+              </td>
+              <td class="px-4 sm:px-6 py-4">
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-orange-500 text-white">
+                  {{ getJobCategoryLabel(job.category) }}
+                </span>
+              </td>
+              <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.education }}</td>
+              <td class="px-4 sm:px-6 py-4 text-gray-900">{{ job.salaryRange }}</td>
+              <td class="px-4 sm:px-6 py-4">
+                <span 
+                  [class]="'whitespace-nowrap px-3 py-1 text-xs font-medium rounded-full ' + 
+                    (job.jobMarket === 'High demand' ? 'bg-green-100 text-green-800' : 
+                     job.jobMarket === 'Stable' ? 'bg-blue-100 text-blue-800' :
+                     'bg-gray-100 text-gray-800')">
+                  {{ job.jobMarket }}
+                </span>
+              </td>
+              <td class="px-4 sm:px-6 py-4">
+                <div class="flex flex-wrap items-center space-x-2">
+                  <span 
+                    (click)="openViewJobModal(job)"
+                    class="text-orange-600 hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
+                    View
+                  </span>
+                  <span class="text-gray-300">|</span>
+                  <span 
+                    (click)="openEditJobModal(job)"
+                    class="text-green-600 hover:text-green-800 cursor-pointer font-medium hover:underline transition-colors">
+                    Edit
+                  </span>
+                  <span class="text-gray-300">|</span>
+                  <span 
+                    (click)="deleteJob(job)"
+                    class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
+                    Delete
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <!-- Empty State -->
+        <div *ngIf="paginatedJobs.length === 0 && !loading" class="text-center py-8">
+          <div class="text-gray-500 text-lg">No careers found</div>
+          <p class="text-gray-400 mt-2">Try adjusting your search or filters</p>
+        </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div *ngIf="totalPages > 1" class="mt-6 flex flex-wrap flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Pagination Info -->
+        <div class="text-sm text-gray-700">
+          Showing {{ (currentPage - 1) * pageSize + 1 }} to {{ min(currentPage * pageSize, jobs.length) }} of {{ jobs.length }} results
+        </div>
+        
+        <!-- Pagination Buttons -->
+        <div class="flex items-center max-w-full space-x-2">
+          <!-- Previous Button -->
+          <button
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Previous
+          </button>
+          
+          <!-- Page Numbers -->
+          <div class="overflow-x-auto max-w-full flex items-center space-x-1">
+            <!-- First page if not in visible range -->
+            <button
+              *ngIf="getPageNumbers()[0] > 1"
+              (click)="goToPage(1)"
+              class="px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+              1
+            </button>
+            
+            <!-- Ellipsis if there's a gap -->
+            <span *ngIf="getPageNumbers()[0] > 2" class="px-2 py-2 text-sm text-gray-500">...</span>
+            
+            <!-- Visible page numbers -->
+            <button
+              *ngFor="let page of getPageNumbers()"
+              (click)="goToPage(page)"
+              [class]="page === currentPage 
+                ? 'px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-white bg-orange-600 border border-orange-600 rounded-md'
+                : 'px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors'">
+              {{ page }}
+            </button>
+            
+            <!-- Ellipsis if there's a gap -->
+            <span *ngIf="getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1" class="px-2 py-2 text-sm text-gray-500">...</span>
+            
+            <!-- Last page if not in visible range -->
+            <button
+              *ngIf="getPageNumbers()[getPageNumbers().length - 1] < totalPages"
+              (click)="goToPage(totalPages)"
+              class="px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+              {{ totalPages }}
+            </button>
+          </div>
+          
+          <!-- Next Button -->
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="px-2 smaller-sm-md:px-2.5 sm-md:px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Add Job Modal -->
 <div *ngIf="showAddJobModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+  <div class="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
     <div class="p-6">
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-xl font-semibold text-gray-800">
-          {{ 'ADMIN_CAREERS.MODAL.ADD_TITLE' | translate }}
+          Add New Career
         </h3>
-        <button 
-          (click)="closeAddJobModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl">
+        <button (click)="closeAddJobModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
           ×
         </button>
       </div>
 
       <form [formGroup]="addJobForm" (ngSubmit)="onSubmit()" class="space-y-6">
         <!-- Basic Information -->
-        <div class="border-b pb-4">
+        <div class="border-b pb-6">
           <h4 class="text-lg font-medium text-gray-800 mb-4">
-            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+            Basic Information
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }} *
+                Title *
               </label>
               <input
                 type="text"
                 formControlName="title"
                 [class.border-red-500]="addJobForm.get('title')?.invalid && addJobForm.get('title')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange-dark"
-                [placeholder]="'ADMIN_CAREERS.MODAL.TITLE_PLACEHOLDER' | translate"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter job title"
               />
               <div *ngIf="getErrorMessage('title', addJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('title', addJobForm) }}
@@ -207,14 +320,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }} *
+                Category *
               </label>
               <select
                 formControlName="category"
                 [ngClass]="{'text-gray-400': !addJobForm.get('category')?.value}"
                 [class.border-red-500]="addJobForm.get('category')?.invalid && addJobForm.get('category')?.touched"
                 class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                <option [ngValue]="null" disabled selected hidden>Select Category</option>
                 <option *ngFor="let category of jobCategories" [value]="category">
                   {{ getJobCategoryLabel(category) }}
                 </option>
@@ -226,14 +339,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }} *
+                Education *
               </label>
               <input
                 type="text"
                 formControlName="education"
                 [class.border-red-500]="addJobForm.get('education')?.invalid && addJobForm.get('education')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.EDUCATION_PLACEHOLDER' | translate"
+                placeholder="Required education level"
               />
               <div *ngIf="getErrorMessage('education', addJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('education', addJobForm) }}
@@ -242,14 +355,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }} *
+                Salary Range *
               </label>
               <input
                 type="text"
                 formControlName="salaryRange"
                 [class.border-red-500]="addJobForm.get('salaryRange')?.invalid && addJobForm.get('salaryRange')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.SALARY_RANGE_PLACEHOLDER' | translate"
+                placeholder="e.g., 15,000 - 25,000 MAD"
               />
               <div *ngIf="getErrorMessage('salaryRange', addJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('salaryRange', addJobForm) }}
@@ -258,14 +371,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }} *
+                Job Market *
               </label>
               <input
                 type="text"
                 formControlName="jobMarket"
                 [class.border-red-500]="addJobForm.get('jobMarket')?.invalid && addJobForm.get('jobMarket')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.JOB_MARKET_PLACEHOLDER' | translate"
+                placeholder="e.g., High demand, Stable"
               />
               <div *ngIf="getErrorMessage('jobMarket', addJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('jobMarket', addJobForm) }}
@@ -274,14 +387,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }} *
+                Tags *
               </label>
               <input
                 type="text"
                 formControlName="tags"
                 [class.border-red-500]="addJobForm.get('tags')?.invalid && addJobForm.get('tags')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.TAGS_PLACEHOLDER' | translate"
+                placeholder="Comma-separated tags"
               />
               <div *ngIf="getErrorMessage('tags', addJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('tags', addJobForm) }}
@@ -291,19 +404,121 @@
         </div>
 
         <!-- Description -->
-        <div>
+        <div class="border-b pb-6">
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }} *
+            Description *
           </label>
           <textarea
             formControlName="description"
             rows="4"
             [class.border-red-500]="addJobForm.get('description')?.invalid && addJobForm.get('description')?.touched"
             class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            [placeholder]="'ADMIN_CAREERS.MODAL.DESCRIPTION_PLACEHOLDER' | translate"
+            placeholder="Job description and requirements"
           ></textarea>
           <div *ngIf="getErrorMessage('description', addJobForm)" class="text-red-500 text-xs mt-1">
             {{ getErrorMessage('description', addJobForm) }}
+          </div>
+        </div>
+
+        <!-- RIASEC Profile -->
+        <div class="border-b pb-6">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            RIASEC Profile (0-100)
+          </h4>
+          <p class="text-sm text-gray-600 mb-4">
+            Rate how much this career aligns with each personality type (0 = Not at all, 100 = Perfect match)
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Realistic (R)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecRealistic')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecRealistic"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Hands-on, practical, mechanical</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Investigative (I)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecInvestigative')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecInvestigative"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Analytical, scientific, research-oriented</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Artistic (A)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecArtistic')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecArtistic"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Creative, expressive, innovative</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Social (S)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecSocial')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecSocial"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Helping, teaching, caring</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Enterprising (E)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecEnterprising')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecEnterprising"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Leading, persuading, managing</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Conventional (C)</span>
+                <span class="text-orange-600">{{ addJobForm.get('riasecConventional')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecConventional"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Organizing, data-oriented, systematic</p>
+            </div>
           </div>
         </div>
 
@@ -313,12 +528,13 @@
             type="button"
             (click)="closeAddJobModal()"
             class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
-            {{ 'ADMIN_CAREERS.MODAL.CANCEL' | translate }}
+            Cancel
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
-            {{ 'ADMIN_CAREERS.MODAL.ADD' | translate }}
+            [disabled]="submitting"
+            class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors disabled:opacity-50">
+            {{ submitting ? 'Adding...' : 'Add Career' }}
           </button>
         </div>
       </form>
@@ -328,15 +544,13 @@
 
 <!-- View Job Modal -->
 <div *ngIf="showViewJobModal && selectedJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+  <div class="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
     <div class="p-6">
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-xl font-semibold text-gray-800">
-          {{ 'ADMIN_CAREERS.MODAL.VIEW_TITLE' | translate }}
+          Career Details
         </h3>
-        <button 
-          (click)="closeViewJobModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl">
+        <button (click)="closeViewJobModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
           ×
         </button>
       </div>
@@ -345,20 +559,20 @@
         <!-- Basic Information -->
         <div class="border-b pb-4">
           <h4 class="text-lg font-medium text-gray-800 mb-4">
-            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+            Basic Information
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }}
+                Title
               </label>
               <p class="text-gray-900">{{ selectedJob.title }}</p>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }}
+                Category
               </label>
               <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
                 {{ getJobCategoryLabel(selectedJob.category) }}
@@ -367,21 +581,21 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }}
+                Education
               </label>
               <p class="text-gray-900">{{ selectedJob.education }}</p>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }}
+                Salary Range
               </label>
               <p class="text-gray-900">{{ selectedJob.salaryRange }}</p>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }}
+                Job Market
               </label>
               <span 
                 [class]="'px-2 py-1 text-xs rounded-full ' + 
@@ -391,21 +605,103 @@
                 {{ selectedJob.jobMarket }}
               </span>
             </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Status
+              </label>
+              <span [class]="selectedJob.active ? 'text-green-600' : 'text-red-600'">
+                {{ selectedJob.active ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
           </div>
         </div>
 
         <!-- Description -->
-        <div>
+        <div class="border-b pb-4">
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }}
+            Description
           </label>
           <p class="text-gray-900">{{ selectedJob.description }}</p>
         </div>
 
+        <!-- RIASEC Profile -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            RIASEC Profile
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Realistic (R)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecRealistic || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecRealistic || 0"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Investigative (I)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecInvestigative || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecInvestigative || 0"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Artistic (A)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecArtistic || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecArtistic || 0"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Social (S)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecSocial || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecSocial || 0"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Enterprising (E)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecEnterprising || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecEnterprising || 0"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>Conventional (C)</span>
+                  <span class="text-orange-600">{{ selectedJob.riasecConventional || 0 }}/100</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-300" [style.width.%]="selectedJob.riasecConventional || 0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Tags -->
-        <div *ngIf="selectedJob.tags && selectedJob.tags.length > 0">
+        <div class="border-b pb-4" *ngIf="selectedJob.tags && selectedJob.tags.length > 0">
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }}
+            Tags
           </label>
           <div class="flex flex-wrap gap-2">
             <span 
@@ -417,41 +713,27 @@
         </div>
 
         <!-- System Information -->
-        <div class="border-t pt-4">
+        <!--<div class="border-t pt-4">
           <h4 class="text-lg font-medium text-gray-800 mb-4">
-            {{ 'ADMIN_CAREERS.MODAL.SYSTEM_INFO' | translate }}
+            System Information
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.ID' | translate }}
+                Soft Deleted
               </label>
-              <p class="text-gray-900">{{ selectedJob.id }}</p>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.VERSION' | translate }}
-              </label>
-              <p class="text-gray-900">{{ selectedJob.version }}</p>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.SOFT_DELETED' | translate }}
-              </label>
-              <p class="text-gray-900">{{ selectedJob.softDeleted ? 'Oui' : 'Non' }}</p>
+              <p class="text-gray-900">{{ selectedJob.softDeleted ? 'Yes' : 'No' }}</p>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!-- Actions -->
         <div class="flex justify-end pt-4">
           <button
             (click)="closeViewJobModal()"
             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
-            {{ 'ADMIN_CAREERS.MODAL.CLOSE' | translate }}
+            Close
           </button>
         </div>
       </div>
@@ -461,37 +743,35 @@
 
 <!-- Edit Job Modal -->
 <div *ngIf="showEditJobModal && editingJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-  <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+  <div class="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
     <div class="p-6">
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-xl font-semibold text-gray-800">
-          {{ 'ADMIN_CAREERS.MODAL.EDIT_TITLE' | translate }}
+          Edit Career
         </h3>
-        <button 
-          (click)="closeEditJobModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl">
+        <button (click)="closeEditJobModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
           ×
         </button>
       </div>
 
       <form [formGroup]="editJobForm" (ngSubmit)="onEditSubmit()" class="space-y-6">
         <!-- Basic Information -->
-        <div class="border-b pb-4">
+        <div class="border-b pb-6">
           <h4 class="text-lg font-medium text-gray-800 mb-4">
-            {{ 'ADMIN_CAREERS.MODAL.BASIC_INFO' | translate }}
+            Basic Information
           </h4>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.TITLE' | translate }} *
+                Title *
               </label>
               <input
                 type="text"
                 formControlName="title"
                 [class.border-red-500]="editJobForm.get('title')?.invalid && editJobForm.get('title')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.TITLE_PLACEHOLDER' | translate"
+                placeholder="Enter job title"
               />
               <div *ngIf="getErrorMessage('title', editJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('title', editJobForm) }}
@@ -500,14 +780,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.CATEGORY' | translate }} *
+                Category *
               </label>
               <select
                 formControlName="category"
                 [ngClass]="{'text-gray-400': !editJobForm.get('category')?.value}"
                 [class.border-red-500]="editJobForm.get('category')?.invalid && editJobForm.get('category')?.touched"
                 class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_CAREERS.MODAL.SELECT_CATEGORY' | translate }}</option>
+                <option [ngValue]="null" disabled selected hidden>Select Category</option>
                 <option *ngFor="let category of jobCategories" [value]="category">
                   {{ getJobCategoryLabel(category) }}
                 </option>
@@ -519,14 +799,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.EDUCATION' | translate }} *
+                Education *
               </label>
               <input
                 type="text"
                 formControlName="education"
                 [class.border-red-500]="editJobForm.get('education')?.invalid && editJobForm.get('education')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.EDUCATION_PLACEHOLDER' | translate"
+                placeholder="Required education level"
               />
               <div *ngIf="getErrorMessage('education', editJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('education', editJobForm) }}
@@ -535,14 +815,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.SALARY_RANGE' | translate }} *
+                Salary Range *
               </label>
               <input
                 type="text"
                 formControlName="salaryRange"
                 [class.border-red-500]="editJobForm.get('salaryRange')?.invalid && editJobForm.get('salaryRange')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.SALARY_RANGE_PLACEHOLDER' | translate"
+                placeholder="e.g., 15,000 - 25,000 MAD"
               />
               <div *ngIf="getErrorMessage('salaryRange', editJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('salaryRange', editJobForm) }}
@@ -551,14 +831,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.JOB_MARKET' | translate }} *
+                Job Market *
               </label>
               <input
                 type="text"
                 formControlName="jobMarket"
                 [class.border-red-500]="editJobForm.get('jobMarket')?.invalid && editJobForm.get('jobMarket')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.JOB_MARKET_PLACEHOLDER' | translate"
+                placeholder="e.g., High demand, Stable"
               />
               <div *ngIf="getErrorMessage('jobMarket', editJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('jobMarket', editJobForm) }}
@@ -567,14 +847,14 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_CAREERS.MODAL.TAGS' | translate }} *
+                Tags *
               </label>
               <input
                 type="text"
                 formControlName="tags"
                 [class.border-red-500]="editJobForm.get('tags')?.invalid && editJobForm.get('tags')?.touched"
                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_CAREERS.MODAL.TAGS_PLACEHOLDER' | translate"
+                placeholder="Comma-separated tags"
               />
               <div *ngIf="getErrorMessage('tags', editJobForm)" class="text-red-500 text-xs mt-1">
                 {{ getErrorMessage('tags', editJobForm) }}
@@ -584,19 +864,121 @@
         </div>
 
         <!-- Description -->
-        <div>
+        <div class="border-b pb-6">
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            {{ 'ADMIN_CAREERS.MODAL.DESCRIPTION' | translate }} *
+            Description *
           </label>
           <textarea
             formControlName="description"
             rows="4"
             [class.border-red-500]="editJobForm.get('description')?.invalid && editJobForm.get('description')?.touched"
             class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            [placeholder]="'ADMIN_CAREERS.MODAL.DESCRIPTION_PLACEHOLDER' | translate"
+            placeholder="Job description and requirements"
           ></textarea>
           <div *ngIf="getErrorMessage('description', editJobForm)" class="text-red-500 text-xs mt-1">
             {{ getErrorMessage('description', editJobForm) }}
+          </div>
+        </div>
+
+        <!-- RIASEC Profile -->
+        <div class="border-b pb-6">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            RIASEC Profile (0-100)
+          </h4>
+          <p class="text-sm text-gray-600 mb-4">
+            Rate how much this career aligns with each personality type (0 = Not at all, 100 = Perfect match)
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Realistic (R)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecRealistic')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecRealistic"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Hands-on, practical, mechanical</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Investigative (I)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecInvestigative')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecInvestigative"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Analytical, scientific, research-oriented</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Artistic (A)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecArtistic')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecArtistic"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Creative, expressive, innovative</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Social (S)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecSocial')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecSocial"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Helping, teaching, caring</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Enterprising (E)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecEnterprising')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecEnterprising"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Leading, persuading, managing</p>
+            </div>
+
+            <div>
+              <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
+                <span>Conventional (C)</span>
+                <span class="text-orange-600">{{ editJobForm.get('riasecConventional')?.value || 0 }}</span>
+              </label>
+              <input
+                type="range"
+                formControlName="riasecConventional"
+                min="0"
+                max="100"
+                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange"
+              />
+              <p class="text-xs text-gray-500 mt-1">Organizing, data-oriented, systematic</p>
+            </div>
           </div>
         </div>
 
@@ -606,12 +988,13 @@
             type="button"
             (click)="closeEditJobModal()"
             class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
-            {{ 'ADMIN_CAREERS.MODAL.CANCEL' | translate }}
+            Cancel
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
-            {{ 'ADMIN_CAREERS.MODAL.UPDATE' | translate }}
+            [disabled]="submitting"
+            class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors disabled:opacity-50">
+            {{ submitting ? 'Updating...' : 'Update Career' }}
           </button>
         </div>
       </form>

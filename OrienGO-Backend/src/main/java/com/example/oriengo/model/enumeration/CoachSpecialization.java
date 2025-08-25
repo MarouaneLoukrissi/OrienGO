@@ -1,0 +1,22 @@
+package com.example.oriengo.model.enumeration;
+
+import lombok.Getter;
+
+@Getter
+public enum CoachSpecialization {
+    CAREER_COUNSELING,
+    ACADEMIC_GUIDANCE,
+    STUDY_ABROAD,
+    SCHOLARSHIP_PREPARATION,
+    EXAM_PREPARATION,
+    INTERNSHIP_PREPARATION,
+    JOB_SEARCH,
+    INTERVIEW_PREPARATION,
+    CV_RESUME_BUILDING,
+    PERSONAL_DEVELOPMENT,
+    GOAL_SETTING,
+    SKILL_DEVELOPMENT,
+    ENTREPRENEURSHIP,
+    LIFE_COACHING
+
+}

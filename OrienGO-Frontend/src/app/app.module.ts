@@ -27,7 +27,7 @@ import { SavedComponent } from './pages/student/saved/saved.component';
 import { AdminCareersComponent } from './pages/admin/admin-careers/admin-careers.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminQuestionnairesComponent } from './pages/admin/admin-questionnaires/admin-questionnaires.component';
-import { DashboardComponent } from './pages/coach/dashboard/dashboard.component';
+
 import {
   Bell,
   Home,
@@ -65,6 +65,8 @@ import { appInitializerFactory } from './init/translate-init';
 import { JobsRecommendationComponent } from './pages/student/jobs-recommendation/jobs-recommendation.component';
 import { TestComponent } from './pages/student/test/test.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CoachDashboardComponent } from './pages/coach/dashboard/coachDashboard.component';
+import { StudentDashboardComponent } from './pages/student/dashboard/student-dashboard.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -96,7 +98,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminCareersComponent,
     AdminDashboardComponent,
     AdminQuestionnairesComponent,
-    DashboardComponent,
+    CoachDashboardComponent,
+    StudentDashboardComponent,
     HomeComponent,
     ManageAdminsComponent,
     ManageUsersComponent,

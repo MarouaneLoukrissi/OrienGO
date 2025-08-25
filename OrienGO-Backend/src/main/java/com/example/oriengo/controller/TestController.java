@@ -1,12 +1,14 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.TestMapper;
+import com.example.oriengo.model.dto.TestCountDTO;
 import com.example.oriengo.model.dto.TestCreateDTO;
 import com.example.oriengo.model.dto.TestResponseDTO;
 import com.example.oriengo.model.dto.TestSaveDTO;
 import com.example.oriengo.model.entity.Test;
 
 import com.example.oriengo.model.enumeration.TestStatus;
+import com.example.oriengo.model.enumeration.TestType;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.TestService;
 import jakarta.validation.Valid;
@@ -38,6 +40,23 @@ public class TestController {
                 .message("Tests fetched successfully")
                 .data(testResps)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<Long>> countTestsByTypeAndDeleted(
+            @RequestParam TestType type,
+            @RequestParam(defaultValue = "false") boolean deleted) {
+
+        long count = testService.countByTypeAndDeleted(type, deleted);
+
+        ApiResponse<Long> response = ApiResponse.<Long>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Test count fetched successfully")
+                .data(count)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 
@@ -88,6 +107,18 @@ public class TestController {
                 .code("SUCCESS")
                 .status(200)
                 .message("tests fetched successfully")
+                .data(testResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/count/{userId}")
+    public ResponseEntity<ApiResponse<List<TestCountDTO>>> getTestCountByStudentId(@PathVariable Long userId) {
+        List<TestCountDTO> testResps = testService.getTestCountByStudentId(userId);
+        ApiResponse<List<TestCountDTO>> response = ApiResponse.<List<TestCountDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Tests fetched successfully")
                 .data(testResps)
                 .build();
         return ResponseEntity.ok(response);

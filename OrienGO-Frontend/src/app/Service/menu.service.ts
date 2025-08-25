@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MenuItem } from './user.service';
+import { MenuItem } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -149,7 +149,7 @@ export class MenuService {
       id: 'profile',
       label: 'SIDEBAR.MENU_ITEMS.PROFILE',
       icon: 'profile',
-      route: '/profile/current-user-123',
+      route: '/profile', // /current-user-123
       roles: ['student'],
       divider: true
     },
@@ -157,7 +157,7 @@ export class MenuService {
       id: 'coach-profile',
       label: 'SIDEBAR.MENU_ITEMS.PROFILE',
       icon: 'profile',
-      route: '/profile/1',
+      route: '/profile',
       roles: ['coach'],
       divider: true
     },

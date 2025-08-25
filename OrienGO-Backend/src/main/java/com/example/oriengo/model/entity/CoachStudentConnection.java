@@ -1,6 +1,7 @@
 package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.ConnectionStatus;
+import com.example.oriengo.model.enumeration.RequestInitiator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,10 +40,14 @@ public class CoachStudentConnection {
     private ConnectionStatus status = ConnectionStatus.PENDING;
 
     @CreationTimestamp
-    @Column(name = "requested_at", nullable = false, updatable = false)
+    @Column(name = "requested_at", updatable = false)
     private LocalDateTime requestedAt;
 
     @Column(name = "responded_at")
     private LocalDateTime respondedAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "requested_by", nullable = false)
+    private RequestInitiator requestedBy;
 
 }

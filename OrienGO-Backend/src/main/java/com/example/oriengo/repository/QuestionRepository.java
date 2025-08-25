@@ -24,4 +24,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     Optional<Question> findByIdAndSoftDeleted(Long id, boolean deleted);
 
     boolean existsByTextAndSoftDeletedFalse(String text);
+
+    long countBySoftDeleted(boolean softDeleted);
 }

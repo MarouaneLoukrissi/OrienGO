@@ -413,7 +413,13 @@
       "ARTISTIC": "Artistic",
       "SOCIAL": "Social",
       "ENTERPRISING": "Enterprising",
-      "CONVENTIONAL": "Conventional"
+      "CONVENTIONAL": "Conventional",
+      "HEALTH": "Health", 
+      "EDUCATION": "Education", 
+      "TECH": "Tech", 
+      "BUSINESS": "Business", 
+      "ARTS": "Arts"
+
     }
   },
   "ADMIN_ADMINS": {
@@ -518,77 +524,186 @@
     "MESSAGE": "You do not have permission to view this page.",
     "BACK": "Go to Dashboard"
   },
-    "DASHBOARD_COACH": {
-      "WELCOME": "Welcome back, {{name}}!",
-      "SUBTITLE": "Here are the average of your Coachees career test results",
-
-      "RADAR_TITLE": "Radar Chart – Complete Profile",
-      "BAR_TITLE": "Bar Chart – Detailed Scores",
-
-      "DETAIL_SCORES": "Detailed Scores",
-      "DOMINANT_PROFILE": "Your Coachees Dominant Profile",
-
-      "PERCENT": "{{value}}%",
-
-      "PROFILES": {
-        "R": {
-          "NAME": "Realistic (R)",
-          "DESC": "Practical, hands-on, action-oriented"
-        },
-        "I": {
-          "NAME": "Investigative (I)",
-          "DESC": "Analytical, curious, scientific"
-        },
-        "A": {
-          "NAME": "Artistic (A)",
-          "DESC": "Creative, expressive, original"
-        },
-        "S": {
-          "NAME": "Social (S)",
-          "DESC": "Altruistic, cooperative, kind"
-        },
-        "E": {
-          "NAME": "Enterprising (E)",
-          "DESC": "Persuasive, ambitious, energetic"
-        },
-        "C": {
-          "NAME": "Conventional (C)",
-          "DESC": "Organized, precise, methodical"
-        }
-      },
-      "SCORES": [
-        {
-          "LABEL": "Realistic (R)",
-          "DESCRIPTION": "Practical, hands-on, action-oriented",
-          "TAGS": ["Tool handling", "Concrete activities", "Practical problem-solving"]
-        },
-        {
-          "LABEL": "Investigative (I)",
-          "DESCRIPTION": "Analytical, curious, scientific",
-          "TAGS": ["Research", "Analysis", "Experimentation"]
-        },
-        {
-          "LABEL": "Artistic (A)",
-          "DESCRIPTION": "Creative, expressive, original",
-          "TAGS": ["Creativity", "Artistic expression", "Innovation"]
-        },
-        {
-          "LABEL": "Social (S)",
-          "DESCRIPTION": "Altruistic, cooperative, kind",
-          "TAGS": ["Helping others", "Communication", "Teaching"]
-        },
-        {
-          "LABEL": "Enterprising (E)",
-          "DESCRIPTION": "Persuasive, ambitious, energetic",
-          "TAGS": ["Leadership", "Persuasion", "Risk-taking"]
-        },
-        {
-          "LABEL": "Conventional (C)",
-          "DESCRIPTION": "Organized, precise, methodical",
-          "TAGS": ["Organization", "Precision", "Procedures"]
-        }
-      ]
+  "COACH_NETWORKS": {
+    "TITLE": "Coach Networks",
+    "SUBTITLE": "Manage your students and network connections",
+    "TAB_NETWORK": "My Network",
+    "TAB_SENT_REQUESTS": "Sent Requests",
+    "TAB_RECEIVED_REQUESTS": "Received Requests",
+    "ADD_STUDENT": {
+      "TITLE": "Add a student",
+      "PLACEHOLDER": "Enter student email",
+      "SEARCH_BUTTON": "Search",
+      "SENDING": "Sending..."
     },
+    "MY_STUDENTS": "My Students",
+    "SENT_REQUESTS": "Sent Requests",
+    "RECEIVED_REQUESTS": "Received Requests",
+    "CONNECTED_ON": "Connected on",
+    "REQUEST_SENT_ON": "Request sent on",
+    "REQUEST_RECEIVED_ON": "Request received on",
+    "ACTIONS": {
+      "MESSAGE": "Message",
+      "ACCEPT": "Accept",
+      "DECLINE": "Decline",
+      "CANCEL_REQUEST": "Cancel Request",
+      "REMOVE": "Remove"
+    },
+    "SORTED_BY": "Sorted by",
+    "SORT_OPTIONS": {
+      "RECENT": "Most Recent",
+      "NAME": "Name",
+      "OLDEST": "Oldest"
+    },
+    "SEARCH_PLACEHOLDER": "Search students...",
+    "LOADING": "Loading...",
+    "CONNECTIONS": "Connections",
+    "EMPTY_NETWORK": "You have no students in your network.",
+    "EMPTY_SENT_REQUESTS": "You have not sent any connection requests.",
+    "EMPTY_RECEIVED_REQUESTS": "You have no received requests."
+  },
+  "DASHBOARD_COACH": {
+    "WELCOME": "Welcome back, {{name}}!",
+    "SUBTITLE": "Here are the average of your Coachees career test results",
+
+    "RADAR_TITLE": "Radar Chart – Complete Profile",
+    "BAR_TITLE": "Bar Chart – Detailed Scores",
+
+    "DETAIL_SCORES": "Detailed Scores",
+    "DOMINANT_PROFILE": "Your Coachees Dominant Profile",
+
+    "PERCENT": "{{value}}%",
+
+    "PROFILES": {
+      "R": {
+        "NAME": "Realistic (R)",
+        "DESC": "Practical, hands-on, action-oriented"
+      },
+      "I": {
+        "NAME": "Investigative (I)",
+        "DESC": "Analytical, curious, scientific"
+      },
+      "A": {
+        "NAME": "Artistic (A)",
+        "DESC": "Creative, expressive, original"
+      },
+      "S": {
+        "NAME": "Social (S)",
+        "DESC": "Altruistic, cooperative, kind"
+      },
+      "E": {
+        "NAME": "Enterprising (E)",
+        "DESC": "Persuasive, ambitious, energetic"
+      },
+      "C": {
+        "NAME": "Conventional (C)",
+        "DESC": "Organized, precise, methodical"
+      }
+    },
+    "SCORES": [
+      {
+        "LABEL": "Realistic (R)",
+        "DESCRIPTION": "Practical, hands-on, action-oriented",
+        "TAGS": ["Tool handling", "Concrete activities", "Practical problem-solving"]
+      },
+      {
+        "LABEL": "Investigative (I)",
+        "DESCRIPTION": "Analytical, curious, scientific",
+        "TAGS": ["Research", "Analysis", "Experimentation"]
+      },
+      {
+        "LABEL": "Artistic (A)",
+        "DESCRIPTION": "Creative, expressive, original",
+        "TAGS": ["Creativity", "Artistic expression", "Innovation"]
+      },
+      {
+        "LABEL": "Social (S)",
+        "DESCRIPTION": "Altruistic, cooperative, kind",
+        "TAGS": ["Helping others", "Communication", "Teaching"]
+      },
+      {
+        "LABEL": "Enterprising (E)",
+        "DESCRIPTION": "Persuasive, ambitious, energetic",
+        "TAGS": ["Leadership", "Persuasion", "Risk-taking"]
+      },
+      {
+        "LABEL": "Conventional (C)",
+        "DESCRIPTION": "Organized, precise, methodical",
+        "TAGS": ["Organization", "Precision", "Procedures"]
+      }
+    ]
+  },
+  "DASHBOARD_STUDENT": {
+    "WELCOME": "Welcome back, {{name}}!",
+    "SUBTITLE": "Here are the average of your test results",
+
+    "RADAR_TITLE": "Radar Chart - Complete Profile",
+    "BAR_TITLE": "Bar Chart - Detailed Scores",
+
+    "DETAIL_SCORES": "Detailed Scores",
+    "DOMINANT_PROFILE": "Your Dominant Profile",
+
+    "PERCENT": "{{value}}%",
+
+    "PROFILES": {
+      "R": {
+        "NAME": "Realistic (R)",
+        "DESC": "Practical, hands-on, action-oriented"
+      },
+      "I": {
+        "NAME": "Investigative (I)",
+        "DESC": "Analytical, curious, scientific"
+      },
+      "A": {
+        "NAME": "Artistic (A)",
+        "DESC": "Creative, expressive, original"
+      },
+      "S": {
+        "NAME": "Social (S)",
+        "DESC": "Altruistic, cooperative, kind"
+      },
+      "E": {
+        "NAME": "Enterprising (E)",
+        "DESC": "Persuasive, ambitious, energetic"
+      },
+      "C": {
+        "NAME": "Conventional (C)",
+        "DESC": "Organized, precise, methodical"
+      }
+    },
+    "SCORES": [
+      {
+        "LABEL": "Realistic (R)",
+        "DESCRIPTION": "Practical, hands-on, action-oriented",
+        "TAGS": ["Tool handling", "Concrete activities", "Practical problem-solving"]
+      },
+      {
+        "LABEL": "Investigative (I)",
+        "DESCRIPTION": "Analytical, curious, scientific",
+        "TAGS": ["Research", "Analysis", "Experimentation"]
+      },
+      {
+        "LABEL": "Artistic (A)",
+        "DESCRIPTION": "Creative, expressive, original",
+        "TAGS": ["Creativity", "Artistic expression", "Innovation"]
+      },
+      {
+        "LABEL": "Social (S)",
+        "DESCRIPTION": "Altruistic, cooperative, kind",
+        "TAGS": ["Helping others", "Communication", "Teaching"]
+      },
+      {
+        "LABEL": "Enterprising (E)",
+        "DESCRIPTION": "Persuasive, ambitious, energetic",
+        "TAGS": ["Leadership", "Persuasion", "Risk-taking"]
+      },
+      {
+        "LABEL": "Conventional (C)",
+        "DESCRIPTION": "Organized, precise, methodical",
+        "TAGS": ["Organization", "Precision", "Procedures"]
+      }
+    ]
+  },
   "MY_NETWORK": {
     "TAB_MY_NETWORK": "My network",
     "TAB_MY_PENDINGS": "My pendings",
@@ -956,7 +1071,17 @@
     "TITLE": "My Networks",
     "SUBTITLE": "Manage your connected teachers, send messages, and maintain your educational network.",
     "TAB_NETWORK": "My network",
+    "TAB_SENT_REQUESTS": "Sent Requests",
+    "TAB_RECEIVED_REQUESTS": "Received Requests",
     "TAB_PENDINGS": "My pendings",
+    "MY_COACHES": "My Coaches",
+    "CONNECTIONS": "Connections",
+    "EMPTY_NETWORK": "You have no coaches yet.",
+    "SENT_REQUESTS": "Sent Requests",
+    "RECEIVED_REQUESTS": "Received Requests",
+    "EMPTY_SENT_REQUESTS": "You haven't sent any requests.",
+    "EMPTY_RECEIVED_REQUESTS": "You haven't received any requests.",
+    "REQUEST_SENT_ON": "Request sent on",
     "ADD_COACH": {
       "TITLE": "Add a Coach",
       "PLACEHOLDER": "Enter The code or The coach's Email",
@@ -971,12 +1096,16 @@
       "NAME": "Name",
       "OLDEST": "Oldest First"
     },
+    "CONNECTED_ON": "Connected on",
     "SEARCH_PLACEHOLDER": "Search by Name",
     "ACTIONS": {
       "MESSAGE": "Message",
       "ACCEPT": "Accept",
-      "REMOVE": "Remove"
+      "REMOVE": "Remove",
+      "CANCEL_REQUEST": "Cancel Request",
+      "DECLINE": "Decline"
     },
+    "REQUEST_RECEIVED_ON": "Request received on",
     "EMPTY_STATE": "No coachs found"
   },
   "STUDENTPROFILE": {

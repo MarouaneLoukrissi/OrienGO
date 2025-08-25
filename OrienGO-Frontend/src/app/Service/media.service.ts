@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../model/ApiResponse';
+import { TestCountDTO } from '../model/dto/TestCount.dto';
 
 
 export interface MediaResponseDTO {
@@ -35,6 +36,10 @@ export class MediaService {
   // 3. Get media by user ID
   getMediaByUserId(userId: number): Observable<ApiResponse<MediaResponseDTO[]>> {
     return this.http.get<ApiResponse<MediaResponseDTO[]>>(`${this.baseUrl}/user/${userId}`);
+  }
+
+  getLatestMediaByUserId(userId: number): Observable<ApiResponse<MediaResponseDTO[]>> {
+    return this.http.get<ApiResponse<MediaResponseDTO[]>>(`${this.baseUrl}/user/latest/${userId}`);
   }
 
     // 4. Create media (upload file + metadata)

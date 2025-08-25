@@ -1,9 +1,7 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.TestResultMapper;
-import com.example.oriengo.model.dto.TestResultCreateDTO;
-import com.example.oriengo.model.dto.TestResultMapMediaDTO;
-import com.example.oriengo.model.dto.TestResultResponseDTO;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.TestResult;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.TestResultService;
@@ -86,6 +84,36 @@ public class TestResultController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/student/average/{studentId}")
+    public ResponseEntity<ApiResponse<TestResultAverageDTO>> getAverageByStudentId(@PathVariable Long studentId) {
+        TestResultAverageDTO averageDTO = testResultService.getAverageByStudentId(studentId);
+
+        ApiResponse<TestResultAverageDTO> response = ApiResponse.<TestResultAverageDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Dominant profile calculated successfully")
+                .data(averageDTO)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/student/profiles/{studentId}")
+    public ResponseEntity<ApiResponse<TestResultProfilesDTO>> getProfilesByStudentId(@PathVariable Long studentId) {
+        TestResultProfilesDTO profilesDTO = testResultService.getProfilesByStudentId(studentId);
+
+        ApiResponse<TestResultProfilesDTO> response = ApiResponse.<TestResultProfilesDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Profiles retrieved and sorted successfully")
+                .data(profilesDTO)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+
 
     @PostMapping("/{testId}/unsaved-test/submit")
     public ResponseEntity<ApiResponse<TestResultResponseDTO>> createUnsavedTestResult(@Valid @RequestBody TestResultCreateDTO dto) {

@@ -17,6 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/api/job")
 @RequiredArgsConstructor
@@ -37,6 +38,20 @@ public class JobController {
                 .message("Jobs fetched successfully")
                 .data(jobDtos)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<Long>> countJobs() {
+        long count = jobService.countJobs();
+
+        ApiResponse<Long> response = ApiResponse.<Long>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Jobs count fetched successfully")
+                .data(count)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 

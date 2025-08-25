@@ -31,7 +31,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -91,6 +93,25 @@ public class MediaService {
         }
         try {
             return mediaRepository.findByUserId(userId);
+        } catch (Exception e) {
+            log.error("Error getting media by user ID {}: {}", userId, e.getMessage());
+            throw new MediaGetException(HttpStatus.BAD_REQUEST, getMessage("media.by.user.failed", userId));
+        }
+    }
+
+    public List<Media> getLatestMediaByUserId(Long userId) {
+        if (userId == null) {
+            log.warn("User ID is null");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("media.user.id.empty"));
+        }
+        try {
+            Optional<Media> latestCover = mediaRepository.findFirstByUserIdAndTypeOrderByCreatedAtDesc(userId, MediaType.COVER_PHOTO);
+            Optional<Media> latestProfile = mediaRepository.findFirstByUserIdAndTypeOrderByCreatedAtDesc(userId, MediaType.PROFILE_PHOTO);
+
+            return Stream.of(latestCover, latestProfile)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
         } catch (Exception e) {
             log.error("Error getting media by user ID {}: {}", userId, e.getMessage());
             throw new MediaGetException(HttpStatus.BAD_REQUEST, getMessage("media.by.user.failed", userId));

@@ -1,6 +1,7 @@
 package com.example.oriengo.model.entity;
 
 import com.example.oriengo.model.enumeration.AccountPrivacy;
+import com.example.oriengo.model.enumeration.CoachSpecialization;
 import com.example.oriengo.model.enumeration.MessagePermission;
 import com.example.oriengo.model.enumeration.VisibilityStatus;
 import jakarta.persistence.*;
@@ -38,6 +39,9 @@ public class Coach extends User implements Serializable {
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<CoachStudentConnection> connections = new HashSet<>();
 
+    @Embedded
+    private Location location;
+
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -54,4 +58,17 @@ public class Coach extends User implements Serializable {
     @Column(nullable = false)
     private AccountPrivacy accountPrivacy = AccountPrivacy.PUBLIC;
 
+    @Enumerated(EnumType.STRING)
+    private CoachSpecialization specialization;
+
+    private Double rate;
+
+    @Column(nullable = true, length = 500)
+    private String expertise; // e.g., "Career Development, Personal Growth, Goal Setting"
+
+    @Column(nullable = true, length = 200)
+    private String services; // e.g., "Available for 1-on-1 sessions"
+
+    @Column(nullable = true, length = 500)
+    private String availability; // e.g., "Monday - Friday: 9 AM - 6 PM; Weekend: By appointment"
 }

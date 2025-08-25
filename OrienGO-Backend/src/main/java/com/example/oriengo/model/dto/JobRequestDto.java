@@ -61,5 +61,5 @@ public class JobRequestDto {
 
     private Set<@Size(max = 50, message = "{job.tags.size}") String> tags;
 
-    private boolean softDeleted = false;
+    //private boolean softDeleted = false;
 }

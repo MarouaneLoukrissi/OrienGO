@@ -4,6 +4,10 @@ import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionCreationExc
 import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionDeleteException;
 import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionGetException;
 import com.example.oriengo.exception.custom.AnswerOption.AnswerOptionUpdateException;
+import com.example.oriengo.exception.custom.CoachStudentConnections.CoachStudentConnectionCreationException;
+import com.example.oriengo.exception.custom.CoachStudentConnections.CoachStudentConnectionDeleteException;
+import com.example.oriengo.exception.custom.CoachStudentConnections.CoachStudentConnectionGetException;
+import com.example.oriengo.exception.custom.CoachStudentConnections.CoachStudentConnectionUpdateException;
 import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationCreationException;
 import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationDeleteException;
 import com.example.oriengo.exception.custom.JobRecommendation.JobRecommendationGetException;
@@ -77,7 +81,25 @@ import java.util.Map;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private final MessageSource messageSource; // Injected
+    private final MessageSource messageSource; // Injectepd
+
+    @ExceptionHandler(CoachStudentConnectionCreationException.class)
+    public ResponseEntity<?> handleCoachStudentConnectionCreationException(CoachStudentConnectionCreationException ex) {
+        return buildResponse("COACH_STUDENT_CONNECTION_CREATION_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+
+    @ExceptionHandler(CoachStudentConnectionDeleteException.class)
+    public ResponseEntity<?> handleCoachStudentConnectionDeleteException(CoachStudentConnectionDeleteException ex) {
+        return buildResponse("COACH_STUDENT_CONNECTION_DELETE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(CoachStudentConnectionUpdateException.class)
+    public ResponseEntity<?> handleCoachStudentConnectionUpdateException(CoachStudentConnectionUpdateException ex) {
+        return buildResponse("COACH_STUDENT_CONNECTION_UPDATE_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
+    @ExceptionHandler(CoachStudentConnectionGetException.class)
+    public ResponseEntity<?> handleCoachStudentConnectionGetException(CoachStudentConnectionGetException ex) {
+        return buildResponse("COACH_STUDENT_CONNECTION_FETCH_FAILED", ex.getStatusCode(), ex.getReason(), null);
+    }
 
     @ExceptionHandler(JobCreationException.class)
     public ResponseEntity<?> handleJobCreationException(JobCreationException ex) {

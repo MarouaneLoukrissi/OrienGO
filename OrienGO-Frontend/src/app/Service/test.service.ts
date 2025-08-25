@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { TestCreateDTO } from '../model/dto/TestCreateDTO';
-import { TestResponseDTO } from '../model/dto/TestResponseDTO';
+import { TestCreateDTO } from '../model/dto/TestCreate.dto';
+import { TestResponseDTO } from '../model/dto/TestResponse.dto';
 import { ApiResponse } from '../model/ApiResponse';
+import { TestCountDTO } from '../model/dto/TestCount.dto';
+import { TestType } from '../model/enum/TestType.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +59,11 @@ export class TestService {
     return this.http.get<ApiResponse<TestResponseDTO[]>>(`${this.baseUrl}/deleted/student/${studentId}/status/${status}`);
   }
 
+  getTestCountByStudentId(userId: number): Observable<ApiResponse<TestCountDTO[]>> {
+    return this.http.get<ApiResponse<TestCountDTO[]>>(`${this.baseUrl}/count/${userId}`);
+  }
+
+
   // POST create a new test
   createTest(dto: TestCreateDTO): Observable<ApiResponse<TestResponseDTO>> {
     return this.http.post<ApiResponse<TestResponseDTO>>(`${this.baseUrl}`, dto)
@@ -87,5 +94,10 @@ export class TestService {
   // POST save uncompleted test
   saveUncompletedTest(dto: any): Observable<ApiResponse<TestResponseDTO>> {
     return this.http.post<ApiResponse<TestResponseDTO>>(`${this.baseUrl}/save`, dto);
+  }
+
+  getTestCountByType(type: TestType, deleted: boolean = false): Observable<ApiResponse<number>> {
+    const params = { type, deleted: deleted.toString() };
+    return this.http.get<ApiResponse<number>>(`${this.baseUrl}/count`, { params });
   }
 }

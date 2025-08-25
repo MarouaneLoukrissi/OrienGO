@@ -1,7 +1,6 @@
 package com.example.oriengo.model.dto;
 
-import com.example.oriengo.model.enumeration.EducationLevel;
-import com.example.oriengo.model.enumeration.GenderType;
+import com.example.oriengo.model.enumeration.*;
 //import com.example.oriengo.validations.PasswordMatches;
 import com.example.oriengo.validations.ValidPhoneNumber;
 import jakarta.validation.Valid;
@@ -56,6 +55,15 @@ public class StudentCreateDTO {
 
     @NotNull(message = "{educationLevel.notNull}")
     private EducationLevel educationLevel;
+
+//    @NotNull(message = "{messagePermission.notNull}")
+//    private MessagePermission messagePermission;
+//
+//    @NotNull(message = "{accountPrivacy.notNull}")
+//    private AccountPrivacy accountPrivacy;
+//
+//    @NotNull(message = "{profileVisibility.notNull}")
+//    private VisibilityStatus profileVisibility;
 
     @Valid
     private LocationDTO location;

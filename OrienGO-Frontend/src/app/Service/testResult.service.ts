@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../model/ApiResponse';
-import { TestResultResponseDTO } from '../model/dto/TestResultResponseDTO';
-import { TestResultCreateDTO } from '../model/dto/TestResultCreateDTO';
-import { TestResultMapMediaDTO } from '../model/dto/TestResultMapMediaDTO';
+import { TestResultResponseDTO } from '../model/dto/TestResultResponse.dto';
+import { TestResultCreateDTO } from '../model/dto/TestResultCreate.dto';
+import { TestResultMapMediaDTO } from '../model/dto/TestResultMapMedia.dto';
+import { TestResultAverageDTO } from '../model/dto/TestResultAverage.dto';
+import { TestResultProfilesDTO } from '../model/dto/TestResultProfiles.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,10 @@ export class TestResultService {
     return this.http.get<ApiResponse<TestResultResponseDTO[]>>(`${this.baseUrl}/student/${studentId}`);
   }
 
+  getDominantProfileByStudentId(studentId: number): Observable<ApiResponse<TestResultAverageDTO>> {
+    return this.http.get<ApiResponse<TestResultAverageDTO>>(`${this.baseUrl}/student/average/${studentId}`);
+  }
+
   // This corresponds to POST /{testId}/unsaved-test/submit with a body
   createUnsavedTestResult(dto: TestResultCreateDTO): Observable<ApiResponse<TestResultResponseDTO>> {
     return this.http.post<ApiResponse<TestResultResponseDTO>>(`${this.baseUrl}/${dto.testId}/unsaved-test/submit`, dto);
@@ -44,6 +50,12 @@ export class TestResultService {
     return this.http.post<ApiResponse<TestResultResponseDTO>>(
       `${this.baseUrl}/map-to-media`,
       dto
+    );
+  }
+
+  getProfilesByStudentId(studentId: number): Observable<ApiResponse<TestResultProfilesDTO>> {
+    return this.http.get<ApiResponse<TestResultProfilesDTO>>(
+      `${this.baseUrl}/student/profiles/${studentId}`
     );
   }
 }

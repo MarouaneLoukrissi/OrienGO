@@ -3,26 +3,26 @@ package com.example.oriengo.service;
 import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.user.*;
 import com.example.oriengo.mapper.StudentMapper;
+import com.example.oriengo.model.dto.ProfileScoreDTO;
 import com.example.oriengo.model.dto.StudentCreateDTO;
-import com.example.oriengo.model.entity.Location;
+import com.example.oriengo.model.dto.StudentUpdateDTO;
+import com.example.oriengo.model.dto.TestResultProfilesDTO;
 import com.example.oriengo.model.entity.Role;
 import com.example.oriengo.model.entity.Student;
-import com.example.oriengo.model.enumeration.AccountPrivacy;
+import com.example.oriengo.model.enumeration.Category;
 import com.example.oriengo.repository.RoleRepository;
 import com.example.oriengo.repository.StudentRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -33,6 +33,7 @@ public class StudentService {
     private final RoleRepository roleRepository;
 //    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     private final MessageSource messageSource;
+    private final TestResultService testResultService;
 
     private String getMessage(String key, Object... args) {
         Locale locale = LocaleContextHolder.getLocale();
@@ -51,6 +52,46 @@ public class StudentService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public TestResultProfilesDTO getAverageProfilesByDeleted(boolean deleted) {
+        try {
+            log.info("Fetching student IDs with isDeleted = {}", deleted);
+
+            // Get student IDs instead of full student entities
+            List<Long> studentIds = studentRepository.findIdsByIsDeleted(deleted);
+
+            if (studentIds.isEmpty()) {
+                log.warn("No students found with isDeleted = {}", deleted);
+
+                // Return all categories with 0.0 if no students found
+                List<ProfileScoreDTO> emptyProfiles = Arrays.stream(Category.values())
+                        .map(cat -> new ProfileScoreDTO(cat, 0.0))
+                        .collect(Collectors.toList());
+
+                return TestResultProfilesDTO.builder()
+                        .profiles(emptyProfiles)
+                        .build();
+            }
+
+            // Calculate average profiles across studentIds
+            TestResultProfilesDTO averageProfiles = testResultService.getAverageProfilesByStudentIds(studentIds);
+
+            // Ensure profiles are sorted descending
+            List<ProfileScoreDTO> sortedProfiles = averageProfiles.getProfiles().stream()
+                    .sorted(Comparator.comparing(ProfileScoreDTO::getPercentage).reversed())
+                    .collect(Collectors.toList());
+
+            averageProfiles.setProfiles(sortedProfiles);
+
+            log.info("Successfully calculated average profiles for {} students", studentIds.size());
+            return averageProfiles;
+
+        } catch (Exception e) {
+            log.error("Failed to calculate average profiles: {}", e.getMessage(), e);
+            throw new UserGetException(HttpStatus.NOT_FOUND, getMessage("student.not.found"));
+        }
+    }
+
     public Student getStudentById(Long id, boolean deleted) {
         if (id == null) {
             log.warn("Attempted to fetch student with null ID");
@@ -63,12 +104,12 @@ public class StudentService {
                 });
     }
 
-    public Student getStudentById(Long id) {
+    private Student getStudentById(Long id) {
         if (id == null) {
             log.warn("Attempted to fetch student with null ID");
             throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("student.id.empty"));
         }
-        return studentRepository.findById(id)
+        return studentRepository.findByIdIncludingDeleted(id)
                 .orElseThrow(() -> {
                     log.error("Student not found with ID: {}", id);
                     return new UserGetException(HttpStatus.NOT_FOUND, getMessage("student.not.found"));
@@ -216,6 +257,27 @@ public class StudentService {
     }
 
     @Transactional
+    public Student updateProfile(Long id, StudentUpdateDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update student with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("student.id.empty"));
+        } else if (dto == null) {
+            log.warn("Student update request cannot be null");
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("student.dto.empty"));
+        }
+        try {
+            log.info("Updating student with ID: {}", id);
+            Student existingStudent = getStudentById(id, false);
+            studentMapper.updateStudentFromDto(dto, existingStudent);
+            Student savedStudent = studentRepository.save(existingStudent);
+            log.info("Student with ID {} successfully updated", savedStudent.getId());
+            return savedStudent;
+        } catch (Exception e) {
+            log.error("Error updating student with ID {}: {}", id, e.getMessage(), e);
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("student.update.failed"));
+        }
+    }
+    @Transactional
     public Student updateStudent(Long id, StudentCreateDTO dto) {
         if (id == null) {
             log.warn("Attempted to update student with null ID");
@@ -226,31 +288,20 @@ public class StudentService {
         }
         try {
             log.info("Updating student with ID: {}", id);
-            Student student = studentMapper.toEntity(dto);
-            Student existingStudent = getStudentById(id);
-//            existingStudent.setFirstName(student.getFirstName());
-//            existingStudent.setLastName(student.getLastName());
-//            existingStudent.setPhoneNumber(student.getPhoneNumber());
-//            existingStudent.setGender(student.getGender());
-//            existingStudent.setEmail(student.getEmail());
-//            existingStudent.setAge(student.getAge());
-//            existingStudent.setEducationLevel(dto.getEducationLevel());
-//            existingStudent.setSchool(dto.getSchool());
-//            existingStudent.setFieldOfStudy(dto.getFieldOfStudy());
-//            if (dto.getLocation() != null) {
-//                Location location = Location.builder()
-//                        .country(dto.getLocation().getCountry())
-//                        .region(dto.getLocation().getRegion())
-//                        .city(dto.getLocation().getCity())
-//                        .address(dto.getLocation().getAddress())
-//                        .build();
-//                existingStudent.setLocation(location);
-//            }
-            studentMapper.updateStudentFromDto(dto, existingStudent);
-            if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
-                student.setPassword(student.getPassword()); //encoder.encode(student.getPassword())
+            // Check if email already exists
+            try {
+                Student existingStudent = getStudentByEmail(dto.getEmail(), false);
+                if (existingStudent != null) {
+                    log.warn("Student already exists with email: {}", dto.getEmail());
+                    throw new UserCreationException(HttpStatus.CONFLICT, getMessage("student.email.already.exists", dto.getEmail()));
+                }
+            } catch (UserGetException e) {
+                log.debug("No existing student found with email {}, proceeding with creation", dto.getEmail());
             }
-            Student savedStudent = studentRepository.save(student);
+            Student existingStudent = getStudentById(id);
+            studentMapper.updateStudentFromDto(dto, existingStudent);
+            existingStudent.setPassword(existingStudent.getPassword()); //encoder.encode(student.getPassword())
+            Student savedStudent = studentRepository.save(existingStudent);
             log.info("Student with ID {} successfully updated", savedStudent.getId());
             return savedStudent;
         } catch (Exception e) {

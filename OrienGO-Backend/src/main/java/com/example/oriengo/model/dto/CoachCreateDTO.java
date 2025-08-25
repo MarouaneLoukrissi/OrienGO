@@ -1,7 +1,9 @@
 package com.example.oriengo.model.dto;
 
+import com.example.oriengo.model.enumeration.CoachSpecialization;
 import com.example.oriengo.model.enumeration.GenderType;
 import com.example.oriengo.validations.ValidPhoneNumber;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -24,7 +26,7 @@ public class CoachCreateDTO {
     @Max(value = 120, message = "{coach.age.max}")
     private Integer age;
 
-    @Size(max = 10, message = "{coach.gender.size}")
+    @NotNull(message = "{gender.notNull}")
     private GenderType gender;
 
     @Size(max = 20, message = "{coach.phoneNumber.size}")
@@ -41,6 +43,21 @@ public class CoachCreateDTO {
     @Size(min = 8, max = 255, message = "{coach.password.size}")
     private String password;
 
+    @Valid
+    private LocationDTO location;
 //    @NotBlank(message = "Confirm password is required")
 //    private String confirmPassword;
+
+
+//    @NotNull(message = "{coach.specialization.notnull}")
+//    private CoachSpecialization specialization;
+//    @Size(max = 500, message = "{coach.expertise.size}")
+//    private String expertise; // e.g., "Career Development, Personal Growth, Goal Setting"
+//
+//    @Size(max = 200, message = "{coach.services.size}")
+//    private String services; // e.g., "Available for 1-on-1 sessions"
+//
+//    @Size(max = 500, message = "{coach.availability.size}")
+//    private String availability; // e.g., "Monday - Friday: 9 AM - 6 PM; Weekend: By appointment"
+
 }

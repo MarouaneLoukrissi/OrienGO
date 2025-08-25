@@ -5,9 +5,9 @@ import { TestResultService } from '../../../Service/testResult.service';
 import { PdfGeneratorService, RiasecData } from '../../../Service/pdf-generator.service';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { TestResultMapMediaDTO } from '../../../model/dto/TestResultMapMediaDTO';
+import { TestResultMapMediaDTO } from '../../../model/dto/TestResultMapMedia.dto';
 import { MediaService } from '../../../Service/media.service';
-import { MediaType } from '../../../model/enum/MediaType';
+import { MediaType } from '../../../model/enum/MediaType.enum';
 
 type ScoreKey = 'REALISTIC' | 'INVESTIGATIVE' | 'ARTISTIC' | 'SOCIAL' | 'ENTERPRISING' | 'CONVENTIONAL';
 const RIASEC_ORDER: ScoreKey[] = ['REALISTIC', 'INVESTIGATIVE', 'ARTISTIC', 'SOCIAL', 'ENTERPRISING', 'CONVENTIONAL'];
@@ -382,21 +382,21 @@ export class ResultsComponent implements OnInit{
 
   generateAndUploadPdf(riasecData: RiasecData, testId: number, userId: number, testResultId: number) {
     this.pdfGeneratorService.generatePdfBlob(riasecData).then(pdfBlob => {
-    // Step 1: Upload PDF
-    const formData = new FormData();
-    const fileName = `RIASEC_Results_User_${userId}_Test_${testId}_${new Date().toISOString().split('T')[0]}.pdf`;
-    formData.append('media', new File([pdfBlob], fileName, { type: 'application/pdf' }));
-    formData.append('userId', userId.toString());
-    formData.append('type', MediaType.RESULT_PDF)
-    this.mediaService.createMedia(formData).subscribe({
-      next: (res) => {
-        this.mapTestResult(testResultId, res.data.id)
-      },
-      error: (err) => {
-        console.error('Failed to upload PDF: ', err)
-      }
+      // Step 1: Upload PDF
+      const formData = new FormData();
+      const fileName = `RIASEC_Results_User_${userId}_Test_${testId}_${new Date().toISOString().split('T')[0]}.pdf`;
+      formData.append('media', new File([pdfBlob], fileName, { type: 'application/pdf' }));
+      formData.append('userId', userId.toString());
+      formData.append('type', MediaType.RESULT_PDF)
+      this.mediaService.createMedia(formData).subscribe({
+        next: (res) => {
+          this.mapTestResult(testResultId, res.data.id)
+        },
+        error: (err) => {
+          console.error('Failed to upload PDF: ', err)
+        }
+      });
     });
-  });
   }
 
   mapTestResult(testResultId: number, mediaId: number) {

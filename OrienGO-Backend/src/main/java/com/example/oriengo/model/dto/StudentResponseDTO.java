@@ -48,4 +48,6 @@ public class StudentResponseDTO {
 
     private LocalDateTime updatedAt;
 
+    private Double rate;
+
 }

@@ -2,12 +2,12 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationStart, Route, Router } from '@angular/router';
 import { TestQuestionService } from '../../../Service/testQuestion.service';
-import { QuestionResponseDTO } from '../../../model/dto/QuestionResponseDTO';
+import { QuestionResponseDTO } from '../../../model/dto/QuestionResponse.dto';
 import { TestService } from '../../../Service/test.service';
 import { NotificationService } from '../../../Service/notification.service';
 import { Question } from './data/questions';
-import { TestSaveDTO } from '../../../model/dto/TestSaveDTO';
-import { TestStatus } from '../../../model/enum/TestStatus';
+import { TestSaveDTO } from '../../../model/dto/TestSave.dto';
+import { TestStatus } from '../../../model/enum/TestStatus.enum';
 import { TestResultService } from '../../../Service/testResult.service';
 import { Subscription } from 'rxjs';
 

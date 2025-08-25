@@ -42,6 +42,18 @@ public class QuestionService {
         }
     }
 
+    public long countQuestions(boolean deleted) {
+        try {
+            log.info("Counting questions with isDeleted = {}", deleted);
+            long count = questionRepository.countBySoftDeleted(deleted);
+            log.info("Found {} questions", count);
+            return count;
+        } catch (Exception e) {
+            log.error("Failed to count questions with isDeleted = {}: {}", deleted, e.getMessage(), e);
+            throw new QuestionGetException(HttpStatus.NOT_FOUND, getMessage("question.not.found"));
+        }
+    }
+
     public Question getQuestionById(Long id, boolean deleted) {
         if (id == null) {
             log.warn("Attempted to fetch question with null ID");

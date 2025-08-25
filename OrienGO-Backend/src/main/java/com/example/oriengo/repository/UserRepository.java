@@ -22,4 +22,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r = :role AND u.isDeleted = :deleted")
     List<User> findAllByRoleAndIsDeleted(@Param("role") Role role, @Param("deleted") boolean deleted);
+
+    @Query("SELECT COUNT(DISTINCT u) FROM User u " +
+            "JOIN u.roles r " +
+            "WHERE u.isDeleted = :deleted " +
+            "AND r.name IN (:roleNames)")
+    long countUsersByDeletedAndRoles(@Param("deleted") boolean deleted,
+                                     @Param("roleNames") List<String> roleNames);
 }

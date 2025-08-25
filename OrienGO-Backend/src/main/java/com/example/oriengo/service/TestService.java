@@ -4,6 +4,7 @@ import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.Test.*;
 import com.example.oriengo.exception.custom.TestResult.TestResultCreationException;
 import com.example.oriengo.mapper.TestMapper;
+import com.example.oriengo.model.dto.TestCountDTO;
 import com.example.oriengo.model.dto.TestCreateDTO;
 
 import com.example.oriengo.model.dto.TestSaveDTO;
@@ -57,6 +58,19 @@ public class TestService {
     }
 
     @Transactional(readOnly = true)
+    public long countByTypeAndDeleted(TestType type, boolean deleted) {
+        try {
+            log.info("Counting tests with type = {} and deleted = {}", type, deleted);
+            long count = testRepository.countByTypeAndSoftDeletedAndStatus(type, deleted, TestStatus.COMPLETED);
+            log.info("Found {} tests with type {} and deleted = {}", count, type, deleted);
+            return count;
+        } catch (Exception e) {
+            log.error("Failed to count tests with type {} and deleted = {}: {}", type, deleted, e.getMessage(), e);
+            throw new TestGetException(HttpStatus.NOT_FOUND, getMessage("test.not.found"));
+        }
+    }
+
+    @Transactional(readOnly = true)
     public Test getById(Long id, boolean deleted) {
         if (id == null) {
             log.warn("Attempted to fetch test with null ID");
@@ -102,6 +116,28 @@ public class TestService {
         } catch (Exception e) {
             log.error("Failed to fetch tests with student id = {} and isDeleted = {}: {}", id, deleted, e.getMessage(), e);
             throw new TestGetException(HttpStatus.NOT_FOUND, getMessage("test.not.found"));
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<TestCountDTO> getTestCountByStudentId(Long studentId) {
+        if (studentId == null) {
+            log.warn("Attempted to count tests with null student ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("test.id.empty"));
+        }
+        try {
+            log.info("Counting tests for student ID: {}", studentId);
+            List<Object[]> results = testRepository.countTestsByStudentId(studentId);
+
+            return results.stream()
+                    .map(row -> new TestCountDTO(
+                            TestType.valueOf(row[0].toString()),   // convert String to TestType enum
+                            (Long) row[1]                          // count
+                    ))
+                    .toList();
+        } catch (Exception e) {
+            log.error("Failed to count tests for student id = {}: {}", studentId, e.getMessage(), e);
+            throw new TestGetException(HttpStatus.NOT_FOUND, getMessage("test.count.failed"));
         }
     }
 

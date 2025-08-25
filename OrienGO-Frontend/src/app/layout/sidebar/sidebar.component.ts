@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subject, takeUntil, combineLatest } from 'rxjs';
-import { UserService, User, MenuItem } from '../../Service/user.service';
+import { User, MenuItem, AuthService } from '../../Service/auth.service';
 import { MenuService } from '../../Service/menu.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -61,7 +61,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private menuService: MenuService,
     private router: Router
   ) {}
@@ -81,7 +81,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.initializeSidebarState();
 
     combineLatest([
-      this.userService.currentUser$
+      this.authService.currentUser$
     ]).pipe(
       takeUntil(this.destroy$)
     ).subscribe(([user]) => {
@@ -100,7 +100,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
 
     if (this.userRole) {
-      this.userService.updateUserRole(this.userRole);
+      this.authService.updateUserRole(this.userRole);
     }
   }
 
@@ -335,7 +335,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   switchRole(role: 'admin' | 'superAdmin' | 'student' | 'coach') {
-    this.userService.updateUserRole(role);
+    this.authService.updateUserRole(role);
   }
 
   resetPreferences() {

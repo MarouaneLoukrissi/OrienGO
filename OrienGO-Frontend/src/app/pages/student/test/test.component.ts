@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
-import { TestCreateDTO } from '../../../model/dto/TestCreateDTO';
-import { TestType } from '../../../model/enum/TestType';
+import { TestCreateDTO } from '../../../model/dto/TestCreate.dto';
+import { TestType } from '../../../model/enum/TestType.enum';
 import { Router, NavigationEnd } from '@angular/router';
 import { TestService } from '../../../Service/test.service';
 import { TestQuestionService } from '../../../Service/testQuestion.service';
 import { NotificationService } from '../../../Service/notification.service';
-import { TestStatus } from '../../../model/enum/TestStatus';
+import { TestStatus } from '../../../model/enum/TestStatus.enum';
 import { delay, filter, Subscription } from 'rxjs';
 
 interface TestResult {

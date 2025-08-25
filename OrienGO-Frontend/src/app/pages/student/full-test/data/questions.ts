@@ -1,4 +1,4 @@
-import { AnswerOptionResponseDTO } from "../../../../model/dto/AnswerOptionResponseDTO";
+import { AnswerOptionResponseDTO } from "../../../../model/dto/AnswerOptionResponse.dto";
 
 export interface Question {
   id: number;

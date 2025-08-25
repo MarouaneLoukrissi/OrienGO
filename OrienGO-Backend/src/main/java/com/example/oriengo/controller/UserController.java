@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -35,6 +36,23 @@ public class UserController {
                 .message("Users fetched successfully")
                 .data(userResponses)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/count-by-roles")
+    public ResponseEntity<ApiResponse<Long>> countUsersByRoles(
+            @RequestParam(defaultValue = "false") boolean deleted,
+            @RequestParam List<String> roles) {
+
+        long count = userService.countUsersByRoles(deleted, roles);
+
+        ApiResponse<Long> response = ApiResponse.<Long>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Count of users with roles " + roles + " fetched successfully")
+                .data(count)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 

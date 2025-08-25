@@ -50,6 +50,18 @@ public class UserService {
         }
     }
 
+    public long countUsersByRoles(boolean deleted, List<String> roles) {
+        try {
+            log.info("Counting users with deleted={} and roles in {}", deleted, roles);
+            long count = userRepository.countUsersByDeletedAndRoles(deleted, roles);
+            log.info("Found {} users", count);
+            return count;
+        } catch (Exception e) {
+            log.error("Failed to count users: {}", e.getMessage(), e);
+            throw new UserGetException(HttpStatus.NOT_FOUND, getMessage("user.not.found"));
+        }
+    }
+
     public User getUserById(Long id, boolean deleted) {
         if (id == null) {
             log.warn("User ID is null");

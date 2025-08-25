@@ -3,12 +3,12 @@ import { Observable, forkJoin, map, switchMap, of } from 'rxjs';
 import { TestService } from '../../../Service/test.service';
 import { TestResultService } from '../../../Service/testResult.service';
 import { MediaService } from '../../../Service/media.service';
-import { TestResponseDTO } from '../../../model/dto/TestResponseDTO';
+import { TestResponseDTO } from '../../../model/dto/TestResponse.dto';
 import { ApiResponse } from '../../../model/ApiResponse';
-import { Category } from '../../../model/enum/Category';
-import { TestType } from '../../../model/enum/TestType';
-import { TestResultResponseDTO } from '../../../model/dto/TestResultResponseDTO';
-import { TestStatus } from '../../../model/enum/TestStatus';
+import { Category } from '../../../model/enum/Category.enum';
+import { TestType } from '../../../model/enum/TestType.enum';
+import { TestResultResponseDTO } from '../../../model/dto/TestResultResponse.dto';
+import { TestStatus } from '../../../model/enum/TestStatus.enum';
 import { CommonModule } from '@angular/common';
 
 interface TestResult {
@@ -141,7 +141,7 @@ export class HistoryComponent implements OnInit {
     
     this.mediaService.getMediaFileById(testResult.fullResultData.pdfId).subscribe({
       next: (blob: Blob) => {
-        this.downloadBlob(blob, `test-result-${testResult.id}.pdf`);
+        this.downloadBlob(blob, `RIASEC_Results_User_${this.userId}_Test_${testResult.fullResultData?.testId}_${new Date().toISOString().split('T')[0]}.pdf`);
         this.isDownloadingPdf = false;
       },
       error: (error) => {

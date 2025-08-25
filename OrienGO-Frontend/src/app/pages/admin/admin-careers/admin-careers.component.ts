@@ -1,30 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-
-// Enum correspondant à l'entité backend
-enum JobCategory {
-  REALISTIC = 'REALISTIC',
-  INVESTIGATIVE = 'INVESTIGATIVE',
-  ARTISTIC = 'ARTISTIC',
-  SOCIAL = 'SOCIAL',
-  ENTERPRISING = 'ENTERPRISING',
-  CONVENTIONAL = 'CONVENTIONAL'
-}
-
-// Interface correspondant exactement à l'entité backend
-interface Job {
-  id: number;
-  title: string;
-  description: string;
-  category: JobCategory;
-  education: string;
-  salaryRange: string;
-  jobMarket: string;
-  tags: string[];
-  softDeleted: boolean;
-  version: number;
-}
+import { JobResponseDto } from '../../../model/dto/JobResponse.dto';
+import { JobCategory } from '../../../model/enum/JobCategory.enum';
+import { JobService } from '../../../Service/job.service';
+import { JobRequestDto } from '../../../model/dto/JobRequest.dto';
 
 @Component({
   selector: 'app-admin-careers',
@@ -32,163 +12,128 @@ interface Job {
   styleUrls: ['./admin-careers.component.css']
 })
 export class AdminCareersComponent implements OnInit {
-  // Propriétés pour les modales
+  // State management
+  loading = false;
+  submitting = false;
+  error: string | null = null;
+  success: string | null = null;
+
+  // Modal properties
   showAddJobModal = false;
   showViewJobModal = false;
   showEditJobModal = false;
-  selectedJob: Job | null = null;
-  editingJob: Job | null = null;
+  selectedJob: JobResponseDto | null = null;
+  editingJob: JobResponseDto | null = null;
 
-  // Formulaires
-  addJobForm: FormGroup;
-  editJobForm: FormGroup;
+  // Forms
+  addJobForm!: FormGroup;
+  editJobForm!: FormGroup;
 
-  // Propriétés pour la recherche et le tri
+  // Search and filtering properties
   searchTerm = '';
   selectedCategory = '';
   selectedJobMarket = '';
   sortField = '';
   sortDirection = 'asc';
 
-  // Données
-  originalJobs: Job[] = [
-    {
-      id: 1,
-      title: 'Software Developer',
-      description: 'Develop and maintain web applications using modern technologies. Work in agile environment.',
-      category: JobCategory.REALISTIC,
-      education: "Bachelor's in Computer Science",
-      salaryRange: '15,000 - 25,000 MAD',
-      jobMarket: 'High demand',
-      tags: ['JavaScript', 'React', 'Node.js', 'Problem Solving'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 2,
-      title: 'Clinical Psychologist',
-      description: 'Psychological support for patients and their families. Work in a multidisciplinary team.',
-      category: JobCategory.SOCIAL,
-      education: "Master's in Clinical Psychology",
-      salaryRange: '12,000 - 20,000 MAD',
-      jobMarket: 'Stable',
-      tags: ['Clinical Psychology', 'Listening', 'Empathy', 'Therapy'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 3,
-      title: 'Marketing Manager',
-      description: 'Lead marketing campaigns and strategies for various clients. Manage team and budgets.',
-      category: JobCategory.ENTERPRISING,
-      education: "Bachelor's in Marketing",
-      salaryRange: '18,000 - 30,000 MAD',
-      jobMarket: 'High demand',
-      tags: ['Digital Marketing', 'Strategy', 'Leadership', 'Analytics'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 4,
-      title: 'Data Analyst',
-      description: 'Analyze data to help organizations make informed decisions. Create reports and visualizations.',
-      category: JobCategory.INVESTIGATIVE,
-      education: "Bachelor's in Statistics or Mathematics",
-      salaryRange: '12,000 - 20,000 MAD',
-      jobMarket: 'High demand',
-      tags: ['Data Analysis', 'SQL', 'Python', 'Statistics'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 5,
-      title: 'Graphic Designer',
-      description: 'Create visual content for brands and organizations. Work with design software and creative tools.',
-      category: JobCategory.ARTISTIC,
-      education: "Bachelor's in Graphic Design",
-      salaryRange: '8,000 - 15,000 MAD',
-      jobMarket: 'Stable',
-      tags: ['Adobe Creative Suite', 'Creativity', 'Typography', 'Branding'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 6,
-      title: 'Project Manager',
-      description: 'Lead project teams and ensure successful delivery of projects within scope, time, and budget.',
-      category: JobCategory.ENTERPRISING,
-      education: "Bachelor's in Business Administration",
-      salaryRange: '20,000 - 35,000 MAD',
-      jobMarket: 'High demand',
-      tags: ['Project Management', 'Leadership', 'Communication', 'Agile'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 7,
-      title: 'Content Writer',
-      description: 'Create engaging content for websites, blogs, and marketing materials.',
-      category: JobCategory.ARTISTIC,
-      education: "Bachelor's in Communications or Journalism",
-      salaryRange: '6,000 - 12,000 MAD',
-      jobMarket: 'Stable',
-      tags: ['Content Writing', 'SEO', 'Creativity', 'Research'],
-      softDeleted: false,
-      version: 1
-    },
-    {
-      id: 8,
-      title: 'UX/UI Designer',
-      description: 'Design user interfaces and experiences for digital products. Focus on usability and user satisfaction.',
-      category: JobCategory.ARTISTIC,
-      education: "Bachelor's in Design or related field",
-      salaryRange: '14,000 - 22,000 MAD',
-      jobMarket: 'High demand',
-      tags: ['UI/UX Design', 'Figma', 'User Research', 'Prototyping'],
-      softDeleted: false,
-      version: 1
-    }
-  ];
+  // Pagination properties
+  currentPage = 1;
+  pageSize = 5;
+  totalPages = 0;
+  paginatedJobs: JobResponseDto[] = [];
 
-  // Liste des jobs (filtrée et triée)
-  jobs: Job[] = [];
-
-  // Arrays pour les enums
+  // Data
+  originalJobs: JobResponseDto[] = [];
+  jobs: JobResponseDto[] = [];
   jobCategories = Object.values(JobCategory);
 
   constructor(
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private jobService: JobService
   ) {
-    this.addJobForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      category: [null, Validators.required],
-      education: ['', [Validators.required, Validators.maxLength(100)]],
-      salaryRange: ['', [Validators.required, Validators.maxLength(100)]],
-      jobMarket: ['', [Validators.required, Validators.maxLength(100)]],
-      tags: ['', [Validators.required, Validators.maxLength(500)]]
-    });
-
-    this.editJobForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      category: [null, Validators.required],
-      education: ['', [Validators.required, Validators.maxLength(100)]],
-      salaryRange: ['', [Validators.required, Validators.maxLength(100)]],
-      jobMarket: ['', [Validators.required, Validators.maxLength(100)]],
-      tags: ['', [Validators.required, Validators.maxLength(500)]]
-    });
+    this.initializeForms();
   }
 
   ngOnInit(): void {
-    this.initializeJobs();
+    this.loadJobs();
   }
 
-  // Méthodes pour les modales
+  min(a: number, b: number): number {
+    return Math.min(a, b);
+  }
+
+  private initializeForms(): void {
+    this.addJobForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+      category: [null, Validators.required],
+      education: ['', [Validators.maxLength(100)]],
+      salaryRange: ['', [Validators.maxLength(100)]],
+      jobMarket: ['', [Validators.maxLength(100)]],
+      tags: ['', [Validators.maxLength(500)]],
+      riasecRealistic: [0, [Validators.min(0), Validators.max(100)]],
+      riasecInvestigative: [0, [Validators.min(0), Validators.max(100)]],
+      riasecArtistic: [0, [Validators.min(0), Validators.max(100)]],
+      riasecSocial: [0, [Validators.min(0), Validators.max(100)]],
+      riasecEnterprising: [0, [Validators.min(0), Validators.max(100)]],
+      riasecConventional: [0, [Validators.min(0), Validators.max(100)]]
+    });
+
+    this.editJobForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
+      category: [null, Validators.required],
+      education: ['', [Validators.maxLength(100)]],
+      salaryRange: ['', [Validators.maxLength(100)]],
+      jobMarket: ['', [Validators.maxLength(100)]],
+      tags: ['', [Validators.maxLength(500)]],
+      riasecRealistic: [0, [Validators.min(0), Validators.max(100)]],
+      riasecInvestigative: [0, [Validators.min(0), Validators.max(100)]],
+      riasecArtistic: [0, [Validators.min(0), Validators.max(100)]],
+      riasecSocial: [0, [Validators.min(0), Validators.max(100)]],
+      riasecEnterprising: [0, [Validators.min(0), Validators.max(100)]],
+      riasecConventional: [0, [Validators.min(0), Validators.max(100)]]
+    });
+  }
+
+  // Data loading methods
+  loadJobs(): void {
+    this.loading = true;
+    this.error = null;
+    
+    this.jobService.getAllJobs().subscribe({
+      next: (response) => {
+        if (response.status === 200) {
+          this.originalJobs = response.data || [];
+          this.applyFilters();
+          this.success = 'Careers loaded successfully';
+          this.clearMessages();
+        } else {
+          this.error = response.message || 'Failed to load careers';
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading jobs:', error);
+        this.error = 'Failed to load careers. Please try again.';
+        this.loading = false;
+      }
+    });
+  }
+
+  // Modal management methods
   openAddJobModal(): void {
     this.showAddJobModal = true;
     this.addJobForm.reset();
+    this.addJobForm.patchValue({
+      riasecRealistic: 0,
+      riasecInvestigative: 0,
+      riasecArtistic: 0,
+      riasecSocial: 0,
+      riasecEnterprising: 0,
+      riasecConventional: 0
+    });
   }
 
   closeAddJobModal(): void {
@@ -198,30 +143,51 @@ export class AdminCareersComponent implements OnInit {
 
   onSubmit(): void {
     if (this.addJobForm.valid) {
+      this.submitting = true;
+      this.error = null;
+      
       const formValue = this.addJobForm.value;
-      const newJob: Job = {
-        id: this.jobs.length + 1,
+      const jobRequest: JobRequestDto = {
         title: formValue.title,
         description: formValue.description,
         category: formValue.category,
         education: formValue.education,
         salaryRange: formValue.salaryRange,
         jobMarket: formValue.jobMarket,
-        tags: formValue.tags.split(',').map((tag: string) => tag.trim()),
-        softDeleted: false,
-        version: 1
+        tags: this.parseTags(formValue.tags),
+        riasecRealistic: formValue.riasecRealistic || 0,
+        riasecInvestigative: formValue.riasecInvestigative || 0,
+        riasecArtistic: formValue.riasecArtistic || 0,
+        riasecSocial: formValue.riasecSocial || 0,
+        riasecEnterprising: formValue.riasecEnterprising || 0,
+        riasecConventional: formValue.riasecConventional || 0,
+        softDeleted: false
       };
 
-      this.jobs.push(newJob);
-      this.originalJobs.push(newJob);
-      this.closeAddJobModal();
-      this.applyFilters();
+      this.jobService.createJob(jobRequest).subscribe({
+        next: (response) => {
+          if (response.status === 200 || response.status === 201) {
+            this.success = 'Career created successfully';
+            this.closeAddJobModal();
+            this.loadJobs(); // Reload data
+            this.clearMessages();
+          } else {
+            this.error = response.message || 'Failed to create career';
+          }
+          this.submitting = false;
+        },
+        error: (error) => {
+          console.error('Error creating job:', error);
+          this.error = 'Failed to create career. Please try again.';
+          this.submitting = false;
+        }
+      });
     } else {
       this.markFormGroupTouched(this.addJobForm);
     }
   }
 
-  openViewJobModal(job: Job): void {
+  openViewJobModal(job: JobResponseDto): void {
     this.selectedJob = job;
     this.showViewJobModal = true;
   }
@@ -231,8 +197,8 @@ export class AdminCareersComponent implements OnInit {
     this.selectedJob = null;
   }
 
-  openEditJobModal(job: Job): void {
-    this.editingJob = { ...job };
+  openEditJobModal(job: JobResponseDto): void {
+    this.editingJob = job;
     this.editJobForm.patchValue({
       title: job.title,
       description: job.description,
@@ -240,7 +206,13 @@ export class AdminCareersComponent implements OnInit {
       education: job.education,
       salaryRange: job.salaryRange,
       jobMarket: job.jobMarket,
-      tags: job.tags.join(', ')
+      tags: job.tags ? job.tags.join(', ') : '',
+      riasecRealistic: job.riasecRealistic || 0,
+      riasecInvestigative: job.riasecInvestigative || 0,
+      riasecArtistic: job.riasecArtistic || 0,
+      riasecSocial: job.riasecSocial || 0,
+      riasecEnterprising: job.riasecEnterprising || 0,
+      riasecConventional: job.riasecConventional || 0
     });
     this.showEditJobModal = true;
   }
@@ -253,45 +225,137 @@ export class AdminCareersComponent implements OnInit {
 
   onEditSubmit(): void {
     if (this.editJobForm.valid && this.editingJob) {
-      const formValue = this.editJobForm.value;
-      const index = this.jobs.findIndex(job => job.id === this.editingJob!.id);
+      this.submitting = true;
+      this.error = null;
       
-      if (index !== -1) {
-        this.jobs[index] = {
-          ...this.jobs[index],
-          title: formValue.title,
-          description: formValue.description,
-          category: formValue.category,
-          education: formValue.education,
-          salaryRange: formValue.salaryRange,
-          jobMarket: formValue.jobMarket,
-          tags: formValue.tags.split(',').map((tag: string) => tag.trim()),
-          version: this.jobs[index].version + 1
-        };
+      const formValue = this.editJobForm.value;
+      const jobRequest: JobRequestDto = {
+        title: formValue.title,
+        description: formValue.description,
+        category: formValue.category,
+        education: formValue.education,
+        salaryRange: formValue.salaryRange,
+        jobMarket: formValue.jobMarket,
+        tags: this.parseTags(formValue.tags),
+        riasecRealistic: formValue.riasecRealistic || 0,
+        riasecInvestigative: formValue.riasecInvestigative || 0,
+        riasecArtistic: formValue.riasecArtistic || 0,
+        riasecSocial: formValue.riasecSocial || 0,
+        riasecEnterprising: formValue.riasecEnterprising || 0,
+        riasecConventional: formValue.riasecConventional || 0,
+        softDeleted: this.editingJob.softDeleted
+      };
 
-        // Mettre à jour aussi dans originalJobs
-        const originalIndex = this.originalJobs.findIndex(job => job.id === this.editingJob!.id);
-        if (originalIndex !== -1) {
-          this.originalJobs[originalIndex] = { ...this.jobs[index] };
+      this.jobService.updateJob(this.editingJob.id, jobRequest).subscribe({
+        next: (response) => {
+          if (response.status === 200) {
+            this.success = 'Career updated successfully';
+            this.closeEditJobModal();
+            this.loadJobs(); // Reload data
+            this.clearMessages();
+          } else {
+            this.error = response.message || 'Failed to update career';
+          }
+          this.submitting = false;
+        },
+        error: (error) => {
+          console.error('Error updating job:', error);
+          this.error = 'Failed to update career. Please try again.';
+          this.submitting = false;
         }
-      }
-
-      this.closeEditJobModal();
-      this.applyFilters();
+      });
     } else {
       this.markFormGroupTouched(this.editJobForm);
     }
   }
 
-  deleteJob(job: Job): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce poste ?')) {
-      this.jobs = this.jobs.filter(j => j.id !== job.id);
-      this.originalJobs = this.originalJobs.filter(j => j.id !== job.id);
-      this.applyFilters();
+  deleteJob(job: JobResponseDto): void {
+    if (confirm('Are you sure you want to delete this career?')) {
+      this.error = null;
+      
+      this.jobService.deleteJob(job.id).subscribe({
+        next: (response) => {
+          if (response.status === 200 || response.status === 204) {
+            this.success = 'Career deleted successfully';
+            this.loadJobs(); // Reload data
+            this.clearMessages();
+          } else {
+            this.error = response.message || 'Failed to delete career';
+          }
+        },
+        error: (error) => {
+          console.error('Error deleting job:', error);
+          this.error = 'Failed to delete career. Please try again.';
+        }
+      });
     }
   }
 
-  // Méthodes de validation
+  // Pagination methods
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.jobs.length / this.pageSize);
+    
+    // Reset to first page if current page is out of bounds
+    if (this.currentPage > this.totalPages && this.totalPages > 0) {
+      this.currentPage = 1;
+    }
+    
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedJobs = this.jobs.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagination();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisiblePages = 3;
+    let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
+    
+    // Adjust start page if we're near the end
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    
+    return pages;
+  }
+
+  // Utility methods
+  private parseTags(tagsString: string): string[] {
+    return tagsString ? tagsString.split(',').map(tag => tag.trim()).filter(tag => tag) : [];
+  }
+
+  private clearMessages(): void {
+    setTimeout(() => {
+      this.success = null;
+      this.error = null;
+    }, 3000);
+  }
+
   markFormGroupTouched(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
@@ -303,37 +367,48 @@ export class AdminCareersComponent implements OnInit {
     const control = form.get(fieldName);
     if (control?.errors && control.touched) {
       if (control.errors['required']) {
-        return this.translate.instant('ADMIN_CAREERS.MODAL.REQUIRED_FIELD');
+        return 'This field is required';
       }
       if (control.errors['minlength']) {
-        return this.translate.instant('ADMIN_CAREERS.MODAL.MIN_LENGTH', { min: control.errors['minlength'].requiredLength });
+        return `Minimum length is ${control.errors['minlength'].requiredLength} characters`;
       }
       if (control.errors['maxlength']) {
-        return this.translate.instant('ADMIN_CAREERS.MODAL.MAX_LENGTH', { max: control.errors['maxlength'].requiredLength });
+        return `Maximum length is ${control.errors['maxlength'].requiredLength} characters`;
+      }
+      if (control.errors['min']) {
+        return `Minimum value is ${control.errors['min'].min}`;
+      }
+      if (control.errors['max']) {
+        return `Maximum value is ${control.errors['max'].max}`;
       }
     }
     return '';
   }
 
-  // Méthodes pour les labels des enums
   getJobCategoryLabel(category: JobCategory): string {
-    try {
-      return this.translate.instant(`ADMIN_CAREERS.JOB_CATEGORY.${category}`);
-    } catch {
-      return category;
-    }
+    const labels: { [key in JobCategory]: string } = {
+      [JobCategory.HEALTH]: 'Health',
+      [JobCategory.EDUCATION]: 'Education',
+      [JobCategory.TECH]: 'Technology',
+      [JobCategory.BUSINESS]: 'Business',
+      [JobCategory.ARTS]: 'Arts'
+    };
+    return labels[category] || category;
   }
 
-  // Méthodes de recherche et tri
+  // Search and filtering methods
   onSearchChange(): void {
+    this.currentPage = 1; // Reset to first page when searching
     this.applyFilters();
   }
 
   onCategoryChange(): void {
+    this.currentPage = 1; // Reset to first page when filtering
     this.applyFilters();
   }
 
   onJobMarketChange(): void {
+    this.currentPage = 1; // Reset to first page when filtering
     this.applyFilters();
   }
 
@@ -344,33 +419,34 @@ export class AdminCareersComponent implements OnInit {
       this.sortField = field;
       this.sortDirection = 'asc';
     }
+    this.currentPage = 1; // Reset to first page when sorting
     this.applyFilters();
   }
 
   applyFilters(): void {
     let filteredJobs = [...this.originalJobs];
 
-    // Filtre par recherche
+    // Search filter
     if (this.searchTerm) {
       const searchLower = this.searchTerm.toLowerCase();
       filteredJobs = filteredJobs.filter(job =>
         job.title.toLowerCase().includes(searchLower) ||
         job.description.toLowerCase().includes(searchLower) ||
-        job.education.toLowerCase().includes(searchLower)
+        (job.education && job.education.toLowerCase().includes(searchLower))
       );
     }
 
-    // Filtre par catégorie
+    // Category filter
     if (this.selectedCategory) {
       filteredJobs = filteredJobs.filter(job => job.category === this.selectedCategory);
     }
 
-    // Filtre par marché du travail
+    // Job market filter
     if (this.selectedJobMarket) {
       filteredJobs = filteredJobs.filter(job => job.jobMarket === this.selectedJobMarket);
     }
 
-    // Tri
+    // Sorting
     if (this.sortField) {
       filteredJobs.sort((a, b) => {
         const aValue = (a as any)[this.sortField];
@@ -383,10 +459,7 @@ export class AdminCareersComponent implements OnInit {
     }
 
     this.jobs = filteredJobs;
-  }
-
-  initializeJobs(): void {
-    this.jobs = [...this.originalJobs];
+    this.updatePagination();
   }
 
   resetFilters(): void {
@@ -395,10 +468,17 @@ export class AdminCareersComponent implements OnInit {
     this.selectedJobMarket = '';
     this.sortField = '';
     this.sortDirection = 'asc';
+    this.currentPage = 1; // Reset to first page when resetting filters
     this.applyFilters();
   }
 
   getUniqueJobMarkets(): string[] {
-    return [...new Set(this.originalJobs.map(job => job.jobMarket))];
+    return [
+      ...new Set(
+        this.originalJobs
+          .map(job => job.jobMarket)
+          .filter((market): market is string => !!market) // type guard
+      )
+    ];
   }
 }

@@ -1,6 +1,7 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.MediaMapper;
+import com.example.oriengo.model.dto.MediaFilteredResponseDTO;
 import com.example.oriengo.model.dto.MediaRequestDTO;
 import com.example.oriengo.model.dto.MediaResponseDTO;
 import com.example.oriengo.model.entity.Media;
@@ -44,6 +45,17 @@ public class MediaController {
                 .status(200)
                 .message("Media fetched successfully")
                 .data(mediaMapper.toDTO(media))
+                .build());
+    }
+
+    @GetMapping("/user/latest/{userId}")
+    public ResponseEntity<ApiResponse<List<MediaFilteredResponseDTO>>> getLatestMediaByUserId(@PathVariable Long userId) {
+        List<Media> medias = mediaService.getLatestMediaByUserId(userId);
+        return ResponseEntity.ok(ApiResponse.<List<MediaFilteredResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("User's media files fetched successfully")
+                .data(mediaMapper.toFilteredDTO(medias))
                 .build());
     }
 

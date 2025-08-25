@@ -3,6 +3,8 @@ package com.example.oriengo.controller;
 import com.example.oriengo.mapper.StudentMapper;
 import com.example.oriengo.model.dto.StudentCreateDTO;
 import com.example.oriengo.model.dto.StudentResponseDTO;
+import com.example.oriengo.model.dto.StudentUpdateDTO;
+import com.example.oriengo.model.dto.TestResultProfilesDTO;
 import com.example.oriengo.model.entity.Admin;
 import com.example.oriengo.model.entity.Student;
 import com.example.oriengo.payload.response.ApiResponse;
@@ -35,6 +37,21 @@ public class StudentController {
                 .message("Students fetched successfully")
                 .data(studentResps)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/average-profiles")
+    public ResponseEntity<ApiResponse<TestResultProfilesDTO>> getAverageProfilesByDeleted(
+            @RequestParam(defaultValue = "false") boolean deleted) {
+        TestResultProfilesDTO averageProfiles = studentService.getAverageProfilesByDeleted(deleted);
+
+        ApiResponse<TestResultProfilesDTO> response = ApiResponse.<TestResultProfilesDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Average profiles fetched successfully")
+                .data(averageProfiles)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 
@@ -152,6 +169,18 @@ public class StudentController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @PutMapping("/profile/{id}")
+    public ResponseEntity<ApiResponse<StudentResponseDTO>> updateProfile(@PathVariable Long id, @Valid @RequestBody StudentUpdateDTO studentInfo){
+        Student student = studentService.updateProfile(id, studentInfo);
+        StudentResponseDTO studentResp = studentMapper.toDTO(student);
+        ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("STUDENT_UPDATED")
+                .status(200)
+                .message("Student updated successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<StudentResponseDTO>> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentCreateDTO studentInfo){
         Student student = studentService.updateStudent(id, studentInfo);

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublicProfileComponent } from './profile-coach.component';
+import { ProfileCoachComponent } from './profile-coach.component';
 
 describe('PublicProfileComponent', () => {
-  let component: PublicProfileComponent;
-  let fixture: ComponentFixture<PublicProfileComponent>;
+  let component: ProfileCoachComponent;
+  let fixture: ComponentFixture<ProfileCoachComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PublicProfileComponent]
+      imports: [ProfileCoachComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PublicProfileComponent);
+    fixture = TestBed.createComponent(ProfileCoachComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,185 @@
+<div class="min-h-screen p-6 bg-orange-50 py-6 px-4 sm:py-8 sm:px-6 lg:px-8 w-full max-w-full">
+  <div class="mx-auto w-full md-lg:max-w-[88rem]">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+      <p class="mt-4 text-gray-600">Loading your profile data...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="text-center py-12">
+      <div class="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+        <div class="text-red-600 mb-4">
+          <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-red-800 mb-2">Error Loading Data</h3>
+        <p class="text-red-600 mb-4">{{ errorMessage }}</p>
+        <button 
+          (click)="retryLoading()"
+          class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="!isLoading && !hasError">
+      <!-- Title -->
+      <div class="text-center mb-12 mt-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">
+          {{ 'DASHBOARD_STUDENT.WELCOME' | translate:{ name: 'Student' } }}
+        </h1>
+        <p class="text-lg text-gray-600">
+          {{ 'DASHBOARD_STUDENT.SUBTITLE' | translate }}
+        </p>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 w-full max-w-full sm:px-0">
+        <!-- Radar Chart -->
+        <div class="bg-white rounded-xl shadow-lg sm:p-6 w-full max-w-full overflow-hidden">
+          <div class="flex items-center gap-2 p-4 mb-4 sm:mb-6">
+            <svg width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 2H28V9" stroke="#EA580C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+              <path d="M2 16L11 7L17 13L27 3" stroke="#EA580C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+            </svg>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-800">{{ 'DASHBOARD_STUDENT.RADAR_TITLE' | translate }}</h3>
+          </div>
+          <!-- The radar chart -->
+          <div class="w-full max-w-[425px] mx-auto pb-4">
+            <app-radar-chart [data]="radarData" class="w-full h-auto"></app-radar-chart>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="bg-white rounded-xl shadow-lg sm:p-6 w-full max-w-full overflow-x-auto">
+          <div class="flex items-center gap-2 mb-4 sm:mb-6 p-4">
+            <svg width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 2H28V9" stroke="#EA580C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+              <path d="M2 16L11 7L17 13L27 3" stroke="#EA580C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+            </svg>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-800">{{ 'DASHBOARD_STUDENT.BAR_TITLE' | translate }}</h3>
+          </div>
+
+          <!-- Wrap the chart with a div enforcing min-width and horizontal scroll -->
+          <div class="overflow-x-auto">
+            <div class="min-w-[128px] h-full w-full py-6 mx-auto">
+              <app-bar-chart [data]="barData" class="w-full h-full flex items-center lg:pt-12 lg:pb-0"></app-bar-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Scores and Key Points -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 w-full max-w-full sm:px-0">
+        <!-- Detailed Scores -->
+        <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+          <h3 class="text-lg font-semibold text-gray-800 mb-6">{{ 'DASHBOARD_STUDENT.DETAIL_SCORES' | translate }}</h3>
+
+          <div class="space-y-6">
+            <div 
+              class="transition-all duration-300 ease-in-out hover:-translate-y-0.5" 
+              *ngFor="let score of detailedScores"
+            >
+              <!-- Label and Percentage Row -->
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2 sm:gap-0">
+                <!-- Label with color dot -->
+                <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap max-w-full">
+                  <div
+                    class="w-3 h-3 rounded-full flex-shrink-0"
+                    [style.background-color]="score.color"
+                  ></div>
+                  <span
+                    class="font-semibold text-gray-800 truncate max-w-full sm:max-w-xs"
+                    [title]="score.label"
+                  >
+                    {{ score.label }}
+                  </span>
+                </div>
+
+                <!-- Percentage -->
+                <span
+                  class="text-orange-500 font-semibold flex-shrink-0"
+                  aria-label="Percentage score"
+                >
+                  {{ score.percentage }}%
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="text-sm text-gray-600 mb-2 break-words">
+                {{ score.description }}
+              </p>
+
+              <!-- Progress Bar -->
+              <div
+                class="w-full bg-gray-200 rounded-full h-2 mb-3 overflow-hidden"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [attr.aria-valuenow]="score.percentage"
+                [attr.aria-label]="'Progress bar for ' + score.label"
+              >
+                <div
+                  class="h-2 rounded-full transition-all duration-300"
+                  [style.width.%]="score.percentage"
+                  [style.backgroundColor]="score.color"
+                ></div>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 max-w-full">
+                <span
+                  *ngFor="let tag of score.tags"
+                  class="px-2 sm:px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full break-words max-w-full"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dominant Profile Card -->
+        <div class="bg-white rounded-xl shadow-lg py-6 sm:p-8 w-full max-w-full mx-auto">
+          <div class="text-center px-2 sm:px-0">
+            <div class="flex justify-center items-center mb-4">
+              <div class="w-20 h-20 sm:w-24 sm:h-24 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-[48px] h-[48px] sm:w-[56px] sm:h-[56px]" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M28 0.5C22.561 0.5 17.2442 2.11285 12.7218 5.13459C8.19948 8.15632 4.67473 12.4512 2.59333 17.4762C0.511915 22.5012 -0.0326764 28.0305 1.02842 33.365C2.08951 38.6995 4.70863 43.5995 8.55458 47.4454C12.4005 51.2914 17.3006 53.9105 22.635 54.9716C27.9695 56.0327 33.4988 55.4881 38.5238 53.4067C43.5488 51.3253 47.8437 47.8005 50.8654 43.2782C53.8872 38.7558 55.5 33.439 55.5 28C55.4914 20.7092 52.5913 13.7195 47.4359 8.56406C42.2806 3.40868 35.2908 0.508601 28 0.5ZM28 50.5C23.5499 50.5 19.1998 49.1804 15.4997 46.7081C11.7996 44.2357 8.91569 40.7217 7.21272 36.6104C5.50975 32.499 5.06418 27.975 5.93234 23.6105C6.80051 19.2459 8.94343 15.2368 12.0901 12.0901C15.2368 8.94342 19.2459 6.8005 23.6105 5.93233C27.975 5.06416 32.499 5.50974 36.6104 7.21271C40.7217 8.91568 44.2357 11.7996 46.7081 15.4997C49.1804 19.1998 50.5 23.5499 50.5 28C50.4927 33.9651 48.1199 39.6839 43.9019 43.9019C39.6839 48.1199 33.9651 50.4927 28 50.5ZM28 9.25C24.2916 9.25 20.6665 10.3497 17.5831 12.4099C14.4996 14.4702 12.0964 17.3986 10.6773 20.8247C9.25813 24.2508 8.88681 28.0208 9.61029 31.6579C10.3338 35.2951 12.1195 38.636 14.7418 41.2583C17.364 43.8805 20.7049 45.6663 24.3421 46.3897C27.9792 47.1132 31.7492 46.7419 35.1753 45.3227C38.6014 43.9036 41.5298 41.5004 43.5901 38.4169C45.6503 35.3335 46.75 31.7084 46.75 28C46.7447 23.0288 44.7676 18.2628 41.2524 14.7476C37.7373 11.2324 32.9712 9.25529 28 9.25ZM28 41.75C25.2805 41.75 22.6221 40.9436 20.3609 39.4327C18.0997 37.9218 16.3374 35.7744 15.2967 33.2619C14.256 30.7494 13.9837 27.9847 14.5142 25.3175C15.0448 22.6503 16.3543 20.2003 18.2773 18.2773C20.2003 16.3543 22.6503 15.0447 25.3175 14.5142C27.9848 13.9837 30.7494 14.256 33.2619 15.2967C35.7744 16.3374 37.9218 18.0997 39.4327 20.3609C40.9436 22.6221 41.75 25.2805 41.75 28C41.746 31.6455 40.2961 35.1406 37.7183 37.7183C35.1406 40.2961 31.6455 41.746 28 41.75ZM28 18C26.0222 18 24.0888 18.5865 22.4443 19.6853C20.7998 20.7841 19.5181 22.3459 18.7612 24.1732C18.0043 26.0004 17.8063 28.0111 18.1922 29.9509C18.578 31.8907 19.5304 33.6725 20.9289 35.0711C22.3275 36.4696 24.1093 37.422 26.0491 37.8079C27.9889 38.1937 29.9996 37.9957 31.8268 37.2388C33.6541 36.4819 35.2159 35.2002 36.3147 33.5557C37.4135 31.9112 38 29.9778 38 28C38 25.3478 36.9464 22.8043 35.0711 20.9289C33.1957 19.0536 30.6522 18 28 18ZM28 33C27.0111 33 26.0444 32.7068 25.2222 32.1573C24.3999 31.6079 23.7591 30.827 23.3806 29.9134C23.0022 28.9998 22.9032 27.9945 23.0961 27.0245C23.289 26.0546 23.7652 25.1637 24.4645 24.4645C25.1637 23.7652 26.0547 23.289 27.0246 23.0961C27.9945 22.9031 28.9998 23.0022 29.9134 23.3806C30.8271 23.759 31.608 24.3999 32.1574 25.2221C32.7068 26.0444 33 27.0111 33 28C33 29.3261 32.4732 30.5979 31.5355 31.5355C30.5979 32.4732 29.3261 33 28 33Z" fill="white"/>
+                </svg>
+              </div>
+            </div>
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
+              {{ 'DASHBOARD_STUDENT.DOMINANT_PROFILE' | translate }}
+            </h2>
+            <div class="mb-3">
+              <span
+                class="
+                bg-orange-500 text-white
+                px-5 xs:px-8
+                py-3 xs:py-4
+                rounded-full
+                text-base sm:text-lg md:text-xl
+                font-semibold
+                inline-block
+                max-w-full
+                truncate
+                "
+              >
+                {{ dominantProfile.name }}
+              </span>
+            </div>
+            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+                {{ ('DASHBOARD_STUDENT.PROFILES.' + dominantProfile.name.charAt(0) + '.DESC') | translate }}
+            </p>
+            <div class="text-3xl sm:text-4xl font-bold text-orange-500">{{ dominantProfile.percentage }}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

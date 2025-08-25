@@ -23,7 +23,7 @@ import { SuperAdminComponent } from './pages/admin/super-admin/super-admin.compo
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { NotAuthorizedComponent } from './pages/admin/not-authorized/not-authorized.component';
 import { RiasecTestPageComponent } from './pages/common/riasec-test-page/riasec-test-page.component';
-import { DashboardComponent } from './pages/coach/dashboard/dashboard.component';
+import { CoachDashboardComponent } from './pages/coach/dashboard/coachDashboard.component';
 import { NetworkCoachComponent } from './pages/coach/network-coach/network-coach.component';
 import { ProfileEditComponent } from './pages/coach/profile-edit/profile-edit.component';
 import { HomeComponent } from './pages/common/home/home.component';
@@ -37,6 +37,7 @@ import { ProfileCoachComponent } from './pages/coach/profile-coach/profile-coach
 import { NavFooterComponent } from './layout/nav-footer/nav-footer.component';
 import { JobsRecommendationComponent } from './pages/student/jobs-recommendation/jobs-recommendation.component';
 import { TestComponent } from './pages/student/test/test.component';
+import { StudentDashboardComponent } from './pages/student/dashboard/student-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -137,18 +138,15 @@ export const routes: Routes = [
         children: [
           { path: 'settings',
             component: SettingsComponent
-          } ,
+          },
           { path: 'dashboard',
-            component: DashboardComponent
+            component: CoachDashboardComponent
           },
           { path: 'network',
             component: NetworkCoachComponent
           },
           { path: 'profile',
-            component: ProfileComponent
-          },
-          { path: 'profile/edit',
-            component: ProfileEditComponent
+            component: ProfileCoachComponent
           },
           { path: 'history',
             component: HistoryComponent
@@ -173,7 +171,7 @@ export const routes: Routes = [
       { path: 'student',
         children: [
           { path: 'dashboard',
-            component: DashboardComponent
+            component: StudentDashboardComponent
           },
           { path: 'test',
             component: TestComponent
@@ -192,6 +190,9 @@ export const routes: Routes = [
           },
           { path: 'history',
             component: HistoryComponent
+          },
+          { path: 'profile',
+            component: ProfileComponent
           },
           { path: 'profile/:id',
             component: ProfileComponent
@@ -214,7 +215,7 @@ export const routes: Routes = [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
       },
-      ]
+    ]
   },
 
   // test Routes

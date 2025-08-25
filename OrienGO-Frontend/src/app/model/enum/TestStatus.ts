@@ -1,5 +1,0 @@
-export enum TestStatus {
-  PENDING = 'PENDING',
-  COMPLETED = 'COMPLETED',
-  CANCELLED = 'CANCELLED'
-}

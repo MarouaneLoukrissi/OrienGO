@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/api/questions")
 @RequiredArgsConstructor
@@ -33,6 +34,22 @@ public class QuestionController {
                 .message("Questions fetched successfully")
                 .data(questionResps)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<ApiResponse<Long>> countQuestions(
+            @RequestParam(defaultValue = "false") boolean deleted) {
+
+        long count = questionService.countQuestions(deleted);
+
+        ApiResponse<Long> response = ApiResponse.<Long>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Questions count fetched successfully")
+                .data(count)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 

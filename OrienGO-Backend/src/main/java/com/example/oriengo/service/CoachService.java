@@ -4,6 +4,7 @@ import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.user.*;
 import com.example.oriengo.mapper.CoachMapper;
 import com.example.oriengo.model.dto.CoachCreateDTO;
+import com.example.oriengo.model.dto.CoachUpdateProfileDTO;
 import com.example.oriengo.model.entity.Coach;
 import com.example.oriengo.model.entity.Role;
 import com.example.oriengo.repository.CoachRepository;
@@ -15,7 +16,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -233,6 +233,28 @@ public class CoachService {
             }
 
             Coach savedCoach = coachRepository.save(coach);
+            log.info("Coach with ID {} successfully updated", savedCoach.getId());
+            return savedCoach;
+        } catch (Exception e) {
+            log.error("Error updating coach with ID {}: {}", id, e.getMessage(), e);
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("coach.update.failed"));
+        }
+    }
+    @Transactional
+    public Coach updateProfileCoach(Long id, CoachUpdateProfileDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update coach with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("coach.id.empty"));
+        }
+        if (dto == null) {
+            log.warn("Coach update request cannot be null");
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("coach.dto.empty"));
+        }
+        try {
+            log.info("Updating coach with ID: {}", id);
+            Coach existingCoach = getCoachById(id, false);
+            coachMapper.updateCoachFromDto(dto, existingCoach);
+            Coach savedCoach = coachRepository.save(existingCoach);
             log.info("Coach with ID {} successfully updated", savedCoach.getId());
             return savedCoach;
         } catch (Exception e) {

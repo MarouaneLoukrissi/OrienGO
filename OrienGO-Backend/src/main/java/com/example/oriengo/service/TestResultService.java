@@ -1,9 +1,10 @@
 package com.example.oriengo.service;
 
+import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.Test.TestCreationException;
+import com.example.oriengo.exception.custom.Test.TestGetException;
 import com.example.oriengo.exception.custom.TestResult.TestResultCreationException;
-import com.example.oriengo.model.dto.MediaResponseDTO;
-import com.example.oriengo.model.dto.TestResultCreateDTO;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.*;
 import com.example.oriengo.model.enumeration.Category;
 import com.example.oriengo.model.enumeration.TestStatus;
@@ -81,6 +82,204 @@ public class TestResultService {
             log.error("Error fetching test results for student ID {}: {}", studentId, e.getMessage(), e);
             throw new TestResultCreationException(HttpStatus.INTERNAL_SERVER_ERROR, getMessage("testresult.fetch.failed"));
         }
+    }
+
+    @Transactional(readOnly = true)
+    public TestResultAverageDTO getAverageByStudentId(Long studentId) {
+        if (studentId == null) {
+            log.warn("Attempted to fetch averages with null student ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("testResult.student.id.empty"));
+        }
+
+        List<TestResult> results = testResultRepository.findByStudentIdAndSoftDeletedFalse(studentId);
+
+        if (results.isEmpty()) {
+            log.warn("No test results found for student ID: {}", studentId);
+            if (results.isEmpty()) {
+                // Return empty DTO if no test results exist
+                return TestResultAverageDTO.builder()
+                        .dominantProfile(null)
+                        .percentage(0.0)
+                        .build();
+            }
+            throw new TestGetException(HttpStatus.NOT_FOUND, getMessage("testResult.not.found"));
+        }
+
+        // Sum scores for each category
+        Map<Category, Double> sumScores = new EnumMap<>(Category.class);
+        results.forEach(r -> r.getScores().forEach((category, score) ->
+                sumScores.merge(category, score, Double::sum)
+        ));
+
+        // Compute average for each category
+        Map<Category, Double> avgScores = sumScores.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue() / results.size()
+                ));
+
+        // Find the category with the highest average
+        Map.Entry<Category, Double> dominantEntry = avgScores.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .orElseThrow(() -> new TestGetException(HttpStatus.INTERNAL_SERVER_ERROR, "Cannot determine dominant profile"));
+
+        return new TestResultAverageDTO(dominantEntry.getKey(), dominantEntry.getValue());
+    }
+
+    @Transactional(readOnly = true)
+    public TestResultAverageDTO getAverageByStudentIds(List<Long> studentIds) {
+        if (studentIds == null || studentIds.isEmpty()) {
+            log.warn("Student ID list is null or empty");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, "Student ID list cannot be empty");
+        }
+
+        // Map to accumulate sums of percentages per category
+        Map<Category, Double> sumCategoryScores = new EnumMap<>(Category.class);
+        int validStudents = 0;
+
+        for (Long studentId : studentIds) {
+            try {
+                TestResultAverageDTO studentAvg = getAverageByStudentId(studentId);
+
+                if (studentAvg.getDominantProfile() != null) {
+                    sumCategoryScores.merge(studentAvg.getDominantProfile(), studentAvg.getPercentage(), Double::sum);
+                    validStudents++;
+                }
+            } catch (TestGetException | PathVarException e) {
+                log.warn("Skipping student ID {} due to error: {}", studentId, e.getMessage());
+            }
+        }
+
+        if (validStudents == 0) {
+            return TestResultAverageDTO.builder()
+                    .dominantProfile(null)
+                    .percentage(0.0)
+                    .build();
+        }
+
+        // Compute average percentage per category
+        int finalValidStudents = validStudents;
+        Map<Category, Double> avgCategoryScores = sumCategoryScores.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue() / finalValidStudents
+                ));
+
+        // Find the dominant category with the highest average
+        Map.Entry<Category, Double> dominantEntry = avgCategoryScores.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .orElseThrow(() -> new TestGetException(HttpStatus.INTERNAL_SERVER_ERROR, "Cannot determine dominant profile"));
+
+        return new TestResultAverageDTO(dominantEntry.getKey(), dominantEntry.getValue());
+    }
+
+
+    @Transactional(readOnly = true)
+    public TestResultProfilesDTO getProfilesByStudentId(Long studentId) {
+        if (studentId == null) {
+            log.warn("Attempted to fetch profiles with null student ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("testResult.student.id.empty"));
+        }
+
+        List<TestResult> results = testResultRepository.findByStudentIdAndSoftDeletedFalse(studentId);
+
+        if (results.isEmpty()) {
+            log.warn("No test results found for student ID: {}", studentId);
+            // Return all categories with 0.0 when no results exist
+            List<ProfileScoreDTO> emptyProfiles = Arrays.stream(Category.values())
+                    .map(category -> new ProfileScoreDTO(category, 0.0))
+                    .collect(Collectors.toList());
+
+            return TestResultProfilesDTO.builder()
+                    .profiles(emptyProfiles)
+                    .build();
+        }
+
+        // Initialize all categories with 0.0
+        Map<Category, Double> sumScores = new EnumMap<>(Category.class);
+        for (Category category : Category.values()) {
+            sumScores.put(category, 0.0);
+        }
+
+        // Add student scores
+        results.forEach(r -> r.getScores().forEach((category, score) ->
+                sumScores.merge(category, score, Double::sum)
+        ));
+
+        // Compute average for each category
+        Map<Category, Double> avgScores = sumScores.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue() / results.size()
+                ));
+
+        // Sort descending by percentage and map to DTO
+        List<ProfileScoreDTO> sortedProfiles = avgScores.entrySet().stream()
+                .sorted(Map.Entry.<Category, Double>comparingByValue().reversed())
+                .map(e -> new ProfileScoreDTO(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
+
+        return TestResultProfilesDTO.builder()
+                .profiles(sortedProfiles)
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public TestResultProfilesDTO getAverageProfilesByStudentIds(List<Long> studentIds) {
+        if (studentIds == null || studentIds.isEmpty()) {
+            log.warn("Attempted to fetch profiles with null or empty student IDs list");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("testResult.student.ids.empty"));
+        }
+
+        // Initialize sum map with 0.0 for all categories
+        Map<Category, Double> sumScores = new EnumMap<>(Category.class);
+        for (Category category : Category.values()) {
+            sumScores.put(category, 0.0);
+        }
+
+        int validStudentsCount = 0;
+
+        for (Long studentId : studentIds) {
+            try {
+                TestResultProfilesDTO studentProfiles = getProfilesByStudentId(studentId);
+                // Only consider profiles with at least one non-zero score
+                List<ProfileScoreDTO> nonZeroProfiles = studentProfiles.getProfiles().stream()
+                        .filter(p -> p.getPercentage() != null && p.getPercentage() > 0)
+                        .toList();
+
+                if (!nonZeroProfiles.isEmpty()) {
+                    validStudentsCount++;
+                    nonZeroProfiles.forEach(profile ->
+                            sumScores.merge(profile.getCategory(), profile.getPercentage(), Double::sum)
+                    );
+                }
+            } catch (PathVarException e) {
+                log.warn("Skipping studentId {}: {}", studentId, e.getMessage());
+            }
+        }
+
+
+        if (validStudentsCount == 0) {
+            // No valid students, return all categories with 0.0
+            List<ProfileScoreDTO> emptyProfiles = Arrays.stream(Category.values())
+                    .map(cat -> new ProfileScoreDTO(cat, 0.0))
+                    .collect(Collectors.toList());
+
+            return TestResultProfilesDTO.builder()
+                    .profiles(emptyProfiles)
+                    .build();
+        }
+
+        // Compute average per category
+        int finalValidStudentsCount = validStudentsCount;
+        List<ProfileScoreDTO> averagedProfiles = sumScores.entrySet().stream()
+                .map(e -> new ProfileScoreDTO(e.getKey(), e.getValue() / finalValidStudentsCount))
+                .sorted((a, b) -> b.getPercentage().compareTo(a.getPercentage())) // descending
+                .collect(Collectors.toList());
+
+        return TestResultProfilesDTO.builder()
+                .profiles(averagedProfiles)
+                .build();
     }
 
     @Transactional

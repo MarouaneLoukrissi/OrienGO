@@ -1,11 +1,48 @@
 <div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
   <main class="max-w-[88rem] mx-auto">
-    <h2 class="text-3xl font-bold text-gray-800 mb-2 mt-4">
-      {{ 'ADMIN_DASHBOARD.HEADER.WELCOME' | translate }}
-    </h2>
-    <p class="text-lg text-gray-600 mb-10">{{ 'ADMIN_DASHBOARD.HEADER.STATS' | translate }}</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <div class="bg-orange-100 p-6 rounded-lg text-center">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-2 mt-4">
+          {{ 'ADMIN_DASHBOARD.HEADER.WELCOME' | translate }}
+        </h2>
+        <p class="text-lg text-gray-600">{{ 'ADMIN_DASHBOARD.HEADER.STATS' | translate }}</p>
+      </div>
+      
+      <!-- Refresh Button -->
+      <button 
+        (click)="refreshData()" 
+        [disabled]="isLoading"
+        class="bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        {{ isLoading ? 'Refreshing...' : 'Refresh' }}
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="hasError" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Loading Skeleton -->
+    <div *ngIf="isLoading" class="animate-pulse">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div *ngFor="let item of [1,2,3,4,5]" class="bg-gray-200 p-6 rounded-lg h-32"></div>
+      </div>
+      <div class="space-y-4">
+        <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+        <div *ngFor="let item of [1,2,3,4,5,6]" class="space-y-2">
+          <div class="h-3 bg-gray-200 rounded w-1/6"></div>
+          <div class="h-2 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div *ngIf="!isLoading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-orange-100 p-6 rounded-lg text-center transform transition-transform duration-200 hover:scale-[1.02]">
         <div class="text-4xl mb-2 flex justify-center">
           <svg width="50" height="50" viewBox="0 0 72 54" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M49.314 7.23595C50.3066 6.868 51.3798 6.66699 52.5004 6.66699C57.5629 6.66699 61.667 10.7711 61.667 15.8337C61.667 20.8962 57.5629 25.0003 52.5004 25.0003C51.3798 25.0003 50.3066 24.7994 49.314 24.4313" stroke="#E96E40" stroke-width="5.33333" stroke-linecap="round"/>
@@ -14,113 +51,158 @@
             <path d="M39.6667 15.8333C39.6667 22.921 33.921 28.6667 26.8333 28.6667C19.7457 28.6667 14 22.921 14 15.8333C14 8.74567 19.7457 3 26.8333 3C33.921 3 39.6667 8.74567 39.6667 15.8333Z" stroke="#E96E40" stroke-width="5.33333"/>
           </svg>
         </div>
-        <div class="text-2xl font-bold">400</div>
+        <div class="text-2xl font-bold text-orange-800">{{ stats.users | number }}</div>
         <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.USERS' | translate }}</div>
       </div>
-      <div class="bg-blue-100 p-6 rounded-lg text-center">
+
+      <div class="bg-blue-100 p-6 rounded-lg text-center transform transition-transform duration-200 hover:scale-[1.02]">
         <div class="flex justify-center text-4xl mb-2">
           <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 52.75H39C40.5188 52.75 41.75 51.5188 41.75 50V6C41.75 4.48122 40.5188 3.25 39 3.25H6C4.48122 3.25 3.25 4.48122 3.25 6V50C3.25 51.5188 4.48122 52.75 6 52.75ZM39 55.5H6C2.96243 55.5 0.5 53.0375 0.5 50V6C0.5 2.96243 2.96243 0.5 6 0.5H39C42.0375 0.5 44.5 2.96243 44.5 6V50C44.5 53.0375 42.0375 55.5 39 55.5Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 12.875C19.75 12.1156 20.3656 11.5 21.125 11.5H37.625C38.3844 11.5 39 12.1156 39 12.875C39 13.6344 38.3844 14.25 37.625 14.25H21.125C20.3656 14.25 19.75 13.6344 19.75 12.875Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 18.375C19.75 17.6156 20.3656 17 21.125 17H37.625C38.3844 17 39 17.6156 39 18.375C39 19.1344 38.3844 19.75 37.625 19.75H21.125C20.3656 19.75 19.75 19.1344 19.75 18.375Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 29.375C19.75 28.6156 20.3656 28 21.125 28H37.625C38.3844 28 39 28.6156 39 29.375C39 30.1344 38.3844 30.75 37.625 30.75H21.125C20.3656 30.75 19.75 30.1344 19.75 29.375Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 34.875C19.75 34.1156 20.3656 33.5 21.125 33.5H37.625C38.3844 33.5 39 34.1156 39 34.875C39 35.6344 38.3844 36.25 37.625 36.25H21.125C20.3656 36.25 19.75 35.6344 19.75 34.875Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75 30.75V34.875H12.875V30.75H8.75ZM7.375 28H14.25C15.0094 28 15.625 28.6156 15.625 29.375V36.25C15.625 37.0094 15.0094 37.625 14.25 37.625H7.375C6.61562 37.625 6 37.0094 6 36.25V29.375C6 28.6156 6.61562 28 7.375 28Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5973 11.9027C17.1342 12.4396 17.1342 13.3103 16.5973 13.8472L10.125 20.3195L6.40272 16.5972C5.86576 16.0603 5.86576 15.1896 6.40272 14.6527C6.9397 14.1158 7.8103 14.1158 8.34728 14.6527L10.125 16.4304L14.6527 11.9027C15.1897 11.3658 16.0603 11.3658 16.5973 11.9027Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 28H50V49.0833L51.375 50.9167L52.75 49.0833V28ZM55.5 50L51.375 55.5L47.25 50V25.25H55.5V50Z" fill="#404546"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 18.375H50V21.125H52.75V18.375ZM50 15.625H52.75C54.2688 15.625 55.5 16.8562 55.5 18.375V23.875H47.25V18.375C47.25 16.8562 48.4812 15.625 50 15.625Z" fill="#404546"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 52.75H39C40.5188 52.75 41.75 51.5188 41.75 50V6C41.75 4.48122 40.5188 3.25 39 3.25H6C4.48122 3.25 3.25 4.48122 3.25 6V50C3.25 51.5188 4.48122 52.75 6 52.75ZM39 55.5H6C2.96243 55.5 0.5 53.0375 0.5 50V6C0.5 2.96243 2.96243 0.5 6 0.5H39C42.0375 0.5 44.5 2.96243 44.5 6V50C44.5 53.0375 42.0375 55.5 39 55.5Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 12.875C19.75 12.1156 20.3656 11.5 21.125 11.5H37.625C38.3844 11.5 39 12.1156 39 12.875C39 13.6344 38.3844 14.25 37.625 14.25H21.125C20.3656 14.25 19.75 13.6344 19.75 12.875Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 18.375C19.75 17.6156 20.3656 17 21.125 17H37.625C38.3844 17 39 17.6156 39 18.375C39 19.1344 38.3844 19.75 37.625 19.75H21.125C20.3656 19.75 19.75 19.1344 19.75 18.375Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 29.375C19.75 28.6156 20.3656 28 21.125 28H37.625C38.3844 28 39 28.6156 39 29.375C39 30.1344 38.3844 30.75 37.625 30.75H21.125C20.3656 30.75 19.75 30.1344 19.75 29.375Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 34.875C19.75 34.1156 20.3656 33.5 21.125 33.5H37.625C38.3844 33.5 39 34.1156 39 34.875C39 35.6344 38.3844 36.25 37.625 36.25H21.125C20.3656 36.25 19.75 35.6344 19.75 34.875Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75 30.75V34.875H12.875V30.75H8.75ZM7.375 28H14.25C15.0094 28 15.625 28.6156 15.625 29.375V36.25C15.625 37.0094 15.0094 37.625 14.25 37.625H7.375C6.61562 37.625 6 37.0094 6 36.25V29.375C6 28.6156 6.61562 28 7.375 28Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5973 11.9027C17.1342 12.4396 17.1342 13.3103 16.5973 13.8472L10.125 20.3195L6.40272 16.5972C5.86576 16.0603 5.86576 15.1896 6.40272 14.6527C6.9397 14.1158 7.8103 14.1158 8.34728 14.6527L10.125 16.4304L14.6527 11.9027C15.1897 11.3658 16.0603 11.3658 16.5973 11.9027Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 28H50V49.0833L51.375 50.9167L52.75 49.0833V28ZM55.5 50L51.375 55.5L47.25 50V25.25H55.5V50Z" fill="#3B82F6"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 18.375H50V21.125H52.75V18.375ZM50 15.625H52.75C54.2688 15.625 55.5 16.8562 55.5 18.375V23.875H47.25V18.375C47.25 16.8562 48.4812 15.625 50 15.625Z" fill="#3B82F6"/>
           </svg>
         </div>
-        <div class="text-2xl font-bold">600</div>
+        <div class="text-2xl font-bold text-blue-800">{{ stats.fullTests | number }}</div>
         <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.FULL_TESTS' | translate }}</div>
       </div>
-      <div class="bg-purple-100 p-6 rounded-lg text-center">
+
+      <div class="bg-purple-100 p-6 rounded-lg text-center transform transition-transform duration-200 hover:scale-[1.02]">
         <div class="flex justify-center text-4xl mb-2">
           <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M35 0C15.6692 0 0 15.6692 0 35C0 54.3308 15.6692 70 35 70C54.3308 70 70 54.3308 70 35C70 15.6692 54.3308 0 35 0ZM35 64.5312C18.6899 64.5312 5.46875 51.3101 5.46875 35C5.46875 18.6899 18.6899 5.46875 35 5.46875C51.3101 5.46875 64.5312 18.6899 64.5312 35C64.5312 51.3101 51.3101 64.5312 35 64.5312Z" fill="#FF6CD7"/>
-            <path d="M43.0451 46.683C47.4072 43.9038 50.3125 38.9371 50.3125 33.2675C50.3125 24.5602 43.4552 17.5 35 17.5C26.5405 17.5 19.6875 24.5603 19.6875 33.2675C19.6875 41.9769 26.5405 49.0372 35 49.0372C36.2433 49.0372 37.4525 48.8791 38.6102 48.5907C40.0628 51.278 42.2759 53.1792 46.9778 52.2692V49.5968C46.9778 49.5968 43.9636 48.8279 43.0451 46.683ZM42.9382 35.3525C42.9382 37.9865 42.1136 40.3747 40.7742 42.1414C39.0909 40.3214 36.4526 38.8237 33.1051 39.0139V39.3344V42.1136C33.1051 42.1136 35.3758 42.2055 36.931 44.9185C36.3478 45.0937 35.7411 45.1877 35.1153 45.1877C30.7958 45.1877 27.2966 40.785 27.2966 35.3525C27.2966 34.656 27.2966 31.9879 27.2966 31.2915C27.2966 25.8591 30.7958 21.4562 35.1153 21.4562C39.4368 21.4562 42.9382 25.859 42.9382 31.2915C42.9382 31.9879 42.9382 34.656 42.9382 35.3525Z" fill="#FF6CD7"/>
+            <path d="M35 0C15.6692 0 0 15.6692 0 35C0 54.3308 15.6692 70 35 70C54.3308 70 70 54.3308 70 35C70 15.6692 54.3308 0 35 0ZM35 64.5312C18.6899 64.5312 5.46875 51.3101 5.46875 35C5.46875 18.6899 18.6899 5.46875 35 5.46875C51.3101 5.46875 64.5312 18.6899 64.5312 35C64.5312 51.3101 51.3101 64.5312 35 64.5312Z" fill="#8B5CF6"/>
+            <path d="M43.0451 46.683C47.4072 43.9038 50.3125 38.9371 50.3125 33.2675C50.3125 24.5602 43.4552 17.5 35 17.5C26.5405 17.5 19.6875 24.5603 19.6875 33.2675C19.6875 41.9769 26.5405 49.0372 35 49.0372C36.2433 49.0372 37.4525 48.8791 38.6102 48.5907C40.0628 51.278 42.2759 53.1792 46.9778 52.2692V49.5968C46.9778 49.5968 43.9636 48.8279 43.0451 46.683ZM42.9382 35.3525C42.9382 37.9865 42.1136 40.3747 40.7742 42.1414C39.0909 40.3214 36.4526 38.8237 33.1051 39.0139V39.3344V42.1136C33.1051 42.1136 35.3758 42.2055 36.931 44.9185C36.3478 45.0937 35.7411 45.1877 35.1153 45.1877C30.7958 45.1877 27.2966 40.785 27.2966 35.3525C27.2966 34.656 27.2966 31.9879 27.2966 31.2915C27.2966 25.8591 30.7958 21.4562 35.1153 21.4562C39.4368 21.4562 42.9382 25.859 42.9382 31.2915C42.9382 31.9879 42.9382 34.656 42.9382 35.3525Z" fill="#8B5CF6"/>
           </svg>
         </div>
-        <div class="text-2xl font-bold">60</div>
+        <div class="text-2xl font-bold text-purple-800">{{ stats.questionnaires | number }}</div>
         <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.QUESTIONNAIRES' | translate }}</div>
       </div>
-      <div class="bg-cyan-100 p-6 rounded-lg text-center">
+
+      <div class="bg-cyan-100 p-6 rounded-lg text-center transform transition-transform duration-200 hover:scale-[1.02]">
         <div class="flex justify-center text-4xl mb-2">
           <svg width="42" height="42" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.75 28.75C2.75 22.6217 2.75 19.5576 4.65382 17.6538C6.5576 15.75 9.62174 15.75 15.75 15.75H19H45H48.25C54.3782 15.75 57.4423 15.75 59.3461 17.6538C61.25 19.5576 61.25 22.6217 61.25 28.75V48.25C61.25 54.3782 61.25 57.4423 59.3461 59.3462C57.4423 61.25 54.3782 61.25 48.25 61.25H45H19H15.75C9.62174 61.25 6.5576 61.25 4.65382 59.3462C2.75 57.4423 2.75 54.3782 2.75 48.25V28.75Z" stroke="#2FCDFF" stroke-width="5.33333" stroke-linejoin="round"/>
-            <path d="M19 61.25V9.25C19 5.66015 21.9101 2.75 25.5 2.75H38.5C42.0899 2.75 45 5.66015 45 9.25V61.25" stroke="#2FCDFF" stroke-width="5.33333" stroke-linejoin="round"/>
+            <path d="M2.75 28.75C2.75 22.6217 2.75 19.5576 4.65382 17.6538C6.5576 15.75 9.62174 15.75 15.75 15.75H19H45H48.25C54.3782 15.75 57.4423 15.75 59.3461 17.6538C61.25 19.5576 61.25 22.6217 61.25 28.75V48.25C61.25 54.3782 61.25 57.4423 59.3461 59.3462C57.4423 61.25 54.3782 61.25 48.25 61.25H45H19H15.75C9.62174 61.25 6.5576 61.25 4.65382 59.3462C2.75 57.4423 2.75 54.3782 2.75 48.25V28.75Z" stroke="#06B6D4" stroke-width="5.33333" stroke-linejoin="round"/>
+            <path d="M19 61.25V9.25C19 5.66015 21.9101 2.75 25.5 2.75H38.5C42.0899 2.75 45 5.66015 45 9.25V61.25" stroke="#06B6D4" stroke-width="5.33333" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="text-2xl font-bold">20</div>
+        <div class="text-2xl font-bold text-cyan-800">{{ stats.profiles | number }}</div>
         <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.PROFILES' | translate }}</div>
       </div>
-      <div class="bg-lime-100 p-6 rounded-lg text-center">
+
+      <div class="bg-lime-100 p-6 rounded-lg text-center transform transition-transform duration-200 hover:scale-[1.02]">
         <div class="flex justify-center text-4xl mb-2">
           <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 52.75H39C40.5188 52.75 41.75 51.5188 41.75 50V6C41.75 4.48122 40.5188 3.25 39 3.25H6C4.48122 3.25 3.25 4.48122 3.25 6V50C3.25 51.5188 4.48122 52.75 6 52.75ZM39 55.5H6C2.96243 55.5 0.5 53.0375 0.5 50V6C0.5 2.96243 2.96243 0.5 6 0.5H39C42.0375 0.5 44.5 2.96243 44.5 6V50C44.5 53.0375 42.0375 55.5 39 55.5Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 12.875C19.75 12.1156 20.3656 11.5 21.125 11.5H37.625C38.3844 11.5 39 12.1156 39 12.875C39 13.6344 38.3844 14.25 37.625 14.25H21.125C20.3656 14.25 19.75 13.6344 19.75 12.875Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 18.375C19.75 17.6156 20.3656 17 21.125 17H37.625C38.3844 17 39 17.6156 39 18.375C39 19.1344 38.3844 19.75 37.625 19.75H21.125C20.3656 19.75 19.75 19.1344 19.75 18.375Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 29.375C19.75 28.6156 20.3656 28 21.125 28H37.625C38.3844 28 39 28.6156 39 29.375C39 30.1344 38.3844 30.75 37.625 30.75H21.125C20.3656 30.75 19.75 30.1344 19.75 29.375Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 34.875C19.75 34.1156 20.3656 33.5 21.125 33.5H37.625C38.3844 33.5 39 34.1156 39 34.875C39 35.6344 38.3844 36.25 37.625 36.25H21.125C20.3656 36.25 19.75 35.6344 19.75 34.875Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75 30.75V34.875H12.875V30.75H8.75ZM7.375 28H14.25C15.0094 28 15.625 28.6156 15.625 29.375V36.25C15.625 37.0094 15.0094 37.625 14.25 37.625H7.375C6.61562 37.625 6 37.0094 6 36.25V29.375C6 28.6156 6.61562 28 7.375 28Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5973 11.9027C17.1342 12.4396 17.1342 13.3103 16.5973 13.8472L10.125 20.3195L6.40272 16.5972C5.86576 16.0603 5.86576 15.1896 6.40272 14.6527C6.9397 14.1158 7.8103 14.1158 8.34728 14.6527L10.125 16.4304L14.6527 11.9027C15.1897 11.3658 16.0603 11.3658 16.5973 11.9027Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 28H50V49.0833L51.375 50.9167L52.75 49.0833V28ZM55.5 50L51.375 55.5L47.25 50V25.25H55.5V50Z" fill="#57604B"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 18.375H50V21.125H52.75V18.375ZM50 15.625H52.75C54.2688 15.625 55.5 16.8562 55.5 18.375V23.875H47.25V18.375C47.25 16.8562 48.4812 15.625 50 15.625Z" fill="#57604B"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 52.75H39C40.5188 52.75 41.75 51.5188 41.75 50V6C41.75 4.48122 40.5188 3.25 39 3.25H6C4.48122 3.25 3.25 4.48122 3.25 6V50C3.25 51.5188 4.48122 52.75 6 52.75ZM39 55.5H6C2.96243 55.5 0.5 53.0375 0.5 50V6C0.5 2.96243 2.96243 0.5 6 0.5H39C42.0375 0.5 44.5 2.96243 44.5 6V50C44.5 53.0375 42.0375 55.5 39 55.5Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 12.875C19.75 12.1156 20.3656 11.5 21.125 11.5H37.625C38.3844 11.5 39 12.1156 39 12.875C39 13.6344 38.3844 14.25 37.625 14.25H21.125C20.3656 14.25 19.75 13.6344 19.75 12.875Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 18.375C19.75 17.6156 20.3656 17 21.125 17H37.625C38.3844 17 39 17.6156 39 18.375C39 19.1344 38.3844 19.75 37.625 19.75H21.125C20.3656 19.75 19.75 19.1344 19.75 18.375Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 29.375C19.75 28.6156 20.3656 28 21.125 28H37.625C38.3844 28 39 28.6156 39 29.375C39 30.1344 38.3844 30.75 37.625 30.75H21.125C20.3656 30.75 19.75 30.1344 19.75 29.375Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 34.875C19.75 34.1156 20.3656 33.5 21.125 33.5H37.625C38.3844 33.5 39 34.1156 39 34.875C39 35.6344 38.3844 36.25 37.625 36.25H21.125C20.3656 36.25 19.75 35.6344 19.75 34.875Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75 30.75V34.875H12.875V30.75H8.75ZM7.375 28H14.25C15.0094 28 15.625 28.6156 15.625 29.375V36.25C15.625 37.0094 15.0094 37.625 14.25 37.625H7.375C6.61562 37.625 6 37.0094 6 36.25V29.375C6 28.6156 6.61562 28 7.375 28Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5973 11.9027C17.1342 12.4396 17.1342 13.3103 16.5973 13.8472L10.125 20.3195L6.40272 16.5972C5.86576 16.0603 5.86576 15.1896 6.40272 14.6527C6.9397 14.1158 7.8103 14.1158 8.34728 14.6527L10.125 16.4304L14.6527 11.9027C15.1897 11.3658 16.0603 11.3658 16.5973 11.9027Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 28H50V49.0833L51.375 50.9167L52.75 49.0833V28ZM55.5 50L51.375 55.5L47.25 50V25.25H55.5V50Z" fill="#84CC16"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M52.75 18.375H50V21.125H52.75V18.375ZM50 15.625H52.75C54.2688 15.625 55.5 16.8562 55.5 18.375V23.875H47.25V18.375C47.25 16.8562 48.4812 15.625 50 15.625Z" fill="#84CC16"/>
           </svg>
         </div>
-        <div class="text-2xl font-bold">600</div>
+        <div class="text-2xl font-bold text-lime-800">{{ stats.expressTests | number }}</div>
         <div class="text-sm text-gray-700">{{ 'ADMIN_DASHBOARD.STATS.EXPRESS' | translate }}</div>
       </div>
     </div>
-    <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ 'ADMIN_DASHBOARD.CHART.TITLE' | translate }}</h3>
-    <div class="space-y-3">
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.REALISTIC' | translate }}</span>
+
+    <!-- RIASEC Chart -->
+    <div *ngIf="!isLoading" class="bg-white p-6 rounded-lg shadow-sm">
+      <h3 class="text-xl font-semibold text-gray-800 mb-6">
+        {{ 'ADMIN_DASHBOARD.CHART.TITLE' | translate }}
+      </h3>
+      
+      <div class="space-y-4">
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.REALISTIC' | translate }}</span>
+            <span class="text-sm font-semibold text-blue-600">{{ chartData.realistic }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.realistic">
+            </div>
+          </div>
         </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#3b82f6] rounded-full w-[60%]"></div>
+
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.INVESTIGATOR' | translate }}</span>
+            <span class="text-sm font-semibold text-purple-600">{{ chartData.investigative }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.investigative">
+            </div>
+          </div>
+        </div>
+
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.ARTISTIC' | translate }}</span>
+            <span class="text-sm font-semibold text-pink-600">{{ chartData.artistic }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-pink-500 to-pink-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.artistic">
+            </div>
+          </div>
+        </div>
+
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.SOCIAL' | translate }}</span>
+            <span class="text-sm font-semibold text-green-600">{{ chartData.social }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-green-500 to-green-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.social">
+            </div>
+          </div>
+        </div>
+
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.ENTREPRENEUR' | translate }}</span>
+            <span class="text-sm font-semibold text-red-600">{{ chartData.enterprising }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.enterprising">
+            </div>
+          </div>
+        </div>
+
+        <div class="transition-all duration-300 hover:bg-gray-50 p-2 rounded">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">{{ 'ADMIN_DASHBOARD.CHART.CONVENTIONAL' | translate }}</span>
+            <span class="text-sm font-semibold text-indigo-600">{{ chartData.conventional }}%</span>
+          </div>
+          <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full transition-all duration-1000 ease-out"
+              [style.width.%]="chartData.conventional">
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.INVESTIGATOR' | translate }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#8b5cf6] rounded-full w-[30%]"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.ARTISTIC' | translate }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#ec4899] rounded-full w-[90%]"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.SOCIAL' | translate }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#10b981] rounded-full w-[65%]"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.ENTREPRENEUR' | translate }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#ef4444] rounded-full w-[50%]"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between mb-1">
-          <span>{{ 'ADMIN_DASHBOARD.CHART.CONVENTIONAL' | translate }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-300 rounded-full">
-          <div class="h-full bg-[#6366f1] rounded-full w-[75%]"></div>
-        </div>
+      
+      <!-- Chart Legend -->
+      <div class="mt-6 text-xs text-gray-500 text-center">
+        Data represents average personality profile distribution across all completed tests
       </div>
     </div>
   </main>

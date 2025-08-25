@@ -47,6 +47,18 @@ public class JobService {
         }
     }
 
+    public long countJobs() {
+        try {
+            log.info("Counting jobs");
+            long count = repository.count();
+            log.info("Found {} jobs", count);
+            return count;
+        } catch (Exception e) {
+            log.error("Failed to count jobs: {}", e.getMessage(), e);
+            throw new JobGetException(HttpStatus.NOT_FOUND, getMessage("job.not.found"));
+        }
+    }
+
     public Job findById(Long id) {
         if (id == null) {
             log.warn("Attempted to fetch job with null ID");
@@ -98,6 +110,7 @@ public class JobService {
         }
     }
 
+    @Transactional
     public void deleteById(Long id) {
         if (id == null) {
             log.warn("Attempted hard delete with null job ID");

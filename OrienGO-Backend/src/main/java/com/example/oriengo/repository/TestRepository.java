@@ -2,6 +2,7 @@ package com.example.oriengo.repository;
 
 import com.example.oriengo.model.entity.Test;
 import com.example.oriengo.model.enumeration.TestStatus;
+import com.example.oriengo.model.enumeration.TestType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -52,10 +53,22 @@ public interface TestRepository extends JpaRepository<Test, Long> {
             "WHERE t.softDeleted = :deleted")
     List<Test> findAllWithRelations(@Param("deleted") boolean deleted);
 
+    @Query("SELECT t.type, COUNT(t) " +
+            "FROM Test t " +
+            "WHERE t.student.id = :studentId " +
+            "AND t.softDeleted = false " +
+            "AND t.status = com.example.oriengo.model.enumeration.TestStatus.COMPLETED " +
+            "GROUP BY t.type")
+    List<Object[]> countTestsByStudentId(@Param("studentId") Long studentId);
+
     @Query("SELECT DISTINCT t FROM Test t " +
             "LEFT JOIN FETCH t.testQuestions tq " +
             "LEFT JOIN FETCH tq.question q " +
             "LEFT JOIN FETCH t.student " +
             "WHERE t.student.id = :id AND t.status = :status AND t.softDeleted = :deleted")
     List<Test> findAllByStudentIdAndStatusWithRelations(@Param("id") Long id, @Param("status") TestStatus status, @Param("deleted") boolean deleted);
+
+    long countByTypeAndSoftDeleted(TestType type, boolean softDeleted);
+
+    long countByTypeAndSoftDeletedAndStatus(TestType type, boolean softDeleted, TestStatus status);
 }

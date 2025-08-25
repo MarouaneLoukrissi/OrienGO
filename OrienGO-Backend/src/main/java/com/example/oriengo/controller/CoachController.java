@@ -2,6 +2,7 @@ package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.CoachMapper;
 import com.example.oriengo.model.dto.CoachCreateDTO;
+import com.example.oriengo.model.dto.CoachUpdateProfileDTO;
 import com.example.oriengo.model.dto.CoachResponseDTO;
 import com.example.oriengo.model.entity.Coach;
 import com.example.oriengo.payload.response.ApiResponse;
@@ -155,6 +156,19 @@ public class CoachController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CoachResponseDTO>> updateCoach(@PathVariable Long id, @Valid @RequestBody CoachCreateDTO coachInfo) {
         Coach coach = coachService.updateCoach(id, coachInfo);
+        CoachResponseDTO coachResp = coachMapper.toDTO(coach);
+        ApiResponse<CoachResponseDTO> response = ApiResponse.<CoachResponseDTO>builder()
+                .code("COACH_UPDATED")
+                .status(200)
+                .message("Coach updated successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/profile/{id}")
+    public ResponseEntity<ApiResponse<CoachResponseDTO>> updateProfileCoach(@PathVariable Long id, @Valid @RequestBody CoachUpdateProfileDTO coachInfo) {
+        Coach coach = coachService.updateProfileCoach(id, coachInfo);
         CoachResponseDTO coachResp = coachMapper.toDTO(coach);
         ApiResponse<CoachResponseDTO> response = ApiResponse.<CoachResponseDTO>builder()
                 .code("COACH_UPDATED")

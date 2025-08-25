@@ -30,5 +30,4 @@ public class JobResponseDto {
     private Set<String> tags;
     private boolean softDeleted;
     private boolean active;
-    private Long version;
-} 
+}

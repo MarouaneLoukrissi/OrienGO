@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from '../../../Service/user.service';
+import { AuthService } from '../../../Service/auth.service';
 
 // Enums pour les options des dropdowns
 enum EducationLevel {
@@ -253,7 +253,7 @@ export class ManageUsersComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private translateService: TranslateService,
-    private userService: UserService
+    private authService: AuthService
   ) {
     // Initialiser le formulaire d'ajout
     this.addUserForm = this.fb.group({
@@ -624,7 +624,7 @@ export class ManageUsersComponent implements OnInit {
 
   // Obtenir les rôles disponibles selon l'utilisateur actuel
   getAvailableRoles(): string[] {
-    const currentUser = this.userService.getCurrentUser();
+    const currentUser = this.authService.getCurrentUser();
     if (currentUser.role === 'superAdmin') {
       return ['student', 'coach'];
     }

@@ -414,7 +414,12 @@
       "ARTISTIC": "Artistique",
       "SOCIAL": "Social",
       "ENTERPRISING": "Entreprenant",
-      "CONVENTIONAL": "Conventionnel"
+      "CONVENTIONAL": "Conventionnel",
+      "HEALTH": "Santé",
+      "EDUCATION": "Éducation",
+      "TECH": "Technologie",
+      "BUSINESS": "Affaires",
+      "ARTS": "Arts"
     }
   },
   "ADMIN_ADMINS": {
@@ -520,6 +525,44 @@
     "MESSAGE": "Vous n'avez pas la permission d'accéder à cette page.",
     "BACK": "Retour au tableau de bord"
   },
+  "COACH_NETWORKS": {
+    "TITLE": "Réseaux de coach",
+    "SUBTITLE": "Gérez vos étudiants et vos connexions réseau",
+    "TAB_NETWORK": "Mon réseau",
+    "TAB_SENT_REQUESTS": "Demandes envoyées",
+    "TAB_RECEIVED_REQUESTS": "Demandes reçues",
+    "ADD_STUDENT": {
+      "TITLE": "Ajouter un étudiant",
+      "PLACEHOLDER": "Entrez l'e-mail de l'étudiant",
+      "SEARCH_BUTTON": "Rechercher",
+      "SENDING": "Envoi..."
+    },
+    "MY_STUDENTS": "Mes étudiants",
+    "SENT_REQUESTS": "Demandes envoyées",
+    "RECEIVED_REQUESTS": "Demandes reçues",
+    "CONNECTED_ON": "Connecté le",
+    "REQUEST_SENT_ON": "Demande envoyée le",
+    "REQUEST_RECEIVED_ON": "Demande reçue le",
+    "ACTIONS": {
+      "MESSAGE": "Envoyer un message",
+      "ACCEPT": "Accepter",
+      "DECLINE": "Refuser",
+      "CANCEL_REQUEST": "Annuler la demande",
+      "REMOVE": "Supprimer"
+    },
+    "SORTED_BY": "Trié par",
+    "SORT_OPTIONS": {
+      "RECENT": "Les plus récents",
+      "NAME": "Nom",
+      "OLDEST": "Les plus anciens"
+    },
+    "SEARCH_PLACEHOLDER": "Rechercher des étudiants...",
+    "LOADING": "Chargement...",
+    "CONNECTIONS": "Connexions",
+    "EMPTY_NETWORK": "Vous n'avez aucun étudiant dans votre réseau.",
+    "EMPTY_SENT_REQUESTS": "Vous n'avez envoyé aucune demande de connexion.",
+    "EMPTY_RECEIVED_REQUESTS": "Vous n'avez reçu aucune demande."
+  },
   "SETTINGS_COACH": {
     "TITLE": "Paramètres",
     "SUBTITLE": "Gérez votre disponibilité, emplois et visibilité",
@@ -566,37 +609,104 @@
       }
     },
     "SCORES": [
-    {
-      "LABEL": "Réaliste (R)",
-      "DESCRIPTION": "Pratique, manuel, orienté vers l'action",
-      "TAGS": ["Manipulation d'outils", "Activités concrètes", "Résolution pratique de problèmes"]
+      {
+        "LABEL": "Réaliste (R)",
+        "DESCRIPTION": "Pratique, manuel, orienté vers l'action",
+        "TAGS": ["Manipulation d'outils", "Activités concrètes", "Résolution pratique de problèmes"]
+      },
+      {
+        "LABEL": "Investigateur (I)",
+        "DESCRIPTION": "Analytique, curieux, scientifique",
+        "TAGS": ["Recherche", "Analyse", "Expérimentation"]
+      },
+      {
+        "LABEL": "Artistique (A)",
+        "DESCRIPTION": "Créatif, expressif, original",
+        "TAGS": ["Créativité", "Expression artistique", "Innovation"]
+      },
+      {
+        "LABEL": "Social (S)",
+        "DESCRIPTION": "Altruiste, coopératif, bienveillant",
+        "TAGS": ["Aide aux autres", "Communication", "Enseignement"]
+      },
+      {
+        "LABEL": "Entreprenant (E)",
+        "DESCRIPTION": "Persuasif, ambitieux, énergique",
+        "TAGS": ["Leadership", "Persuasion", "Prise de risque"]
+      },
+      {
+        "LABEL": "Conventionnel (C)",
+        "DESCRIPTION": "Organisé, précis, méthodique",
+        "TAGS": ["Organisation", "Précision", "Procédures"]
+      }
+    ]
+  },
+  "DASHBOARD_STUDENT": {
+    "WELCOME": "Bienvenue, {{name}} !",
+    "SUBTITLE": "Voici votre moyenne des résultats des tests de carrière",
+    "RADAR_TITLE": "Graphique radar – Profil complet",
+    "BAR_TITLE": "Graphique en barres – Scores détaillés",
+    "DETAIL_SCORES": "Scores détaillés",
+    "DOMINANT_PROFILE": "Votre Profil dominant",
+    "PERCENT": "{{value}}%",
+    "PROFILES": {
+      "R": {
+        "NAME": "Réaliste (R)",
+        "DESC": "Pratique, concret, orienté action"
+      },
+      "I": {
+        "NAME": "Investigateur (I)",
+        "DESC": "Analytique, curieux, scientifique"
+      },
+      "A": {
+        "NAME": "Artistique (A)",
+        "DESC": "Créatif, expressif, original"
+      },
+      "S": {
+        "NAME": "Social (S)",
+        "DESC": "Altruiste, coopératif, bienveillant"
+      },
+      "E": {
+        "NAME": "Entrepreneurial (E)",
+        "DESC": "Persuasif, ambitieux, énergique"
+      },
+      "C": {
+        "NAME": "Conventionnel (C)",
+        "DESC": "Organisé, précis, méthodique"
+      }
     },
-    {
-      "LABEL": "Investigateur (I)",
-      "DESCRIPTION": "Analytique, curieux, scientifique",
-      "TAGS": ["Recherche", "Analyse", "Expérimentation"]
-    },
-    {
-      "LABEL": "Artistique (A)",
-      "DESCRIPTION": "Créatif, expressif, original",
-      "TAGS": ["Créativité", "Expression artistique", "Innovation"]
-    },
-    {
-      "LABEL": "Social (S)",
-      "DESCRIPTION": "Altruiste, coopératif, bienveillant",
-      "TAGS": ["Aide aux autres", "Communication", "Enseignement"]
-    },
-    {
-      "LABEL": "Entreprenant (E)",
-      "DESCRIPTION": "Persuasif, ambitieux, énergique",
-      "TAGS": ["Leadership", "Persuasion", "Prise de risque"]
-    },
-    {
-      "LABEL": "Conventionnel (C)",
-      "DESCRIPTION": "Organisé, précis, méthodique",
-      "TAGS": ["Organisation", "Précision", "Procédures"]
-    }
-  ]
+    "SCORES": [
+      {
+        "LABEL": "Réaliste (R)",
+        "DESCRIPTION": "Pratique, manuel, orienté vers l'action",
+        "TAGS": ["Manipulation d'outils", "Activités concrètes", "Résolution pratique de problèmes"]
+      },
+      {
+        "LABEL": "Investigateur (I)",
+        "DESCRIPTION": "Analytique, curieux, scientifique",
+        "TAGS": ["Recherche", "Analyse", "Expérimentation"]
+      },
+      {
+        "LABEL": "Artistique (A)",
+        "DESCRIPTION": "Créatif, expressif, original",
+        "TAGS": ["Créativité", "Expression artistique", "Innovation"]
+      },
+      {
+        "LABEL": "Social (S)",
+        "DESCRIPTION": "Altruiste, coopératif, bienveillant",
+        "TAGS": ["Aide aux autres", "Communication", "Enseignement"]
+      },
+      {
+        "LABEL": "Entreprenant (E)",
+        "DESCRIPTION": "Persuasif, ambitieux, énergique",
+        "TAGS": ["Leadership", "Persuasion", "Prise de risque"]
+      },
+      {
+        "LABEL": "Conventionnel (C)",
+        "DESCRIPTION": "Organisé, précis, méthodique",
+        "TAGS": ["Organisation", "Précision", "Procédures"]
+      }
+    ]
   },
   "MY_NETWORK": {
     "TAB_MY_NETWORK": "Mon réseau",
@@ -965,6 +1075,16 @@
     "SUBTITLE": "Gérez vos enseignants connectés, envoyez des messages et maintenez votre réseau éducatif.",
     "TAB_NETWORK": "Mon réseau",
     "TAB_PENDINGS": "Mes en attente",
+    "TAB_SENT_REQUESTS": "Demandes envoyées",
+    "TAB_RECEIVED_REQUESTS": "Demandes reçues",
+    "MY_COACHES": "Mes Coachs",
+    "CONNECTIONS": "Connexions",
+    "EMPTY_NETWORK": "Vous n’avez pas encore de coachs.",
+    "SENT_REQUESTS": "Demandes envoyées",
+    "RECEIVED_REQUESTS": "Demandes reçues",
+    "EMPTY_SENT_REQUESTS": "Vous n’avez envoyé aucune demande.",
+    "EMPTY_RECEIVED_REQUESTS": "Vous n’avez reçu aucune demande.",
+    "CONNECTED_ON": "Connecté le",
     "ADD_COACH": {
       "TITLE": "Ajouter un Coach",
       "PLACEHOLDER": "Entrez le code ou l'email du coach",
@@ -974,6 +1094,7 @@
     "RELATIONS": "relations",
     "PENDINGS": "en attente",
     "SORTED_BY": "Trié par :",
+    "REQUEST_SENT_ON": "Demande envoyée le",
     "SORT_OPTIONS": {
       "RECENT": "Récemment ajouté",
       "NAME": "Nom",
@@ -983,8 +1104,11 @@
     "ACTIONS": {
       "MESSAGE": "Message",
       "ACCEPT": "Accepter",
-      "REMOVE": "Supprimer"
+      "REMOVE": "Supprimer",
+      "CANCEL_REQUEST": "Annuler la demande",
+      "DECLINE": "Refuser"
     },
+    "REQUEST_RECEIVED_ON": "Demande reçue le",
     "EMPTY_STATE": "Aucun coach trouvé"
   },
   "STUDENTPROFILE": {
