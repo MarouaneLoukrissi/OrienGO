@@ -304,17 +304,28 @@
     }
   },
   "ADMIN_QUESTIONS": {
-    "TITLE": "Gestion de la Banque de Questions",
-    "SUBTITLE": "Gérer les questions du test RIASEC et les options de réponse",
-    "ADD_BUTTON": "Ajouter une Question",
+    "NO_QUESTIONS": "Aucune question disponible",
+    "LOADING": "Chargement des questions...",
+    "DELETE": {
+      "TITLE": "Supprimer la question",
+      "MESSAGE": "Êtes-vous sûr de vouloir supprimer cette question ?",
+      "SOFT_DELETE": "Suppression douce",
+      "SOFT_DELETE_INFO": "Cela masquera la question sans la supprimer définitivement.",
+      "HARD_DELETE": "Suppression définitive",
+      "HARD_DELETE_INFO": "Cela supprimera définitivement la question du système.",
+      "CANCEL": "Annuler"
+    },
+    "TITLE": "Gestion de la banque de questions",
+    "SUBTITLE": "Gérer les questions et options de réponse du test RIASEC",
+    "ADD_BUTTON": "Ajouter une question",
     "SEARCH_PLACEHOLDER": "Rechercher par texte de question",
-    "FILTER_CATEGORY": "Filtrer par Catégorie",
-    "RESET_FILTERS": "Réinitialiser les Filtres",
-    "ALL": "Tous les Catégories",
+    "FILTER_CATEGORY": "Filtrer par catégorie",
+    "RESET_FILTERS": "Réinitialiser les filtres",
+    "ALL": "Toutes les catégories",
     "TABLE": {
       "QUESTION": "Question",
       "CATEGORY": "Catégorie",
-      "OPTIONS": "Options de Réponse",
+      "OPTIONS": "Options de réponse",
       "OPTIONS_COUNT": "options",
       "ACTIONS": "Actions",
       "VIEW": "Voir",
@@ -322,21 +333,21 @@
       "DELETE": "Supprimer"
     },
     "MODAL": {
-      "ADD_TITLE": "Ajouter une Nouvelle Question",
-      "VIEW_TITLE": "Voir les Détails de la Question",
-      "EDIT_TITLE": "Modifier la Question",
-      "BASIC_INFO": "Informations de Base",
-      "SYSTEM_INFO": "Informations Système",
+      "ADD_TITLE": "Ajouter une nouvelle question",
+      "VIEW_TITLE": "Voir les détails de la question",
+      "EDIT_TITLE": "Modifier la question",
+      "BASIC_INFO": "Informations de base",
+      "SYSTEM_INFO": "Informations système",
       "CATEGORY": "Catégorie",
-      "QUESTION_TEXT": "Texte de la Question",
+      "QUESTION_TEXT": "Texte de la question",
       "QUESTION_TEXT_PLACEHOLDER": "Entrez le texte de la question",
-      "ANSWER_OPTIONS": "Options de Réponse",
+      "ANSWER_OPTIONS": "Options de réponse",
       "ID": "ID",
-      "SOFT_DELETED": "Supprimé en Douceur",
-      "SELECT_CATEGORY": "Sélectionner une catégorie",
+      "SOFT_DELETED": "Supprimée doucement",
+      "SELECT_CATEGORY": "Sélectionner la catégorie",
       "CANCEL": "Annuler",
-      "ADD": "Ajouter la Question",
-      "UPDATE": "Mettre à Jour",
+      "ADD": "Ajouter la question",
+      "UPDATE": "Mettre à jour la question",
       "CLOSE": "Fermer",
       "REQUIRED_FIELD": "Ce champ est requis",
       "MIN_LENGTH": "Minimum {{min}} caractères requis",
@@ -344,7 +355,7 @@
     },
     "CATEGORY": {
       "REALISTIC": "Réaliste",
-      "INVESTIGATIVE": "Investigateur",
+      "INVESTIGATIVE": "Investigatif",
       "ARTISTIC": "Artistique",
       "SOCIAL": "Social",
       "ENTERPRISING": "Entreprenant",
@@ -444,9 +455,21 @@
     "ACTIONS": {
       "VIEW": "Voir",
       "EDIT": "Modifier",
-      "DELETE": "Supprimer"
+      "DELETE": "Supprimer",
+      "SOFT_DELETE": "Suppression douce",
+      "HARD_DELETE": "Suppression définitive",
+      "RESTORE": "Restaurer"
     },
     "MODAL": {
+      "GENDER_SELECTION": {
+        "MALE": "Homme",
+        "FEMALE": "Femme",
+        "OTHER": "Autre"
+      },
+      "ADMIN_LEVEL": {
+        "STANDARD_ADMIN": "Administrateur standard",
+        "MANAGER": "Gestionnaire"
+      },
       "ADD_TITLE": "Ajouter un nouvel admin",
       "FIRST_NAME": "Prénom",
       "FIRST_NAME_PLACEHOLDER": "Entrez le prénom",

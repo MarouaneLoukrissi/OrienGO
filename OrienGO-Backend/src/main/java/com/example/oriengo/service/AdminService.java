@@ -4,6 +4,8 @@ import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.user.*;
 import com.example.oriengo.mapper.AdminMapper;
 import com.example.oriengo.model.dto.AdminCreateDTO;
+import com.example.oriengo.model.dto.AdminDTO;
+import com.example.oriengo.model.dto.AdminModifyDTO;
 import com.example.oriengo.model.dto.AdminUpdateDTO;
 import com.example.oriengo.model.entity.Admin;
 import com.example.oriengo.model.entity.Role;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +50,18 @@ public class AdminService {
         }
     }
 
+    public List<Admin> getAdmins() {
+        try {
+            log.info("Fetching admins");
+            List<Admin> admins = adminRepository.findAll();
+            log.info("Found {} admins", admins.size());
+            return admins;
+        } catch (Exception e) {
+            log.error("Failed to fetch admins: {}", e.getMessage(), e);
+            throw new UserGetException(HttpStatus.NOT_FOUND, getMessage("admin.not.found"));
+        }
+    }
+
     public Admin getAdminById(Long id, boolean deleted) {
         if (id == null) {
             log.warn("Attempted to fetch admin with null ID");
@@ -70,7 +85,7 @@ public class AdminService {
 
         log.info("Fetching admin with ID: {}", id);
 
-        return adminRepository.findById(id)
+        return adminRepository.findByIdIncludingDeleted(id)
                 .orElseThrow(() -> {
                     log.error("Admin not found with ID: {}", id);
                     return new UserGetException(HttpStatus.NOT_FOUND, getMessage("admin.not.found"));
@@ -238,6 +253,75 @@ public class AdminService {
     }
 
     @Transactional
+    public Admin createAdminFromDTO(AdminDTO dto) {
+        if (dto == null) {
+            log.warn("Admin DTO cannot be null");
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("admin.dto.empty"));
+        }
+
+        try {
+            log.info("Starting creation of new admin with email: {}", dto.getEmail());
+
+            // Check if email already exists
+            try {
+                Admin existingAdmin = getAdminByEmail(dto.getEmail(), false);
+                if (existingAdmin != null) {
+                    log.warn("Admin already exists with email: {}", dto.getEmail());
+                    throw new UserCreationException(HttpStatus.CONFLICT,
+                            getMessage("admin.email.already.exists", dto.getEmail()));
+                }
+            } catch (UserGetException e) {
+                log.debug("No existing admin found with email {}, proceeding with creation", dto.getEmail());
+            }
+
+            // Map DTO to entity
+            Admin admin = adminMapper.toEntity(dto);
+
+            // Encode password (replace with passwordEncoder.encode if needed)
+            admin.setPassword(admin.getPassword());
+            admin.setEnabled(true);
+
+            // Determine role from admin level
+            String roleName = switch (admin.getAdminLevel()) {
+                case MANAGER -> "MANAGER";
+                case STANDARD_ADMIN -> "STANDARD_ADMIN";
+                default -> {
+                    log.warn("Invalid admin level provided: {}", admin.getAdminLevel());
+                    throw new UserCreationException(HttpStatus.NOT_FOUND, getMessage("admin.level.invalid"));
+                }
+            };
+
+            Role role = roleRepository.findByName(roleName)
+                    .orElseThrow(() -> {
+                        log.warn("Role '{}' not found in database", roleName);
+                        return new UserCreationException(HttpStatus.NOT_FOUND, getMessage("admin.role.not.found", roleName));
+                    });
+
+            admin.setRoles(Set.of(role));
+
+            // Set createdBy if applicable
+            if (dto.getCreatedById() != null) {
+                Admin creator = adminRepository.findByIdIncludingDeleted(dto.getCreatedById())
+                        .orElseThrow(() -> new UserCreationException(HttpStatus.NOT_FOUND,
+                                getMessage("admin.creator.not.found", dto.getCreatedById().toString())));
+                admin.setCreatedBy(creator);
+            }
+
+            // Save admin
+            Admin savedAdmin = adminRepository.save(admin);
+            log.info("Admin created successfully with ID: {} and role: {}", savedAdmin.getId(), roleName);
+
+            return savedAdmin;
+
+        } catch (UserCreationException e) {
+            throw e; // already logged
+        } catch (Exception e) {
+            log.error("Unexpected error during admin creation for email {}: {}", dto.getEmail(), e.getMessage(), e);
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("admin.create.failed"));
+        }
+    }
+
+    @Transactional
     public Admin updateAdmin(Long id, AdminUpdateDTO dto) {
         if (id == null) {
             log.warn("Attempted to update admin with null ID");
@@ -281,6 +365,68 @@ public class AdminService {
             Admin savedAdmin = adminRepository.save(existingAdmin);
             log.info("Admin with ID {} successfully updated", savedAdmin.getId());
             return savedAdmin;
+        } catch (Exception e) {
+            log.error("Error updating admin with ID {}: {}", id, e.getMessage(), e);
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("admin.update.failed"));
+        }
+    }
+
+    @Transactional
+    public Admin updateAdminWithModifyDTO(Long id, AdminModifyDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update admin with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("admin.id.empty"));
+        } else if (dto == null) {
+            log.warn("Admin modify request cannot be null");
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("admin.dto.empty"));
+        }
+
+        try {
+            log.info("Updating admin with ID: {}", id);
+            Admin existingAdmin = getAdminById(id);
+
+            // Update fields from DTO
+            adminMapper.updateAdminFromDto(dto, existingAdmin);
+
+            // Update password if provided
+            if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+                existingAdmin.setPassword(dto.getPassword()); // e.g., passwordEncoder.encode(dto.getPassword())
+            }
+
+            // Update role based on adminLevel
+            String roleName = switch (existingAdmin.getAdminLevel()) {
+                case MANAGER -> "MANAGER";
+                case STANDARD_ADMIN -> "STANDARD_ADMIN";
+                default -> {
+                    log.warn("Invalid admin level provided: {}", existingAdmin.getAdminLevel());
+                    throw new UserUpdateException(HttpStatus.NOT_FOUND, getMessage("admin.level.invalid"));
+                }
+            };
+
+            Role role = roleRepository.findByName(roleName)
+                    .orElseThrow(() -> {
+                        log.warn("Role '{}' not found in database", roleName);
+                        return new UserUpdateException(HttpStatus.NOT_FOUND, getMessage("admin.role.not.found", roleName));
+                    });
+
+            // Use mutable set
+            existingAdmin.setRoles(new HashSet<>(Set.of(role)));
+
+            // Update createdBy if necessary
+//            if (dto.getCreatedById() != null) {
+//                Admin creator = adminRepository.findById(dto.getCreatedById())
+//                        .orElseThrow(() -> new UserUpdateException(HttpStatus.NOT_FOUND,
+//                                getMessage("admin.creator.not.found", dto.getCreatedById().toString())));
+//                existingAdmin.setCreatedBy(creator);
+//            }
+
+            Admin savedAdmin = adminRepository.save(existingAdmin);
+            log.info("Admin with ID {} successfully updated with role: {}", savedAdmin.getId(), roleName);
+            return savedAdmin;
+
+        } catch (UserUpdateException e) {
+            // Already logged; just rethrow
+            throw e;
         } catch (Exception e) {
             log.error("Error updating admin with ID {}: {}", id, e.getMessage(), e);
             throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("admin.update.failed"));

@@ -1,11 +1,16 @@
 <div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
   <div class="max-w-[88rem] mx-auto">
-    
+
     <!-- Header -->
     <div class="text-center mb-12">
-      <!-- Admin Icon -->
       <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="#ffffff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M276.941 440.584v565.722c0 422.4 374.174 625.468 674.71 788.668l8.02 4.292 8.131-4.292c300.537-163.2 674.71-366.268 674.71-788.668V440.584l-682.84-321.657L276.94 440.584Zm682.73 1479.529c-9.262 0-18.523-2.372-26.993-6.89l-34.9-18.974C588.095 1726.08 164 1495.906 164 1006.306V404.78c0-21.91 12.65-41.788 32.414-51.162L935.727 5.42c15.134-7.228 32.866-7.228 48 0l739.313 348.2c19.765 9.374 32.414 29.252 32.414 51.162v601.525c0 489.6-424.207 719.774-733.779 887.943l-34.899 18.975c-8.47 4.517-17.731 6.889-27.105 6.889Zm467.158-547.652h-313.412l-91.595-91.482v-83.803H905.041v-116.78h-83.69l-58.503-58.504c-1.92.113-3.84.113-5.76.113-176.075 0-319.285-143.21-319.285-319.285 0-176.075 143.21-319.398 319.285-319.398 176.075 0 319.285 143.323 319.285 319.398 0 1.92 0 3.84-.113 5.647l350.57 350.682v313.412Zm-266.654-112.941h153.713v-153.713L958.462 750.155l3.953-37.27c1.017-123.897-91.595-216.621-205.327-216.621S550.744 588.988 550.744 702.72c0 113.845 92.612 206.344 206.344 206.344l47.21-5.309 63.811 63.7h149.873v116.78h116.781v149.986l25.412 25.299Zm-313.4-553.57c0 46.758-37.949 84.706-84.706 84.706-46.758 0-84.706-37.948-84.706-84.706s37.948-84.706 84.706-84.706c46.757 0 84.706 37.948 84.706 84.706" fill-rule="evenodd"></path> </g></svg>
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[62px] md:h-[62px] text-white" fill="#ffffff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M276.941 440.584v565.722c0 422.4 374.174 625.468 674.71 788.668l8.02 4.292 8.131-4.292c300.537-163.2 674.71-366.268 674.71-788.668V440.584l-682.84-321.657L276.94 440.584Zm682.73 1479.529c-9.262 0-18.523-2.372-26.993-6.89l-34.9-18.974C588.095 1726.08 164 1495.906 164 1006.306V404.78c0-21.91 12.65-41.788 32.414-51.162L935.727 5.42c15.134-7.228 32.866-7.228 48 0l739.313 348.2c19.765 9.374 32.414 29.252 32.414 51.162v601.525c0 489.6-424.207 719.774-733.779 887.943l-34.899 18.975c-8.47 4.517-17.731 6.889-27.105 6.889Zm467.158-547.652h-313.412l-91.595-91.482v-83.803H905.041v-116.78h-83.69l-58.503-58.504c-1.92.113-3.84.113-5.76.113-176.075 0-319.285-143.21-319.285-319.285 0-176.075 143.21-319.398 319.285-319.398 176.075 0 319.285 143.323 319.285 319.398 0 1.92 0 3.84-.113 5.647l350.57 350.682v313.412Zm-266.654-112.941h153.713v-153.713L958.462 750.155l3.953-37.27c1.017-123.897-91.595-216.621-205.327-216.621S550.744 588.988 550.744 702.72c0 113.845 92.612 206.344 206.344 206.344l47.21-5.309 63.811 63.7h149.873v116.78h116.781v149.986l25.412 25.299Zm-313.4-553.57c0 46.758-37.949 84.706-84.706 84.706-46.758 0-84.706-37.948-84.706-84.706s37.948-84.706 84.706-84.706c46.757 0 84.706 37.948 84.706 84.706" fill-rule="evenodd"></path>
+          </g>
+        </svg>
       </div>
       
       <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
@@ -14,6 +19,32 @@
       <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
         {{ 'ADMIN_ADMINS.SUBTITLE' | translate }}
       </p>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div *ngIf="successMessage" class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+      {{ errorMessage }}
+    </div>
+
+    <!-- View Mode Toggle -->
+    <div class="mb-6 flex justify-center">
+      <div class="bg-white rounded-lg p-1 shadow-md">
+        <button 
+          (click)="switchViewMode('active')"
+          [class]="viewMode === 'active' ? 'bg-brand-orange text-white' : 'text-gray-600 hover:bg-gray-100'"
+          class="px-6 py-2 rounded-md font-medium transition-colors">
+          Active Admins
+        </button>
+        <button 
+          (click)="switchViewMode('deleted')"
+          [class]="viewMode === 'deleted' ? 'bg-brand-orange text-white' : 'text-gray-600 hover:bg-gray-100'"
+          class="px-6 py-2 rounded-md font-medium transition-colors">
+          Deleted Admins
+        </button>
+      </div>
     </div>
 
     <!-- Search and Filters -->
@@ -34,8 +65,8 @@
             (change)="onRoleChange()"
             class="cursor-pointer bg-white px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors w-full">
             <option value="">{{ 'ADMIN_ADMINS.FILTER_ROLE' | translate }}</option>
-            <option value="admin">Admin</option>
-            <option value="superAdmin">Super Admin</option>
+            <option value="STANDARD_ADMIN">Standard Admin</option>
+            <option value="MANAGER">Manager</option>
           </select>
         </div>
         <div>
@@ -64,15 +95,22 @@
           {{ 'ADMIN_ADMINS.RESET_FILTERS' | translate }}
         </button>
         <button 
+          *ngIf="viewMode === 'active'"
           (click)="openAddAdminModal()"
-          class="px-6 py-3 bg-brand-orange hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition-all">
+          [disabled]="loading || loadingAction"
+          class="px-6 py-3 bg-brand-orange hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform transition-all disabled:opacity-50">
           + {{ 'ADMIN_ADMINS.ADD_BUTTON' | translate }}
         </button>
       </div>
     </div>
 
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-orange"></div>
+    </div>
+
     <!-- Table -->
-    <div class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+    <div *ngIf="!loading" class="overflow-x-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-orange-100">
           <tr>
@@ -93,12 +131,15 @@
               </span>
             </th>
             <th 
-              (click)="onSort('role')"
+              (click)="onSort('adminLevel')"
               class="px-6 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-orange-200 transition-colors cursor-pointer select-none">
-              {{ 'ADMIN_ADMINS.TABLE.PERMISSION' | translate }}
-              <span *ngIf="sortField === 'role'" class="ml-1">
+              Level
+              <span *ngIf="sortField === 'adminLevel'" class="ml-1">
                 {{ sortDirection === 'asc' ? '↑' : '↓' }}
               </span>
+            </th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+              Department
             </th>
             <th 
               (click)="onSort('status')"
@@ -122,214 +163,203 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let admin of admins" class="hover:bg-orange-50 transition-colors">
+          <tr *ngFor="let admin of paginatedAdmins" class="hover:bg-orange-50 transition-colors">
             <td class="px-6 py-4">
-              <div class="font-semibold text-gray-900">{{ admin.firstName }} {{ admin.lastName }}</div>
+              <div [class]="viewMode === 'deleted' ? 'font-semibold text-gray-900 line-through' : 'font-semibold text-gray-900'">
+                {{ admin.firstName }} {{ admin.lastName }}
+              </div>
             </td>
-            <td class="px-6 py-4 text-gray-900">{{ admin.email }}</td>
+            <td [class]="viewMode === 'deleted' ? 'px-6 py-4 text-gray-900 line-through' : 'px-6 py-4 text-gray-900'">
+              {{ admin.email }}
+            </td>
             <td class="px-6 py-4">
-              <span class="whitespace-nowrap bg-brand-orange text-white px-3 py-1 rounded-full text-xs font-medium">
-                {{ admin.role === 'superAdmin' ? 'Super Admin' : 'Admin' }}
+              <span [class]="viewMode === 'deleted' ? 'whitespace-nowrap bg-brand-orange text-white px-3 py-1 rounded-full text-xs font-medium line-through' : 'whitespace-nowrap bg-brand-orange text-white px-3 py-1 rounded-full text-xs font-medium'">
+                {{ getAdminLevelLabel(admin.adminLevel) }}
               </span>
             </td>
+            <td [class]="viewMode === 'deleted' ? 'px-6 py-4 text-gray-900 line-through' : 'px-6 py-4 text-gray-900'">
+              {{ getDepartmentLabel(admin.department) }}
+            </td>
             <td class="px-6 py-4">
-              <span [class]="admin.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'" 
+              <span [class]="getStatusClass(admin)" 
                     class="px-3 py-1 rounded-full text-xs font-medium">
-                {{ admin.status === 'active' ? 'Active' : 'Inactive' }}
+                {{ getStatusLabel(admin) }}
               </span>
             </td>
-            <td class="px-6 py-4 text-gray-900">{{ admin.createdAt }}</td>
+            <td [class]="viewMode === 'deleted' ? 'px-6 py-4 text-gray-900 line-through' : 'px-6 py-4 text-gray-900'">
+              {{ admin.createdAt | date:'dd/MM/yyyy' }}
+            </td>
             <td class="px-6 py-4">
               <span 
                 (click)="openViewAdminModal(admin)"
                 class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
                 {{ 'ADMIN_ADMINS.ACTIONS.VIEW' | translate }}
               </span>
-              <span class="text-gray-300 mx-2">|</span>
-              <span 
+
+              <span *ngIf="viewMode === 'active'" class="text-gray-300 mx-2">|</span>
+              <span *ngIf="viewMode === 'active'"
                 (click)="openEditAdminModal(admin)"
                 class="text-green-600 hover:text-green-700 cursor-pointer font-medium hover:underline transition-colors">
                 {{ 'ADMIN_ADMINS.ACTIONS.EDIT' | translate }}
               </span>
-              <span class="text-gray-300 mx-2">|</span>
-              <span 
-                (click)="deleteAdmin(admin)"
-                class="text-red-600 hover:text-red-700 cursor-pointer font-medium hover:underline transition-colors">
-                {{ 'ADMIN_ADMINS.ACTIONS.DELETE' | translate }}
-              </span>
+
+              <ng-container *ngIf="viewMode === 'active'">
+                <span class="text-gray-300 mx-2">|</span>
+                <span 
+                  (click)="openDeleteConfirmModal(admin, 'soft')"
+                  class="text-yellow-600 hover:text-yellow-700 cursor-pointer font-medium hover:underline transition-colors">
+                  Soft Delete
+                </span>
+                <span class="text-gray-300 mx-1">|</span>
+                <span 
+                  (click)="openDeleteConfirmModal(admin, 'hard')"
+                  class="text-red-600 hover:text-red-700 cursor-pointer font-medium hover:underline transition-colors">
+                  Hard Delete
+                </span>
+              </ng-container>
+
+              <ng-container *ngIf="viewMode === 'deleted'">
+                <span class="text-gray-300 mx-2">|</span>
+                <span 
+                  (click)="restoreAdmin(admin)"
+                  [class.opacity-50]="loadingAction"
+                  class="text-blue-600 hover:text-blue-700 cursor-pointer font-medium hover:underline transition-colors">
+                  Restore
+                </span>
+                <span class="text-gray-300 mx-2">|</span>
+                <span 
+                  (click)="openDeleteConfirmModal(admin, 'hard')"
+                  [class.opacity-50]="loadingAction"
+                  class="text-red-600 hover:text-red-700 cursor-pointer font-medium hover:underline transition-colors">
+                  Hard Delete
+                </span>
+              </ng-container>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Empty state -->
+      <div *ngIf="paginatedAdmins.length === 0" class="text-center py-12">
+        <div class="text-gray-500 text-lg">
+          {{ viewMode === 'active' ? 'No active admins found' : 'No deleted admins found' }}
+        </div>
+      </div>
     </div>
+
+    <!-- Pagination -->
+    <div *ngIf="!loading && admins.length > 0" class="max-w-full flex-wrap gap-2 mt-6 flex items-center justify-between">
+      <div class="text-sm text-gray-700">
+        Showing {{ getStartIndex() + 1 }} to {{ getEndIndex() }} of {{ admins.length }} results
+      </div>
+      <div class="max-w-full flex items-center space-x-2">
+        <button 
+          (click)="goToPreviousPage()" 
+          [disabled]="currentPage === 1"
+          class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+          Previous
+        </button>
+        
+        <div class="max-w-full overflow-x-auto flex items-center space-x-1">
+          <button 
+            *ngFor="let page of getPageNumbers()" 
+            (click)="goToPage(page)"
+            [class]="page === currentPage ? 'bg-brand-orange text-white' : 'bg-white text-gray-700 hover:bg-gray-50'"
+            class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm">
+            {{ page }}
+          </button>
+        </div>
+        
+        <button 
+          (click)="goToNextPage()" 
+          [disabled]="currentPage === totalPages"
+          class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+          Next
+        </button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Add Admin Modal -->
   <div *ngIf="showAddAdminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="p-6">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold text-gray-800">
             {{ 'ADMIN_ADMINS.MODAL.ADD_TITLE' | translate }}
           </h3>
-          <button 
-            (click)="closeAddAdminModal()"
-            class="text-gray-400 hover:text-gray-600 text-2xl">
+          <button (click)="closeAddAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
             ×
           </button>
         </div>
 
         <form [formGroup]="addAdminForm" (ngSubmit)="onSubmit()" class="space-y-4">
-          <!-- Informations de base -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.FIRST_NAME' | translate }} *
-              </label>
-              <input
-                type="text"
-                formControlName="firstName"
-                [class.border-red-500]="addAdminForm.get('firstName')?.invalid && addAdminForm.get('firstName')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.FIRST_NAME_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('firstName', addAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('firstName', addAdminForm) }}
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.LAST_NAME' | translate }} *
-              </label>
-              <input
-                type="text"
-                formControlName="lastName"
-                [class.border-red-500]="addAdminForm.get('lastName')?.invalid && addAdminForm.get('lastName')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.LAST_NAME_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('lastName', addAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('lastName', addAdminForm) }}
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.EMAIL' | translate }} *
-              </label>
-              <input
-                type="email"
-                formControlName="email"
-                [class.border-red-500]="addAdminForm.get('email')?.invalid && addAdminForm.get('email')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.EMAIL_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('email', addAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('email', addAdminForm) }}
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.ROLE' | translate }} *
-              </label>
-              <select
-                formControlName="role"
-                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option *ngFor="let role of getAvailableRoles()" [value]="role">
-                  {{ role === 'superAdmin' ? 'Super Admin' : 'Admin' }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.PASSWORD' | translate }} *
-              </label>
-              <input
-                type="password"
-                formControlName="password"
-                [class.border-red-500]="addAdminForm.get('password')?.invalid && addAdminForm.get('password')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.PASSWORD_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('password', addAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('password', addAdminForm) }}
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.CONFIRM_PASSWORD' | translate }} *
-              </label>
-              <input
-                type="password"
-                formControlName="confirmPassword"
-                [class.border-red-500]="addAdminForm.get('confirmPassword')?.invalid && addAdminForm.get('confirmPassword')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.CONFIRM_PASSWORD_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="addAdminForm.errors?.['passwordMismatch'] && addAdminForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
-                {{ 'ADMIN_ADMINS.MODAL.PASSWORD_MISMATCH' | translate }}
-              </div>
-            </div>
-          </div>
-
-          <!-- Champs communs pour admin et superAdmin -->
-          <div *ngIf="isAdminOrSuperAdminRole()" class="border-t pt-4">
-            <h4 class="text-lg font-medium text-gray-800 mb-4">
-              {{ 'ADMIN_ADMINS.MODAL.ADMIN_INFO' | translate }}
-            </h4>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Basic Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Basic Information</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.AGE' | translate }}
+                  {{ 'ADMIN_ADMINS.MODAL.FIRST_NAME' | translate }} *
                 </label>
                 <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  formControlName="age"
-                  [class.border-red-500]="addAdminForm.get('age')?.invalid && addAdminForm.get('age')?.touched"
+                  type="text"
+                  formControlName="firstName"
+                  [class.border-red-500]="addAdminForm.get('firstName')?.invalid && addAdminForm.get('firstName')?.touched"
                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  [placeholder]="'ADMIN_ADMINS.MODAL.AGE_PLACEHOLDER' | translate"
+                  [placeholder]="'ADMIN_ADMINS.MODAL.FIRST_NAME_PLACEHOLDER' | translate"
                 />
-                <div *ngIf="getErrorMessage('age', addAdminForm)" class="text-red-500 text-xs mt-1">
-                  {{ getErrorMessage('age', addAdminForm) }}
+                <div *ngIf="getErrorMessage('firstName', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('firstName', addAdminForm) }}
                 </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.GENDER' | translate }}
+                  {{ 'ADMIN_ADMINS.MODAL.LAST_NAME' | translate }} *
                 </label>
-                <select
-                  formControlName="gender"
-                  [ngClass]="{'text-gray-400': !addAdminForm.get('gender')?.value}"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_ADMINS.MODAL.SELECT_GENDER' | translate }}</option>
-                  <option value="male">{{ 'ADMIN_ADMINS.MODAL.MALE' | translate }}</option>
-                  <option value="female">{{ 'ADMIN_ADMINS.MODAL.FEMALE' | translate }}</option>
-                  <option value="other">{{ 'ADMIN_ADMINS.MODAL.OTHER' | translate }}</option>
-                </select>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  [class.border-red-500]="addAdminForm.get('lastName')?.invalid && addAdminForm.get('lastName')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_ADMINS.MODAL.LAST_NAME_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('lastName', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('lastName', addAdminForm) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ 'ADMIN_ADMINS.MODAL.EMAIL' | translate }} *
+                </label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  [class.border-red-500]="addAdminForm.get('email')?.invalid && addAdminForm.get('email')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_ADMINS.MODAL.EMAIL_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('email', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('email', addAdminForm) }}
+                </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.PHONE_NUMBER' | translate }}
+                  Phone Number
                 </label>
                 <input
                   type="tel"
                   formControlName="phoneNumber"
                   [class.border-red-500]="addAdminForm.get('phoneNumber')?.invalid && addAdminForm.get('phoneNumber')?.touched"
                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  [placeholder]="'ADMIN_ADMINS.MODAL.PHONE_PLACEHOLDER' | translate"
+                  placeholder="+1234567890"
                 />
                 <div *ngIf="getErrorMessage('phoneNumber', addAdminForm)" class="text-red-500 text-xs mt-1">
                   {{ getErrorMessage('phoneNumber', addAdminForm) }}
@@ -340,27 +370,89 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}
+                  {{ 'ADMIN_ADMINS.MODAL.PASSWORD' | translate }} *
                 </label>
-                <select
-                  formControlName="messagePermission"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let permission of messagePermissions" [value]="permission">
-                    {{ getMessagePermissionLabel(permission) }}
-                  </option>
-                </select>
+                <input
+                  type="password"
+                  formControlName="password"
+                  [class.border-red-500]="addAdminForm.get('password')?.invalid && addAdminForm.get('password')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_ADMINS.MODAL.PASSWORD_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="getErrorMessage('password', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('password', addAdminForm) }}
+                </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}
+                  {{ 'ADMIN_ADMINS.MODAL.CONFIRM_PASSWORD' | translate }} *
+                </label>
+                <input
+                  type="password"
+                  formControlName="confirmPassword"
+                  [class.border-red-500]="addAdminForm.get('confirmPassword')?.invalid && addAdminForm.get('confirmPassword')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [placeholder]="'ADMIN_ADMINS.MODAL.CONFIRM_PASSWORD_PLACEHOLDER' | translate"
+                />
+                <div *ngIf="addAdminForm.errors?.['passwordMismatch'] && addAdminForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
+                  {{ 'ADMIN_ADMINS.MODAL.PASSWORD_MISMATCH' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Personal Information</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Age *
+                </label>
+                <input
+                  type="number"
+                  min="18"
+                  max="100"
+                  formControlName="age"
+                  [class.border-red-500]="addAdminForm.get('age')?.invalid && addAdminForm.get('age')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="25"
+                />
+                <div *ngIf="getErrorMessage('age', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('age', addAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Gender *
                 </label>
                 <select
-                  formControlName="accountPrivacy"
+                  formControlName="gender"
+                  [ngClass]="{'text-gray-400': !addAdminForm.get('gender')?.value}"
+                  [class.border-red-500]="addAdminForm.get('gender')?.invalid && addAdminForm.get('gender')?.touched"
                   class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
-                    {{ getAccountPrivacyLabel(privacy) }}
+                  <option disabled selected hidden value="null">Select Gender</option>
+                  <option *ngFor="let gender of genderTypes" [value]="gender">
+                    {{ getGenderLabel(gender) }}
                   </option>
+                </select>
+                <div *ngIf="getErrorMessage('gender', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('gender', addAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Admin Level *
+                </label>
+                <select
+                  formControlName="adminLevel"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="MANAGER">Manager</option>
+                  <option value="STANDARD_ADMIN">Standard Admin</option>
                 </select>
               </div>
             </div>
@@ -368,20 +460,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}
-                </label>
-                <select
-                  formControlName="profileVisibility"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
-                    {{ getVisibilityStatusLabel(visibility) }}
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.DEPARTMENT_LABEL' | translate }}
+                  Department *
                 </label>
                 <select
                   formControlName="department"
@@ -394,18 +473,80 @@
             </div>
           </div>
 
-          <!-- Boutons -->
+          <!-- Account Settings -->
+          <div class="pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Account Settings</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  formControlName="enabled"
+                  id="enabled"
+                  class="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <label for="enabled" class="text-sm font-medium text-gray-700">
+                  Account Enabled
+                </label>
+              </div>
+
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  formControlName="suspended"
+                  id="suspended"
+                  class="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <label for="suspended" class="text-sm font-medium text-gray-700">
+                  Account Suspended
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="addAdminForm.get('suspended')?.value" class="mt-4 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Suspension Reason *
+                </label>
+                <textarea
+                  formControlName="suspensionReason"
+                  rows="3"
+                  [class.border-red-500]="addAdminForm.get('suspensionReason')?.invalid && addAdminForm.get('suspensionReason')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="Please provide reason for suspension..."
+                ></textarea>
+                <div *ngIf="getErrorMessage('suspensionReason', addAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('suspensionReason', addAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Suspended Until
+                </label>
+                <input
+                  type="datetime-local"
+                  formControlName="suspendedUntil"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
           <div class="flex justify-end space-x-3 pt-6 border-t">
             <button
               type="button"
               (click)="closeAddAdminModal()"
-              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+              [disabled]="loadingAction"
+              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50">
               {{ 'ADMIN_ADMINS.MODAL.CANCEL' | translate }}
             </button>
             <button
               type="submit"
-              [disabled]="addAdminForm.invalid"
+              [disabled]="addAdminForm.invalid || loadingAction"
               class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 font-medium transition-colors">
+              <span *ngIf="loadingAction" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
               {{ 'ADMIN_ADMINS.MODAL.ADD' | translate }}
             </button>
           </div>
@@ -416,93 +557,132 @@
 
   <!-- View Admin Modal -->
   <div *ngIf="showViewAdminModal && selectedAdmin" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="p-6">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold text-gray-800">
-            {{ 'ADMIN_ADMINS.VIEW_MODAL.TITLE' | translate }}
+            Admin Details
           </h3>
-          <button 
-            (click)="closeViewAdminModal()"
-            class="text-gray-400 hover:text-gray-600 text-2xl">
+          <button (click)="closeViewAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
             ×
           </button>
         </div>
 
-        <div class="space-y-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.FIRST_NAME' | translate }}</label>
-              <p class="text-gray-900">{{ selectedAdmin.firstName }}</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.LAST_NAME' | translate }}</label>
-              <p class="text-gray-900">{{ selectedAdmin.lastName }}</p>
+        <div class="space-y-6">
+          <!-- Basic Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Basic Information</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">First Name</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.firstName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.lastName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.email }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.phoneNumber || 'Not provided' }}</p>
+              </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.EMAIL' | translate }}</label>
-              <p class="text-gray-900">{{ selectedAdmin.email }}</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.ROLE' | translate }}</label>
-              <p class="text-gray-900">{{ selectedAdmin.role === 'superAdmin' ? 'Super Admin' : 'Admin' }}</p>
-            </div>
-          </div>
-
-          <div *ngIf="selectedAdmin.age || selectedAdmin.gender || selectedAdmin.phoneNumber" class="border-t pt-4">
-            <h4 class="text-lg font-medium text-gray-800 mb-4">{{ 'ADMIN_ADMINS.MODAL.ADMIN_INFO' | translate }}</h4>
-            
+          <!-- Personal Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Personal Information</h4>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div *ngIf="selectedAdmin.age">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.AGE' | translate }}</label>
-                <p class="text-gray-900">{{ selectedAdmin.age }}</p>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Age</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.age }}</p>
               </div>
-              <div *ngIf="selectedAdmin.gender">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.GENDER' | translate }}</label>
-                <p class="text-gray-900">{{ selectedAdmin.gender }}</p>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Gender</label>
+                <p class="text-gray-900 mt-1">{{ getGenderLabel(selectedAdmin.gender) }}</p>
               </div>
-              <div *ngIf="selectedAdmin.phoneNumber">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.PHONE_NUMBER' | translate }}</label>
-                <p class="text-gray-900">{{ selectedAdmin.phoneNumber }}</p>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div *ngIf="selectedAdmin.messagePermission">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}</label>
-                <p class="text-gray-900">{{ getMessagePermissionLabel(selectedAdmin.messagePermission) }}</p>
-              </div>
-              <div *ngIf="selectedAdmin.accountPrivacy">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}</label>
-                <p class="text-gray-900">{{ getAccountPrivacyLabel(selectedAdmin.accountPrivacy) }}</p>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Admin Level</label>
+                <p class="text-gray-900 mt-1">{{ getAdminLevelLabel(selectedAdmin.adminLevel) }}</p>
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div *ngIf="selectedAdmin.profileVisibility">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}</label>
-                <p class="text-gray-900">{{ getVisibilityStatusLabel(selectedAdmin.profileVisibility) }}</p>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Department</label>
+                <p class="text-gray-900 mt-1">{{ getDepartmentLabel(selectedAdmin.department) }}</p>
               </div>
-              <div *ngIf="selectedAdmin.department">
-                <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.MODAL.DEPARTMENT_LABEL' | translate }}</label>
-                <p class="text-gray-900">{{ getDepartmentLabel(selectedAdmin.department) }}</p>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Created By ID</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.createdById }}</p>
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.TABLE.CREATED' | translate }}</label>
-              <p class="text-gray-900">{{ selectedAdmin.createdAt }}</p>
+          <!-- Account Status -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Account Status</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Status</label>
+                <p [class]="getStatusClass(selectedAdmin)" class="inline-block px-3 py-1 rounded-full text-xs font-medium mt-1">
+                  {{ getStatusLabel(selectedAdmin) }}
+                </p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Account Enabled</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.enabled ? 'Yes' : 'No' }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Account Suspended</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.suspended ? 'Yes' : 'No' }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Token Expired</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.tokenExpired ? 'Yes' : 'No' }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Is Deleted</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.isDeleted ? 'Yes' : 'No' }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.suspended && selectedAdmin.suspensionReason">
+                <label class="block text-sm font-medium text-gray-700">Suspension Reason</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.suspensionReason }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.suspendedUntil">
+                <label class="block text-sm font-medium text-gray-700">Suspended Until</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.suspendedUntil | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">{{ 'ADMIN_ADMINS.TABLE.STATUS' | translate }}</label>
-              <p [class]="selectedAdmin.status === 'active' ? 'text-green-600' : 'text-red-600'">
-                {{ selectedAdmin.status === 'active' ? 'Active' : 'Inactive' }}
-              </p>
+          </div>
+
+          <!-- Timestamps -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Timestamps</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Created At</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.updatedAt">
+                <label class="block text-sm font-medium text-gray-700">Updated At</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.updatedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.lastSeen">
+                <label class="block text-sm font-medium text-gray-700">Last Seen</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.lastSeen | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.lastLoginAt">
+                <label class="block text-sm font-medium text-gray-700">Last Login</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.lastLoginAt | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+              <div *ngIf="selectedAdmin.deletedAt">
+                <label class="block text-sm font-medium text-gray-700">Deleted At</label>
+                <p class="text-gray-900 mt-1">{{ selectedAdmin.deletedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -511,13 +691,14 @@
           <button
             (click)="closeViewAdminModal()"
             class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
-            {{ 'ADMIN_ADMINS.VIEW_MODAL.CLOSE' | translate }}
+            Close
           </button>
-                      <button
-              (click)="openEditAdminModal(selectedAdmin)"
-              class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 font-medium transition-colors">
-              {{ 'ADMIN_ADMINS.VIEW_MODAL.EDIT' | translate }}
-            </button>
+          <button
+            *ngIf="viewMode === 'active'"
+            (click)="openEditAdminModal(selectedAdmin)"
+            class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 font-medium transition-colors">
+            Edit
+          </button>
         </div>
       </div>
     </div>
@@ -525,136 +706,64 @@
 
   <!-- Edit Admin Modal -->
   <div *ngIf="showEditAdminModal && editingAdmin" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="p-6">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold text-gray-800">
-            {{ 'ADMIN_ADMINS.EDIT_MODAL.TITLE' | translate }}
+            Edit Admin
           </h3>
-          <button 
-            (click)="closeEditAdminModal()"
-            class="text-gray-400 hover:text-gray-600 text-2xl">
+          <button (click)="closeEditAdminModal()" class="text-gray-400 hover:text-gray-600 text-2xl">
             ×
           </button>
         </div>
 
         <form [formGroup]="editAdminForm" (ngSubmit)="onEditSubmit()" class="space-y-4">
-          <!-- Informations de base -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.FIRST_NAME' | translate }} *
-              </label>
-              <input
-                type="text"
-                formControlName="firstName"
-                [class.border-red-500]="editAdminForm.get('firstName')?.invalid && editAdminForm.get('firstName')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.FIRST_NAME_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('firstName', editAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('firstName', editAdminForm) }}
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.LAST_NAME' | translate }} *
-              </label>
-              <input
-                type="text"
-                formControlName="lastName"
-                [class.border-red-500]="editAdminForm.get('lastName')?.invalid && editAdminForm.get('lastName')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.LAST_NAME_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('lastName', editAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('lastName', editAdminForm) }}
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.EMAIL' | translate }} *
-              </label>
-              <input
-                type="email"
-                formControlName="email"
-                [class.border-red-500]="editAdminForm.get('email')?.invalid && editAdminForm.get('email')?.touched"
-                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                [placeholder]="'ADMIN_ADMINS.MODAL.EMAIL_PLACEHOLDER' | translate"
-              />
-              <div *ngIf="getErrorMessage('email', editAdminForm)" class="text-red-500 text-xs mt-1">
-                {{ getErrorMessage('email', editAdminForm) }}
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_ADMINS.MODAL.ROLE' | translate }} *
-              </label>
-              <select
-                formControlName="role"
-                class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option *ngFor="let role of getAvailableRoles()" [value]="role">
-                  {{ role === 'superAdmin' ? 'Super Admin' : 'Admin' }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Champs communs pour admin et superAdmin -->
-          <div *ngIf="isAdminOrSuperAdminRoleEdit()" class="border-t pt-4">
-            <h4 class="text-lg font-medium text-gray-800 mb-4">
-              {{ 'ADMIN_ADMINS.MODAL.ADMIN_INFO' | translate }}
-            </h4>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Basic Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Basic Information</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.AGE' | translate }}
+                  First Name *
                 </label>
                 <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  formControlName="age"
-                  [class.border-red-500]="editAdminForm.get('age')?.invalid && editAdminForm.get('age')?.touched"
+                  type="text"
+                  formControlName="firstName"
+                  [class.border-red-500]="editAdminForm.get('firstName')?.invalid && editAdminForm.get('firstName')?.touched"
                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  [placeholder]="'ADMIN_ADMINS.MODAL.AGE_PLACEHOLDER' | translate"
                 />
-                <div *ngIf="getErrorMessage('age', editAdminForm)" class="text-red-500 text-xs mt-1">
-                  {{ getErrorMessage('age', editAdminForm) }}
+                <div *ngIf="getErrorMessage('firstName', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('firstName', editAdminForm) }}
                 </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.GENDER' | translate }}
+                  Last Name *
                 </label>
-                <select
-                  formControlName="gender"
-                  [ngClass]="{'text-gray-400': !editAdminForm.get('gender')?.value}"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option [ngValue]="null" disabled selected hidden>{{ 'ADMIN_ADMINS.MODAL.SELECT_GENDER' | translate }}</option>
-                  <option value="male">{{ 'ADMIN_ADMINS.MODAL.MALE' | translate }}</option>
-                  <option value="female">{{ 'ADMIN_ADMINS.MODAL.FEMALE' | translate }}</option>
-                  <option value="other">{{ 'ADMIN_ADMINS.MODAL.OTHER' | translate }}</option>
-                </select>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  [class.border-red-500]="editAdminForm.get('lastName')?.invalid && editAdminForm.get('lastName')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+                <div *ngIf="getErrorMessage('lastName', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('lastName', editAdminForm) }}
+                </div>
               </div>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.PHONE_NUMBER' | translate }}
+                  Phone Number
                 </label>
                 <input
                   type="tel"
                   formControlName="phoneNumber"
                   [class.border-red-500]="editAdminForm.get('phoneNumber')?.invalid && editAdminForm.get('phoneNumber')?.touched"
-                  class="bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  [placeholder]="'ADMIN_ADMINS.MODAL.PHONE_PLACEHOLDER' | translate"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <div *ngIf="getErrorMessage('phoneNumber', editAdminForm)" class="text-red-500 text-xs mt-1">
                   {{ getErrorMessage('phoneNumber', editAdminForm) }}
@@ -665,27 +774,86 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.MESSAGE_PERMISSION_LABEL' | translate }}
+                  New Password <small class="text-gray-500">(leave blank to keep current password)</small>
                 </label>
-                <select
-                  formControlName="messagePermission"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let permission of messagePermissions" [value]="permission">
-                    {{ getMessagePermissionLabel(permission) }}
-                  </option>
-                </select>
+                <input
+                  type="password"
+                  formControlName="password"
+                  [class.border-red-500]="editAdminForm.get('password')?.invalid && editAdminForm.get('password')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="Enter new password (optional)"
+                />
+                <div *ngIf="getErrorMessage('password', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('password', editAdminForm) }}
+                </div>
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.ACCOUNT_PRIVACY_LABEL' | translate }}
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  formControlName="confirmPassword"
+                  [class.border-red-500]="editAdminForm.get('confirmPassword')?.invalid && editAdminForm.get('confirmPassword')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="Confirm new password"
+                />
+                <div *ngIf="editAdminForm.errors?.['passwordMismatch'] && editAdminForm.get('confirmPassword')?.touched" class="text-red-500 text-xs mt-1">
+                  {{ 'ADMIN_ADMINS.MODAL.PASSWORD_MISMATCH' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Information -->
+          <div class="border-b pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Personal Information</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Age *
+                </label>
+                <input
+                  type="number"
+                  min="18"
+                  max="100"
+                  formControlName="age"
+                  [class.border-red-500]="editAdminForm.get('age')?.invalid && editAdminForm.get('age')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+                <div *ngIf="getErrorMessage('age', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('age', editAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Gender *
                 </label>
                 <select
-                  formControlName="accountPrivacy"
+                  formControlName="gender"
+                  [class.border-red-500]="editAdminForm.get('gender')?.invalid && editAdminForm.get('gender')?.touched"
                   class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let privacy of accountPrivacies" [value]="privacy">
-                    {{ getAccountPrivacyLabel(privacy) }}
+                  <option *ngFor="let gender of genderTypes" [value]="gender">
+                    {{ getGenderLabel(gender) }}
                   </option>
+                </select>
+                <div *ngIf="getErrorMessage('gender', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('gender', editAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Admin Level *
+                </label>
+                <select
+                  formControlName="adminLevel"
+                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                  <option value="MANAGER">Manager</option>
+                  <option value="STANDARD_ADMIN">Standard Admin</option>
                 </select>
               </div>
             </div>
@@ -693,20 +861,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.PROFILE_VISIBILITY_LABEL' | translate }}
-                </label>
-                <select
-                  formControlName="profileVisibility"
-                  class="cursor-pointer bg-white w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option *ngFor="let visibility of visibilityStatuses" [value]="visibility">
-                    {{ getVisibilityStatusLabel(visibility) }}
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ 'ADMIN_ADMINS.MODAL.DEPARTMENT_LABEL' | translate }}
+                  Department *
                 </label>
                 <select
                   formControlName="department"
@@ -719,22 +874,141 @@
             </div>
           </div>
 
-          <!-- Boutons -->
+          <!-- Account Settings -->
+          <div class="pb-4">
+            <h4 class="text-lg font-medium text-gray-800 mb-4">Account Settings</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  formControlName="enabled"
+                  id="editEnabled"
+                  class="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <label for="editEnabled" class="text-sm font-medium text-gray-700">
+                  Account Enabled
+                </label>
+              </div>
+
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  formControlName="suspended"
+                  id="editSuspended"
+                  class="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <label for="editSuspended" class="text-sm font-medium text-gray-700">
+                  Account Suspended
+                </label>
+              </div>
+
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  formControlName="tokenExpired"
+                  id="editTokenExpired"
+                  class="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <label for="editTokenExpired" class="text-sm font-medium text-gray-700">
+                  Token Expired
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="editAdminForm.get('suspended')?.value" class="mt-4 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Suspension Reason *
+                </label>
+                <textarea
+                  formControlName="suspensionReason"
+                  rows="3"
+                  [class.border-red-500]="editAdminForm.get('suspensionReason')?.invalid && editAdminForm.get('suspensionReason')?.touched"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  placeholder="Please provide reason for suspension..."
+                ></textarea>
+                <div *ngIf="getErrorMessage('suspensionReason', editAdminForm)" class="text-red-500 text-xs mt-1">
+                  {{ getErrorMessage('suspensionReason', editAdminForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Suspended Until
+                </label>
+                <input
+                  type="datetime-local"
+                  formControlName="suspendedUntil"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
           <div class="flex justify-end space-x-3 pt-6 border-t">
             <button
               type="button"
               (click)="closeEditAdminModal()"
-              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
-              {{ 'ADMIN_ADMINS.EDIT_MODAL.CANCEL' | translate }}
+              [disabled]="loadingAction"
+              class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50">
+              Cancel
             </button>
             <button
               type="submit"
-              [disabled]="editAdminForm.invalid"
+              [disabled]="editAdminForm.invalid || loadingAction"
               class="px-4 py-2 bg-brand-orange-dark text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 font-medium transition-colors">
-              {{ 'ADMIN_ADMINS.EDIT_MODAL.SAVE_CHANGES' | translate }}
+              <span *ngIf="loadingAction" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+              Save Changes
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div *ngIf="showDeleteConfirmModal && selectedAdmin" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+      <div class="p-6">
+        <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">
+          {{ deleteType === 'hard' ? 'Permanently Delete Admin' : 'Temporarily Delete Admin' }}
+        </h3>
+
+        <p class="text-sm text-gray-600 text-center mb-6">
+          Are you sure you want to {{ deleteType === 'hard' ? 'permanently delete' : 'temporarily disable' }} 
+          <strong>{{ selectedAdmin.firstName }} {{ selectedAdmin.lastName }}</strong>?
+          <span *ngIf="deleteType === 'hard'" class="block text-red-600 font-medium mt-1">
+            This action cannot be undone!
+          </span>
+          <span *ngIf="deleteType === 'soft'" class="block text-yellow-600 font-medium mt-1">
+            This admin can be restored later.
+          </span>
+        </p>
+
+        <div class="flex space-x-3">
+          <button
+            (click)="closeDeleteConfirmModal()"
+            [disabled]="loadingAction"
+            class="flex-1 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50">
+            Cancel
+          </button>
+          <button
+            (click)="confirmDelete()"
+            [disabled]="loadingAction"
+            [class]="deleteType === 'hard' ? 'bg-red-600 hover:bg-red-700' : 'bg-yellow-600 hover:bg-yellow-700'"
+            class="flex-1 px-4 py-2 text-white rounded font-medium transition-colors disabled:opacity-50">
+            <span *ngIf="loadingAction" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+            {{ deleteType === 'hard' ? 'Delete Permanently' : 'Delete Temporarily' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -303,6 +303,17 @@
     }
   },
   "ADMIN_QUESTIONS": {
+    "NO_QUESTIONS": "No questions available",
+    "LOADING": "Loading questions...",
+    "DELETE": {
+      "TITLE": "Delete Question",
+      "MESSAGE": "Are you sure you want to delete this question?",
+      "SOFT_DELETE": "Soft Delete",
+      "SOFT_DELETE_INFO": "This will hide the question without permanently removing it.",
+      "HARD_DELETE": "Hard Delete",
+      "HARD_DELETE_INFO": "This will permanently remove the question from the system.",
+      "CANCEL": "Cancel"
+    },
     "TITLE": "Question Bank Management",
     "SUBTITLE": "Manage RIASEC test questions and answer options",
     "ADD_BUTTON": "Add Question",
@@ -444,9 +455,21 @@
   "ACTIONS": {
     "VIEW": "View",
     "EDIT": "Edit",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "SOFT_DELETE": "Soft Delete",
+    "HARD_DELETE": "Hard Delete",
+    "RESTORE": "Restore"
   },
   "MODAL": {
+    "GENDER_SELECTION": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "OTHER": "Other"
+    },
+    "ADMIN_LEVEL": {
+      "STANDARD_ADMIN": "Standard Admin",
+      "MANAGER": "Manager"
+    },
     "ADD_TITLE": "Add New Admin",
     "FIRST_NAME": "First Name",
     "FIRST_NAME_PLACEHOLDER": "Enter first name",
@@ -477,20 +500,20 @@
     "MALE": "Male",
     "FEMALE": "Female",
     "OTHER": "Other",
-          "PHONE_NUMBER": "Phone Number",
-      "PHONE_PLACEHOLDER": "Enter phone number",
-      "MESSAGE_PERMISSION_LABEL": "Message Permission",
-      "ACCOUNT_PRIVACY_LABEL": "Account Privacy",
-      "PROFILE_VISIBILITY_LABEL": "Profile Visibility",
-      "DEPARTMENT_LABEL": "Department",
-      "SELECT_PERMISSION": "Select permission",
-      "SELECT_ACCOUNT_PRIVACY": "Select privacy",
-      "SELECT_PROFILE_VISIBILITY": "Select visibility",
-      "SELECT_DEPARTMENT": "Select department",
-      "MESSAGE_PERMISSION": {
-      "ALL": "All messages",
-      "CONTACTS_ONLY": "Contacts only",
-      "NONE": "No messages"
+    "PHONE_NUMBER": "Phone Number",
+    "PHONE_PLACEHOLDER": "Enter phone number",
+    "MESSAGE_PERMISSION_LABEL": "Message Permission",
+    "ACCOUNT_PRIVACY_LABEL": "Account Privacy",
+    "PROFILE_VISIBILITY_LABEL": "Profile Visibility",
+    "DEPARTMENT_LABEL": "Department",
+    "SELECT_PERMISSION": "Select permission",
+    "SELECT_ACCOUNT_PRIVACY": "Select privacy",
+    "SELECT_PROFILE_VISIBILITY": "Select visibility",
+    "SELECT_DEPARTMENT": "Select department",
+    "MESSAGE_PERMISSION": {
+    "ALL": "All messages",
+    "CONTACTS_ONLY": "Contacts only",
+    "NONE": "No messages"
     },
     "ACCOUNT_PRIVACY": {
       "PUBLIC": "Public",

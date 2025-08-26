@@ -1,5 +1,13 @@
 <div class="min-h-screen bg-orange-50 py-8 px-2 smaller:px-4 sm:px-6 lg:px-8">
   <div class="max-w-[88rem] mx-auto">
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white p-8 rounded-lg shadow-xl">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
+        <p class="text-gray-600 mt-4 text-center">{{ 'ADMIN_QUESTIONS.LOADING' | translate }}</p>
+      </div>
+    </div>
+
     <!-- Header Section -->
     <div class="text-center mb-12">
       <!-- Question Icon -->
@@ -40,19 +48,50 @@
               {{ getCategoryLabel(category) }}
             </option>
           </select>
+
+          <!-- Status Filter -->
+          <select
+            [(ngModel)]="selectedStatus"
+            (change)="onStatusChange()"
+            class="cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange transition-colors">
+            <option value="all">All Status</option>
+            <option value="active">Active Only</option>
+            <option value="deleted">Deleted Only</option>
+          </select>
         </div>
       </div>
 
       <div class="flex flex-wrap justify-between items-center gap-4">
-        <button
-          (click)="resetFilters()"
-          class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
-          {{ 'ADMIN_QUESTIONS.RESET_FILTERS' | translate }}
-        </button>
+        <div class="flex items-center space-x-2">
+          <button
+            (click)="resetFilters()"
+            class="px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+            {{ 'ADMIN_QUESTIONS.RESET_FILTERS' | translate }}
+          </button>
+          
+          <!-- User Role Indicator and Role Switcher for Testing -->
+          <div class="flex items-center space-x-2">
+            <div class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg text-sm font-medium">
+              {{ currentUser.name }} - Role: {{ getCurrentUserRole() }}
+            </div>
+            
+            <!-- Role Switcher for Testing -->
+            <select 
+              [value]="getCurrentUserRole()"
+              (change)="changeUserRole($any($event.target).value)"
+              class="px-2 py-1 text-xs border border-gray-300 rounded bg-white">
+              <option value="student">Student</option>
+              <option value="coach">Coach</option>
+              <option value="admin">Standard Admin</option>
+              <option value="superAdmin">Manager</option>
+            </select>
+          </div>
+        </div>
 
         <button
           (click)="openAddQuestionModal()"
-          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform">
+          [disabled]="isSubmitting"
+          class="px-6 py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold shadow-lg hover:shadow-xl transform">
           {{ 'ADMIN_QUESTIONS.ADD_BUTTON' | translate }}
         </button>
       </div>
@@ -82,27 +121,45 @@
             <th class="px-4 sm:px-6 py-4 text-left text-sm font-semibold text-gray-700">
               {{ 'ADMIN_QUESTIONS.TABLE.OPTIONS' | translate }}
             </th>
+            <th 
+              (click)="onSort('softDeleted')"
+              class="px-4 sm:px-6 py-4 cursor-pointer hover:bg-orange-200 select-none text-left text-sm font-semibold text-gray-700 transition-colors">
+              Status
+              <span *ngIf="sortField === 'softDeleted'" class="ml-1">
+                {{ sortDirection === 'asc' ? '↑' : '↓' }}
+              </span>
+            </th>
             <th class="px-4 sm:px-6 py-4 text-left text-sm font-semibold text-gray-700">
               {{ 'ADMIN_QUESTIONS.TABLE.ACTIONS' | translate }}
             </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let question of questions" class="hover:bg-orange-50 transition-colors">
+          <tr *ngFor="let question of questions" 
+              [class.bg-red-50]="isQuestionSoftDeleted(question)"
+              [class.opacity-75]="isQuestionSoftDeleted(question)"
+              class="hover:bg-orange-50 transition-colors">
             <td class="px-4 sm:px-6 py-4">
-              <div>
+              <div [class.line-through]="isQuestionSoftDeleted(question)" [class.text-gray-500]="isQuestionSoftDeleted(question)">
                 <div class="font-semibold text-gray-900">{{ question.text }}</div>
-                <!--<div class="text-sm text-gray-500 mt-1">ID: {{ question.id }}</div>-->
               </div>
             </td>
             <td class="px-4 sm:px-6 py-4">
               <span class="px-3 py-1 text-xs font-medium rounded-full bg-brand-orange text-white">
-                {{ getCategoryLabel(question.category) }}
+                {{ getCategoryLabel(question.category!) }}
               </span>
             </td>
             <td class="px-4 sm:px-6 py-4">
               <span class="text-sm text-gray-600">
                 {{ question.answerOptions.length }} {{ 'ADMIN_QUESTIONS.TABLE.OPTIONS_COUNT' | translate }}
+              </span>
+            </td>
+            <td class="px-4 sm:px-6 py-4">
+              <span *ngIf="isQuestionActive(question)" class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                Active
+              </span>
+              <span *ngIf="isQuestionSoftDeleted(question)" class="whitespace-nowrap px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                Soft Deleted
               </span>
             </td>
             <td class="px-4 sm:px-6 py-4">
@@ -112,23 +169,86 @@
                   class="text-brand-orange-dark hover:text-orange-700 cursor-pointer font-medium hover:underline transition-colors">
                   {{ 'ADMIN_QUESTIONS.TABLE.VIEW' | translate }}
                 </span>
-                <span class="text-gray-300">|</span>
-                <span 
-                  (click)="openEditQuestionModal(question)"
-                  class="text-green-600 hover:text-green-800 cursor-pointer font-medium hover:underline transition-colors">
-                  {{ 'ADMIN_QUESTIONS.TABLE.EDIT' | translate }}
-                </span>
-                <span class="text-gray-300">|</span>
-                <span 
-                  (click)="deleteQuestion(question)"
-                  class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
-                  {{ 'ADMIN_QUESTIONS.TABLE.DELETE' | translate }}
-                </span>
+                
+                <ng-container *ngIf="isQuestionActive(question)">
+                  <span class="text-gray-300">|</span>
+                  <span 
+                    (click)="openEditQuestionModal(question)"
+                    class="text-green-600 hover:text-green-800 cursor-pointer font-medium hover:underline transition-colors">
+                    {{ 'ADMIN_QUESTIONS.TABLE.EDIT' | translate }}
+                  </span>
+                  <span class="text-gray-300">|</span>
+                  <span 
+                    (click)="openDeleteConfirmModal(question)"
+                    class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
+                    {{ 'ADMIN_QUESTIONS.TABLE.DELETE' | translate }}
+                  </span>
+                </ng-container>
+                
+                <ng-container *ngIf="isQuestionSoftDeleted(question) && canRestore()">
+                  <span class="text-gray-300">|</span>
+                  <span 
+                    (click)="openRestoreConfirmModal(question)"
+                    class="text-blue-600 hover:text-blue-800 cursor-pointer font-medium hover:underline transition-colors">
+                    Restore
+                  </span>
+                  
+                  <!-- Hard Delete for Soft Deleted Questions -->
+                  <ng-container *ngIf="canHardDelete()">
+                    <span class="text-gray-300">|</span>
+                    <span 
+                      (click)="openDeleteConfirmModal(question)"
+                      class="text-red-600 hover:text-red-800 cursor-pointer font-medium hover:underline transition-colors">
+                      Hard Delete
+                    </span>
+                  </ng-container>
+                </ng-container>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && questions.length === 0" class="text-center py-12">
+        <div class="text-gray-500 text-lg">{{ 'ADMIN_QUESTIONS.NO_QUESTIONS' | translate }}</div>
+      </div>
+    </div>
+
+    <!-- Pagination Info -->
+    <div class="mb-4 flex flex-wrap flex-col sm:flex-row justify-between items-center gap-4 mt-6">
+      <div class="text-sm text-gray-600">
+        Showing {{ ((currentPage - 1) * pageSize) + 1 }} to {{ Math.min(currentPage * pageSize, totalItems) }} of {{ totalItems }} questions
+      </div>
+      
+      <!-- Pagination Controls -->
+      <div class="max-w-full flex items-center space-x-2">
+        <button
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+          class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+          Previous
+        </button>
+        
+        <div class="overflow-x-auto max-w-full flex space-x-1">
+          <button
+            *ngFor="let page of getPaginationArray()"
+            (click)="goToPage(page)"
+            [class.bg-brand-orange]="page === currentPage"
+            [class.text-white]="page === currentPage"
+            [class.hover:bg-gray-50]="page !== currentPage"
+            class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm transition-colors">
+            {{ page }}
+          </button>
+        </div>
+        
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+          class="px-2 smaller-sm-md:px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -143,7 +263,8 @@
         </h3>
         <button 
           (click)="closeAddQuestionModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl">
+          [disabled]="isSubmitting"
+          class="text-gray-400 hover:text-gray-600 text-2xl disabled:opacity-50">
           ×
         </button>
       </div>
@@ -174,6 +295,15 @@
                 {{ getErrorMessage('category', addQuestionForm) }}
               </div>
             </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Status
+              </label>
+              <div class="px-3 py-2 bg-green-50 border border-green-200 rounded text-sm text-green-700">
+                Active (New questions are automatically active)
+              </div>
+            </div>
           </div>
 
           <div class="mt-4">
@@ -193,17 +323,50 @@
           </div>
         </div>
 
+        <!-- Answer Options -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_QUESTIONS.MODAL.ANSWER_OPTIONS' | translate }} *
+          </h4>
+          
+          <div formArrayName="answerOptions" class="space-y-3">
+            <div *ngFor="let optionGroup of getAnswerOptions(addQuestionForm).controls; let i = index" 
+                 [formGroupName]="i" class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold">
+                {{ i + 1 }}
+              </div>
+              <div class="flex-1">
+                <input
+                  formControlName="text"
+                  type="text"
+                  [class.border-red-500]="getAnswerOptionErrorMessage(i, addQuestionForm)"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange"
+                  [placeholder]="'Option ' + (i + 1)"
+                />
+                <div *ngIf="getAnswerOptionErrorMessage(i, addQuestionForm)" class="text-red-500 text-xs mt-1">
+                  {{ getAnswerOptionErrorMessage(i, addQuestionForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Actions -->
         <div class="flex justify-end space-x-3 pt-4">
           <button
             type="button"
             (click)="closeAddQuestionModal()"
-            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
+            [disabled]="isSubmitting"
+            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
             {{ 'ADMIN_QUESTIONS.MODAL.CANCEL' | translate }}
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
+            [disabled]="isSubmitting"
+            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            <span *ngIf="isSubmitting" class="mr-2">
+              <div class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+            </span>
             {{ 'ADMIN_QUESTIONS.MODAL.ADD' | translate }}
           </button>
         </div>
@@ -237,17 +400,22 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_QUESTIONS.MODAL.ID' | translate }}
-              </label>
-              <p class="text-gray-900">{{ selectedQuestion.id }}</p>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
                 {{ 'ADMIN_QUESTIONS.MODAL.CATEGORY' | translate }}
               </label>
               <span class="px-2 py-1 text-xs rounded-full bg-brand-orange text-white">
-                {{ getCategoryLabel(selectedQuestion.category) }}
+                {{ getCategoryLabel(selectedQuestion.category!) }}
+              </span>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Status
+              </label>
+              <span *ngIf="isQuestionActive(selectedQuestion)" class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                Active
+              </span>
+              <span *ngIf="isQuestionSoftDeleted(selectedQuestion)" class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                Soft Deleted
               </span>
             </div>
           </div>
@@ -256,37 +424,29 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">
               {{ 'ADMIN_QUESTIONS.MODAL.QUESTION_TEXT' | translate }}
             </label>
-            <p class="text-gray-900">{{ selectedQuestion.text }}</p>
+            <p class="text-gray-900" [class.line-through]="isQuestionSoftDeleted(selectedQuestion)" [class.text-gray-500]="isQuestionSoftDeleted(selectedQuestion)">
+              {{ selectedQuestion.text }}
+            </p>
           </div>
         </div>
 
         <!-- Answer Options -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">
+          <label class="block text-sm font-medium text-gray-700 mb-3">
             {{ 'ADMIN_QUESTIONS.MODAL.ANSWER_OPTIONS' | translate }}
           </label>
           <div class="space-y-2">
             <div 
               *ngFor="let option of selectedQuestion.answerOptions"
               class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <span class="text-gray-900">{{ option.text }}</span>
-              <span class="text-sm text-gray-600">Score: {{ option.score }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- System Information -->
-        <div class="border-t pt-4">
-          <h4 class="text-lg font-medium text-gray-800 mb-4">
-            {{ 'ADMIN_QUESTIONS.MODAL.SYSTEM_INFO' | translate }}
-          </h4>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ 'ADMIN_QUESTIONS.MODAL.SOFT_DELETED' | translate }}
-              </label>
-              <p class="text-gray-900">{{ selectedQuestion.softDeleted ? 'Oui' : 'Non' }}</p>
+              <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold">
+                  {{ option.optionIndex }}
+                </div>
+                <span class="text-gray-900" [class.line-through]="isQuestionSoftDeleted(selectedQuestion)" [class.text-gray-500]="isQuestionSoftDeleted(selectedQuestion)">
+                  {{ option.text }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -314,7 +474,8 @@
         </h3>
         <button 
           (click)="closeEditQuestionModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl">
+          [disabled]="isSubmitting"
+          class="text-gray-400 hover:text-gray-600 text-2xl disabled:opacity-50">
           ×
         </button>
       </div>
@@ -345,6 +506,18 @@
                 {{ getErrorMessage('category', editQuestionForm) }}
               </div>
             </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Current Status
+              </label>
+              <span *ngIf="isQuestionActive(editingQuestion)" class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                Active
+              </span>
+              <span *ngIf="isQuestionSoftDeleted(editingQuestion)" class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                Soft Deleted
+              </span>
+            </div>
           </div>
 
           <div class="mt-4">
@@ -364,21 +537,177 @@
           </div>
         </div>
 
+        <!-- Answer Options -->
+        <div class="border-b pb-4">
+          <h4 class="text-lg font-medium text-gray-800 mb-4">
+            {{ 'ADMIN_QUESTIONS.MODAL.ANSWER_OPTIONS' | translate }} *
+          </h4>
+          
+          <div formArrayName="answerOptions" class="space-y-3">
+            <div *ngFor="let optionGroup of getAnswerOptions(editQuestionForm).controls; let i = index" 
+                 [formGroupName]="i" class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold">
+                {{ i + 1 }}
+              </div>
+              <div class="flex-1">
+                <input
+                  formControlName="text"
+                  type="text"
+                  [class.border-red-500]="getAnswerOptionErrorMessage(i, editQuestionForm)"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange"
+                  [placeholder]="'Option ' + (i + 1)"
+                />
+                <div *ngIf="getAnswerOptionErrorMessage(i, editQuestionForm)" class="text-red-500 text-xs mt-1">
+                  {{ getAnswerOptionErrorMessage(i, editQuestionForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Actions -->
         <div class="flex justify-end space-x-3 pt-4">
           <button
             type="button"
             (click)="closeEditQuestionModal()"
-            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition-colors">
+            [disabled]="isSubmitting"
+            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
             {{ 'ADMIN_QUESTIONS.MODAL.CANCEL' | translate }}
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 transition-colors">
+            [disabled]="isSubmitting"
+            class="px-4 py-2 bg-brand-orange-dark text-white rounded hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            <span *ngIf="isSubmitting" class="mr-2">
+              <div class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+            </span>
             {{ 'ADMIN_QUESTIONS.MODAL.UPDATE' | translate }}
           </button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteConfirmModal && deletingQuestion" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+    <div class="p-6">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">
+            {{ 'ADMIN_QUESTIONS.DELETE.TITLE' | translate }}
+          </h3>
+        </div>
+      </div>
+
+      <p class="text-gray-600 mb-6">
+        {{ 'ADMIN_QUESTIONS.DELETE.MESSAGE' | translate }}
+      </p>
+
+      <div class="bg-gray-50 p-3 rounded-lg mb-6">
+        <p class="text-sm text-gray-800 font-medium">{{ deletingQuestion.text }}</p>
+      </div>
+
+      <!-- Role-based delete options -->
+      <div class="space-y-3">
+        <!-- Soft Delete - Available for both MANAGER and STANDARD_ADMIN (only for active questions) -->
+        <div *ngIf="canSoftDelete() && !isQuestionSoftDeleted(deletingQuestion)">
+          <button
+            (click)="softDeleteQuestion(deletingQuestion)"
+            [disabled]="isSubmitting"
+            class="w-full px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            <span *ngIf="isSubmitting" class="mr-2">
+              <div class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+            </span>
+            {{ 'ADMIN_QUESTIONS.DELETE.SOFT_DELETE' | translate }}
+          </button>
+          <p class="text-xs text-gray-500 mt-1 text-center">
+            {{ 'ADMIN_QUESTIONS.DELETE.SOFT_DELETE_INFO' | translate }}
+          </p>
+        </div>
+
+        <!-- Hard Delete - Only available for MANAGER -->
+        <div *ngIf="canHardDelete()">
+          <div *ngIf="isQuestionSoftDeleted(deletingQuestion)" class="mb-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p class="text-sm text-red-700 font-medium">⚠️ Warning: This question is already soft deleted</p>
+            <p class="text-xs text-red-600 mt-1">Hard deleting will permanently remove it from the database. This action cannot be undone.</p>
+          </div>
+          <button
+            (click)="hardDeleteQuestion(deletingQuestion)"
+            [disabled]="isSubmitting"
+            class="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            <span *ngIf="isSubmitting" class="mr-2">
+              <div class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+            </span>
+            <span *ngIf="isQuestionSoftDeleted(deletingQuestion)">Permanently Delete</span>
+            <span *ngIf="!isQuestionSoftDeleted(deletingQuestion)">{{ 'ADMIN_QUESTIONS.DELETE.HARD_DELETE' | translate }}</span>
+          </button>
+          <p class="text-xs text-gray-500 mt-1 text-center">
+            <span *ngIf="isQuestionSoftDeleted(deletingQuestion)">This will permanently remove the question from the database</span>
+            <span *ngIf="!isQuestionSoftDeleted(deletingQuestion)">{{ 'ADMIN_QUESTIONS.DELETE.HARD_DELETE_INFO' | translate }}</span>
+          </p>
+        </div>
+
+        <!-- Cancel -->
+        <button
+          (click)="closeDeleteConfirmModal()"
+          [disabled]="isSubmitting"
+          class="w-full px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          {{ 'ADMIN_QUESTIONS.DELETE.CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Restore Confirmation Modal -->
+<div *ngIf="showRestoreConfirmModal && restoringQuestion" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+    <div class="p-6">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">
+            Restore Question
+          </h3>
+        </div>
+      </div>
+
+      <p class="text-gray-600 mb-6">
+        Are you sure you want to restore this question? It will become active again and visible to users.
+      </p>
+
+      <div class="bg-gray-50 p-3 rounded-lg mb-6">
+        <p class="text-sm text-gray-800 font-medium">{{ restoringQuestion.text }}</p>
+      </div>
+
+      <div class="flex space-x-3">
+        <button
+          (click)="closeRestoreConfirmModal()"
+          [disabled]="isSubmitting"
+          class="flex-1 px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          Cancel
+        </button>
+        <button
+          (click)="restoreQuestion(restoringQuestion)"
+          [disabled]="isSubmitting"
+          class="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          <span *ngIf="isSubmitting" class="mr-2">
+            <div class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+          </span>
+          Restore Question
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdminUpdateDTO {
+
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50, message = "First name must be at most 50 characters")
     private String firstName;

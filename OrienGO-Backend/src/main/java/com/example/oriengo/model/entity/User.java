@@ -69,7 +69,7 @@ public class User implements Serializable {
     private String email;
 
     @Column(nullable = false, length = 255)
-    private transient String password;
+    private String password;
 
     @Builder.Default
     @Column(nullable = false)

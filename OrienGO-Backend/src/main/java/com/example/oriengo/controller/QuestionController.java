@@ -3,11 +3,13 @@ package com.example.oriengo.controller;
 import com.example.oriengo.mapper.QuestionMapper;
 import com.example.oriengo.model.dto.QuestionDTO;
 import com.example.oriengo.model.dto.QuestionResponseDTO;
+import com.example.oriengo.model.dto.QuestionWithAnswersDTO;
 import com.example.oriengo.model.entity.Question;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +26,21 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper questionMapper;
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<QuestionResponseDTO>>> getQuestions(){
+    @GetMapping("")
+    public ResponseEntity<ApiResponse<List<QuestionResponseDTO>>> getAllQuestions(){
+        List<Question> questions = questionService.getQuestions();
+        List<QuestionResponseDTO> questionResps = questionMapper.toDTO(questions);
+        ApiResponse<List<QuestionResponseDTO>> response = ApiResponse.<List<QuestionResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Questions fetched successfully")
+                .data(questionResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("active")
+    public ResponseEntity<ApiResponse<List<QuestionResponseDTO>>> getActiveQuestions(){
         List<Question> questions = questionService.getQuestions(false);
         List<QuestionResponseDTO> questionResps = questionMapper.toDTO(questions);
         ApiResponse<List<QuestionResponseDTO>> response = ApiResponse.<List<QuestionResponseDTO>>builder()
@@ -141,6 +156,24 @@ public class QuestionController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @PostMapping("/with-answers")
+    public ResponseEntity<ApiResponse<QuestionResponseDTO>> createQuestionWithAnswers(
+            @Valid @RequestBody QuestionWithAnswersDTO questionInfo) {
+
+        Question question = questionService.createQuestionWithAnswers(questionInfo);
+        QuestionResponseDTO questionResp = questionMapper.toDTO(question);
+
+        ApiResponse<QuestionResponseDTO> response = ApiResponse.<QuestionResponseDTO>builder()
+                .code("SUCCESS")
+                .status(HttpStatus.CREATED.value())
+                .message("Question with answers created successfully")
+                .data(questionResp)
+                .build();
+
+        URI location = URI.create("/api/questions/" + question.getId());
+        return ResponseEntity.created(location).body(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<QuestionResponseDTO>> updateQuestion(@PathVariable Long id, @Valid @RequestBody QuestionDTO questionInfo){
         Question question = questionService.updateQuestion(id, questionInfo);
@@ -151,6 +184,24 @@ public class QuestionController {
                 .message("Question updated successfully")
                 .data(questionResp)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/with-answers")
+    public ResponseEntity<ApiResponse<QuestionResponseDTO>> updateQuestionWithAnswers(
+            @PathVariable Long id,
+            @Valid @RequestBody QuestionWithAnswersDTO questionInfo) {
+
+        Question question = questionService.updateQuestionWithAnswers(id, questionInfo);
+        QuestionResponseDTO questionResp = questionMapper.toDTO(question);
+
+        ApiResponse<QuestionResponseDTO> response = ApiResponse.<QuestionResponseDTO>builder()
+                .code("QUESTION_UPDATED")
+                .status(HttpStatus.OK.value())
+                .message("Question with answers updated successfully")
+                .data(questionResp)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 }

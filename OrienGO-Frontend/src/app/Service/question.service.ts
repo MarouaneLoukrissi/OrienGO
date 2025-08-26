@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../model/ApiResponse';
 import { QuestionResponseDTO } from '../model/dto/QuestionResponse.dto';
 import { QuestionDTO } from '../model/dto/Question.dto';
+import { QuestionWithAnswersDTO } from '../model/dto/QuestionWithAnswers.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,12 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {}
 
-  getQuestions(): Observable<ApiResponse<QuestionResponseDTO[]>> {
+  getAllQuestions(): Observable<ApiResponse<QuestionResponseDTO[]>> {
     return this.http.get<ApiResponse<QuestionResponseDTO[]>>(`${this.baseUrl}`);
+  }
+
+  getActiveQuestions(): Observable<ApiResponse<QuestionResponseDTO[]>> {
+    return this.http.get<ApiResponse<QuestionResponseDTO[]>>(`${this.baseUrl}/active`);
   }
 
   getDeletedQuestions(): Observable<ApiResponse<QuestionResponseDTO[]>> {
@@ -52,5 +57,13 @@ export class QuestionService {
 
   restoreQuestion(id: number): Observable<ApiResponse<QuestionResponseDTO>> {
     return this.http.put<ApiResponse<QuestionResponseDTO>>(`${this.baseUrl}/restore/${id}`, {});
+  }
+
+  createQuestionWithAnswers(question: QuestionWithAnswersDTO): Observable<ApiResponse<QuestionResponseDTO>> {
+    return this.http.post<ApiResponse<QuestionResponseDTO>>(`${this.baseUrl}/with-answers`, question);
+  }
+
+  updateQuestionWithAnswers(id: number, question: QuestionWithAnswersDTO): Observable<ApiResponse<QuestionResponseDTO>> {
+    return this.http.put<ApiResponse<QuestionResponseDTO>>(`${this.baseUrl}/${id}/with-answers`, question);
   }
 }

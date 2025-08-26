@@ -510,4 +510,7 @@ INSERT INTO answer_options (id, question_id, option_index, text) VALUES
 (297, 60, 2, 'En désaccord'),
 (298, 60, 3, 'Neutre'),
 (299, 60, 4, 'D''accord'),
-(300, 60, 5, 'Très d''accord'); 
+(300, 60, 5, 'Très d''accord');
+
+SELECT setval('question_seq', (SELECT MAX(id) FROM questions));
+SELECT setval('answer_option_seq', (SELECT MAX(id) FROM answer_options));

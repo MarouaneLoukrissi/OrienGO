@@ -28,7 +28,7 @@ export class AuthService {
   //private currentUserSubject = new BehaviorSubject<User | null>(null);
   //public currentUser$ = this.currentUserSubject.asObservable();
   private currentUserSubject = new BehaviorSubject<User>({
-    id: '1',
+    id: '202',
     name: 'Badr Icame',
     email: 'badricame@example.com',
     role: 'student' // Default role for demo

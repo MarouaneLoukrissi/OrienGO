@@ -7,7 +7,9 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -47,9 +49,10 @@ public class Question implements Serializable {
 
     @Builder.Default
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<AnswerOption> answerOptions = new HashSet<>();
+    private List<AnswerOption> answerOptions = new ArrayList<>();
 
     @Builder.Default
     @Column(name = "soft_deleted", nullable = false)
     private boolean softDeleted = false;
+
 }

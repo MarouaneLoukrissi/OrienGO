@@ -1,20 +1,20 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.AdminMapper;
-import com.example.oriengo.model.dto.AdminCreateDTO;
-import com.example.oriengo.model.dto.AdminResponseDTO;
-import com.example.oriengo.model.dto.AdminUpdateDTO;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.Admin;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.AdminService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("api/admin")
 @RequiredArgsConstructor
@@ -24,10 +24,23 @@ public class AdminController {
     private final AdminMapper adminMapper;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<AdminResponseDTO>>> getAdmins(){
+    public ResponseEntity<ApiResponse<List<AdminReturnDTO>>> getAdmins(){
+        List<Admin> admins = adminService.getAdmins();
+        List<AdminReturnDTO> adminResps = adminMapper.toReturnDTO(admins);
+        ApiResponse<List<AdminReturnDTO>> response = ApiResponse.<List<AdminReturnDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Admins fetched successfully")
+                .data(adminResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("active")
+    public ResponseEntity<ApiResponse<List<AdminReturnDTO>>> getActiveAdmins(){
         List<Admin> admins = adminService.getAdmins(false);
-        List<AdminResponseDTO> adminResps = adminMapper.toDTO(admins);
-        ApiResponse<List<AdminResponseDTO>> response = ApiResponse.<List<AdminResponseDTO>>builder()
+        List<AdminReturnDTO> adminResps = adminMapper.toReturnDTO(admins);
+        ApiResponse<List<AdminReturnDTO>> response = ApiResponse.<List<AdminReturnDTO>>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -37,10 +50,10 @@ public class AdminController {
     }
 
     @GetMapping("deleted")
-    public ResponseEntity<ApiResponse<List<AdminResponseDTO>>> getDeletedAdmins(){
+    public ResponseEntity<ApiResponse<List<AdminReturnDTO>>> getDeletedAdmins(){
         List<Admin> admins = adminService.getAdmins(true);
-        List<AdminResponseDTO> adminResps = adminMapper.toDTO(admins);
-        ApiResponse<List<AdminResponseDTO>> response = ApiResponse.<List<AdminResponseDTO>>builder()
+        List<AdminReturnDTO> adminResps = adminMapper.toReturnDTO(admins);
+        ApiResponse<List<AdminReturnDTO>> response = ApiResponse.<List<AdminReturnDTO>>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -50,10 +63,10 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<AdminResponseDTO>> getAdminById(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> getAdminById(@PathVariable Long id){
         Admin admin = adminService.getAdminById(id, false);
-        AdminResponseDTO adminResp = adminMapper.toDTO(admin);
-        ApiResponse<AdminResponseDTO> response = ApiResponse.<AdminResponseDTO>builder()
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(admin);
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -63,10 +76,10 @@ public class AdminController {
     }
 
     @GetMapping("/deleted/{id}")
-    public ResponseEntity<ApiResponse<AdminResponseDTO>> getDeletedAdminById(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> getDeletedAdminById(@PathVariable Long id){
         Admin admin = adminService.getAdminById(id, true);
-        AdminResponseDTO adminResp = adminMapper.toDTO(admin);
-        ApiResponse<AdminResponseDTO> response = ApiResponse.<AdminResponseDTO>builder()
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(admin);
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -76,10 +89,10 @@ public class AdminController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<ApiResponse<AdminResponseDTO>> getAdminByEmail(@PathVariable String email){
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> getAdminByEmail(@PathVariable String email){
         Admin admin = adminService.getAdminByEmail(email, false);
-        AdminResponseDTO adminResp = adminMapper.toDTO(admin);
-        ApiResponse<AdminResponseDTO> response = ApiResponse.<AdminResponseDTO>builder()
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(admin);
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -89,10 +102,10 @@ public class AdminController {
     }
 
     @GetMapping("deleted/email/{email}")
-    public ResponseEntity<ApiResponse<AdminResponseDTO>> getDeletedAdminByEmail(@PathVariable String email){
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> getDeletedAdminByEmail(@PathVariable String email){
         Admin admin = adminService.getAdminByEmail(email, true);
-        AdminResponseDTO adminResp = adminMapper.toDTO(admin);
-        ApiResponse<AdminResponseDTO> response = ApiResponse.<AdminResponseDTO>builder()
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(admin);
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Admins fetched successfully")
@@ -124,10 +137,10 @@ public class AdminController {
     }
 
     @PutMapping("/restore/{id}")
-    public ResponseEntity<ApiResponse<AdminResponseDTO>> restoreAdmin(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> restoreAdmin(@PathVariable Long id){
         Admin admin = adminService.restoreAdmin(id);
-        AdminResponseDTO adminResp = adminMapper.toDTO(admin);
-        ApiResponse<AdminResponseDTO> response = ApiResponse.<AdminResponseDTO>builder()
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(admin);
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
                 .code("ADMIN_RESTORED")
                 .status(200)
                 .message("Admin restored successfully")
@@ -150,6 +163,28 @@ public class AdminController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @PostMapping("all-fields")
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> createAdmin(@Valid @RequestBody AdminDTO adminDTO) {
+        // Call the service method
+        Admin createdAdmin = adminService.createAdminFromDTO(adminDTO);
+
+        // Map entity to response DTO
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(createdAdmin);
+
+        // Build API response
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
+                .code("SUCCESS")
+                .status(HttpStatus.CREATED.value())
+                .message("Admin created successfully")
+                .data(adminResp)
+                .build();
+
+        // Set Location header
+        URI location = URI.create("/api/admin/" + createdAdmin.getId());
+
+        return ResponseEntity.created(location).body(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<AdminResponseDTO>> updateAdmin(@PathVariable Long id, @Valid @RequestBody AdminUpdateDTO adminInfo){
         Admin admin = adminService.updateAdmin(id, adminInfo);
@@ -160,6 +195,28 @@ public class AdminController {
                 .message("Admin updated successfully")
                 .data(adminResp)
                 .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/all-fields")
+    public ResponseEntity<ApiResponse<AdminReturnDTO>> updateAdmin(
+            @PathVariable Long id,
+            @Valid @RequestBody AdminModifyDTO adminDTO) {
+
+        // Call the service method to update the admin
+        Admin updatedAdmin = adminService.updateAdminWithModifyDTO(id, adminDTO);
+
+        // Map entity to response DTO
+        AdminReturnDTO adminResp = adminMapper.toReturnDTO(updatedAdmin);
+
+        // Build API response
+        ApiResponse<AdminReturnDTO> response = ApiResponse.<AdminReturnDTO>builder()
+                .code("ADMIN_UPDATED")
+                .status(HttpStatus.OK.value())
+                .message("Admin updated successfully")
+                .data(adminResp)
+                .build();
+
         return ResponseEntity.ok(response);
     }
 }

@@ -22,4 +22,6 @@ public class QuestionResponseDTO {
     // Include answer options in the response DTO, but without circular references or lazy-loading issues
     private Set<AnswerOptionResponseDTO> answerOptions;
 
+    private boolean softDeleted;
+
 }

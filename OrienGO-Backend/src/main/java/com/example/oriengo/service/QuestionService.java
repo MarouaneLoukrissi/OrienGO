@@ -3,7 +3,10 @@ package com.example.oriengo.service;
 import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.Question.*;
 import com.example.oriengo.mapper.QuestionMapper;
+import com.example.oriengo.model.dto.AnswerOptionFilteredDTO;
 import com.example.oriengo.model.dto.QuestionDTO;
+import com.example.oriengo.model.dto.QuestionWithAnswersDTO;
+import com.example.oriengo.model.entity.AnswerOption;
 import com.example.oriengo.model.entity.Question;
 import com.example.oriengo.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Service
@@ -38,6 +45,18 @@ public class QuestionService {
             return questions;
         } catch (Exception e) {
             log.error("Failed to fetch questions with isDeleted = {}: {}", deleted, e.getMessage(), e);
+            throw new QuestionGetException(HttpStatus.NOT_FOUND, getMessage("question.not.found"));
+        }
+    }
+
+    public List<Question> getQuestions() {
+        try {
+            log.info("Fetching questions");
+            List<Question> questions = questionRepository.findAll();
+            log.info("Found {} questions", questions.size());
+            return questions;
+        } catch (Exception e) {
+            log.error("Failed to fetch questions: {}", e.getMessage(), e);
             throw new QuestionGetException(HttpStatus.NOT_FOUND, getMessage("question.not.found"));
         }
     }
@@ -184,6 +203,72 @@ public class QuestionService {
         }
     }
 
+    @Transactional
+    public Question createQuestionWithAnswers(QuestionWithAnswersDTO dto) {
+        if (dto == null) {
+            log.warn("Question DTO cannot be null");
+            throw new QuestionCreationException(HttpStatus.BAD_REQUEST, getMessage("question.dto.empty"));
+        }
+
+        try {
+            log.info("Starting creation of new question with text: {}", dto.getText());
+
+            boolean exists = questionRepository.existsByTextAndSoftDeletedFalse(dto.getText());
+            if (exists) {
+                log.warn("Question already exists with text: {}", dto.getText());
+                throw new QuestionCreationException(HttpStatus.CONFLICT,
+                        getMessage("question.text.already.exists", dto.getText()));
+            }
+
+            // Validate exactly 5 answer options
+            if (dto.getAnswerOptions() == null || dto.getAnswerOptions().size() != 5) {
+                log.warn("Question must have exactly 5 answer options, got {}",
+                        dto.getAnswerOptions() == null ? 0 : dto.getAnswerOptions().size());
+                throw new QuestionCreationException(HttpStatus.BAD_REQUEST,
+                        getMessage("question.answeroptions.exactly.five"));
+            }
+
+            // Validate option indices are 1..5 and unique
+            List<Integer> indices = dto.getAnswerOptions().stream()
+                    .map(AnswerOptionFilteredDTO::getOptionIndex)
+                    .toList();
+
+            if (!indices.containsAll(List.of(1, 2, 3, 4, 5))) {
+                log.warn("Invalid option indices provided: {}", indices);
+                throw new QuestionCreationException(HttpStatus.BAD_REQUEST,
+                        getMessage("question.answeroptions.invalid.indices"));
+            }
+
+            // Map to entity
+            Question question = new Question();
+            question.setText(dto.getText());
+            question.setCategory(dto.getCategory());
+            question.setSoftDeleted(false);
+
+            // Map AnswerOptions
+            List<AnswerOption> options = dto.getAnswerOptions().stream()
+                    .map(optDto -> AnswerOption.builder()
+                            .optionIndex(optDto.getOptionIndex())
+                            .text(optDto.getText())
+                            .question(question)
+                            .build())
+                    .collect(Collectors.toList());
+
+            question.setAnswerOptions(options);
+
+            Question savedQuestion = questionRepository.save(question);
+            log.info("Question created successfully with ID: {}", savedQuestion.getId());
+
+            return savedQuestion;
+
+        } catch (QuestionCreationException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error during question creation for text '{}': {}", dto.getText(), e.getMessage(), e);
+            throw new QuestionCreationException(HttpStatus.INTERNAL_SERVER_ERROR, getMessage("question.create.failed"));
+        }
+    }
+
 
     @Transactional
     public Question updateQuestion(Long id, QuestionDTO dto) {
@@ -216,4 +301,70 @@ public class QuestionService {
             throw new QuestionUpdateException(HttpStatus.INTERNAL_SERVER_ERROR, getMessage("question.update.failed"));
         }
     }
+
+    @Transactional
+    public Question updateQuestionWithAnswers(Long id, QuestionWithAnswersDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update question with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("question.id.empty"));
+        }
+        if (dto == null) {
+            log.warn("Question update request cannot be null");
+            throw new QuestionUpdateException(HttpStatus.BAD_REQUEST, getMessage("question.dto.empty"));
+        }
+
+        try {
+            log.info("Updating question with ID: {}", id);
+
+            Question existingQuestion = getQuestionById(id);
+            if (existingQuestion == null) {
+                log.warn("Question not found with ID: {}", id);
+                throw new QuestionUpdateException(HttpStatus.NOT_FOUND, getMessage("question.not.found", id));
+            }
+
+            // Update question fields
+            existingQuestion.setText(dto.getText());
+            existingQuestion.setCategory(dto.getCategory());
+
+            // Validate answer options (must be exactly 5, indices 1–5)
+            if (dto.getAnswerOptions() == null || dto.getAnswerOptions().size() != 5) {
+                throw new QuestionUpdateException(HttpStatus.BAD_REQUEST,
+                        getMessage("question.answeroptions.exactly.five"));
+            }
+
+            List<Integer> indices = dto.getAnswerOptions().stream()
+                    .map(AnswerOptionFilteredDTO::getOptionIndex)
+                    .toList();
+
+            if (!indices.containsAll(List.of(1, 2, 3, 4, 5))) {
+                throw new QuestionUpdateException(HttpStatus.BAD_REQUEST,
+                        getMessage("question.answeroptions.invalid.indices"));
+            }
+
+            // Map new AnswerOptions to mutable List
+            List<AnswerOption> newOptions = dto.getAnswerOptions().stream()
+                    .map(optDto -> AnswerOption.builder()
+                            .optionIndex(optDto.getOptionIndex())
+                            .text(optDto.getText())
+                            .question(existingQuestion)
+                            .build())
+                    .collect(Collectors.toCollection(ArrayList::new));
+
+            // Replace old options with new ones
+            existingQuestion.getAnswerOptions().clear(); // safe now because it's mutable ArrayList
+            existingQuestion.getAnswerOptions().addAll(newOptions);
+
+            Question savedQuestion = questionRepository.save(existingQuestion);
+            log.info("Question with ID {} successfully updated (with answers)", savedQuestion.getId());
+            return savedQuestion;
+
+        } catch (QuestionUpdateException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Error updating question with ID {}: {}", id, e.getMessage(), e);
+            throw new QuestionUpdateException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    getMessage("question.update.failed"));
+        }
+    }
+
 }
