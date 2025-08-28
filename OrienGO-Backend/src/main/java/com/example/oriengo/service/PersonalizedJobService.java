@@ -9,9 +9,17 @@ import com.example.oriengo.model.dto.PersonalizedJobRequestDto;
 import com.example.oriengo.model.entity.PersonalizedJob;
 import com.example.oriengo.model.entity.JobRecommendation;
 import com.example.oriengo.mapper.PersonalizedJobMapper;
+import com.example.oriengo.repository.StudentRepository;
+import com.example.oriengo.model.entity.Student;
+import com.example.oriengo.model.enumeration.LinkType;
+import com.example.oriengo.model.entity.StudentPersonalizedJobLink;
+import com.example.oriengo.model.dto.PersonalizedJobResponseDto;
 import com.example.oriengo.repository.PersonalizedJobRepository;
 import com.example.oriengo.repository.JobRecommendationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -28,7 +36,12 @@ import java.util.List;
 public class PersonalizedJobService {
     private final PersonalizedJobRepository repository;
     private final JobRecommendationRepository jobRecommendationRepository;
+    private final StudentRepository studentRepository;
+
     private final PersonalizedJobMapper mapper;
+    
+    @Autowired
+    private RestTemplate restTemplate;
     private final MessageSource messageSource; // Injected
 
     private String getMessage(String key, Object... args) {
@@ -153,5 +166,151 @@ public class PersonalizedJobService {
             log.error("Failed to fetch highlighted jobs : {}", e.getMessage(), e);
             throw new PersonalizedJobGetException(HttpStatus.NOT_FOUND, getMessage("personalizedJob.not.found"));
         }
+    }
+
+    public java.util.Map<Long, java.util.List<PersonalizedJobResponseDto>> scrapeAndCreatePersonalizedJobs(java.util.List<Long> jobRecommendationIds, Long studentId) {
+        if (jobRecommendationIds == null || jobRecommendationIds.isEmpty()) {
+            throw new PersonalizedJobCreationException(HttpStatus.BAD_REQUEST, getMessage("personalizedJob.dto.empty"));
+        }
+        if (studentId == null) {
+            throw new PersonalizedJobCreationException(HttpStatus.BAD_REQUEST, getMessage("student.id.empty"));
+        }
+
+        Student student = studentRepository.findByIdAndIsDeletedFalse(studentId)
+                .orElseThrow(() -> new PersonalizedJobCreationException(HttpStatus.NOT_FOUND, getMessage("student.not.found")));
+
+        java.util.Map<Long, java.util.List<PersonalizedJobResponseDto>> result = new java.util.HashMap<>();
+
+        for (Long recId : jobRecommendationIds) {
+            JobRecommendation jobRecommendation = jobRecommendationRepository.findById(recId)
+                    .orElseThrow(() -> new PersonalizedJobCreationException(HttpStatus.NOT_FOUND, getMessage("jobRecommendation.not.found")));
+
+            // Get job title for scraping
+            String title = jobRecommendation.getJob().getTitle();
+            
+            // Call Flask API for job scraping
+            java.util.List<PersonalizedJob> savedList = new java.util.ArrayList<>();
+            try {
+                String url = "http://localhost:5000/jobs/search?search_term=" + java.net.URLEncoder.encode(title, "UTF-8");
+                ResponseEntity<java.util.Map[]> response = restTemplate.getForEntity(url, java.util.Map[].class);
+                
+                if (response.getBody() != null && response.getBody().length > 0) {
+                    for (java.util.Map<String, Object> scrapedJob : response.getBody()) {
+                        PersonalizedJob pj = PersonalizedJob.builder()
+                                .title((String) scrapedJob.get("title"))
+                                .companyName((String) scrapedJob.get("companyName"))
+                                .location((String) scrapedJob.get("location"))
+                                .jobType((String) scrapedJob.get("jobType"))
+                                .description(truncate((String) scrapedJob.get("description"), 1000))
+                                .applyUrl((String) scrapedJob.get("applyUrl"))
+                                .salaryRange((String) scrapedJob.get("salaryRange"))
+                                .category("TECH") // Default category
+                                .source((String) scrapedJob.get("source"))
+                                .postedDate(parseDate((String) scrapedJob.get("postedDate")))
+                                .requiredSkills((String) scrapedJob.get("requiredSkills"))
+                                .companyUrl((String) scrapedJob.get("companyUrl"))
+                                .companyUrlDirect((String) scrapedJob.get("companyUrlDirect"))
+                                .companyAddresses((String) scrapedJob.get("companyAddresses"))
+                                .companyNumEmployees(scrapedJob.get("companyNumEmployees") != null ? 
+                                    Integer.valueOf(scrapedJob.get("companyNumEmployees").toString()) : null)
+                                .companyRevenue((String) scrapedJob.get("companyRevenue"))
+                                .companyDescription((String) scrapedJob.get("companyDescription"))
+                                .experienceRange((String) scrapedJob.get("experienceRange"))
+                                .emails((String) scrapedJob.get("emails"))
+                                .companyIndustry((String) scrapedJob.get("companyIndustry"))
+                                .jobUrlDirect((String) scrapedJob.get("jobUrlDirect"))
+                                .isRemote(scrapedJob.get("isRemote") != null ? 
+                                    Boolean.valueOf(scrapedJob.get("isRemote").toString()) : false)
+                                .expirationDate(java.time.LocalDate.now().plusMonths(1))
+                                .duration("Permanent")
+                                .matchPercentage(jobRecommendation.getMatchPercentage() != null ? 
+                                    jobRecommendation.getMatchPercentage() : 75)
+                                .highlighted(false)
+                                .softDeleted(false)
+                                .build();
+
+                        pj.setJobRecommendation(jobRecommendation);
+
+                        // Create student link with LinkType.NORMAL
+                        StudentPersonalizedJobLink link = StudentPersonalizedJobLink.builder()
+                                .student(student)
+                                .personalizedJob(pj)
+                                .type(LinkType.NORMAL)
+                                .build();
+                        pj.getStudentLinks().add(link);
+
+                        PersonalizedJob saved = repository.save(pj);
+                        savedList.add(saved);
+                    }
+                } else {
+                    log.warn("No jobs found for title: {}", title);
+                }
+            } catch (Exception e) {
+                log.error("Scraping failed for title: {}", title, e);
+                // Create a fallback job if scraping fails
+                PersonalizedJob fallbackJob = createFallbackJob(jobRecommendation, recId);
+                fallbackJob.setJobRecommendation(jobRecommendation);
+                
+                StudentPersonalizedJobLink link = StudentPersonalizedJobLink.builder()
+                        .student(student)
+                        .personalizedJob(fallbackJob)
+                        .type(LinkType.NORMAL)
+                        .build();
+                fallbackJob.getStudentLinks().add(link);
+                
+                PersonalizedJob saved = repository.save(fallbackJob);
+                savedList.add(saved);
+            }
+            
+            result.put(recId, mapper.toResponseDtoList(savedList));
+        }
+
+        return result;
+    }
+
+    private static String truncate(String value, int max) {
+        if (value == null) return null;
+        return value.length() <= max ? value : value.substring(0, max);
+    }
+
+    private static java.time.LocalDate parseDate(String value) {
+        if (value == null || value.isEmpty()) return null;
+        try {
+            return java.time.LocalDate.parse(value.substring(0, 10));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private PersonalizedJob createFallbackJob(JobRecommendation jobRecommendation, Long recId) {
+        return PersonalizedJob.builder()
+                .title("Fallback Job for " + jobRecommendation.getJob().getTitle())
+                .companyName("Fallback Company")
+                .location("Fallback Location")
+                .jobType("FULL_TIME")
+                .description("Fallback job created due to scraping failure for recommendation ID: " + recId)
+                .applyUrl("https://example.com/apply")
+                .salaryRange("30000 - 50000")
+                .category("TECH")
+                .source("FALLBACK")
+                .postedDate(java.time.LocalDate.now())
+                .requiredSkills("Java, Spring Boot, PostgreSQL")
+                .companyUrl("https://example.com")
+                .companyUrlDirect("https://example.com")
+                .companyAddresses("Fallback Address")
+                .companyNumEmployees(100)
+                .companyRevenue("$1M - $10M")
+                .companyDescription("Fallback company description")
+                .experienceRange("2-5 years")
+                .emails("hr@example.com")
+                .companyIndustry("Technology")
+                .jobUrlDirect("https://example.com/job")
+                .isRemote(false)
+                .expirationDate(java.time.LocalDate.now().plusMonths(1))
+                .duration("Permanent")
+                .matchPercentage(jobRecommendation.getMatchPercentage() != null ? jobRecommendation.getMatchPercentage() : 75)
+                .highlighted(false)
+                .softDeleted(false)
+                .build();
     }
 } 

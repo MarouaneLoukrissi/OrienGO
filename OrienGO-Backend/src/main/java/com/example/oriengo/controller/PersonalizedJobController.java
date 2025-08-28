@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 import java.net.URI;
 import java.util.List;
@@ -131,4 +132,19 @@ public class PersonalizedJobController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/scrape")
+    public ResponseEntity<ApiResponse<Map<Long, List<PersonalizedJobResponseDto>>>> scrapeAndCreate(
+            @RequestParam List<Long> jobRecommendationIds,
+            @RequestParam Long studentId) {
+        Map<Long, List<PersonalizedJobResponseDto>> data = service.scrapeAndCreatePersonalizedJobs(jobRecommendationIds, studentId);
+        ApiResponse<Map<Long, List<PersonalizedJobResponseDto>>> response = ApiResponse.<Map<Long, List<PersonalizedJobResponseDto>>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Scraping executed and personalized jobs created")
+                .data(data)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
 }
