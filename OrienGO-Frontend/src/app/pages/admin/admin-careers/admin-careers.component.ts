@@ -101,7 +101,7 @@ export class AdminCareersComponent implements OnInit {
   loadJobs(): void {
     this.loading = true;
     this.error = null;
-    
+
     this.jobService.getAllJobs().subscribe({
       next: (response) => {
         if (response.status === 200) {
@@ -145,7 +145,7 @@ export class AdminCareersComponent implements OnInit {
     if (this.addJobForm.valid) {
       this.submitting = true;
       this.error = null;
-      
+
       const formValue = this.addJobForm.value;
       const jobRequest: JobRequestDto = {
         title: formValue.title,
@@ -227,7 +227,7 @@ export class AdminCareersComponent implements OnInit {
     if (this.editJobForm.valid && this.editingJob) {
       this.submitting = true;
       this.error = null;
-      
+
       const formValue = this.editJobForm.value;
       const jobRequest: JobRequestDto = {
         title: formValue.title,
@@ -272,7 +272,7 @@ export class AdminCareersComponent implements OnInit {
   deleteJob(job: JobResponseDto): void {
     if (confirm('Are you sure you want to delete this career?')) {
       this.error = null;
-      
+
       this.jobService.deleteJob(job.id).subscribe({
         next: (response) => {
           if (response.status === 200 || response.status === 204) {
@@ -294,12 +294,12 @@ export class AdminCareersComponent implements OnInit {
   // Pagination methods
   updatePagination(): void {
     this.totalPages = Math.ceil(this.jobs.length / this.pageSize);
-    
+
     // Reset to first page if current page is out of bounds
     if (this.currentPage > this.totalPages && this.totalPages > 0) {
       this.currentPage = 1;
     }
-    
+
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedJobs = this.jobs.slice(startIndex, endIndex);
@@ -331,16 +331,16 @@ export class AdminCareersComponent implements OnInit {
     const maxVisiblePages = 3;
     let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
-    
+
     // Adjust start page if we're near the end
     if (endPage - startPage < maxVisiblePages - 1) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
-    
+
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
     }
-    
+
     return pages;
   }
 
@@ -391,7 +391,8 @@ export class AdminCareersComponent implements OnInit {
       [JobCategory.EDUCATION]: 'Education',
       [JobCategory.TECH]: 'Technology',
       [JobCategory.BUSINESS]: 'Business',
-      [JobCategory.ARTS]: 'Arts'
+      [JobCategory.ARTS]: 'Arts',
+      [JobCategory.SOCIAL]: 'Social'
     };
     return labels[category] || category;
   }
@@ -451,7 +452,7 @@ export class AdminCareersComponent implements OnInit {
       filteredJobs.sort((a, b) => {
         const aValue = (a as any)[this.sortField];
         const bValue = (b as any)[this.sortField];
-        
+
         if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;
         if (aValue > bValue) return this.sortDirection === 'asc' ? 1 : -1;
         return 0;

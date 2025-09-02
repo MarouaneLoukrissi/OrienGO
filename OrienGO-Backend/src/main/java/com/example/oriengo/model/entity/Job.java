@@ -31,7 +31,7 @@ public class Job implements Serializable {
     @SequenceGenerator(name = "job_seq", sequenceName = "job_seq", allocationSize = 50)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 255)
     private String title;
 
     @Column(nullable = false, length = 1000)
@@ -41,13 +41,13 @@ public class Job implements Serializable {
     @Column(nullable = false, length = 50)
     private JobCategory category;
 
-    @Column(length = 100)
+    @Column(length = 255)
     private String education; // e.g. Master's in Psychology
 
     @Column(name = "salary_range", length = 100)
     private String salaryRange; // e.g. "30,000 - 50,000 USD/year"
 
-    @Column(name = "job_market", length = 100)
+    @Column(name = "job_market", length = 255)
     private String jobMarket; // e.g. "High demand", "Stable"
 
     // RIASEC attributes

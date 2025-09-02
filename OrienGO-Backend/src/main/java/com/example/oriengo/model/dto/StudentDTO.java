@@ -1,42 +1,80 @@
 package com.example.oriengo.model.dto;
 
-import com.example.oriengo.model.enumeration.AccountPrivacy;
-import com.example.oriengo.model.enumeration.EducationLevel;
-import com.example.oriengo.model.enumeration.VisibilityStatus;
-import com.example.oriengo.model.enumeration.MessagePermission;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import com.example.oriengo.model.enumeration.*;
+import com.example.oriengo.validations.ValidPhoneNumber;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import com.example.oriengo.model.entity.Location;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class StudentDTO {
 
-    @NotBlank
+    @NotBlank(message = "{firstName.notBlank}")
+    @Size(min = 2, max = 50, message = "{firstName.size}")
     private String firstName;
-    @NotBlank
+
+    @NotBlank(message = "{lastName.notBlank}")
+    @Size(min = 2, max = 50, message = "{lastName.size}")
     private String lastName;
-    @NotBlank
-    @Email
-    private String email;
+
+    @NotNull(message = "{age.notNull}")
+    @Min(value = 10, message = "{age.min}")
+    @Max(value = 120, message = "{age.max}")
+    private Integer age;
+
+    @NotNull(message = "{gender.notNull}")
+    private GenderType gender;
+
+    @Size(max = 20, message = "{phoneNumber.size}")
+    @Pattern(regexp = "^\\+?[1-9][0-9]{7,19}$", message = "{phoneNumber.pattern}")
+    @ValidPhoneNumber(message = "{phoneNumber.validPhoneNumber}")
     private String phoneNumber;
-    private String age;
-    private String gender;
 
+    @NotBlank(message = "{email.notBlank}")
+    @Email(message = "{email.email}")
+    @Size(max = 365, message = "{email.size}")
+    private String email;
+
+    @NotBlank(message = "{password.notBlank}")
+    @Size(min = 8, max = 255, message = "{password.size}")
+    private String password;
+
+//    @NotBlank(message = "Confirm password is required")
+//    private String confirmPassword;
+
+    @Size(max = 100, message = "{school.size}")
     private String school;
+
+    @Size(max = 100, message = "{fieldOfStudy.size}")
     private String fieldOfStudy;
-    @NotNull
+
+    @NotNull(message = "{educationLevel.notNull}")
     private EducationLevel educationLevel;
-    private Location location;
-    @NotNull
-    private VisibilityStatus profileVisibility;
-    @NotNull
+
+    @NotNull(message = "{messagePermission.notNull}")
+    private MessagePermission messagePermission;
+
+    @NotNull(message = "{accountPrivacy.notNull}")
     private AccountPrivacy accountPrivacy;
-    @NotNull
-    private MessagePermission messagePermission; // si pertinent
 
+    @NotNull(message = "{profileVisibility.notNull}")
+    private VisibilityStatus profileVisibility;
 
+    @Valid
+    private LocationDTO location;
+
+    // Added fields
+    private boolean enabled = false;
+
+    private boolean suspended = false;
+
+    @Size(max = 255, message = "{suspensionReason.size}")
+    private String suspensionReason;
+
+    private LocalDateTime suspendedUntil;
 }

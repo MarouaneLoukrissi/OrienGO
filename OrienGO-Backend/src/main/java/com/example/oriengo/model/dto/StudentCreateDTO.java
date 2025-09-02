@@ -56,15 +56,6 @@ public class StudentCreateDTO {
     @NotNull(message = "{educationLevel.notNull}")
     private EducationLevel educationLevel;
 
-//    @NotNull(message = "{messagePermission.notNull}")
-//    private MessagePermission messagePermission;
-//
-//    @NotNull(message = "{accountPrivacy.notNull}")
-//    private AccountPrivacy accountPrivacy;
-//
-//    @NotNull(message = "{profileVisibility.notNull}")
-//    private VisibilityStatus profileVisibility;
-
     @Valid
     private LocationDTO location;
 }

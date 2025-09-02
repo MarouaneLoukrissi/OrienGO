@@ -16,24 +16,13 @@ def recommendations():
     output = generate_recommendations.generate_recommendations(riasec_result)
     return jsonify(output)
 
-@app.route("/jobs", methods=["GET"])
-def get_jobs():
-    job_recommendation_id = request.args.get("job_recommendation_id", type=int)
-    if job_recommendation_id is None:
-        return jsonify({"error": "Vous devez fournir un 'job_recommendation_id'"}), 400
-    try:
-        output = job_scraper.get_jobs_by_recommendation(job_recommendation_id)
-        return jsonify(output)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 @app.route("/jobs/search", methods=["GET"])
-def search_jobs():
+def search_jobs_route():
     search_term = request.args.get("search_term")
     if not search_term:
         return jsonify({"error": "Vous devez fournir un 'search_term'"}), 400
     try:
-        output = job_scraper.search_jobs(search_term)
+        output = job_scraper.search_jobs(search_term)  # now unambiguous
         return jsonify(output)
     except Exception as e:
         return jsonify({"error": str(e)}), 500

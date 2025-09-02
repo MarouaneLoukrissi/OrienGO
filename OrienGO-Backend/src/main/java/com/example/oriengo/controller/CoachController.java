@@ -1,9 +1,7 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.CoachMapper;
-import com.example.oriengo.model.dto.CoachCreateDTO;
-import com.example.oriengo.model.dto.CoachUpdateProfileDTO;
-import com.example.oriengo.model.dto.CoachResponseDTO;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.Coach;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.CoachService;
@@ -27,7 +25,20 @@ public class CoachController {
     private final CoachMapper coachMapper;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CoachResponseDTO>>> getCoaches() {
+    public ResponseEntity<ApiResponse<List<CoachReturnDTO>>> getCoaches() {
+        List<Coach> coaches = coachService.getCoaches();
+        List<CoachReturnDTO> coachResps = coachMapper.toAdminDTO(coaches);
+        ApiResponse<List<CoachReturnDTO>> response = ApiResponse.<List<CoachReturnDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Coaches fetched successfully")
+                .data(coachResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<ApiResponse<List<CoachResponseDTO>>> getActiveCoaches() {
         List<Coach> coaches = coachService.getCoaches(false);
         List<CoachResponseDTO> coachResps = coachMapper.toDTO(coaches);
         ApiResponse<List<CoachResponseDTO>> response = ApiResponse.<List<CoachResponseDTO>>builder()
@@ -52,11 +63,37 @@ public class CoachController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/admin/deleted")
+    public ResponseEntity<ApiResponse<List<CoachReturnDTO>>> getDeletedCoachesForAdmin() {
+        List<Coach> coaches = coachService.getCoaches(true);
+        List<CoachReturnDTO> coachResps = coachMapper.toAdminDTO(coaches);
+        ApiResponse<List<CoachReturnDTO>> response = ApiResponse.<List<CoachReturnDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted coaches fetched successfully")
+                .data(coachResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<CoachResponseDTO>> getCoachById(@PathVariable Long id) {
         Coach coach = coachService.getCoachById(id, false);
         CoachResponseDTO coachResp = coachMapper.toDTO(coach);
         ApiResponse<CoachResponseDTO> response = ApiResponse.<CoachResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Coach fetched successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> getCoachByIdForAdmin(@PathVariable Long id) {
+        Coach coach = coachService.getCoachById(id, false);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Coach fetched successfully")
@@ -78,6 +115,19 @@ public class CoachController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/admin/deleted/{id}")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> getDeletedCoachByIdForAdmin(@PathVariable Long id) {
+        Coach coach = coachService.getCoachById(id, true);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted coach fetched successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/email/{email}")
     public ResponseEntity<ApiResponse<CoachResponseDTO>> getCoachByEmail(@PathVariable String email) {
         Coach coach = coachService.getCoachByEmail(email, false);
@@ -91,11 +141,37 @@ public class CoachController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("deleted/email/{email}")
+    @GetMapping("/admin/email/{email}")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> getCoachByEmailForAdmin(@PathVariable String email) {
+        Coach coach = coachService.getCoachByEmail(email, false);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Coach fetched successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/deleted/email/{email}")
     public ResponseEntity<ApiResponse<CoachResponseDTO>> getDeletedCoachByEmail(@PathVariable String email) {
         Coach coach = coachService.getCoachByEmail(email, true);
         CoachResponseDTO coachResp = coachMapper.toDTO(coach);
         ApiResponse<CoachResponseDTO> response = ApiResponse.<CoachResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted coach fetched successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/deleted/email/{email}")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> getDeletedCoachByEmailForAdmin(@PathVariable String email) {
+        Coach coach = coachService.getCoachByEmail(email, true);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Deleted coach fetched successfully")
@@ -153,11 +229,38 @@ public class CoachController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @PostMapping("/admin")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> createCoachForAdmin(@Valid @RequestBody CoachDTO coachInfo) {
+        Coach coach = coachService.createCoachForAdmin(coachInfo);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
+                .code("SUCCESS")
+                .status(201)
+                .message("Coach created successfully")
+                .data(coachResp)
+                .build();
+        URI location = URI.create("/api/coach/" + coach.getId());
+        return ResponseEntity.created(location).body(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CoachResponseDTO>> updateCoach(@PathVariable Long id, @Valid @RequestBody CoachCreateDTO coachInfo) {
         Coach coach = coachService.updateCoach(id, coachInfo);
         CoachResponseDTO coachResp = coachMapper.toDTO(coach);
         ApiResponse<CoachResponseDTO> response = ApiResponse.<CoachResponseDTO>builder()
+                .code("COACH_UPDATED")
+                .status(200)
+                .message("Coach updated successfully")
+                .data(coachResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/admin/{id}")
+    public ResponseEntity<ApiResponse<CoachReturnDTO>> updateCoachForAdmin(@PathVariable Long id, @Valid @RequestBody CoachModifyDTO coachInfo) {
+        Coach coach = coachService.updateCoachForAdmin(id, coachInfo);
+        CoachReturnDTO coachResp = coachMapper.toAdminDTO(coach);
+        ApiResponse<CoachReturnDTO> response = ApiResponse.<CoachReturnDTO>builder()
                 .code("COACH_UPDATED")
                 .status(200)
                 .message("Coach updated successfully")

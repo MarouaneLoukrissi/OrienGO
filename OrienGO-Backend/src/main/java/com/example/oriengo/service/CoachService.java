@@ -4,6 +4,8 @@ import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.user.*;
 import com.example.oriengo.mapper.CoachMapper;
 import com.example.oriengo.model.dto.CoachCreateDTO;
+import com.example.oriengo.model.dto.CoachDTO;
+import com.example.oriengo.model.dto.CoachModifyDTO;
 import com.example.oriengo.model.dto.CoachUpdateProfileDTO;
 import com.example.oriengo.model.entity.Coach;
 import com.example.oriengo.model.entity.Role;
@@ -22,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,6 +38,18 @@ public class CoachService {
     private String getMessage(String key, Object... args) {
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(key, args, locale);
+    }
+
+    public List<Coach> getCoaches() {
+        try {
+            log.info("Fetching coaches");
+            List<Coach> coaches = coachRepository.findAll();
+            log.info("Found {} coaches", coaches.size());
+            return coaches;
+        } catch (Exception e) {
+            log.error("Failed to fetch coaches: {}", e.getMessage(), e);
+            throw new UserGetException(HttpStatus.NOT_FOUND, getMessage("coach.not.found"));
+        }
     }
 
     public List<Coach> getCoaches(boolean deleted) {
@@ -213,6 +228,63 @@ public class CoachService {
     }
 
     @Transactional
+    public Coach createCoachForAdmin(CoachDTO dto) {
+        if (dto == null) {
+            log.warn("Coach request cannot be null");
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("coach.dto.empty"));
+        }
+        try {
+            log.info("Starting creation of new coach with email: {}", dto.getEmail());
+
+            // Check if email already exists
+            try {
+                Coach existingCoach = getCoachByEmail(dto.getEmail(), false);
+                if (existingCoach != null) {
+                    log.warn("Coach already exists with email: {}", dto.getEmail());
+                    throw new UserCreationException(
+                            HttpStatus.CONFLICT,
+                            getMessage("coach.email.already.exists", dto.getEmail())
+                    );
+                }
+            } catch (UserGetException e) {
+                log.debug("No existing coach found with email {}, proceeding with creation", dto.getEmail());
+            }
+
+            // Map DTO to Entity
+            Coach coach = coachMapper.toEntity(dto);
+
+            // Encode password if you have a PasswordEncoder configured
+            coach.setPassword(coach.getPassword()); // encoder.encode(dto.getPassword())
+            coach.setEnabled(true);
+
+            // Assign role
+            String roleName = "COACH";
+            Role role = roleRepository.findByName(roleName)
+                    .orElseThrow(() -> {
+                        log.warn("Role '{}' not found in database", roleName);
+                        return new UserCreationException(
+                                HttpStatus.NOT_FOUND,
+                                getMessage("coach.role.not.found", roleName)
+                        );
+                    });
+
+            coach.setRoles(Set.of(role));
+
+            // Save
+            Coach savedCoach = coachRepository.save(coach);
+            log.info("Coach created successfully with ID: {}", savedCoach.getId());
+
+            return savedCoach;
+
+        } catch (UserCreationException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error during coach creation for email {}: {}", dto.getEmail(), e.getMessage(), e);
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("coach.create.failed"));
+        }
+    }
+
+    @Transactional
     public Coach updateCoach(Long id, CoachCreateDTO dto) {
         if (id == null) {
             log.warn("Attempted to update coach with null ID");
@@ -240,6 +312,44 @@ public class CoachService {
             throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("coach.update.failed"));
         }
     }
+
+    @Transactional
+    public Coach updateCoachForAdmin(Long id, CoachModifyDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update coach with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("coach.id.empty"));
+        }
+        if (dto == null) {
+            log.warn("Coach update request cannot be null");
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("coach.dto.empty"));
+        }
+        try {
+            log.info("Updating coach with ID: {}", id);
+
+            Coach existingCoach = getCoachById(id);
+
+            // Map DTO → Entity
+            Coach coach = coachMapper.toEntity(dto);
+            coach.setId(existingCoach.getId());
+
+            // Handle password update only if provided
+            if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+                coach.setPassword(coach.getPassword()); // encoder.encode(dto.getPassword())
+            } else {
+                coach.setPassword(existingCoach.getPassword());
+            }
+
+            Coach savedCoach = coachRepository.save(coach);
+            log.info("Coach with ID {} successfully updated", savedCoach.getId());
+            return savedCoach;
+
+        } catch (Exception e) {
+            log.error("Error updating coach with ID {}: {}", id, e.getMessage(), e);
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("coach.update.failed"));
+        }
+    }
+
+
     @Transactional
     public Coach updateProfileCoach(Long id, CoachUpdateProfileDTO dto) {
         if (id == null) {

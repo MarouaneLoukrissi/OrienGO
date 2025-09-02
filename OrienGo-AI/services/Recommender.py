@@ -65,18 +65,20 @@ Tâche :
 1. Proposer 2 à 5 métiers **largement connus et communs** correspondant au profil.
    - title (nom du métier)
    - description (1-2 phrases)
-   - category (HEALTH, EDUCATION, TECH, BUSINESS, ARTS)
+   - category (**exactement une valeur** parmi : HEALTH, EDUCATION, TECH, BUSINESS, ARTS, SOCIAL)
    - jobMarket
    - education
    - salaryRange (format strict : "min - max CURRENCY/period", ex: "10,000 - 25,000 MAD/month")
    - tags (3-5 mots clés)
+   - matchPercentage (entier entre 0 et 100)
 2. Proposer 2 à 5 formations adaptées pour accéder à ces métiers :
    - name
-   - type (UNIVERSITY, VOCATIONAL, BOOTCAMP, CERTIFICATION, ONLINE_COURSE,
+   - type (**exactement une valeur** parmi : UNIVERSITY, VOCATIONAL, BOOTCAMP, CERTIFICATION, ONLINE_COURSE,
            INTERNSHIP, APPRENTICESHIP, WORKSHOP, SEMINAR, SELF_TAUGHT)
    - description
    - duration
    - specializations (2-4 max)
+   - matchPercentage (entier entre 0 et 100)
 
 Réponds uniquement en JSON valide avec ce format :
 

@@ -82,7 +82,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
 
   private initializeComponent(): void {
     // Get current coach ID from auth service
-    this.currentUserId = 3; // This should come from AuthService in real implementation
+    this.currentUserId = 6; // This should come from AuthService in real implementation
   }
 
   loadConnections(): void {
@@ -96,36 +96,36 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       map(response => {
         const allConnections = response.data || [];
-        
+
         // Filter connections that involve this coach
-        const coachConnections = allConnections.filter(conn => 
+        const coachConnections = allConnections.filter(conn =>
           conn.coachId === this.currentUserId
         );
-        
+
         // Separate connections by status and initiator
-        const acceptedConnections = coachConnections.filter(conn => 
+        const acceptedConnections = coachConnections.filter(conn =>
           conn.status === ConnectionStatus.ACCEPTED
         );
-        
-        const pendingConnections = coachConnections.filter(conn => 
+
+        const pendingConnections = coachConnections.filter(conn =>
           conn.status === ConnectionStatus.PENDING
         );
-        
+
         // For pending connections, separate by who initiated
-        const sentRequests = pendingConnections.filter(conn => 
+        const sentRequests = pendingConnections.filter(conn =>
           conn.requestedBy === RequestInitiator.COACH
         );
-        
-        const receivedRequests = pendingConnections.filter(conn => 
+
+        const receivedRequests = pendingConnections.filter(conn =>
           conn.requestedBy === RequestInitiator.STUDENT
         );
-        
+
         console.log('All connections:', allConnections);
         console.log('Coach connections:', coachConnections);
         console.log('Accepted connections:', acceptedConnections);
         console.log('Sent requests:', sentRequests);
         console.log('Received requests:', receivedRequests);
-        
+
         return {
           acceptedConnections,
           sentRequests,
@@ -136,18 +136,18 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
         // Get student details for all connections
         const allConnections = [...acceptedConnections, ...sentRequests, ...receivedRequests];
         const studentIds = [...new Set(allConnections.map(conn => conn.studentId))];
-        
+
         if (studentIds.length === 0) {
-          return of({ 
-            acceptedConnections, 
-            sentRequests, 
-            receivedRequests, 
-            students: [], 
-            media: [] 
+          return of({
+            acceptedConnections,
+            sentRequests,
+            receivedRequests,
+            students: [],
+            media: []
           });
         }
-        
-        const studentRequests = studentIds.map(id => 
+
+        const studentRequests = studentIds.map(id =>
           this.studentService.getStudentById(id).pipe(
             catchError(err => {
               console.error(`Error fetching student ${id}:`, err);
@@ -155,8 +155,8 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
             })
           )
         );
-          
-        const mediaRequests = studentIds.map(id => 
+
+        const mediaRequests = studentIds.map(id =>
           this.mediaService.getLatestMediaByUserId(id).pipe(
             catchError(err => {
               console.error(`Error fetching media for student ${id}:`, err);
@@ -164,7 +164,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
             })
           )
         );
-        
+
         return forkJoin({
           students: forkJoin(studentRequests),
           media: forkJoin(mediaRequests)
@@ -181,23 +181,23 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
       catchError(error => {
         console.error('Error loading connections:', error);
         this.errorMessage = 'Failed to load connections. Please try again.';
-        return of({ 
-          acceptedConnections: [], 
-          sentRequests: [], 
-          receivedRequests: [], 
-          students: [], 
-          media: [] 
+        return of({
+          acceptedConnections: [],
+          sentRequests: [],
+          receivedRequests: [],
+          students: [],
+          media: []
         });
       })
     ).subscribe(({ acceptedConnections, sentRequests, receivedRequests, students, media }) => {
       console.log('Final mapping - Accepted:', acceptedConnections.length, 'Sent:', sentRequests.length, 'Received:', receivedRequests.length);
-      
+
       this.acceptedConnections = this.mapConnectionsToStudentNetwork(acceptedConnections, students, media);
       this.sentRequests = this.mapConnectionsToStudentNetwork(sentRequests, students, media);
       this.receivedRequests = this.mapConnectionsToStudentNetwork(receivedRequests, students, media);
-      
+
       console.log('Mapped connections - Accepted:', this.acceptedConnections.length, 'Sent:', this.sentRequests.length, 'Received:', this.receivedRequests.length);
-      
+
       this.updatePagination();
       this.isLoadingConnections = false;
     });
@@ -242,7 +242,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
 
   getFilteredConnections(): StudentNetwork[] {
     let currentConnections: StudentNetwork[] = [];
-    
+
     switch (this.activeTab) {
       case 'network':
         currentConnections = this.acceptedConnections;
@@ -287,7 +287,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedConnections = filtered.slice(startIndex, endIndex);
-    
+
     return this.paginatedConnections;
   }
 
@@ -321,7 +321,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
   getPageNumbers(): number[] {
     const maxVisiblePages = 5;
     const pages: number[] = [];
-    
+
     if (this.totalPages <= maxVisiblePages) {
       for (let i = 1; i <= this.totalPages; i++) {
         pages.push(i);
@@ -329,12 +329,12 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
     } else {
       const startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
       const endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
-      
+
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
       }
     }
-    
+
     return pages;
   }
 
@@ -342,10 +342,10 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
     if (this.totalItems === 0) {
       return 'No connections found';
     }
-    
+
     const startItem = (this.currentPage - 1) * this.pageSize + 1;
     const endItem = Math.min(this.currentPage * this.pageSize, this.totalItems);
-    
+
     return `Showing ${startItem}-${endItem} of ${this.totalItems} connections`;
   }
 
@@ -526,20 +526,20 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
           if (!studentResponse.data) {
             throw new Error('Student not found with this email address.');
           }
-          
+
           const student = studentResponse.data;
-          
+
           // Check if connection already exists
           return this.connectionService.getAll().pipe(
             map(allConnections => {
-              const existingConnection = allConnections.data?.find(conn => 
+              const existingConnection = allConnections.data?.find(conn =>
                 conn.coachId === this.currentUserId && conn.studentId === student.id
               );
-              
+
               if (existingConnection) {
                 throw new Error('Connection already exists with this student.');
               }
-              
+
               return student;
             })
           );
@@ -551,7 +551,7 @@ export class NetworkCoachComponent implements OnInit, OnDestroy {
             studentId: student.id,
             requestedBy: RequestInitiator.COACH
           };
-          
+
           return this.connectionService.create(createData);
         }),
         catchError(error => {

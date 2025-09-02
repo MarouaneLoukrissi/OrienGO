@@ -9,6 +9,10 @@ export interface Career {
   jobMarket: string;
   matchPercentage: number;
   skills: string[];
+  jobRecommendationId: number;
+  isSaved: boolean;
+  isFavorite: boolean;
+  backendJobId: number | undefined
 }
 
 export interface EducationPath {
@@ -18,6 +22,9 @@ export interface EducationPath {
   description: string;
   matchPercentage: number;
   specializations: string[];
+  isSaved: boolean;
+  isFavorite: boolean;
+  backendTrainingId: number | undefined
 }
 
 export interface UserProfile {

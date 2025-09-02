@@ -4,5 +4,6 @@ export enum JobCategory {
   EDUCATION = 'EDUCATION',
   TECH = 'TECH',
   BUSINESS = 'BUSINESS',
-  ARTS = 'ARTS'
+  ARTS = 'ARTS',
+  SOCIAL = 'SOCIAL'
 }

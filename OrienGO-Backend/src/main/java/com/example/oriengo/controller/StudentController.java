@@ -1,11 +1,7 @@
 package com.example.oriengo.controller;
 
 import com.example.oriengo.mapper.StudentMapper;
-import com.example.oriengo.model.dto.StudentCreateDTO;
-import com.example.oriengo.model.dto.StudentResponseDTO;
-import com.example.oriengo.model.dto.StudentUpdateDTO;
-import com.example.oriengo.model.dto.TestResultProfilesDTO;
-import com.example.oriengo.model.entity.Admin;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.Student;
 import com.example.oriengo.payload.response.ApiResponse;
 import com.example.oriengo.service.StudentService;
@@ -29,9 +25,48 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getStudents(){
-        List<Student> students = studentService.getStudents(false);
+        List<Student> students = studentService.getStudents();
         List<StudentResponseDTO> studentResps = studentMapper.toDTO(students);
         ApiResponse<List<StudentResponseDTO>> response = ApiResponse.<List<StudentResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Students fetched successfully")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity<ApiResponse<List<StudentReturnDTO>>> getStudentsForAdmin() {
+        List<Student> students = studentService.getStudents();
+        List<StudentReturnDTO> studentResps = studentMapper.toAdminDTO(students);
+        ApiResponse<List<StudentReturnDTO>> response = ApiResponse.<List<StudentReturnDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Students fetched successfully for admin")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("active")
+    public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getActiveStudents(){
+        List<Student> students = studentService.getActiveStudents(false);
+        List<StudentResponseDTO> studentResps = studentMapper.toDTO(students);
+        ApiResponse<List<StudentResponseDTO>> response = ApiResponse.<List<StudentResponseDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Students fetched successfully")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/active")
+    public ResponseEntity<ApiResponse<List<StudentReturnDTO>>> getActiveStudentsForAdmin(){
+        List<Student> students = studentService.getActiveStudents(false);
+        List<StudentReturnDTO> studentResps = studentMapper.toAdminDTO(students);
+        ApiResponse<List<StudentReturnDTO>> response = ApiResponse.<List<StudentReturnDTO>>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Students fetched successfully")
@@ -56,8 +91,21 @@ public class StudentController {
     }
 
     @GetMapping("deleted")
-    public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getDeletedStudents(){
-        List<Student> students = studentService.getStudents(true);
+    public ResponseEntity<ApiResponse<List<StudentReturnDTO>>> getDeletedStudents(){
+        List<Student> students = studentService.getActiveStudents(true);
+        List<StudentReturnDTO> studentResps = studentMapper.toAdminDTO(students);
+        ApiResponse<List<StudentReturnDTO>> response = ApiResponse.<List<StudentReturnDTO>>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted students fetched successfully")
+                .data(studentResps)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/deleted")
+    public ResponseEntity<ApiResponse<List<StudentResponseDTO>>> getDeletedStudentsForAdmin(){
+        List<Student> students = studentService.getActiveStudents(true);
         List<StudentResponseDTO> studentResps = studentMapper.toDTO(students);
         ApiResponse<List<StudentResponseDTO>> response = ApiResponse.<List<StudentResponseDTO>>builder()
                 .code("SUCCESS")
@@ -81,11 +129,37 @@ public class StudentController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> getStudentByIdForAdmin(@PathVariable Long id){
+        Student student = studentService.getStudentById(id, false);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/deleted/{id}")
     public ResponseEntity<ApiResponse<StudentResponseDTO>> getDeletedStudentById(@PathVariable Long id){
         Student student = studentService.getStudentById(id, true);
         StudentResponseDTO studentResp = studentMapper.toDTO(student);
         ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/deleted/{id}")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> getDeletedStudentByIdForAdmin(@PathVariable Long id){
+        Student student = studentService.getStudentById(id, true);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Deleted student fetched successfully")
@@ -107,11 +181,37 @@ public class StudentController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/admin/email/{email}")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> getStudentByEmailForAdmin(@PathVariable String email){
+        Student student = studentService.getStudentByEmail(email, false);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("deleted/email/{email}")
     public ResponseEntity<ApiResponse<StudentResponseDTO>> getDeletedStudentByEmail(@PathVariable String email){
         Student student = studentService.getStudentByEmail(email, true);
         StudentResponseDTO studentResp = studentMapper.toDTO(student);
         ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("SUCCESS")
+                .status(200)
+                .message("Deleted student fetched successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/admin/deleted/email/{email}")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> getDeletedStudentByEmailForAdmin(@PathVariable String email){
+        Student student = studentService.getStudentByEmail(email, true);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
                 .code("SUCCESS")
                 .status(200)
                 .message("Deleted student fetched successfully")
@@ -169,6 +269,20 @@ public class StudentController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @PostMapping("/admin")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> createStudentForAdmin(@Valid @RequestBody StudentDTO studentInfo){
+        Student student = studentService.createStudentForAdmin(studentInfo);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
+                .code("SUCCESS")
+                .status(201)
+                .message("Student created successfully")
+                .data(studentResp)
+                .build();
+        URI location = URI.create("/api/student/" + student.getId());
+        return ResponseEntity.created(location).body(response);
+    }
+
     @PutMapping("/profile/{id}")
     public ResponseEntity<ApiResponse<StudentResponseDTO>> updateProfile(@PathVariable Long id, @Valid @RequestBody StudentUpdateDTO studentInfo){
         Student student = studentService.updateProfile(id, studentInfo);
@@ -186,6 +300,19 @@ public class StudentController {
         Student student = studentService.updateStudent(id, studentInfo);
         StudentResponseDTO studentResp = studentMapper.toDTO(student);
         ApiResponse<StudentResponseDTO> response = ApiResponse.<StudentResponseDTO>builder()
+                .code("STUDENT_UPDATED")
+                .status(200)
+                .message("Student updated successfully")
+                .data(studentResp)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/admin/{id}")
+    public ResponseEntity<ApiResponse<StudentReturnDTO>> updateStudentForAdmin(@PathVariable Long id, @Valid @RequestBody StudentModifyDTO studentInfo){
+        Student student = studentService.updateStudentForAdmin(id, studentInfo);
+        StudentReturnDTO studentResp = studentMapper.toAdminDTO(student);
+        ApiResponse<StudentReturnDTO> response = ApiResponse.<StudentReturnDTO>builder()
                 .code("STUDENT_UPDATED")
                 .status(200)
                 .message("Student updated successfully")

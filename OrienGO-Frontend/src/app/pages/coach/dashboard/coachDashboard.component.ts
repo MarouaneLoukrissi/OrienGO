@@ -9,8 +9,8 @@ import { CoachStudentConnectionService } from '../../../Service/CoachStudentConn
 })
 export class CoachDashboardComponent implements OnInit {
   // Current coach ID (hardcoded for now as requested)
-  currentCoachId = 3;
-  
+  currentCoachId = 6;
+
   // Loading and error states
   isLoading = true;
   hasError = false;
@@ -19,7 +19,7 @@ export class CoachDashboardComponent implements OnInit {
   // Chart data
   radarData: { [key: string]: number } = {};
   barData: { [key: string]: number } = {};
-  
+
   // Detailed scores data
   detailedScores: Array<{
     label: string;
@@ -137,7 +137,7 @@ export class CoachDashboardComponent implements OnInit {
       const categoryKey = this.getCategoryKey(profile.category);
       const letterKey = this.categoryToLetter[categoryKey];
       const percentage = Math.round(profile.percentage * 10) / 10;
-      
+
       // Set chart data using letter keys
       this.radarData[letterKey] = percentage;
       this.barData[letterKey] = percentage;
@@ -181,7 +181,7 @@ export class CoachDashboardComponent implements OnInit {
   private handleError(message: string): void {
     this.hasError = true;
     this.errorMessage = message;
-    
+
     // Set empty data to prevent chart errors
     this.radarData = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
     this.barData = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };

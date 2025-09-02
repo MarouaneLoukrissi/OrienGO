@@ -6,4 +6,6 @@ services:
       - "4200:4200"
     volumes:
       - .:/app
-    command: bash -c "npm install && ng serve --host 0.0.0.0 --disable-host-check"
+      - /app/node_modules
+    command: npm start
+    #command: bash -c "npm install && ng serve --host 0.0.0.0 --disable-host-check"

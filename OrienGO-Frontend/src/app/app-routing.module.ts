@@ -179,7 +179,7 @@ export const routes: Routes = [
           { path: 'test/results/:testId',
             component: ResultsComponent
           },
-          { path: 'test/recommendations',
+          { path: 'test/recommendations/:testResultId',
             component: RecommendationsComponent
           },
           { path: 'test/personalizedjobs',
@@ -219,7 +219,7 @@ export const routes: Routes = [
   },
 
   // test Routes
-  { path: 'student/test/express', 
+  { path: 'student/test/express',
     children: [
       // Create new test (no testId)
       { path: 'new', component: ExpressTestComponent },

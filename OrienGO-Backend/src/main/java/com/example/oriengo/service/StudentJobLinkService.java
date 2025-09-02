@@ -5,11 +5,11 @@ import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkCreatio
 import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkDeleteException;
 import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkGetException;
 import com.example.oriengo.exception.custom.StudentJobLink.StudentJobLinkUpdateException;
+import com.example.oriengo.mapper.StudentJobLinkMapper;
 import com.example.oriengo.model.dto.StudentJobLinkRequestDto;
 import com.example.oriengo.model.entity.StudentJobLink;
 import com.example.oriengo.model.entity.Student;
 import com.example.oriengo.model.entity.Job;
-import com.example.oriengo.mapper.StudentJobLinkMapper;
 import com.example.oriengo.repository.StudentJobLinkRepository;
 import com.example.oriengo.repository.StudentRepository;
 import com.example.oriengo.repository.JobRepository;
@@ -31,7 +31,7 @@ public class StudentJobLinkService {
     private final StudentJobLinkRepository repository;
     private final StudentRepository studentRepository;
     private final JobRepository jobRepository;
-    private final StudentJobLinkMapper mapper;
+    private final StudentJobLinkMapper studentJobLinkMapper;
     private final MessageSource messageSource; // Injected
 
     private String getMessage(String key, Object... args) {
@@ -79,7 +79,7 @@ public class StudentJobLinkService {
             Job job = jobRepository.findById(requestDto.getJobId())
                     .orElseThrow(() -> new StudentJobLinkCreationException(HttpStatus.NOT_FOUND, getMessage("studentJobLink.job.not.found")));
 
-            StudentJobLink studentJobLink = mapper.toEntity(requestDto);
+            StudentJobLink studentJobLink = studentJobLinkMapper.toEntity(requestDto);
             studentJobLink.setStudent(student);
             studentJobLink.setJob(job);
             StudentJobLink savedStudentJobLink = repository.save(studentJobLink);
@@ -115,7 +115,7 @@ public class StudentJobLinkService {
                         .orElseThrow(() -> new StudentJobLinkUpdateException(HttpStatus.NOT_FOUND, getMessage("studentJobLink.job.not.found")));
                 existingStudentJobLink.setJob(job);
             }
-            mapper.updateEntityFromDto(requestDto, existingStudentJobLink);
+            studentJobLinkMapper.updateEntityFromDto(requestDto, existingStudentJobLink);
             StudentJobLink savedStudentJobLink = repository.save(existingStudentJobLink);
             log.info("Student job link updated successfully with ID: {}", savedStudentJobLink.getId());
             return savedStudentJobLink;

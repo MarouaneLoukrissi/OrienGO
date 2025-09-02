@@ -48,7 +48,7 @@ export class ProfileCoachComponent implements OnInit {
   @ViewChild('profilePictureInput') profilePictureInput!: ElementRef;
   @ViewChild('coverPhotoInput') coverPhotoInput!: ElementRef;
   Math = Math;
-  
+
   // Component State
   coachProfile: CoachResponseDTO | null = null;
   isLoading = true;
@@ -59,7 +59,7 @@ export class ProfileCoachComponent implements OnInit {
   isUpdating = false;
   isUploadingProfilePicture = false;
   isUploadingCoverPhoto = false;
-  currentUserId : number = 3;
+  currentUserId : number = 6;
 
   // Dynamic data properties
   studentsCoached = 0;
@@ -129,7 +129,7 @@ export class ProfileCoachComponent implements OnInit {
 
   ngOnInit(): void {
     const profileIdParam = this.route.snapshot.paramMap.get('id');
-    const profileId = profileIdParam ? parseInt(profileIdParam) : this.currentUserId;      
+    const profileId = profileIdParam ? parseInt(profileIdParam) : this.currentUserId;
     this.isOwner = profileId === this.currentUserId;
     this.loadCoachProfile();
   }
@@ -166,7 +166,7 @@ export class ProfileCoachComponent implements OnInit {
     // Get coach ID from route params
     const coachIdParam = this.route.snapshot.paramMap.get('id');
     const coachId = coachIdParam ? +coachIdParam : this.currentUserId;
-    
+
     if (!coachId) {
       this.error = 'Coach ID not found';
       this.isLoading = false;
@@ -202,7 +202,7 @@ export class ProfileCoachComponent implements OnInit {
     if (!this.coachProfile) return;
 
     this.isLoadingStats = true;
-    
+
     // Load students coached count and coach rating in parallel
     forkJoin({
       studentsCount: this.coachStudentConnectionService.countByCoachIdAndStatusAndRequestedBy(
@@ -233,7 +233,7 @@ export class ProfileCoachComponent implements OnInit {
     if (!this.coachProfile) return;
 
     this.isLoadingDominantProfile = true;
-    
+
     this.coachStudentConnectionService.getCoacheesDominantProfile(
       this.coachProfile.id, 'ACCEPTED'
     ).pipe(finalize(() => this.isLoadingDominantProfile = false)) // <-- ensures cleanup
@@ -288,7 +288,7 @@ export class ProfileCoachComponent implements OnInit {
     if (!this.coachProfile) return;
 
     // Calculate member since
-    const memberSinceDate = this.coachProfile.createdAt 
+    const memberSinceDate = this.coachProfile.createdAt
       ? new Date(this.coachProfile.createdAt)
       : new Date();
 
@@ -297,8 +297,8 @@ export class ProfileCoachComponent implements OnInit {
 
     // Calculate last activity
     const lastSeenDate = this.coachProfile.lastSeen ? new Date(this.coachProfile.lastSeen) : null;
-    const lastActivityDays = lastSeenDate 
-      ? Math.floor((Date.now() - lastSeenDate.getTime()) / (1000 * 60 * 60 * 24)) 
+    const lastActivityDays = lastSeenDate
+      ? Math.floor((Date.now() - lastSeenDate.getTime()) / (1000 * 60 * 60 * 24))
       : 0;
 
     this.stats = [
@@ -339,7 +339,7 @@ export class ProfileCoachComponent implements OnInit {
     try {
       // 1. Get all media metadata for the user
       const allMedia: any = await this.mediaService.getLatestMediaByUserId(this.coachProfile.id).toPromise();
-      
+
       if (!allMedia?.data?.length) return;
 
       // 2. Filter latest media by type and sort by creation date
@@ -402,9 +402,9 @@ export class ProfileCoachComponent implements OnInit {
   // Profile field helpers
   get displayablePersonalFields() {
     if (!this.coachProfile) return [];
-    
+
     const fields = [];
-    
+
     // Always show these required fields
     fields.push(
       { key: 'name', label: 'Full Name', value: this.getFullName(), icon: 'user' },
@@ -420,21 +420,21 @@ export class ProfileCoachComponent implements OnInit {
 
     // Conditionally show location if it exists
     if (this.coachProfile.location?.city && this.coachProfile.location?.country) {
-      fields.push({ 
-        key: 'location', 
-        label: 'Location', 
-        value: `${this.coachProfile.location.city}, ${this.coachProfile.location.country}`, 
-        icon: 'location' 
+      fields.push({
+        key: 'location',
+        label: 'Location',
+        value: `${this.coachProfile.location.city}, ${this.coachProfile.location.country}`,
+        icon: 'location'
       });
     }
 
     // Conditionally show specialization if it exists
     if (this.coachProfile.specialization) {
-      fields.push({ 
-        key: 'specialization', 
-        label: 'Specialization', 
-        value: this.getSpecializationLabel(this.coachProfile.specialization), 
-        icon: 'specialization' 
+      fields.push({
+        key: 'specialization',
+        label: 'Specialization',
+        value: this.getSpecializationLabel(this.coachProfile.specialization),
+        icon: 'specialization'
       });
     }
 
@@ -445,7 +445,7 @@ export class ProfileCoachComponent implements OnInit {
     const option = this.specializationOptions.find(spec => spec.value === value);
     return option ? option.label : value;
   }
-  
+
   get hasExpertiseData(): boolean {
     return !!(this.coachProfile?.expertise || this.coachProfile?.services || this.coachProfile?.availability);
   }
@@ -618,10 +618,10 @@ export class ProfileCoachComponent implements OnInit {
 
     // Upload to server
     this.isUploadingProfilePicture = true;
-    
+
     const extension = file.name.split('.').pop(); // preserve original extension
     const fileName = `Profile_Photo_${this.coachProfile.id}_${new Date().toISOString().split('T')[0]}.${extension}`;
-    
+
     const formData = new FormData();
     formData.append('media', new File([file], fileName, { type: file.type }));
     formData.append('userId', this.coachProfile.id.toString());
@@ -673,10 +673,10 @@ export class ProfileCoachComponent implements OnInit {
 
     // Upload to server
     this.isUploadingCoverPhoto = true;
-    
+
     const extension = file.name.split('.').pop(); // preserve original extension
     const fileName = `Cover_Photo_${this.coachProfile.id}_${new Date().toISOString().split('T')[0]}.${extension}`;
-    
+
     const formData = new FormData();
     formData.append('media', new File([file], fileName, { type: file.type }));
     formData.append('userId', this.coachProfile.id.toString());
@@ -708,7 +708,7 @@ export class ProfileCoachComponent implements OnInit {
     const profileUrl = currentUrl.endsWith(`/${profileId}`)
       ? currentUrl
       : `${currentUrl}/${profileId}`;
-    
+
     if (navigator.share && navigator.canShare()) {
       try {
         await navigator.share({
@@ -748,7 +748,7 @@ export class ProfileCoachComponent implements OnInit {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     try {
       document.execCommand('copy');
       this.notificationService.showSuccess('Profile link copied to clipboard!');

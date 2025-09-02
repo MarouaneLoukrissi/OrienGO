@@ -3,10 +3,7 @@ package com.example.oriengo.service;
 import com.example.oriengo.exception.custom.PathVarException;
 import com.example.oriengo.exception.custom.user.*;
 import com.example.oriengo.mapper.StudentMapper;
-import com.example.oriengo.model.dto.ProfileScoreDTO;
-import com.example.oriengo.model.dto.StudentCreateDTO;
-import com.example.oriengo.model.dto.StudentUpdateDTO;
-import com.example.oriengo.model.dto.TestResultProfilesDTO;
+import com.example.oriengo.model.dto.*;
 import com.example.oriengo.model.entity.Role;
 import com.example.oriengo.model.entity.Student;
 import com.example.oriengo.model.enumeration.Category;
@@ -40,7 +37,19 @@ public class StudentService {
         return messageSource.getMessage(key, args, locale);
     }
 
-    public List<Student> getStudents(boolean deleted) {
+    public List<Student> getStudents() {
+        try {
+            log.info("Fetching students");
+            List<Student> students = studentRepository.findAll();
+            log.info("Found {} students", students.size());
+            return students;
+        } catch (Exception e) {
+            log.error("Failed to fetch students: {}", e.getMessage(), e);
+            throw new UserGetException(HttpStatus.NOT_FOUND, getMessage("student.not.found"));
+        }
+    }
+
+    public List<Student> getActiveStudents(boolean deleted) {
         try {
             log.info("Fetching students with isDeleted = {}", deleted);
             List<Student> students = studentRepository.findByIsDeleted(deleted);
@@ -257,6 +266,64 @@ public class StudentService {
     }
 
     @Transactional
+    public Student createStudentForAdmin(StudentDTO dto) {
+        if (dto == null) {
+            log.warn("Student request cannot be null");
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("student.dto.empty"));
+        }
+
+        try {
+            log.info("Starting creation of new student with email: {}", dto.getEmail());
+
+            // Check if email already exists
+            try {
+                Student existingStudent = getStudentByEmail(dto.getEmail(), false);
+                if (existingStudent != null) {
+                    log.warn("Student already exists with email: {}", dto.getEmail());
+                    throw new UserCreationException(HttpStatus.CONFLICT,
+                            getMessage("student.email.already.exists", dto.getEmail()));
+                }
+            } catch (UserGetException e) {
+                log.debug("No existing student found with email {}, proceeding with creation", dto.getEmail());
+            }
+
+            // Map DTO to Entity
+            Student student = studentMapper.toEntity(dto);
+
+            // Password encoding
+            student.setPassword(student.getPassword()); // replace with encoder.encode(dto.getPassword()) if needed
+
+            // Set admin-controlled fields
+            student.setEnabled(dto.isEnabled());
+            student.setSuspended(dto.isSuspended());
+            student.setSuspensionReason(dto.getSuspensionReason());
+            student.setSuspendedUntil(dto.getSuspendedUntil());
+
+            // Assign default role
+            String roleName = "STUDENT";
+            Role role = roleRepository.findByName(roleName)
+                    .orElseThrow(() -> {
+                        log.warn("Role '{}' not found in database", roleName);
+                        return new UserCreationException(HttpStatus.NOT_FOUND,
+                                getMessage("student.role.not.found", roleName));
+                    });
+            student.setRoles(Set.of(role));
+
+            // Save student
+            Student savedStudent = studentRepository.save(student);
+            log.info("Student created successfully with ID: {}", savedStudent.getId());
+
+            return savedStudent;
+
+        } catch (UserCreationException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error during student creation for email {}: {}", dto.getEmail(), e.getMessage(), e);
+            throw new UserCreationException(HttpStatus.BAD_REQUEST, getMessage("student.create.failed"));
+        }
+    }
+
+    @Transactional
     public Student updateProfile(Long id, StudentUpdateDTO dto) {
         if (id == null) {
             log.warn("Attempted to update student with null ID");
@@ -309,4 +376,38 @@ public class StudentService {
             throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("student.update.failed"));
         }
     }
+    @Transactional
+    public Student updateStudentForAdmin(Long id, StudentModifyDTO dto) {
+        if (id == null) {
+            log.warn("Attempted to update student with null ID");
+            throw new PathVarException(HttpStatus.BAD_REQUEST, getMessage("student.id.empty"));
+        }
+        if (dto == null) {
+            log.warn("Student update request cannot be null");
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("student.dto.empty"));
+        }
+
+        try {
+            log.info("Updating student with ID: {}", id);
+
+            // Fetch existing student
+            Student existingStudent = getStudentById(id);
+
+            // Map fields from DTO to entity using MapStruct
+            studentMapper.updateStudentFromDto(dto, existingStudent);
+
+            // Encode password if needed
+            existingStudent.setPassword(existingStudent.getPassword()); // replace with encoder.encode(dto.getPassword()) if you use encoding
+
+            // Save updated student
+            Student savedStudent = studentRepository.save(existingStudent);
+            log.info("Student with ID {} successfully updated", savedStudent.getId());
+
+            return savedStudent;
+        } catch (Exception e) {
+            log.error("Error updating student with ID {}: {}", id, e.getMessage(), e);
+            throw new UserUpdateException(HttpStatus.BAD_REQUEST, getMessage("student.update.failed"));
+        }
+    }
+
 }

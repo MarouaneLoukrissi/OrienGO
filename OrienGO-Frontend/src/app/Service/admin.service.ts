@@ -6,7 +6,7 @@ import { AdminReturnDTO } from '../model/dto/AdminReturn.dto';
 import { AdminResponseDTO } from '../model/dto/AdminResponse.dto';
 import { AdminCreateDTO } from '../model/dto/AdminCreate.dto';
 import { AdminDTO } from '../model/dto/Admin.dto';
-import { AdminUpdateDTO } from '../model/dto/AdminUpdate.sto';
+import { AdminUpdateDTO } from '../model/dto/AdminUpdate.dto';
 import { AdminModifyDTO } from '../model/dto/AdminModify.dto';
 
 @Injectable({

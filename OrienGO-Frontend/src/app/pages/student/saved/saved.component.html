@@ -1,115 +1,425 @@
 <div class="min-h-screen bg-orange-50">
-    <div class="mx-auto w-full md-lg:max-w-[88rem] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+  <div class="mx-auto w-full md-lg:max-w-[88rem] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
     <!-- Header Section -->
     <div class="text-center mb-8 sm:mb-12">
-        <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[64px] md:h-[64px] text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        </div>
-        <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
+      <div class="w-20 h-20 sm:w-[86px] sm:h-[86px] md:w-24 md:h-24 inline-flex items-center justify-center bg-orange-500 rounded-full mb-4">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 md:w-[64px] md:h-[64px] text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+        </svg>
+      </div>
+      <h1 class="text-sm xxs:text-base xs:text-xl smaller:text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
         {{ 'SAVED.TITLE' | translate }}
-        </h1>
-        <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
+      </h1>
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-xl sm:max-w-2xl mx-auto sm:px-0">
         {{ 'SAVED.DESCRIPTION' | translate }}
-        </p>
+      </p>
     </div>
 
-    <!-- Saved Jobs Section -->
-    <div class="mb-16">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
+      <div class="flex">
+        <svg class="w-5 h-5 text-red-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+        </svg>
+        <p class="text-red-700">{{ errorMessage }}</p>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !errorMessage">
+      <!-- Saved Recommendation Jobs Section -->
+      <div class="mb-16">
         <div class="flex items-start sm:items-center mb-8">
-        <svg class="mt-1 sm:mt-0 shrink-0 mr-2 sm:mr-3 text-orange-500 w-6 h-6 xxs:w-7 xxs:h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        <h2 class="text-xl xxs:text-2xl font-bold text-gray-900">
-            {{ 'SAVED.SAVED_JOBS.TITLE' | translate }} ({{ savedJobs.length }})
-        </h2>
+          <svg class="mt-1 sm:mt-0 shrink-0 mr-2 sm:mr-3 text-orange-500 w-6 h-6 xxs:w-7 xxs:h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+          </svg>
+          <h2 class="text-xl xxs:text-2xl font-bold text-gray-900">
+            Saved Recommendation Jobs ({{ savedRecommendationJobs.length }})
+          </h2>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div *ngFor="let job of savedJobs" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-3 xxs:p-6">
+        <!-- Empty State for Recommendation Jobs -->
+        <div *ngIf="savedRecommendationJobs.length === 0" class="text-center py-12">
+          <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No saved recommendation jobs yet</h3>
+          <p class="text-gray-500">Start saving recommended jobs to see them here.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="savedRecommendationJobs.length > 0">
+          <div *ngFor="let job of savedRecommendationJobs" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-3 xxs:p-6">
             <div class="flex flex-col flex-wrap smaller-sm-md:flex-row smaller-sm-md:justify-between items-start mb-4 smaller-sm-md:gap-4">
-            <div class="flex-1">
+              <div class="flex-1">
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ job.title }}</h3>
-                <p class="text-lg text-gray-500 font-medium mb-1">{{ job.company }}</p>
-                <p class="text-gray-500 mb-3">{{ job.location }}</p>
-            </div>
-            <div class="flex-shrink-0">
-                <span class="text-center inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                {{ job.matchPercentage }}% {{ 'SAVED.SAVED_JOBS.MATCH' | translate }}
-                </span>
-            </div>
-            </div>
-
-            <div class="mb-6">
-            <p class="text-gray-500 mb-2">{{ 'SAVED.SAVED_JOBS.SALARY' | translate }}: {{ job.salary }}</p>
-            <p class="text-gray-500 mb-2">{{ 'SAVED.SAVED_JOBS.ADDED_ON' | translate }}: {{ job.addedOn }}</p>
+                <p class="text-lg text-gray-500 font-medium mb-1">{{ job.category || 'Category not specified' }}</p>
+                <p class="text-gray-500 mb-3">{{ job.salaryRange || 'Salary not specified' }}</p>
+              </div>
             </div>
 
             <div class="flex flex-col smaller:flex-row justify-center items-center flex-wrap gap-3">
-            <button
+              <button
                 class="min-w-full smaller:min-w-0 flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                (click)="viewJobDetails(job.id)"
-            >
-                {{ 'SAVED.SAVED_JOBS.VIEW_DETAILS' | translate }}
-            </button>
-            <button
-                class="min-w-full smaller:min-w-0 flex-shrink-0 border-2 border-orange-500 text-orange-500 hover:bg-orange-50 p-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                (click)="toggleJobVisibility(job.id)"
-            >
+                (click)="viewRecommendationJobDetails(job)"
+              >
+                View Details
+              </button>
+              <button
+                class="min-w-full smaller:min-w-0 flex-shrink-0 border-2 border-red-500 text-red-500 hover:bg-red-50 p-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                (click)="removeRecommendationJob(job.id!)"
+                [disabled]="isRemoving"
+              >
                 <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                 </svg>
-            </button>
+              </button>
             </div>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
 
-    <!-- Saved Trainings Section -->
-    <div>
+      <!-- Saved Trainings Section -->
+      <div class="mb-16">
         <div class="flex items-start sm:items-center mb-8">
-        <svg class="mt-1 sm:mt-0 shrink-0 mr-2 sm:mr-3 text-orange-500 w-6 h-6 xxs:w-7 xxs:h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        <h2 class="text-xl xxs:text-2xl font-bold text-gray-900">
-            {{ 'SAVED.SAVED_TRAININGS.TITLE' | translate }} ({{ savedTrainings.length }})
-        </h2>
+          <svg class="mt-1 sm:mt-0 shrink-0 mr-2 sm:mr-3 text-orange-500 w-6 h-6 xxs:w-7 xxs:h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+          </svg>
+          <h2 class="text-xl xxs:text-2xl font-bold text-gray-900">
+            Saved Trainings ({{ savedTrainings.length }})
+          </h2>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div *ngFor="let training of savedTrainings" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-3 xxs:p-6">
-            <div class="flex flex-col flex-wrap smaller-sm-md:flex-row smaller-sm-md:justify-between items-start mb-4 smaller-sm-md:gap-4">
-                <div class="flex-1 max-w-full">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2 break-words block max-w-full">{{ training.title }}</h3>
-                    <p class="text-lg text-gray-500 font-medium mb-1 break-words block max-w-full">{{ training.institution }}</p>
-                    <p class="text-gray-500 mb-3 break-words block max-w-full">{{ training.duration }} • {{ training.degree }}</p>
-                </div>
-                <div class="flex-shrink-0">
-                    <span class="text-center inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                    {{ training.matchPercentage }}% {{ 'SAVED.SAVED_TRAININGS.MATCH' | translate }}
-                    </span>
-                </div>
-            </div>
+        <!-- Empty State for Trainings -->
+        <div *ngIf="savedTrainings.length === 0" class="text-center py-12">
+          <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No saved trainings yet</h3>
+          <p class="text-gray-500">Start saving training programs you're interested in to see them here.</p>
+        </div>
 
-            <div class="mb-6">
-            <p class="text-gray-500 mb-2">{{ 'SAVED.SAVED_TRAININGS.ADDED_ON' | translate }}: {{ training.addedOn }}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="savedTrainings.length > 0">
+          <div *ngFor="let training of savedTrainings" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-3 xxs:p-6">
+            <div class="flex flex-col flex-wrap smaller-sm-md:flex-row smaller-sm-md:justify-between items-start mb-4 smaller-sm-md:gap-4">
+              <div class="flex-1 max-w-full">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2 break-words block max-w-full">{{ training.name }}</h3>
+                <p class="text-lg text-gray-500 font-medium mb-1 break-words block max-w-full">{{ training.type }}</p>
+                <p class="text-gray-500 mb-3 break-words block max-w-full">{{ training.duration || 'Duration not specified' }}</p>
+              </div>
             </div>
 
             <div class="flex flex-col smaller:flex-row justify-center items-center flex-wrap gap-3">
-            <button
+              <button
                 class="min-w-full smaller:min-w-0 flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                (click)="viewTrainingDetails(training.id)"
-            >
-                {{ 'SAVED.SAVED_TRAININGS.VIEW_DETAILS' | translate }}
-            </button>
-            <button
-                class="min-w-full smaller:min-w-0 flex-shrink-0 border-2 border-orange-500 text-orange-500 hover:bg-orange-50 p-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                (click)="toggleTrainingVisibility(training.id)"
-            >
+                (click)="viewTrainingDetails(training)"
+              >
+                View Details
+              </button>
+              <button
+                class="min-w-full smaller:min-w-0 flex-shrink-0 border-2 border-red-500 text-red-500 hover:bg-red-50 p-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                (click)="removeTraining(training.id!)"
+                [disabled]="isRemoving"
+              >
                 <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                 </svg>
-            </button>
+              </button>
             </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Saved Personalized Jobs Section -->
+      <div>
+        <div class="flex items-start sm:items-center mb-8">
+          <svg class="mt-1 sm:mt-0 shrink-0 mr-2 sm:mr-3 text-orange-500 w-6 h-6 xxs:w-7 xxs:h-7 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+          </svg>
+          <h2 class="text-xl xxs:text-2xl font-bold text-gray-900">
+            Saved Personalized Jobs ({{ savedPersonalizedJobs.length }})
+          </h2>
         </div>
+
+        <!-- Empty State for Personalized Jobs -->
+        <div *ngIf="savedPersonalizedJobs.length === 0" class="text-center py-12">
+          <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No saved personalized jobs yet</h3>
+          <p class="text-gray-500">Start saving personalized jobs you're interested in to see them here.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="savedPersonalizedJobs.length > 0">
+          <div *ngFor="let job of savedPersonalizedJobs" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-3 xxs:p-6">
+            <div class="flex flex-col flex-wrap smaller-sm-md:flex-row smaller-sm-md:justify-between items-start mb-4 smaller-sm-md:gap-4">
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ job.title }}</h3>
+                <p class="text-lg text-gray-500 font-medium mb-1">{{ job.companyName || 'Company not specified' }}</p>
+                <p class="text-gray-500 mb-3">{{ job.location || 'Location not specified' }}</p>
+              </div>
+              <div class="flex-shrink-0">
+                <span class="text-center inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                  {{ job.matchPercentage || 0 }}% Match
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p class="text-gray-500 mb-2">Salary: {{ job.salaryRange || 'Not specified' }}</p>
+              <p class="text-gray-500 mb-2">Added on: {{ formatDate(job.createdAt) }}</p>
+            </div>
+
+            <div class="flex flex-col smaller:flex-row justify-center items-center flex-wrap gap-3">
+              <button
+                class="min-w-full smaller:min-w-0 flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                (click)="viewPersonalizedJobDetails(job)"
+              >
+                View Details
+              </button>
+              <button
+                class="min-w-full smaller:min-w-0 flex-shrink-0 border-2 border-red-500 text-red-500 hover:bg-red-50 p-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                (click)="removePersonalizedJob(job.id!)"
+                [disabled]="isRemoving"
+              >
+                <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Recommendation Job Details Modal -->
+<div *ngIf="selectedRecommendationJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" (click)="closeModal()">
+  <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" (click)="$event.stopPropagation()">
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ selectedRecommendationJob.title }}</h2>
+          <p class="text-lg text-gray-600 mb-1">{{ selectedRecommendationJob.category }}</p>
+          <p class="text-gray-500">{{ selectedRecommendationJob.salaryRange || 'Salary not specified' }}</p>
+        </div>
+        <button
+          (click)="closeModal()"
+          class="ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <div class="p-6">
+      <div class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-4">Job Information</h3>
+
+        <div class="space-y-2 text-sm">
+          <p><span class="font-medium">Category:</span> {{ selectedRecommendationJob.category || 'Not specified' }}</p>
+          <p><span class="font-medium">Salary Range:</span> {{ selectedRecommendationJob.salaryRange || 'Not specified' }}</p>
+          <p><span class="font-medium">Education:</span> {{ selectedRecommendationJob.education || 'Not specified' }}</p>
+          <p><span class="font-medium">Job Market:</span> {{ selectedRecommendationJob.jobMarket || 'Not specified' }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="selectedRecommendationJob.description" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Job Description</h3>
+        <p class="text-gray-700 text-sm leading-relaxed">{{ selectedRecommendationJob.description }}</p>
+      </div>
+
+      <div *ngIf="selectedRecommendationJob.tags && selectedRecommendationJob.tags.length > 0" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Tags</h3>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let tag of selectedRecommendationJob.tags"
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+        <button
+          (click)="removeRecommendationJob(selectedRecommendationJob.id!)"
+          [disabled]="isRemoving"
+          class="flex-1 border-2 border-red-500 text-red-500 hover:bg-red-50 font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+        >
+          {{ isRemoving ? 'Removing...' : 'Remove from Saved' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Training Details Modal -->
+<div *ngIf="selectedTraining" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" (click)="closeModal()">
+  <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" (click)="$event.stopPropagation()">
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ selectedTraining.name }}</h2>
+          <p class="text-lg text-gray-600 mb-1">{{ selectedTraining.type }}</p>
+          <p class="text-gray-500">{{ selectedTraining.duration }}</p>
+        </div>
+        <button
+          (click)="closeModal()"
+          class="ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-6">
+      <div class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-4">Training Information</h3>
+
+        <div class="space-y-3 text-sm">
+          <p><span class="font-medium">Duration:</span> {{ selectedTraining.duration || 'Not specified' }}</p>
+          <p><span class="font-medium">Type:</span> {{ selectedTraining.type }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTraining.description" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Description</h3>
+        <p class="text-gray-700 text-sm leading-relaxed">{{ selectedTraining.description }}</p>
+      </div>
+
+      <div *ngIf="selectedTraining.specializations && selectedTraining.specializations.length > 0" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Specializations</h3>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let specialization of selectedTraining.specializations"
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+            {{ specialization }}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+        <button
+          (click)="removeTraining(selectedTraining.id!)"
+          [disabled]="isRemoving"
+          class="flex-1 border-2 border-red-500 text-red-500 hover:bg-red-50 font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+        >
+          {{ isRemoving ? 'Removing...' : 'Remove from Saved' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Personalized Job Details Modal -->
+<div *ngIf="selectedPersonalizedJob" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" (click)="closeModal()">
+  <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" (click)="$event.stopPropagation()">
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ selectedPersonalizedJob.title }}</h2>
+          <p class="text-lg text-gray-600 mb-1">{{ selectedPersonalizedJob.companyName }}</p>
+          <p class="text-gray-500">{{ selectedPersonalizedJob.location }}</p>
+        </div>
+        <button
+          (click)="closeModal()"
+          class="ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Job Information</h3>
+          <div class="space-y-2 text-sm">
+            <p><span class="font-medium">Salary:</span> {{ selectedPersonalizedJob.salaryRange || 'Not specified' }}</p>
+            <p><span class="font-medium">Job Type:</span> {{ selectedPersonalizedJob.jobType || 'Not specified' }}</p>
+            <p><span class="font-medium">Experience:</span> {{ selectedPersonalizedJob.experienceRange || 'Not specified' }}</p>
+            <p><span class="font-medium">Remote:</span> {{ selectedPersonalizedJob.isRemote ? 'Yes' : 'No' }}</p>
+            <p><span class="font-medium">Posted:</span> {{ formatDate(selectedPersonalizedJob.postedDate) }}</p>
+            <p><span class="font-medium">Match:</span>
+              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800 ml-1">
+                {{ selectedPersonalizedJob.matchPercentage || 0 }}%
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="selectedPersonalizedJob.companyName">
+          <h3 class="font-semibold text-gray-900 mb-2">Company Information</h3>
+          <div class="space-y-2 text-sm">
+            <p><span class="font-medium">Industry:</span> {{ selectedPersonalizedJob.companyIndustry || 'Not specified' }}</p>
+            <p><span class="font-medium">Employees:</span> {{ selectedPersonalizedJob.companyNumEmployees || 'Not specified' }}</p>
+            <p><span class="font-medium">Revenue:</span> {{ selectedPersonalizedJob.companyRevenue || 'Not specified' }}</p>
+            <p *ngIf="selectedPersonalizedJob.companyUrl">
+              <span class="font-medium">Website:</span>
+              <a [href]="selectedPersonalizedJob.companyUrl" target="_blank" class="text-orange-600 hover:text-orange-700 ml-1">Visit</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedPersonalizedJob.description" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Job Description</h3>
+        <p class="text-gray-700 text-sm leading-relaxed">{{ selectedPersonalizedJob.description }}</p>
+      </div>
+
+      <div *ngIf="selectedPersonalizedJob.requiredSkills" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Required Skills</h3>
+        <p class="text-gray-700 text-sm">{{ selectedPersonalizedJob.requiredSkills }}</p>
+      </div>
+
+      <div *ngIf="selectedPersonalizedJob.advantages && selectedPersonalizedJob.advantages.length > 0" class="mb-6">
+        <h3 class="font-semibold text-gray-900 mb-2">Advantages</h3>
+        <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+          <li *ngFor="let advantage of selectedPersonalizedJob.advantages">{{ advantage }}</li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+        <button
+          *ngIf="selectedPersonalizedJob.applyUrl"
+          (click)="applyToJob(selectedPersonalizedJob.applyUrl!)"
+          class="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+        >
+          Apply Now
+        </button>
+        <button
+          (click)="removePersonalizedJob(selectedPersonalizedJob.id!)"
+          [disabled]="isRemoving"
+          class="flex-1 border-2 border-red-500 text-red-500 hover:bg-red-50 font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+        >
+          {{ isRemoving ? 'Removing...' : 'Remove from Saved' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

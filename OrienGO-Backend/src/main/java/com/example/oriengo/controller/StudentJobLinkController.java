@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 public class StudentJobLinkController {
 
     private final StudentJobLinkService service;
-    private final StudentJobLinkMapper mapper;
+    private final StudentJobLinkMapper studentJobLinkMapper;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<StudentJobLinkResponseDto>>> getAll() {
         List<StudentJobLink> links = service.findAll();
         List<StudentJobLinkResponseDto> dtos = links.stream()
-                .map(mapper::toResponseDto)
+                .map(studentJobLinkMapper::toResponseDto)
                 .collect(Collectors.toList());
 
         ApiResponse<List<StudentJobLinkResponseDto>> response = ApiResponse.<List<StudentJobLinkResponseDto>>builder()
@@ -45,7 +45,7 @@ public class StudentJobLinkController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<StudentJobLinkResponseDto>> getById(@PathVariable Long id) {
         StudentJobLink link = service.findById(id);
-        StudentJobLinkResponseDto dto = mapper.toResponseDto(link);
+        StudentJobLinkResponseDto dto = studentJobLinkMapper.toResponseDto(link);
 
         ApiResponse<StudentJobLinkResponseDto> response = ApiResponse.<StudentJobLinkResponseDto>builder()
                 .code("SUCCESS")
@@ -60,7 +60,7 @@ public class StudentJobLinkController {
     @PostMapping
     public ResponseEntity<ApiResponse<StudentJobLinkResponseDto>> create(@Valid @RequestBody StudentJobLinkRequestDto requestDto) {
         StudentJobLink created = service.create(requestDto);
-        StudentJobLinkResponseDto dto = mapper.toResponseDto(created);
+        StudentJobLinkResponseDto dto = studentJobLinkMapper.toResponseDto(created);
 
         ApiResponse<StudentJobLinkResponseDto> response = ApiResponse.<StudentJobLinkResponseDto>builder()
                 .code("SUCCESS")
@@ -75,7 +75,7 @@ public class StudentJobLinkController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<StudentJobLinkResponseDto>> update(@PathVariable Long id, @Valid @RequestBody StudentJobLinkRequestDto requestDto) {
         StudentJobLink updated = service.update(id, requestDto);
-        StudentJobLinkResponseDto dto = mapper.toResponseDto(updated);
+        StudentJobLinkResponseDto dto = studentJobLinkMapper.toResponseDto(updated);
 
         ApiResponse<StudentJobLinkResponseDto> response = ApiResponse.<StudentJobLinkResponseDto>builder()
                 .code("SUCCESS")
@@ -104,7 +104,7 @@ public class StudentJobLinkController {
     public ResponseEntity<ApiResponse<List<StudentJobLinkResponseDto>>> getByStudentId(@PathVariable Long studentId) {
         List<StudentJobLink> links = service.findByStudentId(studentId);
         List<StudentJobLinkResponseDto> dtos = links.stream()
-                .map(mapper::toResponseDto)
+                .map(studentJobLinkMapper::toResponseDto)
                 .collect(Collectors.toList());
 
         ApiResponse<List<StudentJobLinkResponseDto>> response = ApiResponse.<List<StudentJobLinkResponseDto>>builder()
@@ -121,7 +121,7 @@ public class StudentJobLinkController {
     public ResponseEntity<ApiResponse<List<StudentJobLinkResponseDto>>> getByJobId(@PathVariable Long jobId) {
         List<StudentJobLink> links = service.findByJobId(jobId);
         List<StudentJobLinkResponseDto> dtos = links.stream()
-                .map(mapper::toResponseDto)
+                .map(studentJobLinkMapper::toResponseDto)
                 .collect(Collectors.toList());
 
         ApiResponse<List<StudentJobLinkResponseDto>> response = ApiResponse.<List<StudentJobLinkResponseDto>>builder()
@@ -138,7 +138,7 @@ public class StudentJobLinkController {
     public ResponseEntity<ApiResponse<List<StudentJobLinkResponseDto>>> getByType(@PathVariable String type) {
         List<StudentJobLink> links = service.findByType(type);
         List<StudentJobLinkResponseDto> dtos = links.stream()
-                .map(mapper::toResponseDto)
+                .map(studentJobLinkMapper::toResponseDto)
                 .collect(Collectors.toList());
 
         ApiResponse<List<StudentJobLinkResponseDto>> response = ApiResponse.<List<StudentJobLinkResponseDto>>builder()
